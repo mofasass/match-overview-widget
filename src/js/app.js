@@ -10,6 +10,8 @@
       },
 
       init: function () {
+
+         console.log(this);
          console.debug('Init callback');
 
          var liveUpcoming = new LiveUpcoming({
