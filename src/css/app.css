@@ -3,14 +3,17 @@
 }
 
 .KambiWidget-card-border-color {
-  border-bottom-color: #ddd;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 1px;
+  border-top-width: 0px;
+}
+.KambiWidget-card-border-color:first-child {
+  border-top-width: 1px;
 }
 
 .kw-header {
   background-color: white;
-  border-bottom: 0;
   color: #222;
   font-size: 16px;
   line-height: 24px;
