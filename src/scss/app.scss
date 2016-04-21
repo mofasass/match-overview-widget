@@ -13,3 +13,9 @@
 @import 'widget/overrides';
 @import 'widget/general';
 @import 'widget/widget-theme';
+
+// Import module specific css
+@import 'modules/groups';
+@import 'modules/live-upcoming';
+@import 'modules/top-scorer';
+@import 'modules/tournament-winner';
