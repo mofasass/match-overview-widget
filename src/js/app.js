@@ -15,19 +15,19 @@
          console.debug('Init callback');
 
          var liveUpcoming = new LiveUpcoming({
-            rootElement: 'div#live-upcoming'
+            rootElement: 'section#live-upcoming'
          });
 
          var groups = new Groups({
-            rootElement: 'div#groups'
+            rootElement: 'section#groups'
          });
 
          var topScorer = new TopScorer({
-            rootElement: 'div#top-scorer'
+            rootElement: 'section#top-scorer'
          });
 
          var tournamentWinner = new TournamentWinner({
-            rootElement: 'div#tournament-winner'
+            rootElement: 'section#tournament-winner'
          });
 
       }
