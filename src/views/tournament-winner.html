@@ -1,37 +1,47 @@
 <!--Tournament winner header-->
-<h3 class="l-flexbox l-align-center l-pack-center l-pt-6 l-pb-6">Tournament winner</h3>
 
-<div class="l-pl-16 l-pr-16 l-pt-12 l-pb-12">
-   <div class="l-flexbox l-pr-16 l-pl-16">
-      <div class="l-flexbox l-flex-1">Team</div>
-      <div class="l-flexbox l-flex-4">Player</div>
-      <div class="l-flexbox l-flex-1">P</div>
-      <div class="l-flexbox l-flex-1">G</div>
-      <div class="l-flexbox l-flex-1">Odds</div>
-   </div>
+<div class="l-pl-12 l-pr-12 l-pt-12">
+   <h3 class="l-flexbox l-align-center l-pack-center l-pt-6 l-pb-6">Tournament winner</h3>
+
+   <h4 class="l-flexbox l-align-center l-pr-16 l-pl-16">
+      <div class="l-flexbox l-flex-1"><span class="text-truncate">Team</span></div>
+      <div class="l-flexbox l-flex-4"><span class="text-truncate">Player</span></div>
+      <div class="l-flexbox l-flex-1"><span class="text-truncate">P</span></div>
+      <div class="l-flexbox l-flex-1"><span class="text-truncate">G</span></div>
+      <div class="l-flexbox l-pack-end l-flex-1"><span class="text-truncate">Odds</span></div>
+   </h4>
 </div>
 
 <!--Players wrapper-->
-<div class="l-flexbox l-vertical l-flex-1 l-pl-16 l-pr-16">
+<div class="l-flexbox l-vertical l-flex-1 l-pl-12 l-pr-12">
 
    <!--Players-->
-   <div class="KambiWidget-card-border-color kw-players l-flexbox l-pl-16 l-pr-16 l-pt-6 l-pb-6" rv-each-player="_data">
+   <div class="KambiWidget-card-border-color kw-players l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6"
+        rv-anim-stagger="index" rv-each-player="_data">
 
+      <!--Player Team Color-->
       <div class="l-flexbox l-align-center l-flex-1">
       </div>
 
+      <!--Player Name-->
       <div class="l-flexbox l-align-center l-flex-4">
-         {player}. Player {player}
+         <span class="text-truncate">{player}. Player {player}</span>
       </div>
 
-      <div class="l-flexbox l-align-center l-flex-1">8</div>
+      <!--Position-->
+      <div class="l-flexbox l-align-center l-flex-1">
+         <span class="text-truncate">{player | * 10 | + 1}</span>
+      </div>
 
-      <div class="l-flexbox l-align-center l-flex-1">12</div>
+      <!--Goals-->
+      <div class="l-flexbox l-align-center l-flex-1">
+         <span class="text-truncate">{player | * 3 | + 3}</span>
+      </div>
 
-      <div class="l-flexbox l-flex-1">
+      <div class="l-flexbox">
          <button rv-click="toggleOutcome(outcome)"
                  rv-disabled="liveEvent.betOffers[0].suspended == true"
-                 type="button" role="button" class="KambiWidget-outcome kw-link l-ml-6 l-flex-1">
+                 type="button" role="button" class="KambiWidget-outcome kw-link l-ml-6">
 
             <div class="l-flexbox l-pack-center">
                <div class="KambiWidget-outcome__odds-wrapper">

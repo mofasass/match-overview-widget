@@ -1,3 +1,22 @@
 main {
    height: 550px;
 }
+
+h3, h4 {
+   line-height: 24px;
+   @extend .KambiWidget-card-border-color;
+   border-width: 1px;
+   border-bottom-width: 0px;
+}
+
+h3 {
+   font-size: 14px;
+}
+
+.kw-footer {
+   @extend .KambiWidget-card-border-color;
+   border-bottom-width: 0;
+   border-left-width: 0;
+   border-right-width: 0;
+   border-top-width: 1px;
+}
