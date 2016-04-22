@@ -1,5 +1,5 @@
 <!--Groups-->
-<div rv-each-event="events" rv-anim-stagger="index">
+<div rv-each-event="_events">
 
    <div class="kw-section-header l-pl-12 l-pr-12 l-pt-12">
 
@@ -13,29 +13,27 @@
    <div class="l-flexbox l-vertical l-flex-1 l-pl-12 l-pr-12">
 
       <!--Teams-->
-      <div rv-each-betoffer="event.betOffers">
-         <div class="KambiWidget-card-border-color kw-teams l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6" rv-anim-stagger="index"
-              rv-each-outcome="betoffer.outcomes">
+      <div class="KambiWidget-card-border-color kw-teams l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6"
+           rv-anim-stagger="index"
+           rv-each-outcome="event.betOffers | array_at 0 'outcomes'">
 
-            <div class="kw-team l-flexbox l-align-center l-flex-4">
-               <span class="text-truncate">{outcome.label}</span>
-            </div>
-
-            <div class="l-flexbox">
-               <button rv-click="toggleOutcome(outcome)"
-                       rv-disabled="betOffer.suspended | == true"
-                       type="button" role="button" class="KambiWidget-outcome kw-link l-ml-6">
-                  <div class="l-flexbox l-pack-center">
-                     <div class="KambiWidget-outcome__odds-wrapper">
-                        <span class="KambiWidget-outcome__odds">{outcome.odds | / 1000 }</span>
-                     </div>
-                  </div>
-               </button>
-            </div>
-
+         <div class="kw-team l-flexbox l-align-center l-flex-4">
+            <span class="text-truncate">{outcome.label}</span>
          </div>
-      </div>
 
+         <div class="l-flexbox">
+            <button rv-click="toggleOutcome(outcome)"
+                    rv-disabled="betOffer.suspended | == true"
+                    type="button" role="button" class="KambiWidget-outcome kw-link l-ml-6">
+               <div class="l-flexbox l-pack-center">
+                  <div class="KambiWidget-outcome__odds-wrapper">
+                     <span class="KambiWidget-outcome__odds">{outcome.odds | / 1000 }</span>
+                  </div>
+               </div>
+            </button>
+         </div>
+
+      </div>
 
    </div>
 
@@ -44,4 +42,5 @@
 <div class="l-flex-1"></div>
 
 <footer class="kw-footer">
+   <div id="groups-pagination" class="kw-pagination l-flexbox l-pack-center l-align-center"></div>
 </footer>

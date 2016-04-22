@@ -13,6 +13,7 @@ var Groups = (function () {
 
       init: function () {
          console.debug('Groups init');
+         this.pagination = new CoreLibrary.PaginationComponent('#groups-pagination', this.scope, 'events', 2);
       }
    });
 })();

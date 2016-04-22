@@ -41,7 +41,7 @@
                   events: promiseData[0]
                });
 
-               var filteredEvents = this.filterOutBetOffers(promiseData[1].events)
+               var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
 
                if ( filteredEvents.groups != null ) {
                   var groups = new Groups('section#groups', filteredEvents.groups);
