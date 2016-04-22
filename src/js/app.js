@@ -18,7 +18,7 @@
          // Get the upcoming events
          var eventsPromise = new Promise(function ( resolve, reject ) {
             CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016_matches/')
-               .then(function (response) {
+               .then(function ( response ) {
                   resolve(response);
                }.bind(this));
          }.bind(this));
@@ -30,25 +30,25 @@
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
          Promise.all([eventsPromise, betofferPromise])
-            .then(function (promiseData) {
+            .then(function ( promiseData ) {
 
                console.debug('both promises resolved');
 
                var liveUpcoming = new LiveUpcoming({
-                  rootElement: 'div#live-upcoming',
+                  rootElement: 'section#live-upcoming',
                   events: promiseData[0]
                });
 
                var groups = new Groups({
-                  rootElement: 'div#groups'
+                  rootElement: 'section#groups'
                });
 
                var topScorer = new TopScorer({
-                  rootElement: 'div#top-scorer'
+                  rootElement: 'section#top-scorer'
                });
 
                var tournamentWinner = new TournamentWinner({
-                  rootElement: 'div#tournament-winner'
+                  rootElement: 'section#tournament-winner'
                });
 
             }.bind(this));
