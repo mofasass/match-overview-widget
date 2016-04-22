@@ -13,15 +13,6 @@ var Groups = (function () {
 
       init: function () {
          console.debug('Groups init');
-         console.debug(this.scope);
-         this.scope.groups = [{
-            group: 'Group A',
-            data: ['Romania', 'France', 'Albania', 'Switzerland']
-         },
-            {
-               group: 'Group B',
-               data: ['Romania', 'France', 'Albania', 'Switzerland']
-            }];
       }
    });
 })();
