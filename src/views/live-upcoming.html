@@ -1,114 +1,22 @@
-<div class="kw-event KambiWidget-card-background-color--hoverable l-flexbox l-vertical l-pb-12 l-pt-12">
-
-   <!--Competitors and path-->
-   <div class="kw-event-name-container l-flexbox l-vertical l-pack-start l-flex-3 l-pl-16 l-pr-16">
-
-      <!--Competitors-->
-      <div class="kw-event-header l-flexbox l-horizontal" rv-click="navigateToLiveEvent(liveEvent.event.id)">
-
-         <!--Team name-->
-         <div class="l-flexbox l-vertical l-flexed l-flex-3">
-            <div class="l-flexbox">
-               <span rv-class="{'kw-serve animated infinite': liveEvent.liveData.statistics.setBasedStats.homeServe}"></span>
-               <span class="text-truncate">{liveEvent.event.homeName}</span>
-            </div>
-
-            <div class="l-flexbox">
-               <span rv-class="{'kw-serve animated infinite': liveEvent.liveData.statistics.setBasedStats.homeServe === false}"></span>
-               <span class="text-truncate">{liveEvent.event.awayName}</span>
-            </div>
-         </div>
-
-         <!--Scores-->
-         <div class="kw-event-score l-flexbox l-vertical">
-            <!--Home set score-->
-            <div rv-if="liveEvent.liveData.statistics" class="l-flexbox l-pack-center l-align-center l-flexed l-mr-6">
-               <div class="kw-event-team-stats {key}"
-                    rv-if="liveEvent.liveData.statistics.footballStats && value > 0"
-                    rv-repeat="(key, value) in liveEvent.liveData.statistics.footballStats.home">
-               </div>
-
-               <div class="kw-event-team-sets l-flexed l-pack-center l-mr-12"
-                    rv-if="liveEvent.liveData.statistics.setBasedStats && liveEvent.liveData.statistics.setBasedStats.home.length && scoreset >= 0"
-                    rv-repeat="scoreset in liveEvent.liveData.statistics.setBasedStats.home track by $index">
-                  <strong class="l-pack-center l-flexbox">{scoreset}</strong>
-               </div>
-            </div>
-            <!--Away set score-->
-            <div rv-if="liveEvent.liveData.statistics" class="l-flexbox l-pack-center l-align-center l-flexed l-mr-6">
-               <div class="kw-event-team-stats {key}"
-                    rv-if="liveEvent.liveData.statistics.footballStats && value > 0"
-                    rv-repeat="(key, value) in liveEvent.liveData.statistics.footballStats.away">
-               </div>
-
-               <div class="kw-event-team-sets l-flexed l-pack-center l-mr-12"
-                    rv-if="liveEvent.liveData.statistics.setBasedStats && liveEvent.liveData.statistics.setBasedStats.away.length && scoreset >= 0"
-                    rv-repeat="scoreset in liveEvent.liveData.statistics.setBasedStats.away track by $index">
-                  <strong class="l-pack-center l-flexbox">{scoreset}</strong>
-               </div>
-            </div>
-         </div>
-
-         <!--Score-->
-         <div class="kw-event-score l-flexbox l-vertical">
-                  <span rv-class="{'kw-sets': liveEvent.liveData.statistics.setBasedStats }"
-                        class="l-flexbox l-pack-end"><strong>{liveEvent.liveData.score.home}</strong></span>
-                  <span rv-class="{'kw-sets': liveEvent.liveData.statistics.setBasedStats }"
-                        class="l-flexbox l-pack-end"><strong>{liveEvent.liveData.score.away}</strong></span>
-         </div>
-
-      </div>
-
-      <div class="l-flexbox">
-         <!--Event path-->
-         <div class="kw-event-path KambiWidget-card-support-text-color l-flexbox l-horizontal l-flexed l-pt-6">
-            <div class="l-flexbox" rv-repeat="p in liveEvent.event.path"
-                 style="max-width: { 100 / liveEvent.event.path.length }%">
-                     <span class="kw-event-path-name l-flexbox l-flex-3">
-                        <span class="text-truncate">{p.name}</span>
-                     </span>
-               <span rv-if="!$last" class="kw-event-path-divider l-pl-6 l-pr-6">{!$last?'/':''}</span>
-            </div>
-         </div>
-
-         <!--Event time-->
-         <div class="kw-event-time">
-            <timer-directive class="l-flexbox l-pack-center" index="$index" timer="liveEvent.liveData.matchClock"
-                             rv-if="liveEvent.liveData.matchClock != null"></timer-directive>
-         </div>
+<!-- Upcoming -->
+<!--<div rc-each-event="_events">-->
+<div rv-each-event="events | property_list">
+   <div>
+      <!-- Date section -->
+      <h3>
+         <span class="text-truncate">{event.key}</span>
+      </h3>
+   </div>
+   <!-- Time slots -->
+   <div rv-each-start_time="event.value | property_list ">
+      <!-- Matches -->
+      <div rv-each-match="start_time.value">
+         <div>{match.customStartTime}</div>
+         <div>{match.event.homeName} - {match.event.awayName}</div>
+         <!-- Outcomes -->
+         <span rv-each-outcome="match.betOffers | array_at 0 'outcomes'">
+            {outcome.label} - {outcome.odds | / 1000}
+         </span>
       </div>
    </div>
-
-   <!--Outcomes-->
-   <div class="kw-event-outcomes l-flexbox l-pr-6" rv-if="liveEvent.betOffers != null && liveEvent.betOffers.length > 0">
-      <button rv-repeat="outcome in liveEvent.betOffers[0].outcomes" rv-if="liveEvent.betOffers[0].outcomes.length <= 3"
-              rv-click="toggleOutcome(outcome)"
-              rv-disabled="liveEvent.betOffers[0].suspended == true"
-              rv-class="{'KambiWidget-outcome--selected': outcome.selected===true,
-                               'KambiWidget-outcome--suspended': liveEvent.betOffers[0].suspended == true}"
-              type="button" role="button" class="KambiWidget-outcome kw-link l-ml-6 l-flex-1">
-         <div class="KambiWidget-outcome__flexwrap">
-            <div class="KambiWidget-outcome__label-wrapper">
-               <span class="KambiWidget-outcome__label">{getOutcomeLabel(outcome, liveEvent.event)| translate}</span>
-               <span class="KambiWidget-outcome__line"></span>
-            </div>
-            <div class="KambiWidget-outcome__odds-wrapper">
-               <span class="KambiWidget-outcome__odds">{getFormattedOdds(outcome)}</span>
-            </div>
-         </div>
-      </button>
-      <div class="l-flexbox l-expander l-flex-1 l-pack-center l-align-center"
-           rv-if="liveEvent.betOffers[0].outcomes.length > 3">
-         {liveEvent.betOffers[0].outcomes.length } outcomes
-      </div>
-      <div class="l-flexbox l-flex-1 l-pack-center" rv-if="!liveEvent.betOffers[0]">
-      </div>
-
-   </div>
-
 </div>
-
-<div class="l-flex-1"></div>
-
-<footer class="kw-footer">
-</footer>

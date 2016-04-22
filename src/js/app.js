@@ -36,10 +36,7 @@
             .then(function ( promiseData ) {
 
 
-               var liveUpcoming = new LiveUpcoming({
-                  rootElement: 'section#live-upcoming',
-                  events: promiseData[0]
-               });
+               var liveUpcoming = new LiveUpcoming( 'section#live-upcoming', promiseData[0]);
 
                var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
 
