@@ -44,10 +44,7 @@
                var filteredEvents = this.filterOutBetOffers(promiseData[1].events)
 
                if ( filteredEvents.groups != null ) {
-                  var groups = new Groups({
-                     rootElement: 'section#groups',
-                     events: filteredEvents.groups
-                  });
+                  var groups = new Groups('section#groups', filteredEvents.groups);
                }
 
                if ( filteredEvents.topScorer != null ) {

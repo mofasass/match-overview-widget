@@ -1,12 +1,11 @@
-
 <!--Groups-->
-<div rv-each-group="groups" rv-anim-stagger="index">
+<div rv-each-event="events" rv-anim-stagger="index">
 
    <div class="kw-section-header l-pl-12 l-pr-12 l-pt-12">
 
       <!--Group header-->
       <h3 class="l-flexbox l-align-center l-pack-center l-pt-6 l-pb-6">
-         <span class="text-truncate">{group.group}</span>
+         <span class="text-truncate">{event.event.name}</span>
       </h3>
 
    </div>
@@ -14,25 +13,29 @@
    <div class="l-flexbox l-vertical l-flex-1 l-pl-12 l-pr-12">
 
       <!--Teams-->
-      <div class="KambiWidget-card-border-color kw-teams l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6" rv-anim-stagger="index" rv-each-competitor="group.data">
+      <div rv-each-betoffer="event.betOffers">
+         <div class="KambiWidget-card-border-color kw-teams l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6" rv-anim-stagger="index"
+              rv-each-outcome="betoffer.outcomes">
 
-         <div class="kw-team l-flexbox l-align-center l-flex-4">
-            <span class="text-truncate">{index | + 1}. {competitor}</span>
-         </div>
+            <div class="kw-team l-flexbox l-align-center l-flex-4">
+               <span class="text-truncate">{outcome.label}</span>
+            </div>
 
-         <div class="l-flexbox">
-            <button rv-click="toggleOutcome(outcome)"
-                    rv-disabled="liveEvent.betOffers[0].suspended == true"
-                    type="button" role="button" class="KambiWidget-outcome kw-link l-ml-6">
-               <div class="l-flexbox l-pack-center">
-                  <div class="KambiWidget-outcome__odds-wrapper">
-                     <span class="KambiWidget-outcome__odds">1.11</span>
+            <div class="l-flexbox">
+               <button rv-click="toggleOutcome(outcome)"
+                       rv-disabled="betOffer.suspended | == true"
+                       type="button" role="button" class="KambiWidget-outcome kw-link l-ml-6">
+                  <div class="l-flexbox l-pack-center">
+                     <div class="KambiWidget-outcome__odds-wrapper">
+                        <span class="KambiWidget-outcome__odds">{outcome.odds | / 1000 }</span>
+                     </div>
                   </div>
-               </div>
-            </button>
-         </div>
+               </button>
+            </div>
 
+         </div>
       </div>
+
 
    </div>
 
