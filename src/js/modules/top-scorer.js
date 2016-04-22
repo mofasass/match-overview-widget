@@ -4,10 +4,11 @@ var TopScorer = (function () {
 
       htmlTemplateFile: './views/top-scorer.html',
 
-      constructor: function () {
-         CoreLibrary.Component.apply(this, arguments);
-
-         this.scope = {};
+      constructor: function ( htmlElement, event ) {
+         CoreLibrary.Component.apply(this, [{
+            rootElement: htmlElement
+         }]);
+         this.scope.event = event;
       },
 
       init: function () {

@@ -48,17 +48,11 @@
                }
 
                if ( filteredEvents.topScorer != null ) {
-                  var topScorer = new TopScorer({
-                     rootElement: 'section#top-scorer',
-                     events: filteredEvents.topScorer
-                  });
+                  var topScorer = new TopScorer('section#top-scorer', filteredEvents.topScorer[0]);
                }
 
                if ( filteredEvents.tournamentWinner != null ) {
-                  var tournamentWinner = new TournamentWinner({
-                     rootElement: 'section#tournament-winner',
-                     events: filteredEvents.tournamentWinner
-                  });
+                  var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0]);
                }
 
             }.bind(this));
