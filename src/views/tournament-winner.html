@@ -6,10 +6,10 @@
    </h3>
 
    <h4 class="l-flexbox l-align-center l-pr-16 l-pl-16 l-pt-12 l-pb-12">
-      <div class="l-flexbox l-flex-1"><span class="text-truncate">Team</span></div>
-      <div class="l-flexbox l-flex-4"><span class="text-truncate">Player</span></div>
+      <div class="l-flexbox l-flex-1"><span class="text-truncate"> </span></div>
+      <div class="l-flexbox l-flex-4"><span class="text-truncate">Team</span></div>
       <div class="l-flexbox l-flex-1"><span class="text-truncate">P</span></div>
-      <div class="l-flexbox l-flex-1"><span class="text-truncate">G</span></div>
+      <div class="l-flexbox l-flex-1"><span class="text-truncate">PTS</span></div>
       <div class="l-flexbox l-pack-end l-flex-1"><span class="text-truncate">Odds</span></div>
    </h4>
 </div>
@@ -19,7 +19,7 @@
 
    <!--Players-->
    <div class="KambiWidget-card-border-color kw-players l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6"
-        rv-anim-stagger="index" rv-each-player="_data">
+        rv-anim-stagger="index" rv-each-team="_event">
 
       <!--Player Team Color-->
       <div class="l-flexbox l-align-center l-flex-1">
@@ -27,17 +27,17 @@
 
       <!--Player Name-->
       <div class="l-flexbox l-align-center l-flex-4">
-         <span class="text-truncate">{player}. Player {player}</span>
+         <span class="text-truncate">{team.index | + 1}. {team.label}</span>
       </div>
 
       <!--Position-->
       <div class="l-flexbox l-align-center l-flex-1">
-         <span class="text-truncate">{player | * 10 | + 1}</span>
+         <span class="text-truncate">{index | * 10 | + 1}</span>
       </div>
 
       <!--Goals-->
       <div class="l-flexbox l-align-center l-flex-1">
-         <span class="text-truncate">{player | * 3 | + 3}</span>
+         <span class="text-truncate">{index | * 3 | + 3}</span>
       </div>
 
       <div class="l-flexbox">
@@ -47,7 +47,7 @@
 
             <div class="l-flexbox l-pack-center">
                <div class="KambiWidget-outcome__odds-wrapper">
-                  <span class="KambiWidget-outcome__odds">1.11</span>
+                  <span class="KambiWidget-outcome__odds">{team.odds | / 1000}</span>
                </div>
             </div>
 
