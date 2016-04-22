@@ -3,32 +3,55 @@
 
    var EuroOverview = CoreLibrary.Component.subclass({
 
-      defaultArgs: {},
+      defaultArgs: {
+         filter: ''
+      },
 
       constructor: function () {
          CoreLibrary.Component.apply(this, arguments);
+
+         this.events = [];
       },
 
       init: function () {
 
-         console.log(this);
-         console.debug('Init callback');
+         // Get the upcoming events
+         var eventsPromise = new Promise(function ( resolve, reject ) {
+            CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016_matches/')
+               .then(function ( response ) {
+                  resolve(response);
+               }.bind(this));
+         }.bind(this));
 
-         var liveUpcoming = new LiveUpcoming({
-            rootElement: 'section#live-upcoming'
-         });
+         // Get the betoffers
+         var betofferPromise = new Promise(function ( resolve, reject ) {
+            resolve();
+         }.bind(this));
 
-         var groups = new Groups({
-            rootElement: 'section#groups'
-         });
+         // When both data fetching promises are resolved, we can create the modules and send them the data
+         Promise.all([eventsPromise, betofferPromise])
+            .then(function ( promiseData ) {
 
-         var topScorer = new TopScorer({
-            rootElement: 'section#top-scorer'
-         });
+               console.debug('both promises resolved');
 
-         var tournamentWinner = new TournamentWinner({
-            rootElement: 'section#tournament-winner'
-         });
+               var liveUpcoming = new LiveUpcoming({
+                  rootElement: 'section#live-upcoming',
+                  events: promiseData[0]
+               });
+
+               var groups = new Groups({
+                  rootElement: 'section#groups'
+               });
+
+               var topScorer = new TopScorer({
+                  rootElement: 'section#top-scorer'
+               });
+
+               var tournamentWinner = new TournamentWinner({
+                  rootElement: 'section#tournament-winner'
+               });
+
+            }.bind(this));
 
       }
 
