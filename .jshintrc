@@ -1,5 +1,5 @@
 {
-   "predef": [ "rivets", "Stapes", "Promise", "CoreLibrary", "fetch", "sightglass" ],
+   "predef": [],
    "bitwise": true,
    "camelcase": false,
    "curly": true,
@@ -66,6 +66,10 @@
       "Promise": true,
       "CoreLibrary": true,
       "fetch": true,
-      "sightglass": true
+      "sightglass": true,
+      "LiveUpcoming": true,
+      "Groups": true,
+      "TopScorer": true,
+      "TournamentWinner": true
    }
 }
