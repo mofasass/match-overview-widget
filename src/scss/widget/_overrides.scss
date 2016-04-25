@@ -13,10 +13,9 @@
 }
 
 .kw-header {
-   //background-color: white;
-   //color: $color-4-2-card-header-text;
-   //font-size: 16px;
-   //line-height: 24px;
+   @extend .KambiWidget-card-border-color;
+   border-width: 0;
+   border-bottom-width: 1px;
 }
 
 // Temp default styles
