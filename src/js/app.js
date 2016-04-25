@@ -52,6 +52,8 @@
                   var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0]);
                }
 
+               this.adjustHeight();
+
             }.bind(this));
 
       },
@@ -90,7 +92,14 @@
          }
 
          return ret;
+      },
+
+      adjustHeight: function () {
+         var contentHeight = 616;
+
+         CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
       }
+
    });
 
    var euroOverview = new EuroOverview({
