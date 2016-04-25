@@ -1,16 +1,16 @@
 <!-- Upcoming -->
 
-<div rv-each-event="events | property_list">
+<div rv-each-event="events | property_list" rv-anim-stagger="index">
 
    <!--Day header-->
-   <div class="kw-section-header l-pl-12 l-pr-12 l-pt-12">
+   <div class="kw-section-header l-pl-12 l-pt-12">
       <h3 class="l-flexbox l-align-center l-pack-center l-pt-6 l-pb-6">
          <span class="text-truncate">{'Next game' | translate} {event.key}</span>
       </h3>
    </div>
 
    <!-- Time slots -->
-   <div rv-each-start_time="event.value | property_list " class="l-flexbox l-vertical l-flex-1 l-pl-12 l-pr-12">
+   <div rv-each-start_time="event.value | property_list" class="l-flexbox l-vertical l-flex-1 l-pl-12">
 
       <!-- Matches -->
       <div rv-each-match="start_time.value" class="KambiWidget-card-border-color kw-players l-flexbox l-vertical l-pt-6 l-pb-6">
