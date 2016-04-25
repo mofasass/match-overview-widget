@@ -2,15 +2,15 @@
 
 <div class="kw-section-header l-pl-12 l-pr-12 l-pt-12">
    <h3 class="l-flexbox l-align-center l-pack-center l-pt-6 l-pb-6">
-      <span class="text-truncate">Tournament winner</span>
+      <span class="text-truncate">{'Tournament winner' | translate}</span>
    </h3>
 
-   <h4 class="l-flexbox l-align-center l-pr-16 l-pl-16 l-pt-12 l-pb-12">
-      <div class="l-flexbox l-flex-1"><span class="text-truncate"> </span></div>
-      <div class="l-flexbox l-flex-4"><span class="text-truncate">Team</span></div>
+   <h4 class="l-flexbox l-align-center l-pr-12 l-pl-12 l-pt-12 l-pb-12">
+      <!--<div class="l-flexbox l-flex-1"><span class="text-truncate"> </span></div>-->
+      <div class="l-flexbox l-flex-4"><span class="text-truncate">{'Team' | translate}</span></div>
       <div class="l-flexbox l-flex-1 l-pack-end l-pl-6 l-pr-6"><span class="text-truncate">P</span></div>
-      <div class="l-flexbox l-flex-1 l-pack-end l-pr-6"><span class="text-truncate">PTS</span></div>
-      <div class="l-flexbox l-pack-center l-flex-1"><span class="text-truncate">Odds</span></div>
+      <div class="l-flexbox l-flex-1 l-pack-center l-pr-6"><span class="text-truncate">PTS</span></div>
+      <div class="l-flexbox l-pack-center l-flex-1"><span class="text-truncate">{'Odds' | translate}</span></div>
    </h4>
 </div>
 
@@ -22,8 +22,8 @@
         rv-anim-stagger="index" rv-each-team="_event">
 
       <!--Player Team Color-->
-      <div class="l-flexbox l-align-center l-flex-1">
-      </div>
+      <!--<div class="l-flexbox l-align-center l-flex-1">-->
+      <!--</div>-->
 
       <!--Player Name-->
       <div class="l-flexbox l-align-center l-flex-4">
@@ -36,7 +36,7 @@
       </div>
 
       <!--Goals-->
-      <div class="l-flexbox l-align-center l-flex-1 l-pack-end l-pr-6">
+      <div class="l-flexbox l-align-center l-flex-1 l-pack-center l-pr-6">
          <span class="text-truncate">{index | * 3 | + 3}</span>
       </div>
 
