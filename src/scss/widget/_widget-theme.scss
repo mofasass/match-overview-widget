@@ -1,15 +1,17 @@
-main {
-   height: 550px;
+// Commong widget styles
+
+%Kambi-border {
+   @extend .KambiWidget-card-border-color;
 }
 
 h3, h4 {
-   @extend .KambiWidget-card-border-color;
-   line-height: 24px;
+   @extend %Kambi-border;
    border-width: 1px;
+   line-height: 24px;
 }
 
 button {
-   min-width: 50px;
+   min-width: 60px;
 }
 
 h3 {
@@ -17,20 +19,22 @@ h3 {
 }
 
 h4 {
-   border-top-width: 0px;
+   border-top-width: 0;
 }
 
 .kw-section-header {
 
    h4 > div:last-child {
-      min-width: 50px;
+      min-width: 60px;
    }
 }
 
-.kw-footer {
-   @extend .KambiWidget-card-border-color;
-   height: 37px;
-   border-bottom-width: 1px;
-   border-top-width: 1px;
+.ismobile {
+   display: block;
+}
 
+.kw-footer {
+   @extend %Kambi-border;
+   border-top-width: 1px;
+   height: 37px;
 }

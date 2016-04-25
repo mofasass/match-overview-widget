@@ -9,11 +9,13 @@
 
       constructor: function () {
          CoreLibrary.Component.apply(this, arguments);
-
          this.events = [];
       },
 
       init: function () {
+
+         this.mainElement = document.getElementById('main');
+         this.scope.is_mobile = this.is_mobile();
 
          // Get the upcoming events
          var eventsPromise = new Promise(function ( resolve, reject ) {
@@ -36,7 +38,7 @@
             .then(function ( promiseData ) {
 
 
-               var liveUpcoming = new LiveUpcoming( 'section#live-upcoming', promiseData[0]);
+               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0]);
 
                var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
 
@@ -52,7 +54,12 @@
                   var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0]);
                }
 
-               this.adjustHeight();
+               window.addEventListener('resize', function () {
+                  this.scope.is_mobile = this.is_mobile();
+                  this.adjustHeight(this.scope.is_mobile);
+               }.bind(this));
+
+               this.adjustHeight(this.scope.is_mobile);
 
             }.bind(this));
 
@@ -94,10 +101,16 @@
          return ret;
       },
 
-      adjustHeight: function () {
-         var contentHeight = 616;
-
+      adjustHeight: function ( is_mobile ) {
+         var sectionHeight = 580;
+         var headerHeight = 37;
+         var contentHeight = is_mobile ? 4 * 546 + 37 : sectionHeight + headerHeight;
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
+      },
+
+      is_mobile: function () {
+         var width = this.mainElement.offsetWidth;
+         return width < 769;
       }
 
    });

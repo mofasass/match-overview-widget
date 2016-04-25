@@ -15,9 +15,21 @@
       <!-- Matches -->
       <div rv-each-match="start_time.value" class="KambiWidget-card-border-color kw-players l-flexbox l-vertical l-pt-6 l-pb-6">
 
-         <div class="l-flexbox l-vertical l-pack-center l-align-center l-pl-12 l-pr-12 l-pb-6">
-            <div>{match.customStartTime}</div>
-            <div>{match.event.homeName} - {match.event.awayName}</div>
+         <div class="l-flexbox l-vertical l-pl-12 l-pr-12 l-pb-6">
+            <div class="l-flexbox l-pack-center">{match.customStartTime}</div>
+            <div class="l-flexbox l-expansder l-flex-1">
+               <div class="l-flexbox l-flex-1 l-pack-end">
+                  <span class="text-truncate">
+                     {match.event.homeName}
+                  </span>
+               </div>
+               <div class="l-pl-6 l-pr-6">-</div>
+               <div class="l-flexbox l-flex-1">
+                  <span class="text-truncate">
+                     {match.event.awayName}
+                  </span>
+               </div>
+            </div>
          </div>
 
          <!-- Outcomes -->
