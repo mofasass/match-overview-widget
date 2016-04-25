@@ -35,8 +35,6 @@ var LiveUpcoming = (function () {
                   matchesObj[date][time] = [];
                }
 
-               console.log(events[i]);
-
                matchesObj[date][time].push(events[i]);
             }
          }
