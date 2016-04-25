@@ -36,9 +36,8 @@
          // When both data fetching promises are resolved, we can create the modules and send them the data
          Promise.all([eventsPromise, betofferPromise])
             .then(function ( promiseData ) {
-
-
-               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0]);
+               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0]),
+                  resizeTimeout = false;
 
                var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
 
@@ -55,8 +54,13 @@
                }
 
                window.addEventListener('resize', function () {
-                  this.scope.is_mobile = this.is_mobile();
-                  this.adjustHeight(this.scope.is_mobile);
+                  clearTimeout(resizeTimeout);
+
+                  resizeTimeout = setTimeout(function() {
+                     this.scope.is_mobile = this.is_mobile();
+                     this.adjustHeight(this.scope.is_mobile);
+                  }.bind(this), 300);
+
                }.bind(this));
 
                this.adjustHeight(this.scope.is_mobile);
@@ -109,8 +113,7 @@
       },
 
       is_mobile: function () {
-         var width = this.mainElement.offsetWidth;
-         return width < 769;
+         return this.mainElement.offsetWidth < 769;
       }
 
    });
