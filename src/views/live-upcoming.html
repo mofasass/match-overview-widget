@@ -15,13 +15,13 @@
       <!-- Matches -->
       <div rv-each-match="start_time.value" class="KambiWidget-card-border-color kw-players l-flexbox l-vertical l-pt-6 l-pb-6">
 
-         <div class="l-flexbox l-vertical l-pack-center l-align-center l-pl-12 l-pr-12">
+         <div class="l-flexbox l-vertical l-pack-center l-align-center l-pl-12 l-pr-12 l-pb-6">
             <div>{match.customStartTime}</div>
             <div>{match.event.homeName} - {match.event.awayName}</div>
          </div>
 
          <!-- Outcomes -->
-         <div class="kw-event-outcomes l-flexbox l-pl-6 l-pr-12">
+         <div class="kw-event-outcomes l-flexbox l-pl-6 l-pr-12 l-pb-6">
 
             <!--Outcome-->
             <button rv-each-outcome="match.betOffers | array_at 0 'outcomes'"
