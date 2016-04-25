@@ -15,14 +15,14 @@ var LiveUpcoming = (function () {
          console.debug('Liveupcoming init');
       },
       parseUpcomingEvents: function ( events ) {
-         var matchesObj = {};
-
-         var dateLocale = 'sv-SE'
+         var matchesObj = {},
+            maxEvents = 4,
+            dateLocale = 'sv-SE';
 
          if ( events != null && events.length > 0 ) {
             var i = 0, eventsLen = events.length;
 
-            for ( ; i < eventsLen; ++i ) {
+            for ( ; i < maxEvents; ++i ) {
                var eventDate = new Date(events[i].event.start);
                var date = eventDate.toLocaleDateString(dateLocale, { month: '2-digit', day: '2-digit' }).toString(),
                   time = eventDate.toLocaleTimeString(dateLocale, { hour: 'numeric', minute: 'numeric' }).toString();
