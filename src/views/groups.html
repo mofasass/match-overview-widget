@@ -22,15 +22,7 @@
          </div>
 
          <div class="l-flexbox">
-            <button rv-click="toggleOutcome(outcome)"
-                    rv-disabled="betOffer.suspended | == true"
-                    type="button" role="button" class="KambiWidget-outcome kw-link l-ml-6">
-               <div class="l-flexbox l-pack-center">
-                  <div class="KambiWidget-outcome__odds-wrapper">
-                     <span class="KambiWidget-outcome__odds">{outcome.odds | / 1000 }</span>
-                  </div>
-               </div>
-            </button>
+            <outcome-component-no-label outcome-attr="outcome" ></outcome-component-no-label>
          </div>
 
       </div>
