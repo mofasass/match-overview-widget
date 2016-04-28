@@ -1,5 +1,5 @@
 {
-   "predef": [],
+   "esversion": 6,
    "bitwise": true,
    "camelcase": false,
    "curly": true,
@@ -11,7 +11,6 @@
    "globalstrict": false,
    "immed": true,
    "indent": 3,
-   "maxcomplexity": 10,
    "maxdepth": 8,
    "maxerr": false,
    "maxlen": 160,
@@ -67,9 +66,10 @@
       "CoreLibrary": true,
       "fetch": true,
       "sightglass": true,
+      "sightglass": true,
       "LiveUpcoming": true,
-      "Groups": true,
-      "TopScorer": true,
+      "GoldenBoot": true,
       "TournamentWinner": true
+
    }
 }

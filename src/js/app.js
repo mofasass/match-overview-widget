@@ -1,10 +1,13 @@
 (function () {
-   'use strict';
 
    var EuroOverview = CoreLibrary.Component.subclass({
 
       defaultArgs: {
-         filter: ''
+         filter: '',
+         criterionIds: {
+            goldenBoot: 1001868386,
+            tournamentWinner: 1001221607
+         }
       },
 
       constructor: function () {
@@ -18,74 +21,66 @@
          this.scope.is_mobile = this.is_mobile();
 
          // Get the upcoming events
-         var eventsPromise = new Promise(function ( resolve, reject ) {
-            CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016_matches/')
-               .then(function ( response ) {
+         var eventsPromise = new Promise(( resolve, reject ) => {
+            CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/matches/')
+               .then(( response ) => {
                   resolve(response);
-               }.bind(this));
-         }.bind(this));
+               });
+         });
 
          // Get the betoffers
-         var betofferPromise = new Promise(function ( resolve, reject ) {
-            CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016_tournament_bets/all/all/competitions/')
-               .then(function ( response ) {
+         var betofferPromise = new Promise(( resolve, reject ) => {
+            CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/competitions/')
+               .then(( response ) => {
                   resolve(response);
-               }.bind(this));
-         }.bind(this));
+               });
+         });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
          Promise.all([eventsPromise, betofferPromise])
-            .then(function ( promiseData ) {
+            .then(( promiseData ) => {
                var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0]),
                   resizeTimeout = false;
 
                var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
 
-               if ( filteredEvents.groups != null ) {
-                  var groups = new Groups('section#groups', filteredEvents.groups);
+               if ( filteredEvents.goldenBoot[0] != null ) {
+                  var goldenBoot = new GoldenBoot('section#golden-boot', filteredEvents.goldenBoot[0]);
                }
 
-               if ( filteredEvents.topScorer != null ) {
-                  var topScorer = new TopScorer('section#top-scorer', filteredEvents.topScorer[0]);
-               }
-
-               if ( filteredEvents.tournamentWinner != null ) {
+               if ( filteredEvents.tournamentWinner[0] != null ) {
                   var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0]);
                }
 
-               window.addEventListener('resize', function () {
+               window.addEventListener('resize', () => {
                   clearTimeout(resizeTimeout);
 
-                  resizeTimeout = setTimeout(function() {
+                  resizeTimeout = setTimeout(() => {
                      this.scope.is_mobile = this.is_mobile();
                      this.adjustHeight(this.scope.is_mobile);
-                  }.bind(this), 300);
+                  }, 300);
 
-               }.bind(this));
+               });
 
                this.adjustHeight(this.scope.is_mobile);
-
-            }.bind(this));
+            });
 
       },
 
       /**
        * Goes through an array of events filters out the events with betoffers that can be mapped based on their criterion id
        * @param {Array} events An array of event objects containing events and betOffers
-       * @returns {{groups: Array, topScorer: Array, tournamentWinner: Array}}
+       * @returns {{groups: Array, goldenBoot: Array, tournamentWinner: Array}}
        */
       filterOutBetOffers: function ( events ) {
          // Map the criterion
-         var mappings = {
-            1001615382: 'groups',
-            1001304945: 'topScorer',
-            1001221607: 'tournamentWinner'
-         };
+         var mappings = {}
+         mappings[this.scope.args.criterionIds.goldenBoot] = 'goldenBoot';
+         mappings[this.scope.args.criterionIds.tournamentWinner] = 'tournamentWinner';
 
          // The return object
          var ret = {
-            groups: [],
-            topScorer: [],
+            goldenBoot: [],
             tournamentWinner: []
          };
 

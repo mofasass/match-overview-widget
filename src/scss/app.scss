@@ -4,7 +4,7 @@
 @import 'compass/css3';
 
 //Included variables, mixins and layout
-@import 'app-base';
+@import 'app-base-all';
 
 //Include own custom plugins
 @import 'plugins/pagination';
@@ -17,7 +17,6 @@
 @import 'widget/widget-theme';
 
 // Import module specific css
-@import 'modules/groups';
 @import 'modules/live-upcoming';
-@import 'modules/top-scorer';
+@import 'modules/golden-boot';
 @import 'modules/tournament-winner';

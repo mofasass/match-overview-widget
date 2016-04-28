@@ -1,8 +1,8 @@
-var TopScorer = (function () {
+var GoldenBoot = (function () {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
-      htmlTemplateFile: './views/top-scorer.html',
+      htmlTemplateFile: './views/golden-boot.html',
 
       constructor: function ( htmlElement, event ) {
          CoreLibrary.Component.apply(this, [{
@@ -21,8 +21,7 @@ var TopScorer = (function () {
       },
 
       init: function () {
-         console.debug('Top scorer init');
-         this.pagination = new CoreLibrary.PaginationComponent('#top-scorer-pagination', this.scope, 'event', 8);
+         this.pagination = new CoreLibrary.PaginationComponent('#golden-boot-pagination', this.scope, 'event', 8);
       }
    });
 })();
