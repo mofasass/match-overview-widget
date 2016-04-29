@@ -21,7 +21,7 @@ var GoldenBoot = (function () {
       },
 
       init: function () {
-         this.pagination = new CoreLibrary.PaginationComponent('#golden-boot-pagination', this.scope, 'event', 8);
+         this.pagination = new CoreLibrary.PaginationComponent('#golden-boot-pagination', this.scope, 'event', 9);
       }
    });
 })();

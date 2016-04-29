@@ -12,7 +12,6 @@ var LiveUpcoming = (function () {
       },
 
       init: function () {
-         console.debug('Liveupcoming init');
       },
       parseUpcomingEvents: function ( events ) {
          var matchesObj = {},

@@ -21,8 +21,7 @@ var TournamentWinner = (function () {
       },
 
       init: function () {
-         console.debug('Tournament winner init');
-         this.pagination = new CoreLibrary.PaginationComponent('#tour-winner-pagination', this.scope, 'event', 8);
+         this.pagination = new CoreLibrary.PaginationComponent('#tour-winner-pagination', this.scope, 'event', 9);
       }
    });
 })();

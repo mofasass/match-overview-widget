@@ -74,7 +74,7 @@
        */
       filterOutBetOffers: function ( events ) {
          // Map the criterion
-         var mappings = {}
+         var mappings = {};
          mappings[this.scope.args.criterionIds.goldenBoot] = 'goldenBoot';
          mappings[this.scope.args.criterionIds.tournamentWinner] = 'tournamentWinner';
 

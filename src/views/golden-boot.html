@@ -5,13 +5,11 @@
       <span class="text-truncate">{'Golden Boot' | translate}</span>
    </h3>
 
-   <h4 class="l-flexbox l-align-center l-pr-12 l-pl-12 l-pt-12 l-pb-12">
-      <!--<div class="l-flexbox l-flex-1"><span class="text-truncate">Team</span></div>-->
-      <div class="l-flexbox l-flex-4"><span class="text-truncate">{'Player' | translate}</span></div>
-      <div class="l-flexbox l-pack-end l-flex-1 l-pl-6 l-pr-6"><span class="text-truncate">P</span></div>
-      <div class="l-flexbox l-pack-center l-flex-1 l-pr-6"><span class="text-truncate">G</span></div>
-      <div class="l-flexbox l-pack-center"><span class="text-truncate">{'Odds' | translate}</span></div>
-   </h4>
+   <!--<h4 class="l-flexbox l-align-center l-pr-12 l-pl-12 l-pt-12 l-pb-12">-->
+      <!--&lt;!&ndash;<div class="l-flexbox l-flex-1"><span class="text-truncate">Team</span></div>&ndash;&gt;-->
+      <!--<div class="l-flexbox l-flex-4"><span class="text-truncate">{'Player' | translate}</span></div>-->
+      <!--<div class="l-flexbox l-pack-center"><span class="text-truncate">{'Odds' | translate}</span></div>-->
+   <!--</h4>-->
 </div>
 
 <!--Players wrapper-->
@@ -25,19 +23,9 @@
       <!--<div class="l-flexbox l-align-center l-flex-1">-->
       <!--</div>-->
 
-      <!--Player Name-->
+      <!--Player Name and goals scored-->
       <div class="l-flexbox l-align-center l-flex-4">
-         <span class="text-truncate">{player.index | + 1}. {player.label}</span>
-      </div>
-
-      <!--Position-->
-      <div class="l-flexbox l-align-center l-pack-end l-flex-1 l-pl-6 l-pr-6">
-         <span class="text-truncate">{index | * 10 | + 1}</span>
-      </div>
-
-      <!--Goals-->
-      <div class="l-flexbox l-align-center l-pack-center l-flex-1 l-pr-6">
-         <span class="text-truncate">{index | * 3 | + 3}</span>
+         <span class="text-truncate">{player.label} ({index | * 3 | + 3})</span>
       </div>
 
       <div class="l-flexbox">
