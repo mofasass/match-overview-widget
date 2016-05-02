@@ -17,7 +17,7 @@
 
    <!--Players-->
    <div class="KambiWidget-card-border-color kw-players l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6"
-        rv-anim-stagger="index" rv-each-player="_event">
+        rv-anim-stagger="index" rv-each-outcome="_outcomes">
 
       <!--Player Team Color-->
       <!--<div class="l-flexbox l-align-center l-flex-1">-->
@@ -25,11 +25,11 @@
 
       <!--Player Name and goals scored-->
       <div class="l-flexbox l-align-center l-flex-4">
-         <span class="text-truncate">{player.label} ({index | * 3 | + 3})</span>
+         <span class="text-truncate">{outcome.label} ({index | * 3 | + 3}) { outcome.odds }</span>
       </div>
 
       <div class="l-flexbox">
-         <outcome-component-no-label outcome-attr="player" ></outcome-component-no-label>
+         <outcome-component-no-label outcome-attr="outcome" ></outcome-component-no-label>
       </div>
 
    </div>
