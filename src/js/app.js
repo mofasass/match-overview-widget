@@ -7,6 +7,11 @@
          criterionIds: {
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
+         },
+         cmsData: {
+            tournamentId: 93,
+            // url: 'http://kambi-cdn.globalmouth.com/tournamentdata/'
+            url: 'https://s3-eu-west-1.amazonaws.com/kambi-widgets/tournamentdata/'
          }
       },
 
@@ -36,20 +41,27 @@
                });
          });
 
+         var cmsDataPromoise = new Promise(( resolve, reject ) => {
+            CoreLibrary.getData(this.scope.args.cmsData.url + this.scope.args.cmsData.tournamentId + '/overview/overview.json')
+               .then(( response ) => {
+                  resolve(response);
+               });
+         });
+
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([eventsPromise, betofferPromise])
+         Promise.all([eventsPromise, betofferPromise, cmsDataPromoise])
             .then(( promiseData ) => {
-               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0]),
+               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[2].teams),
                   resizeTimeout = false;
 
                var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
 
                if ( filteredEvents.goldenBoot[0] != null ) {
-                  var goldenBoot = new GoldenBoot('section#golden-boot', filteredEvents.goldenBoot[0]);
+                  var goldenBoot = new GoldenBoot('section#golden-boot', filteredEvents.goldenBoot[0], promiseData[2]);
                }
 
                if ( filteredEvents.tournamentWinner[0] != null ) {
-                  var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0]);
+                  var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[2].teams);
                }
 
                window.addEventListener('resize', () => {

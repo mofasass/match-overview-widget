@@ -20,12 +20,14 @@
         rv-anim-stagger="index" rv-each-outcome="_outcomes">
 
       <!--Player Team Color-->
-      <!--<div class="l-flexbox l-align-center l-flex-1">-->
-      <!--</div>-->
+      <div class="l-flexbox l-align-center l-flex-1">
+         <img rv-src="outcome.cmsData.playerData.pic.url" >
+         <img rv-src="outcome.cmsData.teamData.flag.url" >
+      </div>
 
       <!--Player Name and goals scored-->
       <div class="l-flexbox l-align-center l-flex-4">
-         <span class="text-truncate">{outcome.label} ({index | * 3 | + 3}) { outcome.odds }</span>
+         <span class="text-truncate">{outcome.label} ({outcome.cmsData.playerData.goals})</span>
       </div>
 
       <div class="l-flexbox">

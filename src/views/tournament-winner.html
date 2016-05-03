@@ -22,12 +22,13 @@
         rv-anim-stagger="index" rv-each-team="_event">
 
       <!--Player Team Color-->
-      <!--<div class="l-flexbox l-align-center l-flex-1">-->
-      <!--</div>-->
+      <div class="l-flexbox l-align-center l-flex-1">
+         <img rv-src="outcome.teamData.flag.url" />
+      </div>
 
       <!--Team Name-->
       <div class="l-flexbox l-align-center l-flex-4">
-         <span class="text-truncate">{team.index | + 1}. {team.label}</span>
+         <span class="text-truncate">{team.label} {team.participantId}</span>
       </div>
 
       <div class="l-flexbox">
