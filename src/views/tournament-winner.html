@@ -1,28 +1,20 @@
 <!--Tournament winner header-->
 
-<div class="kw-section-header l-pl-12 l-pr-12 l-pt-12">
-   <h3 class="l-flexbox l-align-center l-pack-center l-pt-6 l-pb-6">
-      <span class="text-truncate">{'Tournament winner' | translate}</span>
-   </h3>
-
-   <!--<h4 class="l-flexbox l-align-center l-pr-12 l-pl-12 l-pt-12 l-pb-12">-->
-      <!--&lt;!&ndash;<div class="l-flexbox l-flex-1"><span class="text-truncate"> </span></div>&ndash;&gt;-->
-      <!--<div class="l-flexbox l-flex-4"><span class="text-truncate">{'Team' | translate}</span></div>-->
-      <!--<div class="l-flexbox l-flex-1 l-pack-end l-pl-6 l-pr-6"><span class="text-truncate">P</span></div>-->
-      <!--<div class="l-flexbox l-flex-1 l-pack-center l-pr-6"><span class="text-truncate">PTS</span></div>-->
-      <!--<div class="l-flexbox l-pack-center l-flex-1"><span class="text-truncate">{'Odds' | translate}</span></div>-->
-   <!--</h4>-->
+<div class="kw-section-header l-mb-12">
+   <h4 class="l-flexbox l-align-center l-pack-start">
+      <span class="text-truncate">{'Winner' | translate}</span>
+   </h4>
 </div>
 
 <!--Players wrapper-->
-<div class="l-flexbox l-vertical l-flex-1 l-pl-12 l-pr-12">
+<div class="l-flexbox l-vertical l-flex-1">
 
    <!--Players-->
-   <div class="KambiWidget-card-border-color kw-players l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6"
+   <div class="kw-players l-flexbox l-mb-12"
         rv-anim-stagger="index" rv-each-team="_event">
 
       <!--Player Team Color-->
-      <div class="l-flexbox l-align-center l-flex-1">
+      <div class="kw-player-media l-flexbox l-align-center">
          <img rv-src="team.teamData.flag.url" />
       </div>
 
@@ -39,7 +31,7 @@
 
 </div>
 
-<footer class="kw-footer l-ml-12 l-mr-12 l-mt-6">
+<footer class="kw-footer">
    <div id="tour-winner-pagination" class="kw-pagination l-flexbox l-pack-center l-align-center"></div>
 </footer>
 

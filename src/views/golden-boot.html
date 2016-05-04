@@ -1,28 +1,22 @@
 <!--Golden Boot header-->
 
-<div class="kw-section-header l-pl-12 l-pt-12">
-   <h3 class="l-flexbox l-align-center l-pack-center l-pt-6 l-pb-6">
-      <span class="text-truncate">{'Golden Boot' | translate}</span>
-   </h3>
-
-   <!--<h4 class="l-flexbox l-align-center l-pr-12 l-pl-12 l-pt-12 l-pb-12">-->
-      <!--&lt;!&ndash;<div class="l-flexbox l-flex-1"><span class="text-truncate">Team</span></div>&ndash;&gt;-->
-      <!--<div class="l-flexbox l-flex-4"><span class="text-truncate">{'Player' | translate}</span></div>-->
-      <!--<div class="l-flexbox l-pack-center"><span class="text-truncate">{'Odds' | translate}</span></div>-->
-   <!--</h4>-->
+<div class="kw-section-header l-mb-12">
+   <h4 class="l-flexbox l-align-center l-pack-start">
+      <span class="text-truncate">{'Top scorer' | translate}</span>
+   </h4>
 </div>
 
 <!--Players wrapper-->
-<div class="l-flexbox l-vertical l-flex-1 l-pl-12">
+<div class="l-flexbox l-vertical l-flex-1">
 
    <!--Players-->
-   <div class="KambiWidget-card-border-color kw-players l-flexbox l-pl-12 l-pr-12 l-pt-6 l-pb-6"
+   <div class="kw-players l-flexbox l-mb-12"
         rv-anim-stagger="index" rv-each-outcome="_outcomes">
 
       <!--Player Team Color-->
-      <div class="kw-player-media l-flexbox l-align-center l-flex-1 l-mr-6">
-         <img class="playerImage" rv-src="outcome.cmsData.playerData.pic.url" >
-         <img rv-if="outcome.cmsData.teamData.flag.url" class="playerFlag" rv-src="outcome.cmsData.teamData.flag.url" >
+      <div class="kw-player-media l-flexbox l-align-center">
+         <!--<img class="playerImage" rv-src="outcome.cmsData.playerData.pic.url" >-->
+         <img rv-if="outcome.cmsData.teamData.flag.url" class="playerImage" rv-src="outcome.cmsData.teamData.flag.url">
       </div>
 
       <!--Player Name and goals scored-->
@@ -31,14 +25,14 @@
       </div>
 
       <div class="l-flexbox">
-         <outcome-component-no-label outcome-attr="outcome" ></outcome-component-no-label>
+         <outcome-component-no-label outcome-attr="outcome"></outcome-component-no-label>
       </div>
 
    </div>
 
 </div>
 
-<footer class="kw-footer l-ml-12 l-mt-6">
+<footer class="kw-footer">
    <div id="golden-boot-pagination" class="kw-pagination l-flexbox l-pack-center l-align-center"></div>
 </footer>
 

@@ -113,7 +113,7 @@
       },
 
       adjustHeight: function ( is_mobile ) {
-         var sectionHeight = 580;
+         var sectionHeight = 350;
          var headerHeight = 37;
          var contentHeight = is_mobile ? 4 * 546 + 37 : sectionHeight + headerHeight;
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);

@@ -1,22 +1,23 @@
 <!-- Upcoming -->
 
-<div rv-each-event="events | property_list" rv-anim-stagger="index">
-
-   <!--Day header-->
-   <div class="kw-section-header l-pl-12 l-pt-12">
-      <h3 class="l-flexbox l-align-center l-pack-center l-pt-6 l-pb-6">
-         <span class="text-truncate">{'Next game' | translate} {event.key}</span>
-      </h3>
-   </div>
+<div class="l-flexbox l-horizontal" rv-each-event="events | property_list" rv-anim-stagger="index">
 
    <!-- Time slots -->
-   <div rv-each-start_time="event.value | property_list" class="l-flexbox l-vertical l-flex-1 l-pl-12">
+   <div rv-each-start_time="event.value | property_list" class="l-flexbox l-vertical l-flex-1">
 
       <!-- Matches -->
-      <div rv-each-match="start_time.value" class="KambiWidget-card-border-color kw-players l-flexbox l-vertical l-pt-6 l-pb-6">
+      <div rv-each-match="start_time.value" class="kw-players l-flexbox l-vertical">
 
-         <div class="l-flexbox l-vertical l-pl-12 l-pr-12 l-pb-6">
-            <div class="l-flexbox l-pack-center">{match.customStartTime}</div>
+         <!--Day header-->
+         <div class="kw-section-header l-pt-6 l-pb-6 l-mb-6">
+            <h4 class="l-flexbox l-align-center l-pack-start l-pl-16">
+               <span class="text-truncate">{match.customStartTime}&nbsp</span>
+               <span class="text-truncate">{event.key}</span>
+            </h4>
+         </div>
+
+         <div class="kw-teams l-flexbox l-vertical l-pt-6 l-pl-12 l-pr-12 l-pb-6">
+
             <div class="l-flexbox l-expansder l-flex-1">
                <div class="l-flexbox l-flex-1 l-pack-end">
                   <span class="text-truncate">
@@ -33,7 +34,7 @@
          </div>
 
          <!-- Outcomes -->
-         <div class="kw-event-outcomes l-flexbox l-pl-6 l-pr-12 l-pb-6">
+         <div class="kw-event-outcomes l-flexbox l-pl-16 l-pr-16 l-pb-12">
 
             <!--Outcome-->
             <outcome-component rv-each-outcome="match.betOffers | array_at 0 'outcomes'" outcome-attr="outcome" label-attr="outcome.label" >

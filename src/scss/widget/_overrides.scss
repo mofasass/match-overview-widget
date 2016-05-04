@@ -13,9 +13,6 @@
 }
 
 .kw-header {
-   @extend .KambiWidget-card-border-color;
-   border-width: 0;
-   border-bottom-width: 1px;
 }
 
 // Temp default styles
@@ -24,19 +21,19 @@
    overflow: hidden;
    display: block;
    padding: 0;
-   border: none;
+   border: 1px solid $color-custom-border;
    border-radius: 2px;
    line-height: 3;
    font-size: 12px;
    text-align: left;
    font-family: "kambi-roboto", sans-serif;
-   background: #0eb5ca;
+   background: transparent;
    -webkit-transition: background-color 0.2s ease-out, color 0.2s ease-out;
    transition: background-color 0.2s ease-out, color 0.2s ease-out; }
 .KambiWidget-outcome:hover {
-   background: #10cae2; }
+   background: transparent; }
 .KambiWidget-outcome:active {
-   background: #0ca0b2; }
+   background: transparent; }
 .KambiWidget-outcome:hover:active, .KambiWidget-outcome:focus {
    outline: 0; }
 .KambiWidget-outcome__flexwrap {

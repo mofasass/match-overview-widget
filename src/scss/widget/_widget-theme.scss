@@ -1,25 +1,19 @@
 // Commong widget styles
 
-%Kambi-border {
-   @extend .KambiWidget-card-border-color;
+body {
+   background-image: url(../images/background_test.jpg);
+   background-position: 50% 50%;
+   background-repeat: no-repeat;
+   background-size: cover;
+   color: white;
 }
 
 h3, h4 {
-   @extend %Kambi-border;
-   border-width: 1px;
    line-height: 24px;
-}
-
-button {
-   min-width: 60px;
 }
 
 h3 {
    font-size: 14px;
-}
-
-h4 {
-   border-top-width: 0;
 }
 
 .kw-section-header {
@@ -29,10 +23,45 @@ h4 {
    }
 }
 
+.kw-widget-bottom {
+   overflow: hidden;
+
+   button {
+      margin-left: 0;
+      min-width: 100px;
+   }
+
+   outcome-component {
+      margin-left: 6px;
+
+      &:first-child {
+         margin-left: 0;
+      }
+   }
+
+   .kw-section-header {
+      border-bottom: 1px solid $color-custom-border;
+   }
+
+   .kw-teams, .kw-event-outcomes {
+      border-right: 1px solid $color-custom-border;
+   }
+}
+
+.kw-widget-top {
+   section {
+      width: 250px;
+   }
+}
+
 .kw-player-media {
-   max-height: 35px;
-   max-width: 35px;
+   height: 35px;
    position: relative;
+   width: 35px;
+}
+
+button {
+   min-width: 60px;
 }
 
 .playerImage {
@@ -42,7 +71,6 @@ h4 {
 
 .playerFlag {
    @include border-radius(18px);
-   border: 1px solid $color-4-1-card-border;
    bottom: -5px;
    height: 18px;
    left: -8px;
@@ -62,7 +90,14 @@ h4 {
 }
 
 .kw-footer {
-   @extend %Kambi-border;
-   border-top-width: 1px;
-   height: 37px;
+   display: none;
+}
+
+.kw-tournament-logo {
+   background-image: url("../images/UEFA_Euro_2016_Logo.svg");
+   background-position: 50%;
+   background-repeat: no-repeat;
+   background-size: cover;
+   height: 110px;
+   width: 80px;
 }
