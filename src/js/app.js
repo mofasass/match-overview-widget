@@ -51,7 +51,7 @@
          // When both data fetching promises are resolved, we can create the modules and send them the data
          Promise.all([eventsPromise, betofferPromise, cmsDataPromoise])
             .then(( promiseData ) => {
-               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[2].teams),
+               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[2]),
                   resizeTimeout = false;
 
                var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
