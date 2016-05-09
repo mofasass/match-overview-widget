@@ -104,12 +104,19 @@
                // Check if the criterion id is one we've mapped
                if ( mappings.hasOwnProperty(events[i].betOffers[0].criterion.id) ) {
                   // If it is, add it to the return object
+                  this.sortOutcomes(events[i].betOffers[0].outcomes);
                   ret[mappings[events[i].betOffers[0].criterion.id]].push(events[i]);
                }
             }
          }
 
          return ret;
+      },
+
+      sortOutcomes: function ( outcomes ) {
+         return outcomes.sort(function ( outcomeA, outcomeB ) {
+            return outcomeA.odds - outcomeB.odds;
+         });
       },
 
       adjustHeight: function ( is_mobile ) {
