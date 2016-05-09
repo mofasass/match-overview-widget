@@ -20,7 +20,7 @@ var LiveUpcoming = (function () {
             dateLocale = 'sv-SE';
 
          if ( events != null && events.length > 0 ) {
-            var i = 0, eventsLen = events.length;
+            var i = 0;
 
             for ( ; i < maxEvents; ++i ) {
                var eventDate = new Date(events[i].event.start),
@@ -39,6 +39,7 @@ var LiveUpcoming = (function () {
                if ( this.scope.teamData.teams && this.scope.teamData.matches ) {
                   events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;
                   events[i].event.awayFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].flag;
+                  events[i].clickEvent = this.navigateToEvent.bind(this, events[i].event);
                }
 
                matchesObj[date][time].push(events[i]);
@@ -46,6 +47,13 @@ var LiveUpcoming = (function () {
          }
 
          return matchesObj;
+      },
+      navigateToEvent: function ( event ) {
+         if ( event.openForLiveBetting != null && event.openForLiveBetting === true ) {
+            CoreLibrary.widgetModule.navigateToLiveEvent(event.id);
+         } else {
+            CoreLibrary.widgetModule.navigateToEvent(event.id);
+         }
       }
    });
 })();

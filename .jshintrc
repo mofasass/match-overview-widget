@@ -65,6 +65,9 @@
       "Promise": true,
       "CoreLibrary": true,
       "fetch": true,
-      "sightglass": true
+      "sightglass": true,
+      "LiveUpcoming": true,
+      "GoldenBoot": true,
+      "TournamentWinner": true
    }
 }

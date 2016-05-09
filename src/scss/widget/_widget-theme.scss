@@ -44,6 +44,10 @@ h3 {
       border-bottom: 1px solid $color-custom-border;
    }
 
+   .kw-teams {
+      cursor:pointer;
+   }
+
    .kw-teams, .kw-event-outcomes {
       border-right: 1px solid $color-custom-border;
    }
