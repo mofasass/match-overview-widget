@@ -64,15 +64,15 @@
                   var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[2].teams);
                }
 
-               window.addEventListener('resize', () => {
-                  clearTimeout(resizeTimeout);
-
-                  resizeTimeout = setTimeout(() => {
-                     this.scope.is_mobile = this.is_mobile();
-                     this.adjustHeight(this.scope.is_mobile);
-                  }, 300);
-
-               });
+               // window.addEventListener('resize', () => {
+               //    clearTimeout(resizeTimeout);
+               //
+               //    resizeTimeout = setTimeout(() => {
+               //       this.scope.is_mobile = this.is_mobile();
+               //       this.adjustHeight(this.scope.is_mobile);
+               //    }, 300);
+               //
+               // });
 
                this.adjustHeight(this.scope.is_mobile);
             });
@@ -115,7 +115,7 @@
       adjustHeight: function ( is_mobile ) {
          var sectionHeight = 350;
          var headerHeight = 37;
-         var contentHeight = is_mobile ? 4 * 546 + 37 : sectionHeight + headerHeight;
+         var contentHeight = sectionHeight + headerHeight;
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
       },
 

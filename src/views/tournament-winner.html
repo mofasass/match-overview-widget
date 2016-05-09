@@ -1,37 +1,35 @@
 <!--Tournament winner header-->
 
-<div class="kw-section-header l-mb-12">
-   <h4 class="l-flexbox l-align-center l-pack-start">
-      <span class="text-truncate">{'Winner' | translate}</span>
-   </h4>
-</div>
+<div class="l-flexbox l-vertical">
+   <div class="kw-section-header l-mb-12">
+      <h4 class="l-flexbox l-align-center l-pack-start">
+         <span class="text-truncate">{'Winner' | translate}</span>
+      </h4>
+   </div>
 
-<!--Players wrapper-->
-<div class="l-flexbox l-vertical l-flex-1">
+   <!--Players wrapper-->
+   <div class="l-flexbox l-vertical l-flex-1">
 
-   <!--Players-->
-   <div class="kw-players l-flexbox l-mb-12"
-        rv-anim-stagger="index" rv-each-team="_event">
+      <!--Players-->
+      <div class="kw-players l-flexbox l-mb-12"
+           rv-anim-stagger="index" rv-each-team="_event">
 
-      <!--Player Team Color-->
-      <div class="kw-player-media l-flexbox l-align-center">
-         <img rv-src="team.teamData.flag.url" />
-      </div>
+         <!--Player Team Color-->
+         <div class="kw-player-media l-flexbox l-align-center">
+            <img rv-src="team.teamData.flag.url"/>
+         </div>
 
-      <!--Team Name-->
-      <div class="l-flexbox l-align-center l-flex-4">
-         <span class="text-truncate">{team.label}</span>
-      </div>
+         <!--Team Name-->
+         <div class="l-flexbox l-align-center l-flex-4">
+            <span class="text-truncate">{team.label}</span>
+         </div>
 
-      <div class="l-flexbox">
-         <outcome-component-no-label outcome-attr="team" ></outcome-component-no-label>
+         <div class="l-flexbox">
+            <outcome-component-no-label outcome-attr="team"></outcome-component-no-label>
+         </div>
+
       </div>
 
    </div>
-
 </div>
-
-<footer class="kw-footer">
-   <div id="tour-winner-pagination" class="kw-pagination l-flexbox l-pack-center l-align-center"></div>
-</footer>
 

@@ -12,8 +12,8 @@ h3, h4 {
    line-height: 24px;
 }
 
-h3 {
-   font-size: 14px;
+h2 {
+   font-size: 18px;
 }
 
 .kw-section-header {
@@ -45,17 +45,26 @@ h3 {
    }
 
    .kw-teams {
-      cursor:pointer;
+      cursor: pointer;
    }
 
-   .kw-teams, .kw-event-outcomes {
+   .kw-teams,
+   .kw-event-outcomes {
       border-right: 1px solid $color-custom-border;
    }
 }
 
 .kw-widget-top {
    section {
-      width: 250px;
+      > div {
+         max-width: 200px;
+         min-width: 200px;
+
+         @include device(xss) {
+            max-width: $screen-xss;
+            min-width: $screen-xss;
+         }
+      }
    }
 }
 
@@ -102,7 +111,7 @@ button {
    background-image: url("../images/UEFA_Euro_2016_Logo.svg");
    background-position: 50%;
    background-repeat: no-repeat;
-   background-size: cover;
-   height: 110px;
-   width: 80px;
+   background-size: contain;
+   height: 90px;
+   width: 90px;
 }
