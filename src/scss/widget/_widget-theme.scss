@@ -1,14 +1,36 @@
 // Commong widget styles
 
+@mixin device($screen-size-label) {
+   @each $size in $screen-size-label {
+      $size: get-screen-size($size);
+      $min: nth($size, 1);
+      $max: nth($size, 2);
+      @media (min-width: #{$min}) and (max-width: #{$max}) {
+         @content;
+      }
+   }
+}
+
 body {
    background-image: url(../images/background_test.jpg);
    background-position: 50% 50%;
    background-repeat: no-repeat;
    background-size: cover;
    color: white;
+   height: auto;
 }
 
-h3, h4 {
+.kw-main {
+   @include device((xss, xs)) {
+      display: block;
+
+      .kw-tournament-logo, .kw-tournament-name {
+         display: none;
+      }
+   }
+}
+
+h2, h3, h4, h5 {
    line-height: 24px;
 }
 
@@ -16,20 +38,73 @@ h2 {
    font-size: 18px;
 }
 
-.kw-section-header {
+.kw-players-wrapper {
+   height: 145px;
+   @include flexbox();
+   @include box-align(center);
+   @include box-orient(row);
+   @include flex-wrap(wrap);
+   @include flex-flow(column wrap);
+}
 
-   h4 > div:last-child {
-      min-width: 60px;
+.kw-slider-container {
+   height: 150px;
+   overflow: hidden;
+}
+
+.kw-widget-top {
+
+   section {
+
+      > div {
+         max-width: 200px;
+         min-width: 200px;
+      }
+   }
+
+   .kw-players {
+      height: 35px;
+      width: 200px;
+   }
+
+   @include device((xss, xs)) {
+      @include box-orient(column);
+
+      section {
+         @include box-align(flex-start);
+
+         > div {
+            max-width: 100%;
+            min-width: 100%;
+         }
+
+         .kw-players {
+            height: 35px;
+            padding-right: 2%;
+            width: 98%;
+         }
+      }
    }
 }
 
 .kw-widget-bottom {
+   height: 130px;
    overflow: hidden;
    overflow-x: scroll;
+
+   @include device((xss, xs)) {
+      overflow-x: scroll;
+   }
 
    button {
       margin-left: 0;
       min-width: 100px;
+   }
+
+   .kw-day, .kw-time {
+      height: 130px;
+      @include flex(1 0 auto);
+      //width: 100%;
    }
 
    outcome-component {
@@ -54,24 +129,14 @@ h2 {
    }
 }
 
-.kw-widget-top {
-   section {
-      > div {
-         max-width: 200px;
-         min-width: 200px;
-
-         @include device(xss) {
-            max-width: $screen-xss;
-            min-width: $screen-xss;
-         }
-      }
-   }
-}
-
 .kw-player-media {
    height: 35px;
    position: relative;
    width: 35px;
+   > img {
+      background-color: white;
+      @include border-radius(50px)
+   }
 }
 
 button {
@@ -93,14 +158,6 @@ button {
 }
 
 .ismobile {
-   display: block;
-
-   section {
-      padding-right: 12px;
-      &:last-child {
-         padding-right: 0;
-      }
-   }
 }
 
 .kw-footer {
