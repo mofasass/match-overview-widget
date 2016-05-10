@@ -13,7 +13,6 @@ var LiveUpcoming = (function () {
       },
 
       init: function () {
-         this.handleSwipe();
       },
       parseUpcomingEvents: function ( events ) {
          var matchesObj = {},
@@ -48,17 +47,13 @@ var LiveUpcoming = (function () {
          }
 
          return matchesObj;
-      }, 
+      },
       navigateToEvent: function ( event ) {
          if ( event.openForLiveBetting != null && event.openForLiveBetting === true ) {
             CoreLibrary.widgetModule.navigateToLiveEvent(event.id);
          } else {
             CoreLibrary.widgetModule.navigateToEvent(event.id);
          }
-      },
-      handleSwipe: function () {
-
-
       }
    });
 })();

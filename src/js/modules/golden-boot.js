@@ -22,14 +22,13 @@ var GoldenBoot = (function () {
                   item.cmsData.playerData = this.scope.playerData[item.participantId];
                   item.cmsData.teamData = this.scope.teamData[item.cmsData.playerData.teamId];
                }
-
-               item.index = this.scope.outcomes.indexOf(item); 
+               item.index = this.scope.outcomes.indexOf(item);
             }
          }
       },
 
       init: function () {
-         var swiper = new CoreLibrary.SwipeComponent(document.getElementById('players-slider'));
+         // var swiper = new CoreLibrary.SwipeComponent(document.getElementById('players-slider'));
       }
    });
 })();

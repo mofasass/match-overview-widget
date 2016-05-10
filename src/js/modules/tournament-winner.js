@@ -23,7 +23,7 @@ var TournamentWinner = (function () {
       },
 
       init: function () {
-         var swiper = new CoreLibrary.SwipeComponent(document.getElementById('teams-slider'));
+         // var swiper = new CoreLibrary.SwipeComponent(document.getElementById('teams-slider'));
       }
    });
 })();
