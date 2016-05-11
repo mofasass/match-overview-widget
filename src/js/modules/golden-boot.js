@@ -28,7 +28,6 @@ var GoldenBoot = (function () {
       },
 
       init: function () {
-         // var swiper = new CoreLibrary.SwipeComponent(document.getElementById('players-slider'));
       }
    });
 })();

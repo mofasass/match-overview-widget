@@ -6,15 +6,18 @@
       constructor: function ( container ) {
          var direction = Hammer.DIRECTION_HORIZONTAL;
          this.container = container;
-         this.subContainer = this.container.children[0];
-         this.panes = Array.prototype.slice.call(this.subContainer.children, 0);
+         this.subContainer = container.children[0];
+         this.children = document.querySelectorAll('.mobile-page');
+         this.panes = Array.prototype.slice.call(this.children, 0);
          this.containerSize = this.container[this.dirProp(direction, 'offsetWidth', 'offsetHeight')];
          this.direction = direction;
 
          this.currentIndex = 0;
 
+         this.recognizer = new Hammer.Pan({ direction: this.direction, threshold: 0 });
+
          this.hammer = new Hammer.Manager(this.container);
-         this.hammer.add(new Hammer.Pan({ direction: this.direction, threshold: 0 }));
+         this.hammer.add(this.recognizer);
          this.hammer.on('panstart panmove panend pancancel', Hammer.bindFn(this.onPan, this));
 
          this.show(this.currentIndex);
@@ -25,7 +28,7 @@
       },
 
       show: function ( showIndex, percent, animate ) {
-         showIndex = Math.max(0, Math.min(showIndex, Math.floor((this.panes.length - 1) / 3)));
+         showIndex = Math.max(0, Math.min(showIndex, Math.floor((this.panes.length - 1))));
          percent = percent || 0;
 
          var className = this.container.className, pos, translate;
@@ -41,10 +44,24 @@
          }
          pos = (this.containerSize / 100 ) * ((showIndex * 100 * -1) + percent);
          translate = 'translate3d(' + pos + 'px, 0, 0)';
+         this.setTransform(translate);
+         this.currentIndex = showIndex;
+      },
+
+      setTransform: function ( translate ) {
          this.subContainer.style.transform = translate;
          this.subContainer.style.mozTransform = translate;
          this.subContainer.style.webkitTransform = translate;
-         this.currentIndex = showIndex;
+      },
+
+      release: function () {
+         this.hammer.remove(this.recognizer, 'pan');
+         this.setTransform('translate3d(0px, 0, 0)');
+      },
+
+      attach: function () {
+         this.hammer.add(this.recognizer);
+         this.show(this.currentIndex);
       },
 
       onPan: function ( ev ) {

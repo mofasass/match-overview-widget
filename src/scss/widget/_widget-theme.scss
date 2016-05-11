@@ -21,7 +21,7 @@ body {
 }
 
 .kw-main {
-   @include device((xss, xs)) {
+   @include device((xss, xs, ss)) {
       display: block;
 
       .kw-tournament-logo, .kw-tournament-name {
@@ -39,39 +39,35 @@ h2 {
 }
 
 .kw-players-wrapper {
-   height: 145px;
-   @include flexbox();
-   @include box-align(center);
-   @include box-orient(row);
-   @include flex-wrap(wrap);
-   @include flex-flow(column wrap);
+   @include device ((xss, xs, ss)) {
+      height: 175px;
+      @include flexbox();
+      @include box-align(center);
+      @include box-orient(row);
+      @include flex-wrap(wrap);
+      @include flex-flow(column wrap);
+   }
 }
 
 .kw-slider-container {
-   height: 150px;
+   height: 175px;
    overflow: hidden;
 }
 
 .kw-widget-top {
-
-   section {
-
-      > div {
-         max-width: 200px;
-         min-width: 200px;
-      }
-   }
 
    .kw-players {
       height: 35px;
       width: 200px;
    }
 
-   @include device((xss, xs)) {
-      @include box-orient(column);
+   @include device((xss, xs, ss)) {
 
-      section {
-         @include box-align(flex-start);
+      .mobile-page {
+         @include flexbox();
+         height: 175px;
+         @include flex(0 0 100%);
+         width: 100%;
 
          > div {
             max-width: 100%;
@@ -80,8 +76,7 @@ h2 {
 
          .kw-players {
             height: 35px;
-            padding-right: 2%;
-            width: 98%;
+            width: 100%;
          }
       }
    }
@@ -92,7 +87,7 @@ h2 {
    overflow: hidden;
    //overflow-x: scroll;
 
-   @include device((xss, xs)) {
+   @include device((xss, xs, ss)) {
       overflow-x: scroll;
    }
 

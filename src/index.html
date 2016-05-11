@@ -16,14 +16,13 @@
    <meta name="apple-mobile-web-app-status-bar-style" content="black">
    <meta name="apple-mobile-web-app-title" content="">
 
-   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500"/>
-
-   <link rel="stylesheet" type="text/css" rv-href="widgetCss"/>
-
    <!-- build:css -->
    <!-- This section will be replaced in the gulp build process -->
    <link rel="stylesheet" type="text/css" href="transpiled/css/app.css"/>
    <!-- endbuild -->
+
+   <!--Customer css-->
+   <link rel="stylesheet" type="text/css" rv-href="widgetCss"/>
 
    <!-- build:third-party-libs -->
    <script src="https://s3-eu-west-1.amazonaws.com/kambi-widgets/widget-third-party/v1.2.0/thirdparty.js"></script>
@@ -34,22 +33,24 @@
    <script src="https://c3-static.kambi.com/sb-mobileclient/widget-api/1.0.0.11/kambi-widget-api.js"></script>
    <!-- endbuild -->
 </head>
-<body class="kw-body l-p-16">
+<body class="kw-body KambiWidget-font l-p-16">
 <div class="l-flexbox l-vertical l-expander" rv-cloak>
 
    <!--Main-->
-   <main id="main" class="kw-main l-flexbox l-vertical" rv-class-ismobile="is_mobile">
-      <div class="kw-widget-top l-flexbox l-horizontal l-pack-center l-mb-12">
-         <section class="l-flexbox l-vertical l-align-end l-flex-1 l-pl-6 l-pr-6" id="tournament-winner"></section>
-         <section class="l-flexbox l-vertical l-pack-center l-align-center l-pl-6 l-pr-6">
-            <div class="kw-tournament-logo l-mb-12"></div>
-            <div class="kw-tournament-name l-flexbox l-vertical">
-               <h2 class="l-flexbox l-pack-center l-align-center">EURO 2016</h2>
-               <h5 class="l-flexbox l-pack-center l-align-center">FRANCE</h5>
+   <main id="main" class="kw-main KambiWidget-font l-flexbox l-vertical" rv-class-ismobile="is_mobile">
+      <section id="mobile-slider" class="kw-widget-top kw-slider-container l-flexbox l-horizontal l-pack-center l-mb-12">
+         <div class="kw-players-wrapper l-flexbox l-flex-1">
+            <div class="mobile-page l-flexbox l-vertical l-align-end l-flex-1 l-pl-6 l-pr-6 l-mr-16" id="tournament-winner"></div>
+            <div class="l-flexbox l-vertical l-pack-center l-align-center l-pl-16 l-pr-16">
+               <div class="kw-tournament-logo l-mb-12"></div>
+               <div class="kw-tournament-name l-flexbox l-vertical">
+                  <h2 class="l-flexbox l-pack-center l-align-center">EURO 2016</h2>
+                  <h5 class="l-flexbox l-pack-center l-align-center">FRANCE</h5>
+               </div>
             </div>
-         </section>
-         <section class="l-flexbox l-vertical l-align-start l-flex-1 l-pl-6 l-pr-6" id="golden-boot"></section>
-      </div>
+            <div class="mobile-page l-flexbox l-vertical l-align-start l-flex-1 l-pl-6 l-pr-6 l-ml-16" id="golden-boot"></div>
+         </div>
+      </section>
       <section class="kw-widget-bottom l-flexbox l-horizontal" id="live-upcoming"></section>
    </main>
 </div>
