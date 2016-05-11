@@ -14,7 +14,7 @@
 
          this.currentIndex = 0;
 
-         this.recognizer = new Hammer.Pan({ direction: this.direction, threshold: 0 });
+         this.recognizer = new Hammer.Pan({ direction: this.direction, threshold: 30 });
 
          this.hammer = new Hammer.Manager(this.container);
          this.hammer.add(this.recognizer);

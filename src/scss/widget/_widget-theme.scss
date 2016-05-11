@@ -23,10 +23,6 @@ body {
 .kw-main {
    @include device((xss, xs, ss)) {
       display: block;
-
-      .kw-tournament-logo, .kw-tournament-name {
-         display: none;
-      }
    }
 }
 
@@ -46,6 +42,16 @@ h2 {
       @include box-orient(row);
       @include flex-wrap(wrap);
       @include flex-flow(column wrap);
+
+      .animate & {
+         @include transition(all .3s);
+      }
+
+      > .mobile-page {
+         &:nth-child(1) { order: 1; }
+         &:nth-child(2) { order: 0; }
+         &:nth-child(3) { order: 2; }
+      }
    }
 }
 
