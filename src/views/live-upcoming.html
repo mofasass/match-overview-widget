@@ -1,10 +1,10 @@
 <!-- Live -->
-<div class="slide-item l-flexbox l-horizontal" rv-each-event="liveEvents" >
+<div class="slide-item l-flexbox l-horizontal" rv-each-event="liveEvents">
 
    <div class="l-flexbox l-horizontal">
 
       <!-- Matches -->
-      <div  class="kw-players l-flexbox l-vertical">
+      <div class="kw-players l-flexbox l-vertical">
 
          <!--Day header-->
          <div class="kw-section-header l-pt-6 l-pb-6 l-mb-6">
@@ -13,9 +13,9 @@
             </h4>
          </div>
 
-         <div class="kw-teams l-flexbox l-vertical l-pt-6 l-pl-12 l-pr-12 l-pb-6" >
+         <div class="kw-teams l-flexbox l-vertical l-pt-6 l-pl-12 l-pr-12 l-pb-6">
 
-            <div class="l-flexbox l-expander l-flex-1" >
+            <div class="l-flexbox l-expander l-flex-1">
                <div class="l-flexbox l-align-center l-flex-1 l-pack-end">
                   <img class="l-mr-6" rv-src="event.event.homeFlag.url" height=18" width="18" alt="">
                   <span class="text-truncate">
@@ -51,29 +51,31 @@
    <i class="icon-angle-left"></i>
 </div>
 <div class="kw-slider-container faded l-flexbox l-horizontal">
+
    <div id="kw-slider-bottom" class="kw-slider-scroller l-flexbox l-horizontal">
+
       <!--Day-->
       <div class="kw-day mobile-page l-flexbox" rv-each-event="events | property_list">
 
          <!-- Time slots -->
          <div rv-each-start_time="event.value | property_list" class="kw-time l-flexbox">
 
-      <!-- Matches -->
-      <div rv-each-event="start_time.value" class="kw-match">
+            <!-- Event -->
+            <div rv-each-event="start_time.value" class="kw-match">
 
-         <!--Day header-->
-         <div class="kw-section-header l-pt-6 l-pb-6 l-mb-6">
-            <h4 class="l-flexbox l-align-center l-pack-start l-pl-16">
-               <span class="text-truncate">{event.customStartTime}&nbsp</span>
-               <span style="text-transform: capitalize" class="text-truncate">{event.key}</span>
-            </h4>
-         </div>
+               <!--Day header-->
+               <div class="kw-section-header l-pt-6 l-pb-6 l-mb-6">
+                  <h4 class="l-flexbox l-align-center l-pack-start l-pl-16">
+                     <span class="text-truncate">{event.customStartTime}&nbsp</span>
+                     <span style="text-transform: capitalize" class="text-truncate">{event.key}</span>
+                  </h4>
+               </div>
 
-         <div class="kw-teams l-pt-6 l-pl-12 l-pr-12 l-pb-6" rv-on-click="navigateToEvent" >
+               <div class="kw-teams l-pt-6 l-pl-12 l-pr-12 l-pb-6" rv-on-click="navigateToEvent">
 
-            <div class="l-flexbox l-expander l-flex-1" >
-               <div class="l-flexbox l-align-center l-flex-1 l-pack-end">
-                  <img class="l-mr-6" rv-src="event.event.homeFlag.url" height=18" width="18" alt="">
+                  <div class="l-flexbox l-expander l-flex-1">
+                     <div class="l-flexbox l-align-center l-flex-1 l-pack-end">
+                        <img class="l-mr-6" rv-src="event.event.homeFlag.url" height=18" width="18" alt="">
                   <span class="text-truncate">
                      {event.event.homeName}
                   </span>
@@ -83,17 +85,17 @@
                   <span class="text-truncate">
                      {event.event.awayName}
                   </span>
-                  <img class="l-ml-6" rv-src="event.event.awayFlag.url" height="18" width="18" alt="">
+                        <img class="l-ml-6" rv-src="event.event.awayFlag.url" height="18" width="18" alt="">
+                     </div>
+                  </div>
                </div>
-            </div>
-         </div>
 
                <!-- Outcomes -->
                <div class="kw-event-outcomes l-flexbox l-pl-16 l-pr-16 l-pb-12">
 
-            <!--Outcome-->
-            <outcome-component rv-each-outcome="event.betOffers | array_at 0 'outcomes'" outcome-attr="outcome" event-attr="event.event" >
-            </outcome-component>
+                  <!--Outcome-->
+                  <outcome-component rv-each-outcome="event.betOffers | array_at 0 'outcomes'" outcome-attr="outcome" event-attr="event.event">
+                  </outcome-component>
 
                </div>
             </div>

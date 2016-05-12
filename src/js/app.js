@@ -1,4 +1,4 @@
-(function () {
+( () => {
 
    var EuroOverview = CoreLibrary.Component.subclass({
 
@@ -15,12 +15,12 @@
          }
       },
 
-      constructor: function () {
+      constructor () {
          CoreLibrary.Component.apply(this, arguments);
          this.events = [];
       },
 
-      init: function () {
+      init () {
 
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
@@ -49,7 +49,7 @@
          });
 
          var liveEventsPromise = new Promise(( resolve, reject ) => {
-            CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/all/')
+            CoreLibrary.offeringModule.getLiveEventsByFilter('football/all/all/')
                .then(( response ) => {
                   resolve(response);
                });
@@ -91,7 +91,7 @@
        * @param {Array} events An array of event objects containing events and betOffers
        * @returns {{groups: Array, goldenBoot: Array, tournamentWinner: Array}}
        */
-      filterOutBetOffers: function ( events ) {
+      filterOutBetOffers ( events ) {
          // Map the criterion
          var mappings = {};
          mappings[this.scope.args.criterionIds.goldenBoot] = 'goldenBoot';
@@ -120,13 +120,13 @@
          return ret;
       },
 
-      sortOutcomes: function ( outcomes ) {
-         return outcomes.sort(function ( outcomeA, outcomeB ) {
+      sortOutcomes ( outcomes ) {
+         return outcomes.sort( ( outcomeA, outcomeB ) => {
             return outcomeA.odds - outcomeB.odds;
          });
       },
 
-      adjustHeight: function () {
+      adjustHeight () {
          var sectionHeight = 313;
          var headerHeight = 37;
          var contentHeight = sectionHeight + headerHeight;
@@ -145,7 +145,7 @@
          }
       },
 
-      is_mobile: function () {
+      is_mobile () {
          return this.mainElement.offsetWidth < 569;
       }
 
