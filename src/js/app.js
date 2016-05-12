@@ -126,9 +126,11 @@
          var headerHeight = 37;
          var contentHeight = sectionHeight + headerHeight;
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
-         console.log(this.scope.is_mobile, this.scope.swiper);
-         if ( this.scope.is_mobile && !this.scope.swiper ) {
-            this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('mobile-slider'));
+         if ( this.scope.is_mobile ) {
+            if (!this.scope.swiper) {
+               this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
+            }
+
          }
 
          if ( this.scope.is_mobile === false && this.scope.swiper ) {

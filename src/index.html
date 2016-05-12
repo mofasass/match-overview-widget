@@ -16,13 +16,14 @@
    <meta name="apple-mobile-web-app-status-bar-style" content="black">
    <meta name="apple-mobile-web-app-title" content="">
 
+   <link rel="stylesheet" type="text/css" rv-href="widgetCss"/>
+
    <!-- build:css -->
    <!-- This section will be replaced in the gulp build process -->
    <link rel="stylesheet" type="text/css" href="transpiled/css/app.css"/>
    <!-- endbuild -->
 
    <!--Customer css-->
-   <link rel="stylesheet" type="text/css" rv-href="widgetCss"/>
 
    <!-- build:third-party-libs -->
    <script src="https://s3-eu-west-1.amazonaws.com/kambi-widgets/widget-third-party/v1.2.0/thirdparty.js"></script>
@@ -38,10 +39,10 @@
 
    <!--Main-->
    <main id="main" class="kw-main KambiWidget-font l-flexbox l-vertical" rv-class-ismobile="is_mobile">
-      <section id="mobile-slider" class="kw-widget-top kw-slider-container l-flexbox l-horizontal l-pack-center l-mb-12">
-         <div class="kw-players-wrapper l-flexbox l-flex-1">
+      <section id="kw-slider-top" class="kw-widget-top kw-slider-container l-flexbox l-horizontal l-pack-center l-mb-12">
+         <div class="kw-slider-scroller l-flexbox l-flex-1">
             <div class="mobile-page l-flexbox l-vertical l-align-end l-flex-1 l-pl-6 l-pr-6" id="tournament-winner"></div>
-            <div class="mobile-page l-flexbox l-vertical l-pack-center l-align-center l-pl-24 l-pr-24">
+            <div class="mobile-page l-flexbox l-vertical l-pack-center l-align-center l-pl-32 l-pr-32">
                <div class="kw-tournament-logo l-mb-12"></div>
                <div class="kw-tournament-name l-flexbox l-vertical">
                   <h2 class="l-flexbox l-pack-center l-align-center">EURO 2016</h2>
@@ -51,7 +52,7 @@
             <div class="mobile-page l-flexbox l-vertical l-align-start l-flex-1 l-pl-6 l-pr-6" id="golden-boot"></div>
          </div>
       </section>
-      <section class="kw-widget-bottom l-flexbox l-horizontal" id="live-upcoming"></section>
+      <section class="kw-widget-bottom l-flexbox l-horizontal faded-left" id="live-upcoming"></section>
    </main>
 </div>
 

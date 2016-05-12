@@ -1,20 +1,75 @@
-var LiveUpcoming = (function () {
+var LiveUpcoming = (() => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
       htmlTemplateFile: './views/live-upcoming.html',
 
-      constructor: function ( htmlElement, eventsData, cmsData ) {
+      constructor ( htmlElement, eventsData, cmsData ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
+         this.scope.scrollStart = 0;
          this.scope.teamData = cmsData;
          this.scope.events = this.parseUpcomingEvents(eventsData.events);
+         this.scope.doscroll = this.scroll;
+         this.scope.handleClass = this.handleClass;
       },
 
-      init: function () {
+      init () {
+         this.getScroller();
       },
-      parseUpcomingEvents: function ( events ) {
+
+      getScroller () {
+         this.scope.scrollerContainer = document.getElementById('live-upcoming');
+         this.scope.scroller = document.getElementById('kw-slider-bottom');
+         this.scope.scrollerParent = this.scope.scroller.parentElement;
+         this.scope.scrollerParentWidth = this.scope.scrollerParent.offsetWidth;
+         this.scope.scrollerWidth = this.scope.scroller.offsetWidth;
+         this.scope.itemWidth = this.scope.scroller.children[0].offsetWidth;
+         this.scope.maxItems = Math.floor(this.scope.scrollerParentWidth / this.scope.itemWidth);
+         console.log('this.scope.scrollerParentWidth', this.scope.scrollerParentWidth);
+         console.log('this.scope.scrollerWidth', this.scope.scrollerWidth);
+         console.log('this.scope.itemWidth', this.scope.itemWidth);
+         console.log('this.scope.maxItems', this.scope.maxItems);
+
+      },
+
+      handleClass ( dir, end ) {
+         this.scrollerContainer.classList.remove('faded-right');
+         this.scrollerContainer.classList.remove('faded-left');
+         if ( dir === 'right' && end ) {
+            this.scrollerContainer.classList.add('faded-right');
+         } else if ( dir === 'left' && end ) {
+            this.scrollerContainer.classList.add('faded-left');
+         }
+      },
+
+      scroll ( elem, scope ) {
+         var dir = this.getAttribute('data-dir'), translate;
+         scope.handleClass(dir);
+         if ( dir === 'left' ) {
+            scope.scrollStart += scope.itemWidth;
+         } else {
+            scope.scrollStart -= scope.itemWidth;
+         }
+         // console.log(scope.scrollStart);
+         if ( scope.scrollStart >= 0 ) {
+            console.log('scroll left');
+            scope.scrollStart = 0;
+            scope.handleClass(dir, true);
+         }
+         // console.log('end',(scope.scrollStart * -1) >= (scope.scrollerWidth - scope.itemWidth * (scope.maxItems - 1)));
+         if ( (scope.scrollStart * -1) >= (scope.scrollerWidth - scope.itemWidth * (scope.maxItems - 1)) ) {
+            scope.scrollStart += scope.itemWidth;
+            scope.handleClass(dir, true);
+         }
+         translate = 'translate3d(' + scope.scrollStart + 'px, 0, 0)';
+         scope.scroller.style.transform = translate;
+         scope.scroller.style.mozTransform = translate;
+         scope.scroller.style.webkitTransform = translate;
+      },
+
+      parseUpcomingEvents ( events ) {
          var matchesObj = {},
             maxEvents = events.length,
             dateLocale = 'sv-SE';
@@ -48,7 +103,7 @@ var LiveUpcoming = (function () {
 
          return matchesObj;
       },
-      navigateToEvent: function ( event ) {
+      navigateToEvent ( event ) {
          if ( event.openForLiveBetting != null && event.openForLiveBetting === true ) {
             CoreLibrary.widgetModule.navigateToLiveEvent(event.id);
          } else {

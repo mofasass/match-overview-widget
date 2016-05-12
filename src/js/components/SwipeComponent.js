@@ -3,23 +3,22 @@
 
    CoreLibrary.SwipeComponent = Stapes.subclass({
 
-      constructor: function ( container ) {
+      constructor: function ( container, action, threshold ) {
          var direction = Hammer.DIRECTION_HORIZONTAL;
+         action = action || 'Pan';
          this.container = container;
-         this.subContainer = container.children[0];
-         this.children = document.querySelectorAll('.mobile-page');
+         this.subContainer = container.querySelector('.kw-slider-scroller');
+         this.children = this.container.querySelectorAll('.mobile-page');
          this.panes = Array.prototype.slice.call(this.children, 0);
          this.containerSize = this.container[this.dirProp(direction, 'offsetWidth', 'offsetHeight')];
          this.direction = direction;
-
          this.currentIndex = 0;
 
-         this.recognizer = new Hammer.Pan({ direction: this.direction, threshold: 30 });
-
          this.hammer = new Hammer.Manager(this.container);
+
+         this.recognizer = new Hammer[action]({ direction: this.direction, threshold: threshold });
          this.hammer.add(this.recognizer);
          this.hammer.on('panstart panmove panend pancancel', Hammer.bindFn(this.onPan, this));
-
          this.show(this.currentIndex);
       },
 
@@ -78,9 +77,6 @@
          }
 
          this.show(this.currentIndex, percent, animate);
-      },
-
-      init: function () {
       }
    });
 

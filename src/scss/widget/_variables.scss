@@ -10,3 +10,7 @@ $color-custom-border: rgba(255, 255, 255, .9);
 $color-active-background: rgba(0, 0, 0, .1);
 $color-hover-background: rgba(255, 255, 255, .1);
 $color-hover-selected-background: rgba(255, 255, 255, 1);
+
+$full-gradient: -webkit-gradient(linear, 0% 0%, 100% 0, color-stop(0%, transparent), color-stop(7%, black), color-stop(50%, black), color-stop(93%, black), color-stop(100%, transparent));
+$right-gradient: -webkit-gradient(linear, 90% 0%, 100% 0, from(black), to(transparent));
+$left-gradient: -webkit-gradient(linear, 0% 0%, 10% 0, from(transparent), to(black));

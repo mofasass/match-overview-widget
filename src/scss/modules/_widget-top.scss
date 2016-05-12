@@ -1,0 +1,62 @@
+.kw-tournament-logo {
+   background-image: url("../images/UEFA_Euro_2016_Logo.svg");
+   background-position: 50%;
+   background-repeat: no-repeat;
+   background-size: contain;
+   height: 90px;
+   width: 90px;
+}
+
+.kw-widget-top {
+
+   .kw-players {
+      height: 35px;
+      width: 200px;
+   }
+
+   .kw-slider-scroller {
+      @include device ((xss, xs, ss)) {
+         height: 175px;
+         @include flexbox();
+         @include box-align(center);
+         @include box-orient(row);
+         @include flex-wrap(wrap);
+         @include flex-flow(column wrap);
+
+         .animate & {
+            @include transition(all .3s);
+         }
+
+         > .mobile-page {
+            &:nth-child(1) { order: 1; }
+            &:nth-child(2) { order: 0; }
+            &:nth-child(3) { order: 2; }
+         }
+      }
+   }
+
+   .kw-slider-container {
+      height: 140px;
+      overflow: hidden;
+   }
+
+   @include device((xss, xs, ss)) {
+
+      .mobile-page {
+         @include flexbox();
+         height: 175px;
+         @include flex(0 0 100%);
+         width: 100%;
+
+         > div {
+            max-width: 100%;
+            min-width: 100%;
+         }
+
+         .kw-players {
+            height: 35px;
+            width: 100%;
+         }
+      }
+   }
+}

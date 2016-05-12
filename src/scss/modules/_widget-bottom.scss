@@ -1,0 +1,121 @@
+.kw-widget-bottom {
+   height: 130px;
+   overflow: hidden;
+   position: relative;
+
+   .kw-slider-container {
+      height: 130px;
+      overflow: hidden;
+      position: relative;
+      @include transition(all .3s);
+      -webkit-mask-image: $full-gradient;
+
+      > div {
+         @include transition(all .3s);
+      }
+   }
+
+   &:hover {
+      .kw-scroll-left, .kw-scroll-right {
+         opacity: 1;
+      }
+
+      .kw-slider-container {
+         &.faded {
+            -webkit-mask-image: $full-gradient;
+         }
+      }
+   }
+
+   .kw-scroll-left, .kw-scroll-right {
+      @include transition(all .3s);
+      height: 100%;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      width: 50px;
+      z-index: 1;
+
+      i {
+         cursor: pointer;
+         font-size: 60px;
+      }
+   }
+
+   .kw-scroll-left {
+      left: 0;
+   }
+
+   .kw-scroll-right {
+      right: 0;
+   }
+
+   &.faded-left,
+   &.faded-left:hover {
+      .kw-scroll-left i {
+         display: none;
+      }
+
+      .faded {
+         -webkit-mask-image: $right-gradient;
+      }
+   }
+
+   &.faded-right,
+   &.faded-right:hover {
+      .kw-scroll-right i {
+         display: none;
+      }
+
+      .faded {
+         -webkit-mask-image: $left-gradient;
+      }
+   }
+
+   button {
+      margin-left: 0;
+      min-width: 100px;
+   }
+
+   .kw-day, .kw-time {
+      height: 130px;
+      @include flex(1 0 auto);
+   }
+
+   outcome-component {
+      margin-left: 6px;
+
+      .KambiWidget-outcome__label {
+         text-transform: capitalize;
+      }
+
+      &:first-child {
+         margin-left: 0;
+      }
+   }
+
+   .kw-section-header {
+      border-bottom: 1px solid $color-custom-border;
+   }
+
+   .kw-teams,
+   .kw-event-outcomes {
+      border-right: 1px solid $color-custom-border;
+      cursor: pointer;
+   }
+
+   .kw-day:last-child .kw-time:last-child .kw-match:last-child {
+      .kw-teams,
+      .kw-event-outcomes {
+         border-right: 0;
+      }
+   }
+
+   @include device((xss, xs, ss)) {
+      .kw-slider-scroller {
+         @include transform(translate3d(0, 0, 0) !important);
+         overflow-x: scroll;
+         -webkit-overflow-scrolling: touch;
+      }
+   }
+}
