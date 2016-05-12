@@ -4,13 +4,15 @@ var LiveUpcoming = (() => {
 
       htmlTemplateFile: './views/live-upcoming.html',
 
-      constructor ( htmlElement, eventsData, cmsData ) {
+      constructor: function ( htmlElement, eventsData, liveEventsData, cmsData ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
          this.scope.scrollStart = 0;
          this.scope.teamData = cmsData;
          this.scope.events = this.parseUpcomingEvents(eventsData.events);
+         this.scope.liveEvents = liveEventsData.events;
+         this.scope.navigateToEvent = this.navigateToEvent.bind(this);
          this.scope.doscroll = this.scroll;
          this.scope.handleClass = this.handleClass;
       },
@@ -94,7 +96,6 @@ var LiveUpcoming = (() => {
                if ( this.scope.teamData.teams && this.scope.teamData.matches ) {
                   events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;
                   events[i].event.awayFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].flag;
-                  events[i].clickEvent = this.navigateToEvent.bind(this, events[i].event);
                }
 
                matchesObj[date][time].push(events[i]);
@@ -103,11 +104,11 @@ var LiveUpcoming = (() => {
 
          return matchesObj;
       },
-      navigateToEvent ( event ) {
-         if ( event.openForLiveBetting != null && event.openForLiveBetting === true ) {
-            CoreLibrary.widgetModule.navigateToLiveEvent(event.id);
+      navigateToEvent ( e, data ) {
+         if ( data.event.event.openForLiveBetting != null && data.event.event.openForLiveBetting === true ) {
+            CoreLibrary.widgetModule.navigateToLiveEvent(data.event.event.id);
          } else {
-            CoreLibrary.widgetModule.navigateToEvent(event.id);
+            CoreLibrary.widgetModule.navigateToEvent(data.event.event.id);
          }
       }
    });
