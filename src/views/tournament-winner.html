@@ -7,25 +7,29 @@
       </h4>
    </div>
 
-   <!--Players wrapper-->
-   <div class="l-flexbox l-vertical l-flex-1">
+   <div id="teams-slider" class="kw-slider-container">
 
-      <!--Players-->
-      <div class="kw-players l-flexbox l-mb-12"
-           rv-anim-stagger="index" rv-each-team="_event">
+      <!--Players wrapper-->
+      <div class="kw-players-wrapper l-flex-1">
 
-         <!--Player Team Color-->
-         <div class="kw-player-media l-flexbox l-align-center">
-            <img rv-src="team.teamData.flag.url"/>
-         </div>
+         <!--Players-->
+         <div class="kw-players l-flexbox l-mb-12"
+              rv-each-team="event">
 
-         <!--Team Name-->
-         <div class="l-flexbox l-align-center l-flex-4">
-            <span class="text-truncate">{team.label}</span>
-         </div>
+            <!--Player Team Color-->
+            <div class="kw-player-media l-flexbox l-align-center l-mr-6">
+               <img rv-src="team.teamData.flag.url"/>
+            </div>
 
-         <div class="l-flexbox">
-            <outcome-component-no-label outcome-attr="team"></outcome-component-no-label>
+            <!--Team Name-->
+            <div class="l-flexbox l-align-center l-flex-4">
+               <span class="text-truncate">{team.label}</span>
+            </div>
+
+            <div class="l-flexbox">
+               <outcome-component-no-label outcome-attr="team"></outcome-component-no-label>
+            </div>
+
          </div>
 
       </div>

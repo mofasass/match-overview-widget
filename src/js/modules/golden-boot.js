@@ -21,17 +21,13 @@ var GoldenBoot = (function () {
                if ( item.participantId != null && this.scope.playerData[item.participantId] != null ) {
                   item.cmsData.playerData = this.scope.playerData[item.participantId];
                   item.cmsData.teamData = this.scope.teamData[item.cmsData.playerData.teamId];
-                  // console.debug(item.cmsData.teamData);
-                  // console.debug(item.label, item.cmsData.playerData.pic.url);
                }
-
                item.index = this.scope.outcomes.indexOf(item);
             }
          }
       },
 
       init: function () {
-         this.pagination = new CoreLibrary.PaginationComponent('#golden-boot-pagination', this.scope, 'outcomes', 3);
       }
    });
 })();

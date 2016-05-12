@@ -1,14 +1,32 @@
 // Commong widget styles
 
+@mixin device($screen-size-label) {
+   @each $size in $screen-size-label {
+      $size: get-screen-size($size);
+      $min: nth($size, 1);
+      $max: nth($size, 2);
+      @media (min-width: #{$min}) and (max-width: #{$max}) {
+         @content;
+      }
+   }
+}
+
 body {
    background-image: url(../images/background_test.jpg);
    background-position: 50% 50%;
    background-repeat: no-repeat;
    background-size: cover;
    color: white;
+   height: auto;
 }
 
-h3, h4 {
+.kw-main {
+   @include device((xss, xs, ss)) {
+      display: block;
+   }
+}
+
+h2, h3, h4, h5 {
    line-height: 24px;
 }
 
@@ -16,24 +34,86 @@ h2 {
    font-size: 18px;
 }
 
-.kw-section-header {
+.kw-players-wrapper {
+   @include device ((xss, xs, ss)) {
+      height: 175px;
+      @include flexbox();
+      @include box-align(center);
+      @include box-orient(row);
+      @include flex-wrap(wrap);
+      @include flex-flow(column wrap);
 
-   h4 > div:last-child {
-      min-width: 60px;
+      .animate & {
+         @include transition(all .3s);
+      }
+
+      > .mobile-page {
+         &:nth-child(1) { order: 1; }
+         &:nth-child(2) { order: 0; }
+         &:nth-child(3) { order: 2; }
+      }
+   }
+}
+
+.kw-slider-container {
+   height: 175px;
+   overflow: hidden;
+}
+
+.kw-widget-top {
+
+   .kw-players {
+      height: 35px;
+      width: 200px;
+   }
+
+   @include device((xss, xs, ss)) {
+
+      .mobile-page {
+         @include flexbox();
+         height: 175px;
+         @include flex(0 0 100%);
+         width: 100%;
+
+         > div {
+            max-width: 100%;
+            min-width: 100%;
+         }
+
+         .kw-players {
+            height: 35px;
+            width: 100%;
+         }
+      }
    }
 }
 
 .kw-widget-bottom {
+   height: 130px;
    overflow: hidden;
-   overflow-x: scroll;
+   //overflow-x: scroll;
+
+   @include device((xss, xs, ss)) {
+      overflow-x: scroll;
+   }
 
    button {
       margin-left: 0;
       min-width: 100px;
    }
 
+   .kw-day, .kw-time {
+      height: 130px;
+      @include flex(1 0 auto);
+      //width: 100%;
+   }
+
    outcome-component {
       margin-left: 6px;
+
+      .KambiWidget-outcome__label {
+         text-transform: capitalize;
+      }
 
       &:first-child {
          margin-left: 0;
@@ -54,24 +134,14 @@ h2 {
    }
 }
 
-.kw-widget-top {
-   section {
-      > div {
-         max-width: 200px;
-         min-width: 200px;
-
-         @include device(xss) {
-            max-width: $screen-xss;
-            min-width: $screen-xss;
-         }
-      }
-   }
-}
-
 .kw-player-media {
    height: 35px;
    position: relative;
    width: 35px;
+   > img {
+      background-color: white;
+      @include border-radius(50px)
+   }
 }
 
 button {
@@ -93,14 +163,6 @@ button {
 }
 
 .ismobile {
-   display: block;
-
-   section {
-      padding-right: 12px;
-      &:last-child {
-         padding-right: 0;
-      }
-   }
 }
 
 .kw-footer {

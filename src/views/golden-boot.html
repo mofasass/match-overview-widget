@@ -7,32 +7,31 @@
 </div>
 
 <!--Players wrapper-->
-<div class="l-flexbox l-vertical l-flex-1">
+<div id="players-slider" class="kw-slider-container">
 
-   <!--Players-->
-   <div class="kw-players l-flexbox l-mb-12"
-        rv-anim-stagger="index" rv-each-outcome="_outcomes">
+   <div class="kw-players-wrapper l-flex-1">
 
-      <!--Player Team Color-->
-      <div class="kw-player-media l-flexbox l-align-center">
-         <!--<img class="playerImage" rv-src="outcome.cmsData.playerData.pic.url" >-->
-         <img rv-if="outcome.cmsData.teamData.flag.url" class="playerImage" rv-src="outcome.cmsData.teamData.flag.url">
-      </div>
+      <!--Players-->
+      <div class="kw-players l-flexbox l-mb-12"
+           rv-each-outcome="outcomes">
 
-      <!--Player Name and goals scored-->
-      <div class="l-flexbox l-align-center l-flex-4">
-         <span class="text-truncate">{outcome.label} <span rv-if="outcome.cmsData.playerData.goals">({outcome.cmsData.playerData.goals})</span></span>
-      </div>
+         <!--Player Team Color-->
+         <div class="kw-player-media l-flexbox l-align-center l-mr-6">
+            <img rv-if="outcome.cmsData.teamData.flag.url" class="playerImage" rv-src="outcome.cmsData.teamData.flag.url">
+         </div>
 
-      <div class="l-flexbox">
-         <outcome-component-no-label outcome-attr="outcome"></outcome-component-no-label>
+         <!--Player Name and goals scored-->
+         <div class="l-flexbox l-align-center l-flex-4">
+            <span class="text-truncate">{outcome.label} <span rv-if="outcome.cmsData.playerData.goals">({outcome.cmsData.playerData.goals})</span></span>
+         </div>
+
+         <div class="l-flexbox">
+            <outcome-component-no-label outcome-attr="outcome"></outcome-component-no-label>
+         </div>
+
       </div>
 
    </div>
 
 </div>
-
-<footer class="kw-footer">
-   <div id="golden-boot-pagination" class="kw-pagination l-flexbox l-pack-center l-align-center"></div>
-</footer>
 

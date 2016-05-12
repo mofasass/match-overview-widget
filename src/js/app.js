@@ -71,15 +71,17 @@
                   var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[3].teams);
                }
 
-               // window.addEventListener('resize', () => {
-               //    clearTimeout(resizeTimeout);
-               //
-               //    resizeTimeout = setTimeout(() => {
-               //       this.scope.is_mobile = this.is_mobile();
-               //       this.adjustHeight(this.scope.is_mobile);
-               //    }, 300);
-               //
-               // });
+               window.addEventListener('resize', () => {
+                  clearTimeout(resizeTimeout);
+
+                  resizeTimeout = setTimeout(() => {
+                     this.scope.is_mobile = this.is_mobile();
+                     this.adjustHeight(this.scope.is_mobile);
+                  }, 300);
+
+               });
+
+
 
                this.adjustHeight(this.scope.is_mobile);
             });
@@ -126,15 +128,25 @@
          });
       },
 
-      adjustHeight: function ( is_mobile ) {
-         var sectionHeight = 350;
+      adjustHeight: function () {
+         var sectionHeight = 313;
          var headerHeight = 37;
          var contentHeight = sectionHeight + headerHeight;
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
+         console.log(this.scope.is_mobile, this.scope.swiper);
+         if ( this.scope.is_mobile && !this.scope.swiper ) {
+            this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('mobile-slider'));
+         }
+
+         if ( this.scope.is_mobile === false && this.scope.swiper ) {
+            this.scope.swiper.release();
+         } else if ( this.scope.is_mobile && this.scope.swiper ) {
+            this.scope.swiper.attach();
+         }
       },
 
       is_mobile: function () {
-         return this.mainElement.offsetWidth < 769;
+         return this.mainElement.offsetWidth < 569;
       }
 
    });

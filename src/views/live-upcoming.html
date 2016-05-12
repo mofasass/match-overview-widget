@@ -48,13 +48,14 @@
 
 <!-- Upcoming -->
 
-<div class="slide-item l-flexbox l-horizontal" rv-each-event="events | property_list" rv-anim-stagger="index">
+<!--Day-->
+<div class="kw-day l-flexbox" rv-each-event="events | property_list">
 
    <!-- Time slots -->
-   <div rv-each-start_time="event.value | property_list" class="l-flexbox l-horizontal">
+   <div rv-each-start_time="event.value | property_list" class="kw-time l-flexbox">
 
       <!-- Matches -->
-      <div rv-each-event="start_time.value" class="kw-players l-flexbox l-vertical">
+      <div rv-each-event="start_time.value" class="kw-match">
 
          <!--Day header-->
          <div class="kw-section-header l-pt-6 l-pb-6 l-mb-6">
@@ -64,7 +65,7 @@
             </h4>
          </div>
 
-         <div class="kw-teams l-flexbox l-vertical l-pt-6 l-pl-12 l-pr-12 l-pb-6" rv-on-click="navigateToEvent" >
+         <div class="kw-teams l-pt-6 l-pl-12 l-pr-12 l-pb-6" rv-on-click="navigateToEvent" >
 
             <div class="l-flexbox l-expander l-flex-1" >
                <div class="l-flexbox l-align-center l-flex-1 l-pack-end">
