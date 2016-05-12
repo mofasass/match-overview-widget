@@ -64,11 +64,11 @@
                var filteredEvents = this.filterOutBetOffers(promiseData[2].events);
 
                if ( filteredEvents.goldenBoot[0] != null ) {
-                  var goldenBoot = new GoldenBoot('section#golden-boot', filteredEvents.goldenBoot[0], promiseData[3]);
+                  var goldenBoot = new GoldenBoot('div#golden-boot', filteredEvents.goldenBoot[0], promiseData[3]);
                }
 
                if ( filteredEvents.tournamentWinner[0] != null ) {
-                  var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[3].teams);
+                  var tournamentWinner = new TournamentWinner('div#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[3].teams);
                }
 
                window.addEventListener('resize', () => {
@@ -80,8 +80,6 @@
                   }, 300);
 
                });
-
-
 
                this.adjustHeight(this.scope.is_mobile);
             });
