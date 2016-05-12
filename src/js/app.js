@@ -48,20 +48,27 @@
                });
          });
 
+         var liveEventsPromise = new Promise(( resolve, reject ) => {
+            CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/all/')
+               .then(( response ) => {
+                  resolve(response);
+               });
+         });
+
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([eventsPromise, betofferPromise, cmsDataPromoise])
+         Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromoise])
             .then(( promiseData ) => {
-               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[2]),
+               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3]),
                   resizeTimeout = false;
 
-               var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
+               var filteredEvents = this.filterOutBetOffers(promiseData[2].events);
 
                if ( filteredEvents.goldenBoot[0] != null ) {
-                  var goldenBoot = new GoldenBoot('section#golden-boot', filteredEvents.goldenBoot[0], promiseData[2]);
+                  var goldenBoot = new GoldenBoot('section#golden-boot', filteredEvents.goldenBoot[0], promiseData[3]);
                }
 
                if ( filteredEvents.tournamentWinner[0] != null ) {
-                  var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[2].teams);
+                  var tournamentWinner = new TournamentWinner('section#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[3].teams);
                }
 
                // window.addEventListener('resize', () => {
