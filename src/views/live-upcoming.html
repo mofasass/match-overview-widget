@@ -55,19 +55,13 @@
    <div id="kw-slider-bottom" class="kw-slider-scroller l-flexbox l-horizontal">
 
       <!--Day-->
-      <div class="kw-day mobile-page l-flexbox" rv-each-event="events | property_list">
-
-         <!-- Time slots -->
-         <div rv-each-start_time="event.value | property_list" class="kw-time l-flexbox">
-
-            <!-- Event -->
-            <div rv-each-event="start_time.value" class="kw-match">
+      <div class="kw-match" rv-each-event="events">
 
                <!--Day header-->
                <div class="kw-section-header l-pt-6 l-pb-6 l-mb-6">
                   <h4 class="l-flexbox l-align-center l-pack-start l-pl-16">
                      <span class="text-truncate">{event.customStartTime}&nbsp</span>
-                     <span style="text-transform: capitalize" class="text-truncate">{event.key}</span>
+                     <span style="text-transform: capitalize" class="text-truncate">{event.customStartDate}</span>
                   </h4>
                </div>
 
@@ -104,6 +98,7 @@
       </div>
    </div>
 </div>
+
 <div class="kw-scroll-right l-flexbox l-pack-end l-align-center hidden-xss hidden-xs hidden-ss" rv-on-click="doscroll" data-dir="right">
    <i class="icon-angle-right"></i>
 </div>

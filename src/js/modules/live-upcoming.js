@@ -72,7 +72,7 @@ var LiveUpcoming = (() => {
       },
 
       parseUpcomingEvents ( events ) {
-         var matchesObj = {},
+         var matchesObj = [],
             maxEvents = events.length,
             dateLocale = 'sv-SE';
 
@@ -84,24 +84,16 @@ var LiveUpcoming = (() => {
                   date = eventDate.toLocaleDateString(dateLocale, { month: 'short', day: '2-digit' }).toString(),
                   time = eventDate.toLocaleTimeString(dateLocale, { hour: 'numeric', minute: 'numeric' }).toString();
                events[i].customStartTime = time;
-
-               if ( !matchesObj.hasOwnProperty(date) ) {
-                  matchesObj[date] = {};
-               }
-
-               if ( !matchesObj[date].hasOwnProperty(time) ) {
-                  matchesObj[date][time] = [];
-               }
+               events[i].customStartDate = date;
 
                if ( this.scope.teamData.teams && this.scope.teamData.matches ) {
                   events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;
                   events[i].event.awayFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].flag;
                }
 
-               matchesObj[date][time].push(events[i]);
+               matchesObj.push(events[i]);
             }
          }
-
          return matchesObj;
       },
       navigateToEvent ( e, data ) {

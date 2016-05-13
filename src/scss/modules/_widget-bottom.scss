@@ -8,7 +8,8 @@
       overflow: hidden;
       position: relative;
       @include transition(all .3s);
-      -webkit-mask-image: $full-gradient;
+      -webkit-mask-image: $webkit-full-gradient;
+      mask-image: $full-gradient;
 
       > div {
          @include transition(all .3s);
@@ -22,7 +23,8 @@
 
       .kw-slider-container {
          &.faded {
-            -webkit-mask-image: $full-gradient;
+            -webkit-mask-image: $webkit-full-gradient;
+            mask-image: $full-gradient;
          }
       }
    }
@@ -30,7 +32,7 @@
    .kw-scroll-left, .kw-scroll-right {
       @include transition(all .3s);
       height: 100%;
-      opacity: 0;
+      opacity: 0.1;
       position: absolute;
       top: 0;
       width: 50px;
@@ -57,7 +59,8 @@
       }
 
       .faded {
-         -webkit-mask-image: $right-gradient;
+         -webkit-mask-image: $webkit-right-gradient;
+         mask-image: $right-gradient;
       }
    }
 
@@ -68,7 +71,8 @@
       }
 
       .faded {
-         -webkit-mask-image: $left-gradient;
+         -webkit-mask-image: $webkit-left-gradient;
+         mask-image: $left-gradient;
       }
    }
 
@@ -77,8 +81,9 @@
       min-width: 100px;
    }
 
-   .kw-day, .kw-time {
+   .kw-match {
       height: 130px;
+      width: 350px;
       @include flex(1 0 auto);
    }
 

@@ -38,8 +38,10 @@ h2 {
    height: 35px;
    position: relative;
    width: 35px;
+
    > img {
-      background-color: white;
+      height: 35px;
+      width: 35px;
       @include border-radius(50px)
    }
 }
