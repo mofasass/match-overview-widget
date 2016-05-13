@@ -1,14 +1,15 @@
-var GoldenBoot = (function () {
+var GoldenBoot = (() => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
       htmlTemplateFile: './views/golden-boot.html',
 
-      constructor: function ( htmlElement, event, cmsData ) {
+      constructor ( htmlElement, event, cmsData ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
          this.scope.outcomes = event.betOffers[0].outcomes.slice(0, 3);
+         this.scope.count = event.betOffers[0].outcomes.length;
          this.scope.playerData = cmsData.players;
          this.scope.teamData = cmsData.teams;
 
@@ -27,7 +28,7 @@ var GoldenBoot = (function () {
          }
       },
 
-      init: function () {
+      init () {
       }
    });
 })();
