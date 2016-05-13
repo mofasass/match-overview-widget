@@ -8,21 +8,30 @@ var TournamentWinner = (function () {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
-         this.scope.event = event.betOffers[0].outcomes.slice(0,3);
+         this.scope.event = event.event;
+         this.scope.participantString = CoreLibrary.translationModule
+            .getTranslation('Show all {0} participants')
+            .replace(/\{0}/, event.betOffers[0].outcomes.length);
+         this.scope.outcomes = event.betOffers[0].outcomes.slice(0, 3);
          this.scope.teamData = teamData;
+         this.scope.navigateToFilter = this.navigateToFilter.bind(this);
 
          // Assign an index number for each outcome
          var i = 0, arrLength = 3;
          for ( ; i < arrLength; ++i ) {
-            var item = this.scope.event[i];
+            var item = this.scope.outcomes[i];
             if ( typeof item === 'object' ) {
                item.teamData = this.scope.teamData[item.participantId];
-               item.index = this.scope.event.indexOf(item);
+               item.index = this.scope.outcomes.indexOf(item);
             }
          }
       },
 
       init: function () {
+      },
+
+      navigateToFilter () {
+         CoreLibrary.widgetModule.navigateToEvent(this.scope.event.id);
       }
    });
 })();
