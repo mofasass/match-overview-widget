@@ -14,6 +14,7 @@ var LiveUpcoming = (() => {
          this.scope.events = this.parseUpcomingEvents(upcoming_events);
          this.scope.doscroll = this.scroll;
          this.scope.handleClass = this.handleClass;
+         this.scope.navigateToEvent = this.navigateToEvent.bind(this);
       },
 
       init () {
