@@ -127,9 +127,7 @@
       },
 
       adjustHeight () {
-         var sectionHeight = 313;
-         var headerHeight = 37;
-         var contentHeight = sectionHeight + headerHeight;
+         var contentHeight = 380;
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
          if ( this.scope.is_mobile ) {
             if (!this.scope.swiper) {

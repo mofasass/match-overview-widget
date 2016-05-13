@@ -4,7 +4,7 @@ var LiveUpcoming = (() => {
 
       htmlTemplateFile: './views/live-upcoming.html',
 
-      constructor: function ( htmlElement, eventsData, liveEventsData, cmsData ) {
+      constructor ( htmlElement, eventsData, liveEventsData, cmsData ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
@@ -24,9 +24,12 @@ var LiveUpcoming = (() => {
       getScroller () {
          this.scope.scrollerContainer = document.getElementById('live-upcoming');
          this.scope.scroller = document.getElementById('kw-slider-bottom');
+         // this.scope.scroller.style.width = 350 * this.scope.events.length;
+
+         this.scope.scrollerWidth = 350 * this.scope.events.length;
          this.scope.scrollerParent = this.scope.scroller.parentElement;
          this.scope.scrollerParentWidth = this.scope.scrollerParent.offsetWidth;
-         this.scope.scrollerWidth = this.scope.scroller.offsetWidth;
+
          this.scope.itemWidth = this.scope.scroller.children[0].offsetWidth;
          this.scope.maxItems = Math.floor(this.scope.scrollerParentWidth / this.scope.itemWidth);
          console.log('this.scope.scrollerParentWidth', this.scope.scrollerParentWidth);
@@ -56,7 +59,6 @@ var LiveUpcoming = (() => {
          }
          // console.log(scope.scrollStart);
          if ( scope.scrollStart >= 0 ) {
-            console.log('scroll left');
             scope.scrollStart = 0;
             scope.handleClass(dir, true);
          }

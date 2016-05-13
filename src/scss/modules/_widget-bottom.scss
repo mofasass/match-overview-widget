@@ -1,12 +1,14 @@
 .kw-widget-bottom {
-   height: 130px;
+   height: $bottom-height;
    overflow: hidden;
    position: relative;
+   width: 100%;
 
    .kw-slider-container {
-      height: 130px;
+      height: $bottom-height;
       overflow: hidden;
       position: relative;
+      width: 100%;
       @include transition(all .3s);
       -webkit-mask-image: $webkit-full-gradient;
       mask-image: $full-gradient;
@@ -14,6 +16,10 @@
       > div {
          @include transition(all .3s);
       }
+   }
+
+   .kw-slider-scroller {
+      height: $bottom-height;
    }
 
    &:hover {
@@ -82,9 +88,9 @@
    }
 
    .kw-match {
-      height: 130px;
+      height: $bottom-height;
       width: 350px;
-      @include flex(1 0 auto);
+      @include flex(1 0 350px);
    }
 
    outcome-component {
@@ -109,7 +115,7 @@
       cursor: pointer;
    }
 
-   .kw-day:last-child .kw-time:last-child .kw-match:last-child {
+   .kw-match:last-child {
       .kw-teams,
       .kw-event-outcomes {
          border-right: 0;
