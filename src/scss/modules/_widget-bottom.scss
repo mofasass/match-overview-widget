@@ -131,6 +131,17 @@
       }
    }
 
+   .kw-live-now {
+      span {
+         text-transform: uppercase;
+
+         &.red {
+            color: red;
+            font-style: italic;
+         }
+      }
+   }
+
    .kw-section-header {
       border-bottom: 1px solid $color-custom-border;
    }
