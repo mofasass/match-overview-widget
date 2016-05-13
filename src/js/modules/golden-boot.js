@@ -32,7 +32,7 @@ var GoldenBoot = (() => {
          }
       },
 
-      init: function () {
+      init () {
       },
       navigateToDetail () {
          CoreLibrary.widgetModule.navigateToEvent(this.scope.event.id);
