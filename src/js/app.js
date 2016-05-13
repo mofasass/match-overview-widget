@@ -133,7 +133,6 @@
             if (!this.scope.swiper) {
                this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
             }
-
          }
 
          if ( this.scope.is_mobile === false && this.scope.swiper ) {

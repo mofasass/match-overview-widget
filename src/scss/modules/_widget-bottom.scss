@@ -17,7 +17,7 @@
          @include transition(all .3s);
       }
 
-      @include device((xss,xs)) {
+      @include device((xss, xs, ss)) {
          -webkit-mask-image: none;
          mask-image: none;
       }
@@ -73,7 +73,7 @@
          -webkit-mask-image: $webkit-right-gradient;
          mask-image: $right-gradient;
 
-         @include device((xss,xs)) {
+         @include device((xss, xs, ss)) {
             -webkit-mask-image: none;
             mask-image: none;
          }
@@ -90,7 +90,7 @@
          -webkit-mask-image: $webkit-left-gradient;
          mask-image: $left-gradient;
 
-         @include device((xss,xs)) {
+         @include device((xss, xs, ss)) {
             -webkit-mask-image: none;
             mask-image: none;
          }
@@ -104,18 +104,19 @@
 
    .kw-match {
       height: $bottom-height;
-      $width: 350px;
+      width: 350px;
 
       @include device((xss)) {
-         $width: 300px;
+         width: 300px;
+         @include flex(1 0 300px);
       }
 
       @include device((xs)) {
-         $width: 300px;
+         width: 320px;
+         @include flex(1 0 320px);
       }
 
-      width: $width;
-      @include flex(1 0 $width);
+      @include flex(1 0 350px);
    }
 
    outcome-component {

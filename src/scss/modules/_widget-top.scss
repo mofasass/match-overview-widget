@@ -34,8 +34,12 @@
    }
 
    &.kw-slider-container {
-      height: 175px;
+      height: 200px;
       overflow: hidden;
+
+      @include device((xss, xs, ss)) {
+         height: 175px;
+      }
    }
 
    @include device((xss, xs, ss)) {
@@ -57,5 +61,9 @@
             width: 100%;
          }
       }
+   }
+
+   .kw-link {
+      text-decoration: underline;
    }
 }
