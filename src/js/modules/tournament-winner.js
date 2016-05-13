@@ -1,10 +1,10 @@
-var TournamentWinner = (function () {
+var TournamentWinner = ( () => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
       htmlTemplateFile: './views/tournament-winner.html',
 
-      constructor: function ( htmlElement, event, teamData ) {
+      constructor ( htmlElement, event, teamData ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
@@ -14,7 +14,7 @@ var TournamentWinner = (function () {
             .replace(/\{0}/, event.betOffers[0].outcomes.length);
          this.scope.outcomes = event.betOffers[0].outcomes.slice(0, 3);
          this.scope.teamData = teamData;
-         this.scope.navigateToFilter = this.navigateToFilter.bind(this);
+         this.scope.navigateToDetail = this.navigateToDetail.bind(this);
 
          // Assign an index number for each outcome
          var i = 0, arrLength = 3;
@@ -27,10 +27,10 @@ var TournamentWinner = (function () {
          }
       },
 
-      init: function () {
+      init () {
       },
 
-      navigateToFilter () {
+      navigateToDetail () {
          CoreLibrary.widgetModule.navigateToEvent(this.scope.event.id);
       }
    });

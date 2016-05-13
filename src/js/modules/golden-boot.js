@@ -1,10 +1,10 @@
-var GoldenBoot = (function () {
+var GoldenBoot = (() => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
       htmlTemplateFile: './views/golden-boot.html',
 
-      constructor: function ( htmlElement, event, cmsData ) {
+      constructor ( htmlElement, event, cmsData ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
@@ -15,7 +15,7 @@ var GoldenBoot = (function () {
          this.scope.outcomes = event.betOffers[0].outcomes.slice(0, 3);
          this.scope.playerData = cmsData.players;
          this.scope.teamData = cmsData.teams;
-         this.scope.navigateToFilter = this.navigateToFilter.bind(this);
+         this.scope.navigateToDetail = this.navigateToDetail.bind(this);
 
          // Assign an index number for each outcome
          var i = 0, arrLength = 3;
@@ -34,7 +34,7 @@ var GoldenBoot = (function () {
 
       init: function () {
       },
-      navigateToFilter () {
+      navigateToDetail () {
          CoreLibrary.widgetModule.navigateToEvent(this.scope.event.id);
       }
    });

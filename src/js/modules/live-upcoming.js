@@ -28,10 +28,6 @@ var LiveUpcoming = (() => {
          this.scope.scrollerParentWidth = this.scope.scrollerParent.offsetWidth;
          this.scope.itemWidth = this.scope.scroller.children[0].offsetWidth;
          this.scope.maxItems = Math.floor(this.scope.scrollerParentWidth / this.scope.itemWidth);
-         console.log('this.scope.scrollerParentWidth', this.scope.scrollerParentWidth);
-         console.log('this.scope.scrollerWidth', this.scope.scrollerWidth);
-         console.log('this.scope.itemWidth', this.scope.itemWidth);
-         console.log('this.scope.maxItems', this.scope.maxItems);
       },
 
       handleClass ( dir, end ) {
@@ -76,8 +72,18 @@ var LiveUpcoming = (() => {
 
             for ( ; i < maxEvents; ++i ) {
                var eventDate = new Date(events[i].event.start);
-               events[i].customStartTime = eventDate.toLocaleTimeString(dateLocale, { hour: 'numeric', minute: 'numeric' }).toString();
-               events[i].customStartDate = eventDate.toLocaleDateString(dateLocale, { month: 'short', day: '2-digit' }).toString();
+
+               var date = eventDate.toLocaleDateString(dateLocale, { month: 'short', day: '2-digit' }).toString(),
+                  time = eventDate.toLocaleTimeString(dateLocale, { hour: 'numeric', minute: 'numeric' }).toString();
+
+               if ( events[i].liveData && events[i].liveData.matchClock ) {
+                  var minute = events[i].liveData.matchClock.minute < 10 ? '0'+ events[i].liveData.matchClock.minute : events[i].liveData.matchClock.minute;
+                  var second = events[i].liveData.matchClock.second < 10 ? '0'+ events[i].liveData.matchClock.second : events[i].liveData.matchClock.second;
+                  time = minute + ':' + second;
+               }
+
+               events[i].customStartTime = time;
+               events[i].customStartDate = date;
 
                if ( this.scope.teamData.teams && this.scope.teamData.matches && this.scope.teamData.matches[events[i].event.id] ) {
                   events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;
