@@ -66,7 +66,12 @@ var LiveUpcoming = (() => {
       parseUpcomingEvents ( events ) {
          var matchesObj = [],
             maxEvents = events.length,
-            dateLocale = 'sv-SE';
+            dateLocale = CoreLibrary.config.locale.replace(/_/, '-');
+
+         // en-GB uses a 24 hour format, so we use en-US instead
+         if ( dateLocale === 'en-GB' ) {
+            dateLocale = 'en-US';
+         }
 
          if ( events != null && events.length > 0 ) {
             var i = 0;
@@ -74,12 +79,12 @@ var LiveUpcoming = (() => {
             for ( ; i < maxEvents; ++i ) {
                var eventDate = new Date(events[i].event.start);
 
-               var date = eventDate.toLocaleDateString(dateLocale, { month: 'short', day: '2-digit' }).toString(),
+               var date = eventDate.toLocaleDateString(dateLocale, { month: 'long', day: '2-digit' }).toString(),
                   time = eventDate.toLocaleTimeString(dateLocale, { hour: 'numeric', minute: 'numeric' }).toString();
 
                if ( events[i].liveData && events[i].liveData.matchClock ) {
-                  var minute = events[i].liveData.matchClock.minute < 10 ? '0'+ events[i].liveData.matchClock.minute : events[i].liveData.matchClock.minute;
-                  var second = events[i].liveData.matchClock.second < 10 ? '0'+ events[i].liveData.matchClock.second : events[i].liveData.matchClock.second;
+                  var minute = events[i].liveData.matchClock.minute < 10 ? '0' + events[i].liveData.matchClock.minute : events[i].liveData.matchClock.minute;
+                  var second = events[i].liveData.matchClock.second < 10 ? '0' + events[i].liveData.matchClock.second : events[i].liveData.matchClock.second;
                   time = minute + ':' + second;
                }
 
