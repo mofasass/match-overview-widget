@@ -16,6 +16,11 @@
       > div {
          @include transition(all .3s);
       }
+
+      @include device((xss,xs)) {
+         -webkit-mask-image: none;
+         mask-image: none;
+      }
    }
 
    .kw-slider-scroller {
@@ -38,7 +43,7 @@
    .kw-scroll-left, .kw-scroll-right {
       @include transition(all .3s);
       height: 100%;
-      opacity: 0.1;
+      opacity: 0;
       position: absolute;
       top: 0;
       width: 50px;
@@ -67,6 +72,11 @@
       .faded {
          -webkit-mask-image: $webkit-right-gradient;
          mask-image: $right-gradient;
+
+         @include device((xss,xs)) {
+            -webkit-mask-image: none;
+            mask-image: none;
+         }
       }
    }
 
@@ -79,18 +89,33 @@
       .faded {
          -webkit-mask-image: $webkit-left-gradient;
          mask-image: $left-gradient;
+
+         @include device((xss,xs)) {
+            -webkit-mask-image: none;
+            mask-image: none;
+         }
       }
    }
 
    button {
       margin-left: 0;
-      min-width: 100px;
+      min-width: 80px;
    }
 
    .kw-match {
       height: $bottom-height;
-      width: 350px;
-      @include flex(1 0 350px);
+      $width: 350px;
+
+      @include device((xss)) {
+         $width: 300px;
+      }
+
+      @include device((xs)) {
+         $width: 300px;
+      }
+
+      width: $width;
+      @include flex(1 0 $width);
    }
 
    outcome-component {
@@ -123,6 +148,8 @@
    }
 
    @include device((xss, xs, ss)) {
+      padding: 0;
+
       .kw-slider-scroller {
          @include transform(translate3d(0, 0, 0) !important);
          overflow-x: scroll;

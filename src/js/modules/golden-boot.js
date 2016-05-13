@@ -8,12 +8,12 @@ var GoldenBoot = (function () {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
-         this.scope.outcomes = event.betOffers[0].outcomes;
+         this.scope.outcomes = event.betOffers[0].outcomes.slice(0, 3);
          this.scope.playerData = cmsData.players;
          this.scope.teamData = cmsData.teams;
 
          // Assign an index number for each outcome
-         var i = 0, arrLength = this.scope.outcomes.length;
+         var i = 0, arrLength = 3;
          for ( ; i < arrLength; ++i ) {
             var item = this.scope.outcomes[i];
             if ( typeof item === 'object' ) {

@@ -15,6 +15,8 @@
    }
 
    .kw-slider-scroller {
+      @include transition(all .3s);
+
       @include device ((xss, xs, ss)) {
          height: 175px;
          @include flexbox();
@@ -22,10 +24,6 @@
          @include box-orient(row);
          @include flex-wrap(wrap);
          @include flex-flow(column wrap);
-
-         .animate & {
-            @include transition(all .3s);
-         }
 
          > .mobile-page {
             &:nth-child(1) { order: 1; }
@@ -35,12 +33,13 @@
       }
    }
 
-   .kw-slider-container {
-      height: 140px;
+   &.kw-slider-container {
+      height: 175px;
       overflow: hidden;
    }
 
    @include device((xss, xs, ss)) {
+      margin-bottom: 30px;
 
       .mobile-page {
          @include flexbox();

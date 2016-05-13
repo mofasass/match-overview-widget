@@ -8,11 +8,11 @@ var TournamentWinner = (function () {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
-         this.scope.event = event.betOffers[0].outcomes;
+         this.scope.event = event.betOffers[0].outcomes.slice(0,3);
          this.scope.teamData = teamData;
 
          // Assign an index number for each outcome
-         var i = 0, arrLength = this.scope.event.length;
+         var i = 0, arrLength = 3;
          for ( ; i < arrLength; ++i ) {
             var item = this.scope.event[i];
             if ( typeof item === 'object' ) {
@@ -23,7 +23,6 @@ var TournamentWinner = (function () {
       },
 
       init: function () {
-         // var swiper = new CoreLibrary.SwipeComponent(document.getElementById('teams-slider'));
       }
    });
 })();
