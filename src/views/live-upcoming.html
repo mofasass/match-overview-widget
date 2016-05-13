@@ -68,7 +68,7 @@
 
                   <div class="l-flexbox l-expander l-flex-1">
                      <div class="l-flexbox l-align-center l-flex-1 l-pack-end">
-                        <img class="l-mr-6" rv-src="event.event.homeFlag.url" height=18" width="18" alt="">
+                        <img class="l-mr-6" rv-if="event.event.homeFlag" rv-src="event.event.homeFlag.url" height=18" width="18" alt="">
                   <span class="text-truncate">
                      {event.event.homeName}
                   </span>
@@ -78,13 +78,13 @@
                   <span class="text-truncate">
                      {event.event.awayName}
                   </span>
-                        <img class="l-ml-6" rv-src="event.event.awayFlag.url" height="18" width="18" alt="">
+                        <img class="l-ml-6" rv-if="event.event.awayFlag" rv-src="event.event.awayFlag.url" height="18" width="18" alt="">
                      </div>
                   </div>
                </div>
 
                <!-- Outcomes -->
-               <div class="kw-event-outcomes l-flexbox l-pl-16 l-pr-16 l-pb-12">
+               <div rv-if="event.betOffers" class="kw-event-outcomes l-flexbox l-pl-16 l-pr-16 l-pb-12">
 
                   <!--Outcome-->
                   <outcome-component rv-each-outcome="event.betOffers | array_at 0 'outcomes'" outcome-attr="outcome" event-attr="event.event">

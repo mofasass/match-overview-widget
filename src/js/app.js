@@ -49,7 +49,7 @@
          });
 
          var liveEventsPromise = new Promise(( resolve, reject ) => {
-            CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/all/')
+            CoreLibrary.offeringModule.getLiveEventsByFilter('football/all/all/')
                .then(( response ) => {
                   resolve(response);
                });
