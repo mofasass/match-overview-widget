@@ -2,7 +2,7 @@
 
 <div class="kw-section-header l-mb-12">
    <h4 class="l-flexbox l-align-center l-pack-start">
-      <span class="text-truncate">{'Top scorer' | translate}</span>
+      <span class="text-truncate">{event.name}</span>
    </h4>
 </div>
 
@@ -33,7 +33,7 @@
 
    </div>
 
-   <div class=" kw-link hidden-xss hidden-xs l-flexbox l-pack-center">Show all {count} participants</div>
+   <div class=" kw-link hidden-xss hidden-xs l-flexbox l-pack-center" rv-on-click="navigateToDetail" >{participantString}</div>
 
 </div>
 

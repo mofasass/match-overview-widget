@@ -8,10 +8,14 @@ var GoldenBoot = (() => {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
+         this.scope.event = event.event;
+         this.scope.participantString = CoreLibrary.translationModule
+            .getTranslation('Show all {0} participants')
+            .replace(/\{0}/, event.betOffers[0].outcomes.length);
          this.scope.outcomes = event.betOffers[0].outcomes.slice(0, 3);
-         this.scope.count = event.betOffers[0].outcomes.length;
          this.scope.playerData = cmsData.players;
          this.scope.teamData = cmsData.teams;
+         this.scope.navigateToDetail = this.navigateToDetail.bind(this);
 
          // Assign an index number for each outcome
          var i = 0, arrLength = 3;
@@ -29,6 +33,9 @@ var GoldenBoot = (() => {
       },
 
       init () {
+      },
+      navigateToDetail () {
+         CoreLibrary.widgetModule.navigateToEvent(this.scope.event.id);
       }
    });
 })();

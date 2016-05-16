@@ -3,7 +3,7 @@
 <div class="l-flexbox l-vertical">
    <div class="kw-section-header l-mb-12">
       <h4 class="l-flexbox l-align-center l-pack-start">
-         <span class="text-truncate">{'Winner' | translate}</span>
+         <span class="text-truncate">{event.name}</span>
       </h4>
    </div>
 
@@ -14,7 +14,7 @@
 
          <!--Players-->
          <div class="kw-players l-flexbox l-mb-12"
-              rv-each-team="event">
+              rv-each-team="outcomes">
 
             <!--Player Team Color-->
             <div class="kw-player-media l-flexbox l-align-center l-mr-6">
@@ -34,7 +34,7 @@
 
       </div>
 
-      <div class=" kw-link hidden-xss hidden-xs l-flexbox l-pack-center">Show all {count} participants</div>
+      <div class=" kw-link hidden-xss hidden-xs l-flexbox l-pack-center" rv-on-click="navigateToDetail">{participantString}</div>
 
    </div>
 </div>
