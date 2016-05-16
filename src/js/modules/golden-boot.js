@@ -18,9 +18,10 @@ var GoldenBoot = (() => {
          this.scope.navigateToDetail = this.navigateToDetail.bind(this);
 
          // Assign an index number for each outcome
-         var i = 0, arrLength = 3;
+         var i = 0, arrLength = this.scope.outcomes.length;
          for ( ; i < arrLength; ++i ) {
             var item = this.scope.outcomes[i];
+            item.label = item.label.split(' ')[0] + ' ' + item.label.split(' ')[1].slice(0, 1);
             if ( typeof item === 'object' ) {
                item.cmsData = {};
                if ( item.participantId != null && this.scope.playerData[item.participantId] != null ) {
@@ -29,6 +30,7 @@ var GoldenBoot = (() => {
                }
                item.index = this.scope.outcomes.indexOf(item);
             }
+            console.log(item);
          }
       },
 
