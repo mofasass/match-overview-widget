@@ -30,7 +30,6 @@ var GoldenBoot = (() => {
                }
                item.index = this.scope.outcomes.indexOf(item);
             }
-            console.log(item);
          }
       },
 

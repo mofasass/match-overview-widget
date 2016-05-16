@@ -8,6 +8,7 @@
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
          },
+         tournamentCss: '',
          cmsData: {
             tournamentId: 93,
             // url: 'http://kambi-cdn.globalmouth.com/tournamentdata/'
@@ -18,10 +19,12 @@
       constructor () {
          CoreLibrary.Component.apply(this, arguments);
          this.events = [];
+
       },
 
       init () {
 
+         this.tournamentCss = this.scope.args.tournamentCss || '';
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
 
@@ -52,7 +55,6 @@
             if ( CoreLibrary.development === true ) {
                CoreLibrary.getData('fakeLivedata.json')
                   .then(( response ) => {
-                     console.debug(response);
                      resolve(response);
                   });
             } else {
