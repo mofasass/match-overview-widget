@@ -1,6 +1,6 @@
 // Commong widget styles
 body {
-   background-image: url(../images/background_test.jpg);
+
    background-position: 50% 50%;
    background-repeat: no-repeat;
    background-size: cover;
@@ -30,7 +30,6 @@ h2 {
 }
 
 .kw-player-media {
-   background-image: url("../images/UEFA_Euro_2016_Logo.svg");
    background-repeat: no-repeat;
    background-size: cover;
    height: 24px;
@@ -50,6 +49,24 @@ button {
       font-size: 14px;
       line-height: 36px;
    }
+}
+
+.kw-tournament-logo {
+   background-position: 50%;
+   background-repeat: no-repeat;
+   background-size: contain;
+   height: 110px;
+   width: 110px;
+}
+
+// Classes to be used for custom background images and logos
+
+.kw-custom-logo {
+   background-image: url("../images/UEFA_Euro_2016_Logo.svg");
+}
+
+.kw-custom-background {
+   background-image: url(../images/background_test.jpg);
 }
 
 
