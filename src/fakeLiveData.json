@@ -1,0 +1,275 @@
+{
+   "events": [
+      {
+         "event": {
+            "id": 1003022008,
+            "name": "France - Romania",
+            "englishName": "France - Romania",
+            "homeName": "France",
+            "awayName": "Romania",
+            "start": 1465585200000,
+            "type": "ET_MATCH",
+            "group": "Euro 2016",
+            "groupId": 2000091027,
+            "path": [
+               {
+                  "id": 1000093190,
+                  "name": "Football",
+                  "englishName": "Football",
+                  "termKey": "football"
+               },
+               {
+                  "id": 2000091027,
+                  "name": "Euro 2016",
+                  "englishName": "Euro 2016",
+                  "termKey": "euro_2016"
+               }
+            ],
+            "nonLiveBoCount": 0,
+            "liveBoCount": 27,
+            "liveBetOffers": true,
+            "openForLiveBetting": true,
+            "hideStartNo": true,
+            "sport": "FOOTBALL",
+            "streams": [],
+            "state": "STARTED",
+            "rank": 0,
+            "groupSortOrder": 2147483647,
+            "displayType": "ET_MATCH",
+            "prematchEnd": 1463394600000,
+            "hasPrematchStatistics": true
+         },
+         "betOffers": [
+            {
+               "id": 2030240353,
+               "live": true,
+               "criterion": {
+                  "id": 1001159858,
+                  "label": "Full Time"
+               },
+               "betOfferType": {
+                  "id": 2,
+                  "name": "Match"
+               },
+               "eventId": 1003022008,
+               "pba": {
+                  "disabled": true,
+                  "status": "The stake for this bet offer is limited. It is not possible to ask for a higher stake."
+               },
+               "cashIn": true,
+               "outcomes": [
+                  {
+                     "id": 2114360964,
+                     "label": "1",
+                     "odds": 1350,
+                     "type": "OT_ONE",
+                     "betOfferId": 2030240353,
+                     "changedDate": "2016-04-24T16:45:36Z",
+                     "oddsFractional": "7/20",
+                     "oddsAmerican": "-286"
+                  },
+                  {
+                     "id": 2114360965,
+                     "label": "X",
+                     "odds": 4600,
+                     "type": "OT_CROSS",
+                     "betOfferId": 2030240353,
+                     "changedDate": "2016-05-03T13:51:45Z",
+                     "oddsFractional": "18/5",
+                     "oddsAmerican": "360"
+                  },
+                  {
+                     "id": 2114360966,
+                     "label": "2",
+                     "odds": 11500,
+                     "type": "OT_TWO",
+                     "betOfferId": 2030240353,
+                     "changedDate": "2016-05-03T13:51:45Z",
+                     "oddsFractional": "21/2",
+                     "oddsAmerican": "1050"
+                  }
+               ],
+               "main": true,
+               "oddsStats": {
+                  "unexpectedOddsTrend": false,
+                  "outcomeId": 2162136467,
+                  "startingOdds": 2300,
+                  "startingOddsFractional": "13/10",
+                  "startingOddsAmerican": "130"
+               }
+            }
+         ],
+         "liveData": {
+            "eventId": 1003200713,
+            "matchClock": {
+               "minute": 62,
+               "second": 41,
+               "period": "2nd half",
+               "running": true
+            },
+            "score": {
+               "home": "2",
+               "away": "1",
+               "info": "HT:2-1",
+               "who": "UNKNOWN"
+            },
+            "statistics": {
+               "footballStats": {
+                  "home": {
+                     "yellowCards": 2,
+                     "redCards": 0,
+                     "corners": 1
+                  },
+                  "away": {
+                     "yellowCards": 2,
+                     "redCards": 0,
+                     "corners": 3
+                  }
+               }
+            },
+            "open": true
+         }
+      },
+      {
+         "event": {
+            "id": 1003022020,
+            "name": "Albania - Switzerland",
+            "englishName": "Albania - Switzerland",
+            "homeName": "Albania",
+            "awayName": "Switzerland",
+            "start": 1465650000000,
+            "type": "ET_MATCH",
+            "group": "Euro 2016",
+            "groupId": 2000091027,
+            "path": [
+               {
+                  "id": 1000093190,
+                  "name": "Football",
+                  "englishName": "Football",
+                  "termKey": "football"
+               },
+               {
+                  "id": 2000091027,
+                  "name": "Euro 2016",
+                  "englishName": "Euro 2016",
+                  "termKey": "euro_2016"
+               }
+            ],
+            "nonLiveBoCount": 0,
+            "liveBoCount": 24,
+            "liveBetOffers": true,
+            "openForLiveBetting": true,
+            "hideStartNo": true,
+            "sport": "FOOTBALL",
+            "streams": [],
+            "state": "STARTED",
+            "rank": 0,
+            "groupSortOrder": 2147483647,
+            "teamColors": {
+               "home": {
+                  "shirtColor1": "#007000",
+                  "shirtColor2": "#007000"
+               },
+               "away": {
+                  "shirtColor1": "#0000ff",
+                  "shirtColor2": "#ffffff"
+               }
+            },
+            "displayType": "ET_MATCH",
+            "prematchEnd": 1463394600000,
+            "hasPrematchStatistics": true
+         },
+         "betOffers": [
+            {
+               "id": 2030240773,
+               "live": true,
+               "criterion": {
+                  "id": 1001159858,
+                  "label": "Full Time"
+               },
+               "betOfferType": {
+                  "id": 2,
+                  "name": "Match"
+               },
+               "eventId": 1003022020,
+               "pba": {
+                  "disabled": true,
+                  "status": "The stake for this bet offer is limited. It is not possible to ask for a higher stake."
+               },
+               "cashIn": true,
+               "outcomes": [
+                  {
+                     "id": 2114362304,
+                     "label": "1",
+                     "odds": 5850,
+                     "type": "OT_ONE",
+                     "betOfferId": 2030240773,
+                     "changedDate": "2016-02-22T08:54:05Z",
+                     "oddsFractional": "24/5",
+                     "oddsAmerican": "485"
+                  },
+                  {
+                     "id": 2114362305,
+                     "label": "X",
+                     "odds": 3800,
+                     "type": "OT_CROSS",
+                     "betOfferId": 2030240773,
+                     "changedDate": "2016-02-22T08:54:05Z",
+                     "oddsFractional": "14/5",
+                     "oddsAmerican": "280"
+                  },
+                  {
+                     "id": 2114362306,
+                     "label": "2",
+                     "odds": 1620,
+                     "type": "OT_TWO",
+                     "betOfferId": 2030240773,
+                     "changedDate": "2016-02-22T08:54:05Z",
+                     "oddsFractional": "8/13",
+                     "oddsAmerican": "-162"
+                  }
+               ],
+               "main": true,
+               "categoryName": "Match",
+               "oddsStats": {
+                  "unexpectedOddsTrend": false,
+                  "outcomeId": 2162170715,
+                  "startingOdds": 2250,
+                  "startingOddsFractional": "5/4",
+                  "startingOddsAmerican": "125"
+               }
+            }
+         ],
+         "liveData": {
+            "eventId": 1003234563,
+            "matchClock": {
+               "minute": 66,
+               "second": 9,
+               "period": "2nd half",
+               "running": true
+            },
+            "score": {
+               "home": "0",
+               "away": "1",
+               "info": "HT: 0-1",
+               "who": "UNKNOWN"
+            },
+            "statistics": {
+               "footballStats": {
+                  "home": {
+                     "yellowCards": 1,
+                     "redCards": 0,
+                     "corners": 2
+                  },
+                  "away": {
+                     "yellowCards": 1,
+                     "redCards": 0,
+                     "corners": 2
+                  }
+               }
+            },
+            "open": true
+         }
+      }
+   ]
+}
