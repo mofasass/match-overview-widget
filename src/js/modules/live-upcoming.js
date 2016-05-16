@@ -15,6 +15,10 @@ var LiveUpcoming = (() => {
          this.scope.doscroll = this.scroll;
          this.scope.handleClass = this.handleClass;
          this.scope.navigateToEvent = this.navigateToEvent.bind(this);
+         this.scope.labels = {
+            live: 'Live',
+            rightNow: 'Right Now'
+         };
       },
 
       init () {

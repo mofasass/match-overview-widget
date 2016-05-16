@@ -1,0 +1,8 @@
+{
+   "localeStrings": {
+      "draw": "outcomes.draw",
+      "Show all {0} participants": "betoffer.showMoreParticipants",
+      "Live": "liveCarousel.liveLabel",
+      "Right Now": "liveCarousel.rightNowLabel"
+   }
+}
