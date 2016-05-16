@@ -151,6 +151,14 @@
             font-style: italic;
          }
       }
+
+      .KambiWidget-outcome__label-wrapper {
+         @include box-pack(center);
+      }
+   }
+
+   .kw-score {
+      font-size: 24px;
    }
 
    .kw-teams,

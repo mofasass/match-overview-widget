@@ -1,16 +1,4 @@
 // Commong widget styles
-
-@mixin device($screen-size-label) {
-   @each $size in $screen-size-label {
-      $size: get-screen-size($size);
-      $min: nth($size, 1);
-      $max: nth($size, 2);
-      @media (min-width: #{$min}) and (max-width: #{$max}) {
-         @content;
-      }
-   }
-}
-
 body {
    background-image: url(../images/background_test.jpg);
    background-position: 50% 50%;
@@ -36,6 +24,9 @@ h2 {
 }
 
 .kw-player-media {
+   background-image: url("../images/UEFA_Euro_2016_Logo.svg");
+   background-repeat: no-repeat;
+   background-size: cover;
    height: 24px;
    position: relative;
    width: 24px;
@@ -53,20 +44,6 @@ button {
       font-size: 14px;
       line-height: 36px;
    }
-}
-
-.playerImage {
-   height: auto;
-   max-width: 100%;
-}
-
-.playerFlag {
-   @include border-radius(18px);
-   bottom: -5px;
-   height: 18px;
-   left: -8px;
-   max-width: 18px;
-   position: absolute;
 }
 
 
