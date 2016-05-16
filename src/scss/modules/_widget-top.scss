@@ -3,19 +3,31 @@
    background-position: 50%;
    background-repeat: no-repeat;
    background-size: contain;
-   height: 90px;
-   width: 90px;
+   height: 110px;
+   width: 110px;
 }
 
 .kw-widget-top {
 
    .kw-players {
+      font-size: 14px;
       height: 35px;
-      width: 200px;
+      width: 220px;
+   }
+
+   .kw-section-header {
+      span {
+         color: #E0E0E0;
+         font-weight: 200;
+      }
    }
 
    .kw-slider-scroller {
       @include transition(all .3s);
+
+      .mobile-page.l-align-center {
+         width: 25%;
+      }
 
       @include device ((xss, xs, ss)) {
          height: 175px;
@@ -27,14 +39,14 @@
 
          > .mobile-page {
             &:nth-child(1) { order: 1; }
-            &:nth-child(2) { order: 0; }
+            &:nth-child(2) { order: 0; width: 100%; }
             &:nth-child(3) { order: 2; }
          }
       }
    }
 
    &.kw-slider-container {
-      height: 200px;
+      height: 210px;
       overflow: hidden;
 
       @include device((xss, xs, ss)) {

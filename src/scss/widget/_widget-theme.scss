@@ -31,23 +31,28 @@ h2, h3, h4, h5 {
 }
 
 h2 {
-   font-size: 18px;
+   font-size: 21px;
+   line-height: 1;
 }
 
 .kw-player-media {
-   height: 35px;
+   height: 24px;
    position: relative;
-   width: 35px;
+   width: 24px;
 
    > img {
-      height: 35px;
-      width: 35px;
+      height: 24px;
+      width: 24px;
       @include border-radius(50px)
    }
 }
 
 button {
    min-width: 60px;
+   span {
+      font-size: 14px;
+      line-height: 36px;
+   }
 }
 
 .playerImage {

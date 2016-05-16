@@ -36,18 +36,16 @@
          opacity: 1;
       }
 
-      .kw-slider-container {
-         &.faded {
-            -webkit-mask-image: $webkit-full-gradient;
-            mask: $full-gradient;
-         }
+      .kw-slider-container.faded {
+         -webkit-mask-image: $webkit-full-gradient;
+         mask: $full-gradient;
       }
    }
 
    .kw-scroll-left, .kw-scroll-right {
       @include transition(all .3s);
       height: 100%;
-      opacity: 0;
+      opacity: .15;
       position: absolute;
       top: 0;
       width: 50px;
@@ -107,8 +105,19 @@
    }
 
    .kw-match {
+      border-right: 1px dotted rgba(255, 255, 255, 0.4);
       height: $bottom-height;
       width: 350px;
+      @include flex(1 0 350px);
+
+      h4 {
+         font-size: 14px;
+         font-weight: 200;
+      }
+
+      &:last-child {
+         border-right: 0;
+      }
 
       @include device((xss)) {
          width: 300px;
@@ -119,8 +128,6 @@
          width: 320px;
          @include flex(1 0 320px);
       }
-
-      @include flex(1 0 350px);
    }
 
    outcome-component {
@@ -146,21 +153,14 @@
       }
    }
 
-   .kw-section-header {
-      border-bottom: 1px solid $color-custom-border;
-   }
-
    .kw-teams,
    .kw-event-outcomes {
-      border-right: 1px solid $color-custom-border;
       cursor: pointer;
    }
 
-   .kw-match:last-child {
-      .kw-teams,
-      .kw-event-outcomes {
-         border-right: 0;
-      }
+   .kw-team-name {
+      font-size: 14px;
+      line-height: 24px;
    }
 
    @include device((xss, xs, ss)) {
