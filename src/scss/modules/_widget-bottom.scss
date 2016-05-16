@@ -11,7 +11,11 @@
       width: 100%;
       @include transition(all .3s);
       -webkit-mask-image: $webkit-full-gradient;
-      mask-image: $full-gradient;
+      mask: $gradient-mask;
+      //mask: $gradient-mask-base64;
+      //mask: $gradient-mask-moz;
+      //mask: $gradient-mask-linear;
+      //mask: $gradient-mask-webkit-linear;
 
       > div {
          @include transition(all .3s);
@@ -19,7 +23,7 @@
 
       @include device((xss, xs, ss)) {
          -webkit-mask-image: none;
-         mask-image: none;
+         mask: none;
       }
    }
 
@@ -35,7 +39,7 @@
       .kw-slider-container {
          &.faded {
             -webkit-mask-image: $webkit-full-gradient;
-            mask-image: $full-gradient;
+            mask: $full-gradient;
          }
       }
    }
@@ -71,7 +75,7 @@
 
       .faded {
          -webkit-mask-image: $webkit-right-gradient;
-         mask-image: $right-gradient;
+         mask: $right-gradient;
 
          @include device((xss, xs, ss)) {
             -webkit-mask-image: none;

@@ -28,6 +28,7 @@ var LiveUpcoming = (() => {
          this.scope.scrollerParentWidth = this.scope.scrollerParent.offsetWidth;
          this.scope.itemWidth = this.scope.scroller.children[0].offsetWidth;
          this.scope.maxItems = Math.floor(this.scope.scrollerParentWidth / this.scope.itemWidth);
+         console.log(   this.scope.scrollerWidth);
       },
 
       handleClass ( dir, end ) {
@@ -48,6 +49,7 @@ var LiveUpcoming = (() => {
          } else {
             scope.scrollStart -= scope.itemWidth;
          }
+         console.log(scope.scrollStart);
          if ( scope.scrollStart >= 0 ) {
             scope.scrollStart = 0;
             scope.handleClass(dir, true);
