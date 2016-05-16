@@ -30,7 +30,7 @@
       }
 
       @include device ((xss, xs, ss)) {
-         height: 175px;
+         height: $top-height;
          @include flexbox();
          @include box-align(center);
          @include box-orient(row);
@@ -39,27 +39,23 @@
 
          > .mobile-page {
             &:nth-child(1) { order: 1; }
-            &:nth-child(2) { order: 0; width: 100%; }
+            &:nth-child(2) { width: 100%; order: 0; }
             &:nth-child(3) { order: 2; }
          }
       }
    }
 
    &.kw-slider-container {
-      height: 210px;
+      height: $top-height;
       overflow: hidden;
-
-      @include device((xss, xs, ss)) {
-         height: 175px;
-      }
    }
 
    @include device((xss, xs, ss)) {
-      margin-bottom: 30px;
+      margin-bottom: 12px;
 
       .mobile-page {
          @include flexbox();
-         height: 175px;
+         height: $top-height;
          @include flex(0 0 100%);
          width: 100%;
 
@@ -77,5 +73,20 @@
 
    .kw-link {
       text-decoration: underline;
+   }
+}
+
+.kw-slider-nav {
+
+   div {
+      @include border-radius(8px);
+      @include transition(background ease-out .3s);
+      background-color: rgba(255, 255, 255, 0.5);
+      height: 8px;
+      width: 8px;
+
+      &.kw-page-active {
+         background-color: white;
+      }
    }
 }

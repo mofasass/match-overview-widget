@@ -6,6 +6,12 @@ body {
    background-size: cover;
    color: white;
    height: auto;
+
+   @include device((xss, xs, ss)) {
+      &.l-p-16 {
+         padding: 16px 0 0 0;
+      }
+   }
 }
 
 .kw-main {

@@ -3,7 +3,7 @@
 
    CoreLibrary.SwipeComponent = Stapes.subclass({
 
-      constructor: function ( container, action, threshold ) {
+      constructor ( container, action, threshold ) {
          var direction = Hammer.DIRECTION_HORIZONTAL;
          action = action || 'Pan';
          this.container = container;
@@ -13,6 +13,7 @@
          this.containerSize = this.container[this.dirProp(direction, 'offsetWidth', 'offsetHeight')];
          this.direction = direction;
          this.currentIndex = 0;
+         this.navContainer = document.querySelector('.kw-slider-nav');
 
          this.hammer = new Hammer.Manager(this.container);
 
@@ -26,7 +27,7 @@
          return (direction && Hammer.DIRECTION_HORIZONTAL) ? hProp : vProp;
       },
 
-      show: function ( showIndex, percent, animate ) {
+      show ( showIndex, percent, animate ) {
          showIndex = Math.max(0, Math.min(showIndex, Math.floor((this.panes.length - 1))));
          percent = percent || 0;
 
@@ -43,27 +44,34 @@
          }
          pos = (this.containerSize / 100 ) * ((showIndex * 100 * -1) + percent);
          translate = 'translate3d(' + pos + 'px, 0, 0)';
-         this.setTransform(translate);
          this.currentIndex = showIndex;
+         this.setTransform(translate);
+         this.setActive();
       },
 
-      setTransform: function ( translate ) {
+      setActive () {
+         this.currentNavPage = document.querySelector('.kw-page-active');
+         this.currentNavPage.classList.remove('kw-page-active');
+         this.navContainer.children[this.currentIndex].classList.add('kw-page-active');
+      },
+
+      setTransform ( translate ) {
          this.subContainer.style.transform = translate;
          this.subContainer.style.mozTransform = translate;
          this.subContainer.style.webkitTransform = translate;
       },
 
-      release: function () {
+      release () {
          this.hammer.remove(this.recognizer, 'pan');
          this.setTransform('translate3d(0px, 0, 0)');
       },
 
-      attach: function () {
+      attach () {
          this.hammer.add(this.recognizer);
          this.show(this.currentIndex);
       },
 
-      onPan: function ( ev ) {
+      onPan ( ev ) {
          var delta = this.dirProp(this.direction, ev.deltaX, ev.deltaY);
          var percent = (100 / this.containerSize) * delta;
          var animate = false;
