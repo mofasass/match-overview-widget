@@ -1,4 +1,4 @@
-( () => {
+(() => {
 
    var EuroOverview = CoreLibrary.Component.subclass({
 
@@ -49,10 +49,18 @@
          });
 
          var liveEventsPromise = new Promise(( resolve, reject ) => {
-            CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/all/')
-               .then(( response ) => {
-                  resolve(response);
-               });
+            if ( CoreLibrary.development === true ) {
+               CoreLibrary.getData('fakeLivedata.json')
+                  .then(( response ) => {
+                     console.debug(response);
+                     resolve(response);
+                  });
+            } else {
+               CoreLibrary.offeringModule.getLiveEventsByFilter('football/all/all/')
+                  .then(( response ) => {
+                     resolve(response);
+                  });
+            }
          });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
@@ -121,7 +129,7 @@
       },
 
       sortOutcomes ( outcomes ) {
-         return outcomes.sort( ( outcomeA, outcomeB ) => {
+         return outcomes.sort(( outcomeA, outcomeB ) => {
             return outcomeA.odds - outcomeB.odds;
          });
       },
@@ -130,7 +138,7 @@
          var contentHeight = 380;
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
          if ( this.scope.is_mobile ) {
-            if (!this.scope.swiper) {
+            if ( !this.scope.swiper ) {
                this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
             }
          }
