@@ -52,18 +52,17 @@
          });
 
          var liveEventsPromise = new Promise(( resolve, reject ) => {
-            // if ( CoreLibrary.development === true ) {
-            // TODO: Remove after demoing
-            CoreLibrary.getData('fakeLivedata.json')
-               .then(( response ) => {
-                  resolve(response);
-               });
-            // } else {
-            //    CoreLibrary.offeringModule.getLiveEventsByFilter('football/all/all/')
-            //       .then(( response ) => {
-            //          resolve(response);
-            //       });
-            // }
+            if ( CoreLibrary.development === true ) {
+               CoreLibrary.getData('fakeLivedata.json')
+                  .then(( response ) => {
+                     resolve(response);
+                  });
+            } else {
+               CoreLibrary.offeringModule.getLiveEventsByFilter('football/all/all/')
+                  .then(( response ) => {
+                     resolve(response);
+                  });
+            }
          });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
