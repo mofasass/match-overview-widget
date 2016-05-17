@@ -21,6 +21,10 @@
          this.hammer.add(this.recognizer);
          this.hammer.on('panstart panmove panend pancancel', Hammer.bindFn(this.onPan, this));
          this.show(this.currentIndex);
+
+         setTimeout( () => {
+            this.show(1);
+         }, 3000);
       },
 
       dirProp: ( direction, hProp, vProp ) => {
