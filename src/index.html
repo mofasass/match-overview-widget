@@ -35,6 +35,13 @@
    <!-- This section will be replaced in the gulp build process -->
    <script src="https://c3-static.kambi.com/sb-mobileclient/widget-api/1.0.0.11/kambi-widget-api.js"></script>
    <!-- endbuild -->
+
+   <!--Necessary css for Firefox to render properly the transparent gradients-->
+   <style>
+      .faded-left .faded { mask: url(#fade_right) }
+      .faded-right .faded { mask: url(#fade_left) }
+      .faded { mask: url(#fade_both) }
+   </style>
 </head>
 <body class="kw-body kw-custom-background KambiWidget-font l-p-16">
 <div class="l-flexbox l-vertical l-expander" rv-cloak>
@@ -64,6 +71,39 @@
       <section class="kw-widget-bottom l-p-12 faded-left" id="live-upcoming"></section>
    </main>
 </div>
+
+<svg height="0">
+   <mask id="fade_right" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+      <linearGradient id="fade_right_gradient" gradientUnits="objectBoundingBox" x2="1" y2="0">
+         <stop stop-color="white" stop-opacity="1" offset="0.9"></stop>
+         <stop stop-color="white" stop-opacity="0" offset="1"></stop>
+      </linearGradient>
+      <rect x="0" y="0" width="1" height="1" fill="url(#fade_right_gradient)"></rect>
+   </mask>
+</svg>
+
+<svg height="0">
+   <mask id="fade_both" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+      <linearGradient id="fade_both_gradient" gradientUnits="objectBoundingBox" x2="1" y2="0">
+         <stop stop-color="white" stop-opacity="0" offset="0"></stop>
+         <stop stop-color="white" stop-opacity="0.9" offset="0.1"></stop>
+         <stop stop-color="white" stop-opacity="1" offset="0.5"></stop>
+         <stop stop-color="white" stop-opacity="0.9" offset="0.9"></stop>
+         <stop stop-color="white" stop-opacity="0" offset="1"></stop>
+      </linearGradient>
+      <rect x="0" y="0" width="1" height="1" fill="url(#fade_both_gradient)"></rect>
+   </mask>
+</svg>
+
+<svg height="0">
+   <mask id="fade_left" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+      <linearGradient id="fade_left_gradient" gradientUnits="objectBoundingBox" x2="100%" y2="0">
+         <stop stop-color="white" stop-opacity="0" offset="0"></stop>
+         <stop stop-color="white" stop-opacity="1" offset="0.1"></stop>
+      </linearGradient>
+      <rect x="0" y="0" width="1" height="1" fill="url(#fade_left_gradient)"></rect>
+   </mask>
+</svg>
 
 <!-- build:js -->
 <!-- This section will be replaced in the gulp build process -->

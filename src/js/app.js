@@ -138,11 +138,14 @@
 
       adjustHeight () {
          var contentHeight = 385;
-         CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
+
          if ( this.scope.is_mobile ) {
+            CoreLibrary.widgetModule.setWidgetHeight(contentHeight + 30);
             if ( !this.scope.swiper ) {
                this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
             }
+         } else {
+            CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
          }
 
          if ( this.scope.is_mobile === false && this.scope.swiper ) {

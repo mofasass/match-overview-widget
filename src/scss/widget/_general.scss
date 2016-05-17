@@ -1,2 +1,42 @@
 // General Widget Classes
 // Using a low nesting structure in order to ease the theming
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+   .faded {
+      position: relative;
+
+      &:after, &:before {
+         content: "";
+         position: absolute;
+         top: 0;
+         bottom: 0;
+         width: 100px;
+         height: 100%;
+      }
+
+      &:after {
+         @include background-image(linear-gradient(right, rgba(0, 0, 0, 0), rgba(0,0,0,0.2)));
+      }
+
+      &:before {
+         @include background-image(linear-gradient(left, rgba(0, 0, 0, 0), rgba(0,0,0,0.2)));
+      }
+   }
+
+   .faded-left {
+      &:after {
+         @include background-image(linear-gradient(left, rgba(0, 0, 0, 0), rgba(0,0,0,0.2)));
+         right: -50px;
+      }
+      &:before {
+         background-image: none;
+      }
+   }
+
+   .faded-right {
+      .faded:after {
+         @include background-image(linear-gradient(right, rgba(0, 0, 0, 0), rgba(0,0,0,0.2)));
+         left: -40px;
+      }
+   }
+}

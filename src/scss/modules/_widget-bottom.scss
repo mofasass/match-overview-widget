@@ -11,11 +11,6 @@
       width: 100%;
       @include transition(all .3s);
       -webkit-mask-image: $webkit-full-gradient;
-      mask: $gradient-mask;
-      //mask: $gradient-mask-base64;
-      //mask: $gradient-mask-moz;
-      //mask: $gradient-mask-linear;
-      //mask: $gradient-mask-webkit-linear;
 
       > div {
          @include transition(all .3s);
@@ -38,7 +33,6 @@
 
       .kw-slider-container.faded {
          -webkit-mask-image: $webkit-full-gradient;
-         mask: $full-gradient;
       }
    }
 
@@ -73,7 +67,6 @@
 
       .faded {
          -webkit-mask-image: $webkit-right-gradient;
-         mask: $right-gradient;
 
          @include device((xss, xs, ss)) {
             -webkit-mask-image: none;
@@ -90,7 +83,6 @@
 
       .faded {
          -webkit-mask-image: $webkit-left-gradient;
-         mask-image: $left-gradient;
 
          @include device((xss, xs, ss)) {
             -webkit-mask-image: none;
@@ -177,7 +169,10 @@
       .kw-slider-scroller {
          @include transform(translate3d(0, 0, 0) !important);
          overflow-x: scroll;
+         overflow-y: hidden;
          -webkit-overflow-scrolling: touch;
       }
    }
 }
+
+
