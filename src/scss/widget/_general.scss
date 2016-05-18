@@ -1,42 +1,97 @@
 // General Widget Classes
 // Using a low nesting structure in order to ease the theming
+$right: radial-gradient(ellipse 150px 120px at 150px 130px, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+$left: radial-gradient(ellipse 150px 120px at 0px 130px, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-   .faded {
+//$right: linear-gradient(to bottom left, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+//$left: linear-gradient(to bottom right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+
+@mixin ie() {
+   .kw-widget-bottom {
       position: relative;
+      overflow: visible !important;
 
       &:after, &:before {
          content: "";
          position: absolute;
-         top: 0;
+         top: 6px;
          bottom: 0;
-         width: 100px;
-         height: 100%;
+         width: 150px;
+         height: 150px;
+         z-index: 1;
       }
 
       &:after {
-         @include background-image(linear-gradient(right, rgba(0, 0, 0, 0), rgba(0,0,0,0.2)));
+         right: -20px;
+         background-image: $right;
       }
 
       &:before {
-         @include background-image(linear-gradient(left, rgba(0, 0, 0, 0), rgba(0,0,0,0.2)));
+         left: -20px;
+         background-image: $left;
       }
    }
 
+   .faded-left, .faded-right {
+   }
+
    .faded-left {
+      &:after, &:before {
+         content: "";
+         position: absolute;
+         top: 6px;
+         bottom: 0;
+         width: 150px;
+         height: 150px;
+         z-index: 1;
+      }
+
       &:after {
-         @include background-image(linear-gradient(left, rgba(0, 0, 0, 0), rgba(0,0,0,0.2)));
-         right: -50px;
+         background-image: $right;
+         right: -20px;
       }
       &:before {
          background-image: none;
       }
+
+      &.kw-widget-bottom {
+         &:before {
+            background-image: none;
+         }
+      }
    }
 
    .faded-right {
-      .faded:after {
-         @include background-image(linear-gradient(right, rgba(0, 0, 0, 0), rgba(0,0,0,0.2)));
-         left: -40px;
+      &:after, &:before {
+         content: "";
+         position: absolute;
+         top: 6px;
+         bottom: 0;
+         width: 150px;
+         height: 150px;
+         z-index: 1;
+      }
+
+      &:after {
+         background-image: none;
+      }
+      &:before {
+         background-image: $left;
+         left: -20px;
+      }
+
+      &.kw-widget-bottom {
+         &:after {
+            background-image: none;
+         }
       }
    }
+}
+
+.browser-edge {
+   @include ie();
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+   @include ie();
 }

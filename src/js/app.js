@@ -92,6 +92,11 @@
                });
 
                this.adjustHeight(this.scope.is_mobile);
+
+               if ( /Edge/i.test(navigator.userAgent) ) {
+                  var body = document.getElementsByTagName('body')[0];
+                  body.classList.add('browser-edge');
+               }
             });
 
       },
