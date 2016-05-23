@@ -22,7 +22,7 @@
 
       init () {
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
-            'http://kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'custom/style.css';
+            'http://kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
          this.scope.customCss = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
 
          this.mainElement = document.getElementById('main');
