@@ -8,7 +8,6 @@
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
          },
-         tournamentCss: '',
          cmsData: {
             tournamentId: 93,
             // url: 'http://kambi-cdn.globalmouth.com/tournamentdata/'
@@ -19,12 +18,13 @@
       constructor () {
          CoreLibrary.Component.apply(this, arguments);
          this.events = [];
-
       },
 
       init () {
+         this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
+            'http://kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'custom/style.css';
+         this.scope.customCss = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
 
-         this.tournamentCss = this.scope.args.tournamentCss || '';
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
 
@@ -86,12 +86,12 @@
 
                   resizeTimeout = setTimeout(() => {
                      this.scope.is_mobile = this.is_mobile();
-                     this.adjustHeight(this.scope.is_mobile);
+                     this.adjustHeight();
                   }, 300);
 
                });
 
-               this.adjustHeight(this.scope.is_mobile);
+               this.adjustHeight();
 
                if ( /Edge/i.test(navigator.userAgent) ) {
                   var body = document.getElementsByTagName('body')[0];
@@ -135,17 +135,25 @@
          return ret;
       },
 
+      /**
+       * Sorts outcomes
+       * @param outcomes
+       * @returns {Array.<T>}
+       */
       sortOutcomes ( outcomes ) {
          return outcomes.sort(( outcomeA, outcomeB ) => {
             return outcomeA.odds - outcomeB.odds;
          });
       },
 
+      /**
+       * Adjusts widget height
+       */
       adjustHeight () {
-         var contentHeight = 385;
+         var contentHeight = 385; // required value
 
          if ( this.scope.is_mobile ) {
-            CoreLibrary.widgetModule.setWidgetHeight(contentHeight + 30);
+            CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
             if ( !this.scope.swiper ) {
                this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
             }
@@ -160,6 +168,10 @@
          }
       },
 
+      /**
+       * Check parent element width and return true if is under certain mobile value
+       * @returns {boolean}
+       */
       is_mobile () {
          return this.mainElement.offsetWidth < 569;
       }

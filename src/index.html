@@ -18,14 +18,13 @@
 
    <link rel="stylesheet" type="text/css" rv-href="widgetCss"/>
 
-   <link rel="stylesheet" type="text/css" rv-href="tournamentCss"/>
-
    <!-- build:css -->
    <!-- This section will be replaced in the gulp build process -->
    <link rel="stylesheet" type="text/css" href="transpiled/css/app.css"/>
    <!-- endbuild -->
 
    <!--Customer css-->
+   <link rel="stylesheet" type="text/css" rv-href="customCss"/>
 
    <!-- build:third-party-libs -->
    <script src="https://s3-eu-west-1.amazonaws.com/kambi-widgets/widget-third-party/v1.2.0/thirdparty.js"></script>
@@ -43,7 +42,7 @@
       .faded { mask: url(#fade_both) }
    </style>
 </head>
-<body class="kw-body kw-custom-background KambiWidget-font l-p-16">
+<body class="kw-body kw-custom-background kw-custom-background-large KambiWidget-font l-p-16">
 <div class="l-flexbox l-vertical l-expander" rv-cloak>
 
    <!--Main-->
@@ -52,10 +51,8 @@
          <div class="kw-slider-scroller l-flexbox l-flex-1">
             <div class="mobile-page l-flexbox l-vertical l-align-end l-flex-1 l-pl-16 l-pr-16" id="tournament-winner"></div>
             <div class="mobile-page l-flexbox l-vertical l-pack-center l-align-center l-pl-32 l-pr-32">
-               <div class="kw-tournament-logo kw-custom-logo l-mb-12"></div>
+               <div class="kw-tournament-logo kw-custom-logo kw-custom-logo-large-type l-mb-12"></div>
                <div class="kw-tournament-name l-flexbox l-vertical">
-                  <h2 class="l-flexbox l-pack-center l-align-center">EURO 2016</h2>
-                  <h5 class="l-flexbox l-pack-center l-align-center">FRANCE</h5>
                </div>
             </div>
             <div class="mobile-page l-flexbox l-vertical l-align-start l-flex-1 l-pl-16 l-pr-16" id="golden-boot"></div>
