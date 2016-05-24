@@ -26,6 +26,9 @@
    <!--Customer css-->
    <link rel="stylesheet" type="text/css" rv-href="customCss"/>
 
+   <!--Get data version-->
+   <script src="//kambi-cdn.globalmouth.com/tournamentdata/93/versions/versions.js"></script>
+
    <!-- build:third-party-libs -->
    <script src="https://s3-eu-west-1.amazonaws.com/kambi-widgets/widget-third-party/v1.2.0/thirdparty.js"></script>
    <!-- endbuild -->
@@ -47,7 +50,7 @@
 
    <!--Main-->
    <main id="main" class="kw-main KambiWidget-font l-flexbox l-vertical" rv-class-ismobile="is_mobile">
-      <section id="kw-slider-top" class="kw-widget-top kw-slider-container l-flexbox l-horizontal l-pack-center l-mb-12">
+      <section rv-show="widget_top" id="kw-slider-top" class="kw-widget-top kw-slider-container l-flexbox l-horizontal l-pack-center l-mb-12">
          <div class="kw-slider-scroller l-flexbox l-flex-1">
             <div class="mobile-page l-flexbox l-vertical l-align-end l-flex-1 l-pl-16 l-pr-16" id="tournament-winner"></div>
             <div class="mobile-page l-flexbox l-vertical l-pack-center l-align-center l-pl-32 l-pr-32">

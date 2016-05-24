@@ -8,6 +8,10 @@
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
          },
+         widget_top: {
+            start: '2016-05-23T17:01:02+02:00',
+            end: '2017-05-23T17:09:02+02:00'
+         },
          cmsData: {
             tournamentId: 93,
             // url: 'http://kambi-cdn.globalmouth.com/tournamentdata/'
@@ -21,6 +25,20 @@
       },
 
       init () {
+         this.date_now = new Date();
+         this.date_start = new Date(this.scope.args.widget_top.start);
+         this.date_end = new Date(this.scope.args.widget_top.end);
+         this.scope.widget_top = true;
+
+         CoreLibrary.widgetModule.enableWidgetTransition(true);
+
+         if ( this.date_now > this.date_start && this.date_end > this.date_now ) {
+            console.log('display');
+         } else {
+            console.log('hide');
+            this.scope.widget_top = false;
+         }
+
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
             'http://kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
          this.scope.customCss = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
@@ -45,7 +63,8 @@
          });
 
          var cmsDataPromoise = new Promise(( resolve, reject ) => {
-            CoreLibrary.getData(this.scope.args.cmsData.url + this.scope.args.cmsData.tournamentId + '/overview/overview.json')
+            CoreLibrary.getData(this.scope.args.cmsData.url + this.scope.args.cmsData.tournamentId + '/overview/overview.json?' +
+               'version=' + (window.CMS_VERSIONS ? window.CMS_VERSIONS.overview : ''))
                .then(( response ) => {
                   resolve(response);
                });
@@ -58,7 +77,7 @@
                      resolve(response);
                   });
             } else {
-               CoreLibrary.offeringModule.getLiveEventsByFilter('football/all/all/')
+               CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/')
                   .then(( response ) => {
                      resolve(response);
                   });
@@ -150,7 +169,7 @@
        * Adjusts widget height
        */
       adjustHeight () {
-         var contentHeight = 385; // required value
+         var contentHeight = this.scope.widget_top ? 385 : 160; // required value
 
          if ( this.scope.is_mobile ) {
             CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
