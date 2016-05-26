@@ -1,8 +1,6 @@
 // Commong widget styles
 body {
    color: white;
-   height: 100%;
-   opacity: 0;
    @include transition(opacity ease-out .3s);
 }
 
@@ -13,6 +11,7 @@ html, body {
 .kw-main {
    @include device((xss, xs, ss)) {
       display: block;
+      height: 100%;
    }
 }
 

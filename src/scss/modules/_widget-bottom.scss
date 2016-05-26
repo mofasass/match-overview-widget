@@ -99,7 +99,7 @@ $bottom-height: 120px;
 
    .kw-match {
       border-right: 1px dotted rgba(255, 255, 255, 0.4);
-      height: $bottom-height;
+      margin-top: 6px;
       width: 350px;
       @include flex(1 0 350px);
 
