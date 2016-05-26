@@ -17,6 +17,7 @@ $bottom-height: 120px;
       }
 
       @include device((xss, xs, ss)) {
+         margin-bottom: 26px;
          -webkit-mask-image: none;
          mask: none;
       }
