@@ -1,12 +1,11 @@
+$width: 220px;
+$top-height: 236px;
+
 .kw-widget-top {
 
-   .kw-players {
-      font-size: 14px;
-      height: 35px;
-      width: 220px;
-   }
-
    .kw-section-header {
+      width: $width;
+
       span {
          color: #E0E0E0;
          font-weight: 200;
@@ -21,7 +20,7 @@
       }
 
       @include device ((xss, xs, ss)) {
-         height: $top-height;
+         height: $top-height - 12;
          @include flexbox();
          @include box-align(center);
          @include box-orient(row);
@@ -29,6 +28,19 @@
          @include flex-flow(column wrap);
 
          > .mobile-page {
+            @include flexbox();
+            @include flex(0 0 100%);
+            width: 100%;
+
+            > div {
+               max-width: 100%;
+               min-width: 100%;
+            }
+
+            .kw-players {
+               width: 100%;
+            }
+
             &:nth-child(1) { order: 1; }
             &:nth-child(2) { width: 100%; order: 0; }
             &:nth-child(3) { order: 2; }
@@ -36,34 +48,28 @@
       }
    }
 
-   &.kw-slider-container {
-      height: $top-height;
-      overflow: hidden;
+   .kw-players {
+      font-size: 14px;
+      height: 36px;
+      width: $width;
    }
 
-   @include device((xss, xs, ss)) {
-      margin-bottom: 12px;
+   .kw-links {
+      cursor: pointer;
+      margin-bottom: 36px;
+      text-decoration: underline;
 
-      .mobile-page {
-         @include flexbox();
-         height: $top-height;
-         @include flex(0 0 100%);
-         width: 100%;
-
-         > div {
-            max-width: 100%;
-            min-width: 100%;
-         }
-
-         .kw-players {
-            height: 35px;
-            width: 100%;
-         }
+      @include device((xss, xs, ss)) {
+         margin-bottom: 0px;
       }
    }
 
-   .kw-link {
-      text-decoration: underline;
+   @include device((xss, xs, ss)) {
+      overflow: hidden;
+
+      .kw-section-header {
+         margin-top: 12px;
+      }
    }
 }
 

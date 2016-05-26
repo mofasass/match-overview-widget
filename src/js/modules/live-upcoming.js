@@ -4,14 +4,17 @@ var LiveUpcoming = (() => {
 
       htmlTemplateFile: './views/live-upcoming.html',
 
-      constructor ( htmlElement, eventsData, liveEventsData, cmsData ) {
+      constructor ( htmlElement, eventsData, liveEventsData, cmsData, parentScope ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
+
+         this.parentScope = parentScope;
          var upcoming_events = liveEventsData.events.concat(eventsData.events);
          this.scope.scrollStart = 0;
          this.scope.teamData = cmsData;
          this.scope.events = this.parseUpcomingEvents(upcoming_events);
+         this.scope.offline_interval = this.parentScope.offline_interval;
          this.scope.doscroll = this.scroll;
          this.scope.handleClass = this.handleClass;
          this.scope.navigateToEvent = this.navigateToEvent.bind(this);
@@ -65,12 +68,18 @@ var LiveUpcoming = (() => {
          scope.scroller.style.transform = translate;
          scope.scroller.style.mozTransform = translate;
          scope.scroller.style.webkitTransform = translate;
+         scope.scroller.style.width = scope.scrollerWidth;
+         console.log(scope.scrollerWidth);
       },
 
       parseUpcomingEvents ( events ) {
          var matchesObj = [],
             maxEvents = events.length,
             dateLocale = CoreLibrary.config.locale.replace(/_/, '-');
+
+         function pad ( n ) {
+            return n < 10 ? '0' + n : n;
+         }
 
          // en-GB uses a 24 hour format, so we use en-US instead
          if ( dateLocale === 'en-GB' ) {
@@ -83,17 +92,17 @@ var LiveUpcoming = (() => {
             for ( ; i < maxEvents; ++i ) {
                var eventDate = new Date(events[i].event.start);
 
-               var date = eventDate.toLocaleDateString(dateLocale, { month: 'long', day: '2-digit' }).toString(),
-                  time = eventDate.toLocaleTimeString(dateLocale, { hour: 'numeric', minute: 'numeric' }).toString();
+               var date = eventDate.toLocaleDateString(dateLocale, { month: 'short', day: '2-digit' }),
+                  time = pad(eventDate.getHours()) + ':' + pad(eventDate.getMinutes());
 
                if ( events[i].liveData && events[i].liveData.matchClock ) {
-                  var minute = events[i].liveData.matchClock.minute < 10 ? '0' + events[i].liveData.matchClock.minute : events[i].liveData.matchClock.minute;
-                  var second = events[i].liveData.matchClock.second < 10 ? '0' + events[i].liveData.matchClock.second : events[i].liveData.matchClock.second;
+                  var minute = pad(events[i].liveData.matchClock.minute);
+                  var second = pad(events[i].liveData.matchClock.second);
                   time = minute + ':' + second;
                }
 
                events[i].customStartTime = time;
-               events[i].customStartDate = date;
+               events[i].customStartDate = date.replace(eventDate.getFullYear(), '');
 
                if ( this.scope.teamData.teams && this.scope.teamData.matches && this.scope.teamData.matches[events[i].event.id] ) {
                   events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;

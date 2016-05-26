@@ -1,4 +1,4 @@
-(function ( Hammer ) {
+(( Hammer ) => {
    'use strict';
 
    CoreLibrary.SwipeComponent = Stapes.subclass({
@@ -16,13 +16,12 @@
          this.navContainer = document.querySelector('.kw-slider-nav');
 
          this.hammer = new Hammer.Manager(this.container);
-
          this.recognizer = new Hammer[action]({ direction: this.direction, threshold: threshold });
          this.hammer.add(this.recognizer);
          this.hammer.on('panstart panmove panend pancancel', Hammer.bindFn(this.onPan, this));
          this.show(this.currentIndex);
 
-         setTimeout( () => {
+         setTimeout(() => {
             this.show(1);
          }, 3000);
       },

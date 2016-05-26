@@ -8,14 +8,14 @@
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
          },
-         widget_top: {
+         offline_interval: {
             start: '2016-05-23T17:01:02+02:00',
             end: '2017-05-23T17:09:02+02:00'
          },
          cmsData: {
             tournamentId: 93,
             // url: 'http://kambi-cdn.globalmouth.com/tournamentdata/'
-            url: 'https://s3-eu-west-1.amazonaws.com/kambi-widgets/tournamentdata/'
+            url: '//s3-eu-west-1.amazonaws.com/kambi-widgets/tournamentdata/'
          }
       },
 
@@ -25,22 +25,11 @@
       },
 
       init () {
-         this.date_now = new Date();
-         this.date_start = new Date(this.scope.args.widget_top.start);
-         this.date_end = new Date(this.scope.args.widget_top.end);
-         this.scope.widget_top = true;
 
-         CoreLibrary.widgetModule.enableWidgetTransition(true);
-
-         if ( this.date_now > this.date_start && this.date_end > this.date_now ) {
-            console.log('display');
-         } else {
-            console.log('hide');
-            this.scope.widget_top = false;
-         }
+         this.handleOnlineIntervals();
 
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
-            'http://kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
+            '//kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
          this.scope.customCss = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
 
          this.mainElement = document.getElementById('main');
@@ -87,7 +76,7 @@
          // When both data fetching promises are resolved, we can create the modules and send them the data
          Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromoise])
             .then(( promiseData ) => {
-               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3]),
+               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3], this.scope),
                   resizeTimeout = false;
 
                var filteredEvents = this.filterOutBetOffers(promiseData[2].events);
@@ -116,8 +105,11 @@
                   var body = document.getElementsByTagName('body')[0];
                   body.classList.add('browser-edge');
                }
-            });
 
+               setTimeout(() => {
+                  this.scope.loaded = true;
+               }, 200);
+            });
       },
 
       /**
@@ -169,21 +161,36 @@
        * Adjusts widget height
        */
       adjustHeight () {
-         var contentHeight = this.scope.widget_top ? 385 : 160; // required value
+         var contentHeight = this.scope.offline_interval === false ? 395 : 148; // required value
 
          if ( this.scope.is_mobile ) {
+            contentHeight = 380;
             CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
             if ( !this.scope.swiper ) {
                this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
+            } else {
+               this.scope.swiper.attach();
             }
          } else {
             CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
+            if ( this.scope.swiper ) {
+               this.scope.swiper.release();
+            }
          }
+      },
 
-         if ( this.scope.is_mobile === false && this.scope.swiper ) {
-            this.scope.swiper.release();
-         } else if ( this.scope.is_mobile && this.scope.swiper ) {
-            this.scope.swiper.attach();
+      handleOnlineIntervals () {
+         CoreLibrary.widgetModule.enableWidgetTransition(true);
+         this.date_now = new Date();
+         this.date_start = new Date(this.scope.args.offline_interval.start);
+         this.date_end = new Date(this.scope.args.offline_interval.end);
+         this.scope.offline_interval = false;
+
+         if ( this.date_now > this.date_start && this.date_end > this.date_now ) {
+            console.log('display');
+         } else {
+            console.log('hide');
+            this.scope.offline_interval = true;
          }
       },
 

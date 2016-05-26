@@ -1,17 +1,13 @@
 // Commong widget styles
 body {
-
-   background-position: 50% 50%;
-   background-repeat: no-repeat;
-   background-size: cover;
    color: white;
-   height: auto;
+   height: 100%;
+   opacity: 0;
+   @include transition(opacity ease-out .3s);
+}
 
-   @include device((xss, xs, ss)) {
-      &.l-p-16 {
-         padding: 16px 0 0 0;
-      }
-   }
+html, body {
+   //@extend .l-expander;
 }
 
 .kw-main {
@@ -22,6 +18,10 @@ body {
 
 h2, h3, h4, h5 {
    line-height: 24px;
+}
+
+h4 {
+   font-size: 14px;
 }
 
 h2 {
@@ -45,6 +45,11 @@ h2 {
 
 button {
    min-width: 60px;
+
+   &.kw-link {
+      text-decoration: none;
+   }
+
    span {
       font-size: 14px;
       line-height: 36px;
@@ -58,4 +63,24 @@ button {
    height: 150px;
    width: 150px;
 }
+
+.kw-custom-background {
+   background-position: 50% 50%;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
+.kw-custom-background.kw-custom-background-large {
+   @include device(ss, max) {
+      background-image: none;
+   }
+
+   @include device(sm, min) {
+      > .kw-custom-background-small {
+         background-image: none;
+      }
+   }
+}
+
+
 
