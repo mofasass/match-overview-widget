@@ -7,10 +7,11 @@
          var direction = Hammer.DIRECTION_HORIZONTAL;
          action = action || 'Pan';
          this.container = container;
+         this.direction = direction;
          this.subContainer = container.querySelector('.kw-slider-scroller');
          this.children = this.container.querySelectorAll('.mobile-page');
          this.panes = Array.prototype.slice.call(this.children, 0);
-         this.containerSize = this.container[this.dirProp(direction, 'offsetWidth', 'offsetHeight')];
+         this.getContainerSize();
          this.direction = direction;
          this.currentIndex = 0;
          this.navContainer = document.querySelector('.kw-slider-nav');
@@ -26,7 +27,11 @@
          }, 3000);
       },
 
-      dirProp: ( direction, hProp, vProp ) => {
+      getContainerSize () {
+         this.containerSize = this.container[this.dirProp(this.direction, 'offsetWidth', 'offsetHeight')];
+      },
+
+      dirProp ( direction, hProp, vProp ) {
          return (direction && Hammer.DIRECTION_HORIZONTAL) ? hProp : vProp;
       },
 
@@ -71,6 +76,7 @@
 
       attach () {
          this.hammer.add(this.recognizer);
+         this.getContainerSize();
          this.show(this.currentIndex);
       },
 

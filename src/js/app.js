@@ -199,7 +199,7 @@
        * @returns {boolean}
        */
       is_mobile () {
-         return this.mainElement.offsetWidth < 569;
+         return this.mainElement.offsetWidth < 768;
       }
 
    });

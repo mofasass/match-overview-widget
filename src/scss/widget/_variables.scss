@@ -16,5 +16,6 @@ $webkit-right-gradient: -webkit-gradient(linear, 90% 0%, 100% 0, from(black), to
 $webkit-left-gradient: -webkit-gradient(linear, 0% 0%, 10% 0, from(transparent), to(black));
 
 
-
+$mobile: (xss, xs, ss, sm);
+$desktop: (md, lg, xlg);
 

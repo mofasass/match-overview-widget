@@ -16,7 +16,7 @@ $bottom-height: 120px;
          @include transition(all .3s);
       }
 
-      @include device((xss, xs, ss)) {
+      @include device($mobile) {
          margin-bottom: 26px;
          -webkit-mask-image: none;
          mask: none;
@@ -69,7 +69,7 @@ $bottom-height: 120px;
       .faded {
          -webkit-mask-image: $webkit-right-gradient;
 
-         @include device((xss, xs, ss)) {
+         @include device($mobile) {
             -webkit-mask-image: none;
             mask-image: none;
          }
@@ -85,7 +85,7 @@ $bottom-height: 120px;
       .faded {
          -webkit-mask-image: $webkit-left-gradient;
 
-         @include device((xss, xs, ss)) {
+         @include device($mobile) {
             -webkit-mask-image: none;
             mask-image: none;
          }
@@ -173,7 +173,7 @@ $bottom-height: 120px;
       line-height: 24px;
    }
 
-   @include device((xss, xs, ss)) {
+   @include device($mobile) {
       padding: 0;
 
       .kw-slider-scroller {

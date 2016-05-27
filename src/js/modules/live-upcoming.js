@@ -69,7 +69,6 @@ var LiveUpcoming = (() => {
          scope.scroller.style.mozTransform = translate;
          scope.scroller.style.webkitTransform = translate;
          scope.scroller.style.width = scope.scrollerWidth;
-         console.log(scope.scrollerWidth);
       },
 
       parseUpcomingEvents ( events ) {

@@ -1,15 +1,16 @@
 // Commong widget styles
 body {
    color: white;
+   @extend .l-expander;
    @include transition(opacity ease-out .3s);
 }
 
-html, body {
-   @extend .l-expander;
+html {
+   height: 100%;
 }
 
 .kw-main {
-   @include device((xss, xs, ss)) {
+   @include device($mobile) {
       display: block;
       height: 100%;
    }
@@ -70,7 +71,7 @@ button {
 }
 
 .kw-custom-background.kw-custom-background-large {
-   @include device(ss, max) {
+   @include device(sm, max) {
       background-image: none;
    }
 

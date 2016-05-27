@@ -19,7 +19,7 @@ $top-height: 236px;
          width: 25%;
       }
 
-      @include device ((xss, xs, ss)) {
+      @include device ($mobile) {
          height: $top-height - 18;
          @include flexbox();
          @include box-align(center);
@@ -60,13 +60,13 @@ $top-height: 236px;
       margin-bottom: 30px;
       text-decoration: underline;
 
-      @include device((xss, xs, ss)) {
+      @include device($mobile) {
          margin-bottom: 0;
          margin-top: 8px;
       }
    }
 
-   @include device((xss, xs, ss)) {
+   @include device($mobile) {
       overflow: hidden;
 
       .kw-section-header {
@@ -78,7 +78,7 @@ $top-height: 236px;
 .kw-slider-nav {
    display: none;
 
-   @include device((xss, xs, ss)) {
+   @include device($mobile) {
       @include flexbox();
       margin-bottom: 2px;
    }
