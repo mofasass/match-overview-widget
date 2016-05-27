@@ -106,10 +106,10 @@ var LiveUpcoming = (() => {
                if ( this.scope.teamData.teams && this.scope.teamData.matches && this.scope.teamData.matches[events[i].event.id] ) {
                   // Home
                   events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;
-                  events[i].event.home_name_abrev = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].name_abbreviation;
+                  events[i].event.home_name_abrev = events[i].liveData ? this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].name_abbreviation : false;
                   // Away
                   events[i].event.awayFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].flag;
-                  events[i].event.away_name_abrev = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation;
+                  events[i].event.away_name_abrev = events[i].liveData ? this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation : false;
                }
                matchesObj.push(events[i]);
             }
