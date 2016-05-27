@@ -104,8 +104,12 @@ var LiveUpcoming = (() => {
                events[i].customStartDate = date.replace(eventDate.getFullYear(), '');
 
                if ( this.scope.teamData.teams && this.scope.teamData.matches && this.scope.teamData.matches[events[i].event.id] ) {
+                  // Home
                   events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;
+                  events[i].event.home_name_abrev = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].name_abbreviation;
+                  // Away
                   events[i].event.awayFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].flag;
+                  events[i].event.away_name_abrev = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation;
                }
                matchesObj.push(events[i]);
             }

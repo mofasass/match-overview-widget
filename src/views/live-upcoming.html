@@ -7,7 +7,7 @@
    <div id="kw-slider-bottom" class="kw-slider-scroller l-flexbox l-horizontal">
 
       <!--<div rv-show="offline_interval" class="kw-match-logo l-flexbox l-pack-center l-align-center">-->
-         <!--<div class="kw-tournament-logo kw-custom-logo kw-custom-logo-large-type"></div>-->
+      <!--<div class="kw-tournament-logo kw-custom-logo kw-custom-logo-large-type"></div>-->
       <!--</div>-->
 
       <!--Day-->
@@ -27,7 +27,7 @@
                <div class="l-flexbox l-align-center l-flex-1 l-pack-start">
                   <img class="l-mr-12" rv-if="event.event.homeFlag" rv-src="event.event.homeFlag.url" height=24" width="24" alt="">
                   <span class="kw-team-name text-truncate l-mr-6">
-                     {event.event.homeName}
+                     {event.event.home_name_abrev | ? event.event.homeName}
                   </span>
                   <span class="l-flex-1"></span>
                   <span class="kw-score" rv-show="event.liveData.score">
@@ -41,7 +41,7 @@
                   </span>
                   <span class="l-flex-1"></span>
                   <span class="kw-team-name text-truncate l-ml-6">
-                     {event.event.awayName}
+                     {event.event.away_name_abrev | ? event.event.awayName}
                   </span>
                   <img class="l-ml-12" rv-if="event.event.awayFlag" rv-src="event.event.awayFlag.url" height="24" width="24" alt="">
                </div>
