@@ -40,7 +40,7 @@
                if ( response.status >= 200 && response.status < 300 ) {
                   this.scope.customCss = this.scope.customCssUrl;
                } else {
-                  this.scope.localCustomCss = 'custom/style.local.css';
+                  this.scope.customCss = 'custom/style.local.css';
                }
             })
             .catch(( error ) => {
