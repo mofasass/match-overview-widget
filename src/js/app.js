@@ -27,26 +27,10 @@
       init () {
 
          this.handleOnlineIntervals();
-
-         this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
-            '//kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
-         this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
+         this.handleCustomCss();
 
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
-
-         fetch(this.scope.customCssUrl)
-            .then(( response ) => {
-               if ( response.status >= 200 && response.status < 300 ) {
-                  this.scope.customCss = this.scope.customCssUrl;
-               } else {
-                  this.scope.customCss = 'custom/style.local.css';
-               }
-            })
-            .catch(( error ) => {
-               console.debug('Error fetching css');
-               throw error;
-            });
 
          // Get the upcoming events
          var eventsPromise = new Promise(( resolve, reject ) => {
@@ -200,11 +184,29 @@
          this.scope.offline_interval = false;
 
          if ( this.date_now > this.date_start && this.date_end > this.date_now ) {
-            console.log('display');
          } else {
             console.log('hide');
             this.scope.offline_interval = true;
          }
+      },
+
+      handleCustomCss () {
+         this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
+            '//kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
+         this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
+
+         fetch(this.scope.customCssUrl)
+            .then(( response ) => {
+               // console.log(response);
+               if ( response.status >= 200 && response.status < 300 ) {
+                  this.scope.customCss = this.scope.customCssUrl;
+               }
+            })
+            .catch(( error ) => {
+               this.scope.customCss = 'custom/style.local.css';
+               console.debug('Error fetching css');
+               throw error;
+            });
       },
 
       /**
