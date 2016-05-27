@@ -1,6 +1,6 @@
 {
    "name": "euro2016-overview-widget",
-   "version": "0.0.14",
+   "version": "0.0.15",
    "description": "Euro 2016 Overview Widget",
    "main": "dist/index.html",
    "scripts": {
