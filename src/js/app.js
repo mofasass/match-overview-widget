@@ -14,8 +14,8 @@
          },
          cmsData: {
             tournamentId: 93,
-            // url: 'http://kambi-cdn.globalmouth.com/tournamentdata/'
-            url: '//s3-eu-west-1.amazonaws.com/kambi-widgets/tournamentdata/'
+            url: '//kambi-cdn.globalmouth.com/tournamentdata/'
+            // url: '//s3-eu-west-1.amazonaws.com/kambi-widgets/tournamentdata/'
          }
       },
 
