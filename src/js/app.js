@@ -30,10 +30,23 @@
 
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
             '//kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
-         this.scope.customCss = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
+         this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
 
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
+
+         fetch(this.scope.customCssUrl)
+            .then(( response ) => {
+               if ( response.status >= 200 && response.status < 300 ) {
+                  this.scope.customCss = this.scope.customCssUrl;
+               } else {
+                  this.scope.localCustomCss = 'custom/style.local.css';
+               }
+            })
+            .catch(( error ) => {
+               console.debug('Error fetching css');
+               throw error;
+            });
 
          // Get the upcoming events
          var eventsPromise = new Promise(( resolve, reject ) => {
