@@ -190,16 +190,35 @@
          }
       },
 
+      parseResponse ( response ) {
+         var decoder = new TextDecoder();
+         var reader = response.body.getReader();
+
+         reader.read().then(function processResult ( result ) {
+            if ( result.done ) return;
+            var cssStyles = decoder.decode(result.value, { stream: true }).toString();
+            cssStyles = cssStyles.replace(/\('/g, '(\'' + this.customCssBasePath);
+            var css = document.createElement('style');
+            css.type = 'text/css';
+            if ( css.styleSheet ) css.styleSheet.cssText = cssStyles;
+            else css.appendChild(document.createTextNode(cssStyles));
+            document.getElementsByTagName("head")[0].appendChild(css);
+            return reader.read().then(processResult);
+         }.bind(this));
+      },
+
       handleCustomCss () {
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
             '//kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
          this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
+         this.customCssBasePath = this.scope.customCssUrl.replace('style.css', '');
 
          fetch(this.scope.customCssUrl)
             .then(( response ) => {
-               // console.log(response);
+
                if ( response.status >= 200 && response.status < 300 ) {
-                  this.scope.customCss = this.scope.customCssUrl;
+                  // this.scope.customCss = this.scope.customCssUrl;
+                  this.parseResponse(response);
                } else {
                   this.scope.customCss = 'custom/style.local.css';
                }
