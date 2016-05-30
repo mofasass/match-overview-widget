@@ -10,7 +10,7 @@
          },
          offline_interval: {
             start: '2016-05-23T17:01:02+02:00',
-            end: '2018-05-23T17:09:02+02:00'
+            end: '2018-05-30T14:00:02+02:00'
          },
          cmsData: {
             tournamentId: 93,
@@ -73,8 +73,8 @@
          // When both data fetching promises are resolved, we can create the modules and send them the data
          Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromoise])
             .then(( promiseData ) => {
-               var liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3], this.scope),
-                  resizeTimeout = false;
+               this.liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3], this.scope);
+               var resizeTimeout = false;
 
                var filteredEvents = this.filterOutBetOffers(promiseData[2].events);
 
@@ -91,7 +91,7 @@
 
                   resizeTimeout = setTimeout(() => {
                      this.scope.is_mobile = this.is_mobile();
-                     this.adjustHeight();
+                     this.adjustHeight(true);
                   }, 300);
 
                });
@@ -157,7 +157,7 @@
       /**
        * Adjusts widget height
        */
-      adjustHeight () {
+      adjustHeight (resizeEvent) {
          var contentHeight = this.scope.offline_interval === false ? 395 : 148; // required value
 
          if ( this.scope.is_mobile ) {
@@ -168,10 +168,14 @@
             } else {
                this.scope.swiper.attach();
             }
+
          } else {
             CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
             if ( this.scope.swiper ) {
                this.scope.swiper.release();
+            }
+            if ( resizeEvent ) {
+               this.liveUpcoming.scope.onResize();
             }
          }
       },

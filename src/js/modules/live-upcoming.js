@@ -11,13 +11,11 @@ var LiveUpcoming = (() => {
 
          this.parentScope = parentScope;
          var upcoming_events = liveEventsData.events.concat(eventsData.events);
-         this.scope.scrollStart = 0;
          this.scope.teamData = cmsData;
          this.scope.events = this.parseUpcomingEvents(upcoming_events);
-         this.scope.offline_interval = this.parentScope.offline_interval;
-         this.scope.doscroll = this.scroll;
-         this.scope.handleClass = this.handleClass;
+         this.scope.offline_interval = parentScope.offline_interval;
          this.scope.navigateToEvent = this.navigateToEvent.bind(this);
+
          this.scope.labels = {
             live: 'Live',
             rightNow: 'Right Now'
@@ -25,50 +23,9 @@ var LiveUpcoming = (() => {
       },
 
       init () {
-         this.getScroller();
-      },
-
-      getScroller () {
-         this.scope.scrollerContainer = document.getElementById('live-upcoming');
-         this.scope.scroller = document.getElementById('kw-slider-bottom');
-         this.scope.itemWidth = 350;
-         this.scope.scrollerWidth = this.scope.itemWidth * this.scope.events.length + ( this.scope.offline_interval ? 90 : 0 );
-         this.scope.scrollerParent = this.scope.scroller.parentElement;
-         this.scope.scrollerParentWidth = this.scope.scrollerParent.offsetWidth;
-         this.scope.maxItems = Math.floor(this.scope.scrollerParentWidth / this.scope.itemWidth);
-      },
-
-      handleClass ( dir, end ) {
-         this.scrollerContainer.classList.remove('faded-right');
-         this.scrollerContainer.classList.remove('faded-left');
-         if ( dir === 'right' && end ) {
-            this.scrollerContainer.classList.add('faded-right');
-         } else if ( dir === 'left' && end ) {
-            this.scrollerContainer.classList.add('faded-left');
-         }
-      },
-
-      scroll ( elem, scope ) {
-         var dir = this.getAttribute('data-dir'), translate;
-         scope.handleClass(dir);
-         if ( dir === 'left' ) {
-            scope.scrollStart += scope.itemWidth;
-         } else {
-            scope.scrollStart -= scope.itemWidth;
-         }
-         if ( scope.scrollStart >= 0 ) {
-            scope.scrollStart = 0;
-            scope.handleClass(dir, true);
-         }
-         if ( (scope.scrollStart * -1) >= (scope.scrollerWidth - scope.itemWidth * (scope.maxItems - 1)) ) {
-            scope.scrollStart += scope.itemWidth;
-            scope.handleClass(dir, true);
-         }
-         translate = 'translate3d(' + scope.scrollStart + 'px, 0, 0)';
-         scope.scroller.style.transform = translate;
-         scope.scroller.style.mozTransform = translate;
-         scope.scroller.style.webkitTransform = translate;
-         scope.scroller.style.width = scope.scrollerWidth;
+         this.scope.scroller = new CoreLibrary.ScrollComponent(this.parentScope);
+         this.scope.doscroll = this.scope.scroller.onScroll;
+         this.scope.onResize = this.scope.scroller.onResize;
       },
 
       parseUpcomingEvents ( events ) {
