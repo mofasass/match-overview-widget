@@ -6,9 +6,9 @@
    </h4>
 </div>
 
+<!--Players wrapper-->
 <div id="teams-slider" class="kw-slider-container">
 
-   <!--Players wrapper-->
    <div class="kw-players-wrapper l-flex-1">
 
       <!--Players-->
@@ -17,7 +17,7 @@
 
          <!--Player Team Color-->
          <div class="kw-player-media kw-custom-logo l-flexbox l-align-center l-mr-8">
-            <img rv-src="team.teamData.flag.url"/>
+            <img height="24" width="24" rv-if="team.teamData.flag" rv-src="team.teamData.flag.url"/>
          </div>
 
          <!--Team Name-->

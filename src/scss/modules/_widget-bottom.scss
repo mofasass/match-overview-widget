@@ -124,6 +124,7 @@ $bottom-height: 120px;
 
    .kw-match-logo {
       width: 90px;
+      @include flex(1 0 90px);
 
       .kw-custom-logo {
          height: 90px;

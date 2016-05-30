@@ -30,8 +30,6 @@ h2 {
 }
 
 .kw-player-media {
-   background-repeat: no-repeat;
-   background-size: cover;
    height: 24px;
    position: relative;
    width: 24px;
@@ -39,7 +37,6 @@ h2 {
    > img {
       height: 24px;
       width: 24px;
-      @include border-radius(50px)
    }
 }
 

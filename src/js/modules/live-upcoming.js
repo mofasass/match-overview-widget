@@ -31,10 +31,10 @@ var LiveUpcoming = (() => {
       getScroller () {
          this.scope.scrollerContainer = document.getElementById('live-upcoming');
          this.scope.scroller = document.getElementById('kw-slider-bottom');
-         this.scope.scrollerWidth = 350 * this.scope.events.length;
+         this.scope.itemWidth = 350;
+         this.scope.scrollerWidth = this.scope.itemWidth * this.scope.events.length + ( this.scope.offline_interval ? 90 : 0 );
          this.scope.scrollerParent = this.scope.scroller.parentElement;
          this.scope.scrollerParentWidth = this.scope.scrollerParent.offsetWidth;
-         this.scope.itemWidth = this.scope.scroller.children[0].offsetWidth;
          this.scope.maxItems = Math.floor(this.scope.scrollerParentWidth / this.scope.itemWidth);
       },
 

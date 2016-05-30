@@ -16,8 +16,8 @@
            rv-each-outcome="outcomes">
 
          <!--Player Team Color-->
-         <div class="kw-player-media kw-custom-logo kw-custom-logo-large l-flexbox l-align-center l-mr-8">
-            <img rv-if="outcome.cmsData.teamData.flag.url" class="playerImage" rv-src="outcome.cmsData.teamData.flag.url">
+         <div class="kw-player-media kw-custom-logo l-flexbox l-align-center l-mr-8">
+            <img height="24" width="24" rv-if="outcome.cmsData.teamData.flag.url" rv-src="outcome.cmsData.teamData.flag.url">
          </div>
 
          <!--Player Name and goals scored-->
@@ -33,7 +33,7 @@
 
    </div>
 
-   <div class="kw-links l-flexbox l-pack-center l-mb-12 l-mt-16" rv-on-click="navigateToDetail" >{participantString}</div>
+   <div class="kw-links l-flexbox l-pack-center l-mb-12 l-mt-16" rv-on-click="navigateToDetail">{participantString}</div>
 
 </div>
 
