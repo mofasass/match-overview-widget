@@ -19,7 +19,6 @@
          this.itemWidth = 350;
          this.offline_interval = this.offline_interval ? 90 : 0;
          this.scrollerWidth = this.itemWidth * this.events.length + this.offline_interval;
-         this.scroller.style.width = this.scrollerWidth + 'px';
          this.scrollerParent = this.scroller.parentElement;
          this.scrollerParentWidth = this.scrollerParent.offsetWidth;
       },
