@@ -10,7 +10,7 @@
          },
          offline_interval: {
             start: '2016-05-23T17:01:02+02:00',
-            end: '2018-05-30T14:00:02+02:00'
+            end: '2016-05-31T10:11:02+02:00'
          },
          cmsData: {
             tournamentId: 93,
@@ -103,6 +103,7 @@
                   body.classList.add('browser-edge');
                }
 
+               // Delayed value to be passed on rv-cloak binder
                setTimeout(() => {
                   this.scope.loaded = true;
                }, 200);
@@ -155,22 +156,19 @@
       },
 
       /**
-       * Adjusts widget height
+       * Adjusts widget height and enable/disable swipe component if mobile
        */
-      adjustHeight (resizeEvent) {
+      adjustHeight ( resizeEvent ) {
          var contentHeight = this.scope.offline_interval === false ? 395 : 148; // required value
 
          if ( this.scope.is_mobile ) {
             contentHeight = 380;
-            CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
             if ( !this.scope.swiper ) {
                this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
             } else {
                this.scope.swiper.attach();
             }
-
          } else {
-            CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
             if ( this.scope.swiper ) {
                this.scope.swiper.release();
             }
@@ -178,22 +176,26 @@
                this.liveUpcoming.scope.onResize();
             }
          }
+         CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
       },
 
+      /**
+       * Compares start and end dates passed to determine widget visibility
+       */
       handleOnlineIntervals () {
-         CoreLibrary.widgetModule.enableWidgetTransition(true);
-         this.date_now = new Date();
-         this.date_start = new Date(this.scope.args.offline_interval.start);
-         this.date_end = new Date(this.scope.args.offline_interval.end);
-         this.scope.offline_interval = false;
-
-         if ( this.date_now > this.date_start && this.date_end > this.date_now ) {
-         } else {
-            console.log('hide');
-            this.scope.offline_interval = true;
+         if ( this.scope.args.offline_interval && this.scope.args.offline_interval.hasOwnProperty('start') ) {
+            CoreLibrary.widgetModule.enableWidgetTransition(true);
+            this.date_now = new Date();
+            this.date_start = new Date(this.scope.args.offline_interval.start);
+            this.date_end = new Date(this.scope.args.offline_interval.end);
+            this.scope.offline_interval = (this.date_now > this.date_start && this.date_now < this.date_end);
          }
       },
 
+      /**
+       * Makes Ajax request to retrieve customer css
+       * If the request fails sets the default widget style
+       */
       handleCustomCss () {
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
             '//kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
@@ -201,7 +203,6 @@
 
          fetch(this.scope.customCssUrl)
             .then(( response ) => {
-               // console.log(response);
                if ( response.status >= 200 && response.status < 300 ) {
                   this.scope.customCss = this.scope.customCssUrl;
                } else {

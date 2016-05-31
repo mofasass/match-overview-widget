@@ -32,10 +32,10 @@ $left: radial-gradient(ellipse 150px 120px at 0px 130px, rgba(0, 0, 0, 0.9), rgb
       }
    }
 
-   .faded-left, .faded-right {
+   .kw-gradient-left, .kw-gradient-right {
    }
 
-   .faded-left {
+   .kw-gradient-left {
       &:after, &:before {
          content: "";
          position: absolute;
@@ -61,7 +61,7 @@ $left: radial-gradient(ellipse 150px 120px at 0px 130px, rgba(0, 0, 0, 0.9), rgb
       }
    }
 
-   .faded-right {
+   .kw-gradient-right {
       &:after, &:before {
          content: "";
          position: absolute;

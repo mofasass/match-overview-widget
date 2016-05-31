@@ -1,19 +1,22 @@
-<!-- Upcoming -->
+<!--Scroll left-->
 <div class="kw-scroll-left l-flexbox l-align-center hidden-xss hidden-xs hidden-ss" rv-on-click="doscroll" data-dir="left">
    <i class="icon-angle-left"></i>
 </div>
-<div class="kw-slider-container faded">
+
+<!-- Upcoming events timeline -->
+<div class="kw-slider-container kw-gradient">
 
    <div id="kw-slider-bottom" class="kw-slider-scroller l-flexbox l-horizontal">
 
+      <!--Tournament logo on offline mode-->
       <div rv-show="offline_interval" class="kw-match-logo l-flexbox l-pack-center l-align-center">
          <div class="kw-tournament-logo kw-custom-logo kw-custom-logo-large-type"></div>
       </div>
 
-      <!--Day-->
+      <!--Match-->
       <div class="kw-match" rv-each-event="events">
 
-         <!--Day header-->
+         <!--Match header-->
          <div class="kw-section-header l-pt-6">
             <h4 class="l-flexbox l-align-center l-pack-start l-pl-16">
                <span rv-hide="event.liveData" style="text-transform: capitalize" class="text-truncate">{event.customStartDate}&nbsp</span>
@@ -21,9 +24,10 @@
             </h4>
          </div>
 
+         <!--Teams-->
          <div class="kw-teams l-pt-6 l-pl-16 l-pr-16 l-pb-12" rv-on-click="navigateToEvent">
-
             <div class="l-flexbox l-expander l-flex-1">
+               <!--Home team-->
                <div class="l-flexbox l-align-center l-flex-1 l-pack-start">
                   <img class="l-mr-12" rv-if="event.event.homeFlag" rv-src="event.event.homeFlag.url" height=24" width="24" alt="">
                   <span class="kw-team-name text-truncate l-mr-6">
@@ -34,7 +38,9 @@
                      {event.liveData.score.home}
                   </span>
                </div>
+               <!--Divider-->
                <div rv-show="event.liveData" class="l-pl-6 l-pr-6">-</div>
+               <!--Away team-->
                <div class="l-flexbox l-align-center l-flex-1 l-pack-end">
                   <span class="kw-score" rv-show="event.liveData.score">
                      {event.liveData.score.away}
@@ -50,16 +56,13 @@
 
          <!-- Outcomes -->
          <div rv-if="event.betOffers" rv-hide="event.liveData" class="kw-event-outcomes l-flexbox l-pl-16 l-pr-16">
-
             <!--Outcome-->
             <outcome-component rv-each-outcome="event.betOffers | array_at 0 'outcomes'" outcome-attr="outcome" event-attr="event.event">
             </outcome-component>
-
          </div>
 
          <!-- Live outcomes -->
          <div rv-if="event.betOffers" rv-show="event.liveData" class="kw-event-outcomes kw-live-now l-flexbox l-pack-justify l-pl-16 l-pr-16">
-
             <button class="KambiWidget-outcome kw-link l-flexbox l-pack-center l-align-center l-flex-1" rv-on-click="navigateToEvent">
                <div class="KambiWidget-outcome__flexwrap">
                   <div class="KambiWidget-outcome__label-wrapper">
@@ -67,18 +70,14 @@
                      <span class="KambiWidget-outcome__label">{ labels.rightNow | translate}</span>
                   </div>
                </div>
-
             </button>
-
          </div>
 
       </div>
    </div>
-
-</div>
-</div>
 </div>
 
+<!--Scroll right-->
 <div class="kw-scroll-right l-flexbox l-pack-end l-align-center hidden-xss hidden-xs hidden-ss" rv-on-click="doscroll" data-dir="right">
    <i class="icon-angle-right"></i>
 </div>

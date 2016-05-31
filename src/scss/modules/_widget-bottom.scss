@@ -32,7 +32,7 @@ $bottom-height: 120px;
          opacity: 1;
       }
 
-      .kw-slider-container.faded {
+      .kw-slider-container.kw-gradient {
          -webkit-mask-image: $webkit-full-gradient;
       }
    }
@@ -60,13 +60,13 @@ $bottom-height: 120px;
       right: 12px;
    }
 
-   &.faded-left,
-   &.faded-left:hover {
+   &.kw-gradient-left,
+   &.kw-gradient-left:hover {
       .kw-scroll-left i {
          display: none;
       }
 
-      .faded {
+      .kw-gradient {
          -webkit-mask-image: $webkit-right-gradient;
 
          @include device($mobile) {
@@ -76,13 +76,13 @@ $bottom-height: 120px;
       }
    }
 
-   &.faded-right,
-   &.faded-right:hover {
+   &.kw-gradient-right,
+   &.kw-gradient-right:hover {
       .kw-scroll-right i {
          display: none;
       }
 
-      .faded {
+      .kw-gradient {
          -webkit-mask-image: $webkit-left-gradient;
 
          @include device($mobile) {

@@ -24,12 +24,12 @@
       },
 
       handleClass ( dir, end ) {
-         this.scrollerContainer.classList.remove('faded-right');
-         this.scrollerContainer.classList.remove('faded-left');
+         this.scrollerContainer.classList.remove('kw-gradient-right');
+         this.scrollerContainer.classList.remove('kw-gradient-left');
          if ( dir === 'right' && end ) {
-            this.scrollerContainer.classList.add('faded-right');
+            this.scrollerContainer.classList.add('kw-gradient-right');
          } else if ( dir === 'left' && end ) {
-            this.scrollerContainer.classList.add('faded-left');
+            this.scrollerContainer.classList.add('kw-gradient-left');
          }
       },
 
