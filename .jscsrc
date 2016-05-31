@@ -24,7 +24,6 @@
       "while",
       "catch"
    ],
-   "excludeFiles": ["src/js/_lib/**"],
    "requireSpaceAfterKeywords": [
       "do",
       "for",
