@@ -4,6 +4,12 @@ $bottom-height: 120px;
    position: relative;
    width: 100%;
 
+   .clock-black-expand {
+      height: 14px;
+      width: 14px;
+      background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTMgMTMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEzIDEzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6I0ZGRkZGRjt9PC9zdHlsZT48dGl0bGU+Q2xvY2s8L3RpdGxlPjxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02LjUsMEMyLjksMCwwLDIuOSwwLDYuNVMyLjksMTMsNi41LDEzUzEzLDEwLjEsMTMsNi41UzEwLjEsMCw2LjUsMHogTTYuNSwxMS41Yy0yLjgsMC01LTIuMi01LTVjMC0yLjQsMS43LTQuNCwzLjktNC45djUuNkgxMFY1LjdINi45VjEuNWMyLjYsMC4yLDQuNiwyLjMsNC42LDVDMTEuNSw5LjMsOS4zLDExLjUsNi41LDExLjV6Ii8+PC9zdmc+);
+   }
+
    .kw-slider-container {
       height: $bottom-height;
       overflow: hidden;

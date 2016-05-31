@@ -4,9 +4,7 @@
 //Included variables, mixins and layout
 @import 'app-base-all';
 //Include own custom plugins
-@import 'plugins/pagination';
 @import 'plugins/responsive';
-@import 'plugins/animation';
 
 //Included widget related styles
 @import 'widget/variables';
@@ -17,7 +15,4 @@
 // Import module specific css
 @import 'modules/widget-top';
 @import 'modules/widget-bottom';
-
-// Tournament custom css not used
-//@import '../custom/style';
 
