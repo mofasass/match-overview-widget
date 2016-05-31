@@ -1,13 +1,5 @@
 // Commong widget styles
-body {
-   color: white;
-   @extend .l-expander;
-   @include transition(opacity ease-out .3s);
-}
 
-html {
-   height: 100%;
-}
 
 .kw-main {
    @include device($mobile) {

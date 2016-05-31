@@ -2,7 +2,7 @@
 
    var EuroOverview = CoreLibrary.Component.subclass({
 
-      defaultArgs: {
+      defaultArgs: { 
          filter: '',
          criterionIds: {
             goldenBoot: 1001868386,
@@ -15,7 +15,6 @@
          cmsData: {
             tournamentId: 93,
             url: '//kambi-cdn.globalmouth.com/tournamentdata/'
-            // url: '//s3-eu-west-1.amazonaws.com/kambi-widgets/tournamentdata/'
          }
       },
 
@@ -162,7 +161,7 @@
          var contentHeight = this.scope.offline_interval === false ? 395 : 148; // required value
 
          if ( this.scope.is_mobile ) {
-            contentHeight = 380;
+            contentHeight = this.scope.offline_interval === false ? 380 : 148;
             if ( !this.scope.swiper ) {
                this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
             } else {

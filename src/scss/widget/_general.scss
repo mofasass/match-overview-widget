@@ -3,8 +3,16 @@
 $right: radial-gradient(ellipse 150px 120px at 150px 130px, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 $left: radial-gradient(ellipse 150px 120px at 0px 130px, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 
-//$right: linear-gradient(to bottom left, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
-//$left: linear-gradient(to bottom right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+body {
+   color: white;
+   @extend .l-expander;
+   @include transition(opacity ease-out .3s);
+}
+
+html {
+   height: 100%;
+   overflow: hidden;
+}
 
 @mixin ie() {
    .kw-widget-bottom {
