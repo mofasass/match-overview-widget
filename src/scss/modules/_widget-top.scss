@@ -41,9 +41,9 @@ $top-height: 236px;
                width: 100%;
             }
 
-            &:nth-child(1) { order: 1; }
-            &:nth-child(2) { width: 100%; order: 0; }
-            &:nth-child(3) { order: 2; }
+            &:nth-child(1) { @include order(1); }
+            &:nth-child(2) { width: 100%; @include order(0); }
+            &:nth-child(3) { @include order(2); }
          }
       }
    }
@@ -71,6 +71,10 @@ $top-height: 236px;
 
       .kw-section-header {
          margin-top: 17px;
+      }
+
+      * {
+         font-size: 12px;
       }
    }
 }

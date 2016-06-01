@@ -2,7 +2,7 @@
 
    var EuroOverview = CoreLibrary.Component.subclass({
 
-      defaultArgs: { 
+      defaultArgs: {
          filter: '',
          criterionIds: {
             goldenBoot: 1001868386,
