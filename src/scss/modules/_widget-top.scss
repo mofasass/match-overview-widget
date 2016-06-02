@@ -29,12 +29,16 @@ $top-height: 236px;
 
          > .mobile-page {
             @include flexbox();
+            @include box-align(center);
             @include flex(0 0 100%);
             width: 100%;
 
             > div {
                max-width: 100%;
-               min-width: 100%;
+            }
+
+            .kw-section-header {
+               width: auto;
             }
 
             .kw-players {

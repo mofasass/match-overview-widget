@@ -9,12 +9,16 @@ var LiveUpcoming = (() => {
             rootElement: htmlElement
          }]);
 
-         this.parentScope = parentScope;
          var upcoming_events = liveEventsData.events.concat(eventsData.events);
+         this.parentScope = parentScope;
          this.scope.teamData = cmsData;
          this.scope.events = this.parseUpcomingEvents(upcoming_events);
          this.scope.offline_interval = parentScope.offline_interval;
          this.scope.navigateToEvent = this.navigateToEvent.bind(this);
+
+         setTimeout(() => {
+            this.scope.loaded = true;
+         }, 200);
 
          this.scope.labels = {
             live: 'Live',
@@ -69,7 +73,7 @@ var LiveUpcoming = (() => {
                   events[i].event.awayFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].flag;
                   events[i].event.awayName = events[i].liveData ? this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation : events[i].event.awayName;
                   events[i].event.awayLabelCustom = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation;
-               } 
+               }
                matchesObj.push(events[i]);
             }
          }
