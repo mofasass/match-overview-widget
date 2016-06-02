@@ -64,12 +64,12 @@ var LiveUpcoming = (() => {
                   // Home
                   events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;
                   events[i].event.homeName = events[i].liveData ? this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].name_abbreviation : events[i].event.homeName;
-                  events[i].event.homeNameAbrev = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].name_abbreviation;
+                  events[i].event.homeLabelCustom = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].name_abbreviation;
                   // Away
                   events[i].event.awayFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].flag;
                   events[i].event.awayName = events[i].liveData ? this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation : events[i].event.awayName;
-                  events[i].event.awayNameAbrev = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation;
-               }
+                  events[i].event.awayLabelCustom = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation;
+               } 
                matchesObj.push(events[i]);
             }
          }

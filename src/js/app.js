@@ -12,10 +12,8 @@
             start: '2016-05-23T17:01:02+02:00',
             end: '2016-05-31T10:11:02+02:00'
          },
-         cmsData: {
-            tournamentId: 93,
-            url: '//kambi-cdn.globalmouth.com/tournamentdata/'
-         }
+         tournamentId: 1,
+         cmsUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/'
       },
 
       constructor () {
@@ -48,7 +46,7 @@
          });
 
          var cmsDataPromoise = new Promise(( resolve, reject ) => {
-            CoreLibrary.getData(this.scope.args.cmsData.url + this.scope.args.cmsData.tournamentId + '/overview/overview.json?' +
+            CoreLibrary.getData(this.scope.args.cmsUrl + this.scope.args.tournamentId + '/overview/overview.json?' +
                'version=' + (window.CMS_VERSIONS ? window.CMS_VERSIONS.overview : ''))
                .then(( response ) => {
                   resolve(response);
@@ -197,7 +195,7 @@
        */
       handleCustomCss () {
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
-            '//kambi-cdn.globalmouth.com/tournamentdata/euro16/css/{customer}/{offering}/' ) + 'style.css';
+         this.scope.args.cmsUrl + 'euro16/css/{customer}/{offering}/' ) + 'style.css';
          this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
 
          fetch(this.scope.customCssUrl)
