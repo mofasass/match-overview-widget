@@ -33,7 +33,11 @@
          var eventsPromise = new Promise(( resolve, reject ) => {
             CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/matches/')
                .then(( response ) => {
-                  resolve(response);
+                  if ( response && response.events && response.events.length ) {
+                     resolve(response);
+                  } else {
+                     this.handleError('eventsPromise');
+                  }
                });
          });
 
@@ -41,11 +45,16 @@
          var betofferPromise = new Promise(( resolve, reject ) => {
             CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/competitions/')
                .then(( response ) => {
-                  resolve(response);
+                  if ( response && response.events && response.events.length ) {
+                     resolve(response);
+                  } else {
+                     this.handleError('betofferPromise');
+                  }
                });
          });
 
-         var cmsDataPromoise = new Promise(( resolve, reject ) => {
+         // get cms data
+         var cmsDataPromise = new Promise(( resolve, reject ) => {
             CoreLibrary.getData(this.scope.args.cmsUrl + this.scope.args.tournamentId + '/overview/overview.json?' +
                'version=' + (window.CMS_VERSIONS ? window.CMS_VERSIONS.overview : ''))
                .then(( response ) => {
@@ -53,6 +62,7 @@
                });
          });
 
+         // get live data or local mock live data
          var liveEventsPromise = new Promise(( resolve, reject ) => {
             if ( CoreLibrary.development === true ) {
                CoreLibrary.getData('fakeLivedata.json')
@@ -68,7 +78,7 @@
          });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromoise])
+         Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromise])
             .then(( promiseData ) => {
                this.liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3], this.scope);
                var resizeTimeout = false;
@@ -105,6 +115,7 @@
                   this.scope.loaded = true;
                }, 200);
             });
+         // .catch(this.handleError);
       },
 
       /**
@@ -195,7 +206,7 @@
        */
       handleCustomCss () {
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
-         this.scope.args.cmsUrl + 'euro16/css/{customer}/{offering}/' ) + 'style.css';
+            this.scope.args.cmsUrl + 'euro16/css/{customer}/{offering}/' ) + 'style.css';
          this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
 
          fetch(this.scope.customCssUrl)
@@ -209,8 +220,16 @@
             .catch(( error ) => {
                this.scope.customCss = 'custom/style.local.css';
                console.debug('Error fetching css');
-               throw error;
             });
+      },
+
+      /**
+       * Removes the widget
+       * @param prm
+       */
+      handleError ( prm ) {
+         console.warn('Cannot load ', prm, ', removing widget');
+         // CoreLibrary.widgetModule.removeWidget();
       },
 
       /**
