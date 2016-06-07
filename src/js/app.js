@@ -8,11 +8,13 @@
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
          },
-         offline_interval: {
-            // '11-06': ['09:30', '12:00'],
-            // '12-06': ['09:30', '12:00']
-            start: '2016-05-23T17:01:02+02:00',
-            end: '2016-05-31T10:11:02+02:00'
+         online_interval: {
+            1: [
+               '2016-06-07T16:31:02+02:00', '2017-06-07T23:13:02+02:00'
+            ],
+            2: [
+               '2016-06-08T16:13:02+02:00', '2017-06-07T23:13:02+02:00'
+            ]
          },
          tournamentId: 1,
          cmsUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/'
@@ -25,8 +27,10 @@
 
       init () {
 
-         // this.scope.args.cmsUrl = '//kambi-cdn.globalmouth.com/tournamentdata/';
-         // this.scope.args.tournamentId = 93;
+         this.scope.args.cmsUrl = '//kambi-cdn.globalmouth.com/tournamentdata/';
+         this.scope.args.tournamentId = 93;
+
+         CoreLibrary.widgetModule.enableWidgetTransition(true);
 
          this.handleOnlineIntervals();
          this.handleCustomCss();
@@ -43,7 +47,8 @@
                   } else {
                      this.handleError('eventsPromise');
                   }
-               });
+               })
+               .catch(this.handleError);
          });
 
          // Get the betoffers
@@ -55,7 +60,8 @@
                   } else {
                      this.handleError('betofferPromise');
                   }
-               });
+               })
+               .catch(this.handleError);
          });
 
          // get cms data
@@ -63,8 +69,13 @@
             CoreLibrary.getData(this.scope.args.cmsUrl + this.scope.args.tournamentId + '/overview/overview.json?' +
                'version=' + (window.CMS_VERSIONS ? window.CMS_VERSIONS.overview : ''))
                .then(( response ) => {
-                  resolve(response);
-               });
+                  if ( response && response.matches && response.players && response.teams ) {
+                     resolve(response);
+                  } else {
+                     this.handleError('betofferPromise');
+                  }
+               })
+               .catch(this.handleError);
          });
 
          // get live data or local mock live data
@@ -72,13 +83,23 @@
             if ( CoreLibrary.development === true ) {
                CoreLibrary.getData('fakeLivedata.json')
                   .then(( response ) => {
-                     resolve(response);
-                  });
+                     if ( response && response.events && response.events.length ) {
+                        resolve(response);
+                     } else {
+                        this.handleError('eventsPromise');
+                     }
+                  })
+                  .catch(this.handleError);
             } else {
                CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/')
                   .then(( response ) => {
-                     resolve(response);
-                  });
+                     if ( response && response.events && response.events.length ) {
+                        resolve(response);
+                     } else {
+                        this.handleError('eventsPromise');
+                     }
+                  })
+                  .catch(this.handleError);
             }
          });
 
@@ -120,7 +141,6 @@
                   this.scope.loaded = true;
                }, 200);
             });
-         // .catch(this.handleError);
       },
 
       /**
@@ -195,55 +215,44 @@
       /**
        * Compares start and end dates passed to determine widget visibility
        */
+
       handleOnlineIntervals () {
+         var interval = false;
 
-         // var getInterval = ( intervalType ) => {
-         //    var returnDates = {}, date_now = new Date();
-         //    if ( Object.keys(intervalType).length ) {
-         //       var i = 0, arrLength = Object.keys(intervalType).length;
-         //       for ( ; i < arrLength; ++i ) {
-         //          var key = Object.keys(intervalType)[i];
-         //          var startValue = intervalType[key][0];
-         //          var endValue = intervalType[key][1] ? intervalType[key][1] : false;
-         //          var j = 0, arrJLength = intervalType[key].length;
-         //          for ( ; j < arrJLength; ++j ) {
-         //             var value = intervalType[key][j];
-         //             if ( key.match('-') ) {
-         //                var day = key.slice(0, key.match('-').index),
-         //                   month = key.slice(key.match('-').index + 1) - 1,
-         //                   hour = value.slice(0, value.match(':').index),
-         //                   minute = value.slice(value.match(':').index + 1),
-         //                   date = new Date();
-         //
-         //                date.setDate(day);
-         //                date.setMonth(month);
-         //                date.setSeconds(0);
-         //                date.setMinutes(minute);
-         //                date.setHours(hour);
-         //
-         //                if ( j === 1 ) {
-         //                   returnDates['end'] = date;
-         //                } else {
-         //                   returnDates['start'] = date;
-         //                }
-         //             }
-         //          }
-         //
-         //       }
-         //    }
-         //    console.log(returnDates);
-         //    return returnDates;
-         // };
-         //
-         // var interval = getInterval(this.scope.args.offline_interval);
+         var getInterval = ( intervalType ) => {
+            var returnDates = {}, dates = {}, date_now = new Date();
+            if ( Object.keys(intervalType).length ) {
+               var i = 0, arrLength = Object.keys(intervalType).length;
+               for ( ; i < arrLength; ++i ) {
+                  var key = Object.keys(intervalType)[i];
+                  var j = 0, arrJLength = intervalType[key].length;
+                  for ( ; j < arrJLength; ++j ) {
+                     var value = intervalType[key][j];
+                     var date = new Date(value);
+                     if ( j === 1 ) {
+                        dates['end'] = date;
+                     } else {
+                        dates['start'] = date;
+                     }
+                  }
+                  if ( (date_now > dates['start'] && date_now < dates['end']) ) {
+                     returnDates = {
+                        start: dates['start'],
+                        end: dates['end']
+                     };
+                  }
+               }
+            }
+            return returnDates.hasOwnProperty('start');
+         };
 
-         if ( this.scope.args.offline_interval && this.scope.args.offline_interval.hasOwnProperty('start') ) {
-            CoreLibrary.widgetModule.enableWidgetTransition(true);
-            this.date_now = new Date();
-            this.date_start = new Date(this.scope.args.offline_interval.start);
-            this.date_end = new Date(this.scope.args.offline_interval.end);
-            this.scope.offline_interval = (this.date_now > this.date_start && this.date_now < this.date_end);
+         if ( this.scope.args.hasOwnProperty('offline_interval') ) {
+            interval = getInterval(this.scope.args.offline_interval);
+         } else if ( this.scope.args.hasOwnProperty('online_interval') ) {
+            interval = !getInterval(this.scope.args.online_interval);
          }
+         console.log('offline', interval);
+         this.scope.offline_interval = interval;
       },
 
       /**
@@ -275,7 +284,7 @@
        */
       handleError ( prm ) {
          console.warn('Cannot load ', prm, ', removing widget');
-         // CoreLibrary.widgetModule.removeWidget();
+         CoreLibrary.widgetModule.removeWidget();
       },
 
       /**
