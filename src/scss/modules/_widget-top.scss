@@ -39,6 +39,10 @@ $top-height: 236px;
 
             .kw-section-header {
                width: auto;
+
+               > h4 {
+                  @include box-pack(center);
+               }
             }
 
             .kw-players {

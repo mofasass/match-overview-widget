@@ -20,7 +20,7 @@
    display: block;
    font-size: 12px;
    height: 36px;
-   line-height: 3;
+   line-height: 33px;
    overflow: hidden;
    padding: 0;
    text-align: left;
@@ -41,6 +41,7 @@
    outline: 0; }
 
 .KambiWidget-outcome__flexwrap {
+   height: 100%;
    display: -webkit-box;
    display: -webkit-flex;
    display: flex;
