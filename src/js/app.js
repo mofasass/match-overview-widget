@@ -9,6 +9,8 @@
             tournamentWinner: 1001221607
          },
          offline_interval: {
+            // '11-06': ['09:30', '12:00'],
+            // '12-06': ['09:30', '12:00']
             start: '2016-05-23T17:01:02+02:00',
             end: '2016-05-31T10:11:02+02:00'
          },
@@ -22,6 +24,9 @@
       },
 
       init () {
+
+         // this.scope.args.cmsUrl = '//kambi-cdn.globalmouth.com/tournamentdata/';
+         // this.scope.args.tournamentId = 93;
 
          this.handleOnlineIntervals();
          this.handleCustomCss();
@@ -191,6 +196,47 @@
        * Compares start and end dates passed to determine widget visibility
        */
       handleOnlineIntervals () {
+
+         // var getInterval = ( intervalType ) => {
+         //    var returnDates = {}, date_now = new Date();
+         //    if ( Object.keys(intervalType).length ) {
+         //       var i = 0, arrLength = Object.keys(intervalType).length;
+         //       for ( ; i < arrLength; ++i ) {
+         //          var key = Object.keys(intervalType)[i];
+         //          var startValue = intervalType[key][0];
+         //          var endValue = intervalType[key][1] ? intervalType[key][1] : false;
+         //          var j = 0, arrJLength = intervalType[key].length;
+         //          for ( ; j < arrJLength; ++j ) {
+         //             var value = intervalType[key][j];
+         //             if ( key.match('-') ) {
+         //                var day = key.slice(0, key.match('-').index),
+         //                   month = key.slice(key.match('-').index + 1) - 1,
+         //                   hour = value.slice(0, value.match(':').index),
+         //                   minute = value.slice(value.match(':').index + 1),
+         //                   date = new Date();
+         //
+         //                date.setDate(day);
+         //                date.setMonth(month);
+         //                date.setSeconds(0);
+         //                date.setMinutes(minute);
+         //                date.setHours(hour);
+         //
+         //                if ( j === 1 ) {
+         //                   returnDates['end'] = date;
+         //                } else {
+         //                   returnDates['start'] = date;
+         //                }
+         //             }
+         //          }
+         //
+         //       }
+         //    }
+         //    console.log(returnDates);
+         //    return returnDates;
+         // };
+         //
+         // var interval = getInterval(this.scope.args.offline_interval);
+
          if ( this.scope.args.offline_interval && this.scope.args.offline_interval.hasOwnProperty('start') ) {
             CoreLibrary.widgetModule.enableWidgetTransition(true);
             this.date_now = new Date();
