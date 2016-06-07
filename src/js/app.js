@@ -206,8 +206,8 @@
        */
       handleCustomCss () {
          this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
-            this.scope.args.cmsUrl + 'euro16/css/{customer}/{offering}/' ) + 'style.css';
-         this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{offering}/, CoreLibrary.config.offering);
+            this.scope.args.cmsUrl + 'euro16/css/{customer}/' ) + 'style.css';
+         this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer);
 
          fetch(this.scope.customCssUrl)
             .then(( response ) => {
