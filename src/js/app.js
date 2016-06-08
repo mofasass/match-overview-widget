@@ -8,14 +8,6 @@
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
          },
-         online_interval: {
-            1: [
-               '2016-06-07T16:31:02+02:00', '2017-06-07T23:13:02+02:00'
-            ],
-            2: [
-               '2016-06-08T16:13:02+02:00', '2017-06-07T23:13:02+02:00'
-            ]
-         },
          tournamentId: 1,
          cmsUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/'
       },
@@ -217,42 +209,46 @@
        */
 
       handleOnlineIntervals () {
-         var interval = false;
+         var interval = false,
+            getInterval = ( intervalType ) => {
+               var returnDates = {},
+                  date_now = new Date();
 
-         var getInterval = ( intervalType ) => {
-            var returnDates = {}, dates = {}, date_now = new Date();
-            if ( Object.keys(intervalType).length ) {
-               var i = 0, arrLength = Object.keys(intervalType).length;
-               for ( ; i < arrLength; ++i ) {
-                  var key = Object.keys(intervalType)[i];
-                  var j = 0, arrJLength = intervalType[key].length;
-                  for ( ; j < arrJLength; ++j ) {
-                     var value = intervalType[key][j];
-                     var date = new Date(value);
-                     if ( j === 1 ) {
-                        dates['end'] = date;
-                     } else {
-                        dates['start'] = date;
+               if ( typeof intervalType === 'object' && Object.keys(intervalType).length ) {
+                  var i = 0, arrLength = Object.keys(intervalType).length;
+                  for ( ; i < arrLength; ++i ) {
+                     var key = Object.keys(intervalType)[i],
+                        value = intervalType[key];
+
+                     var end = new Date(value),
+                        start = new Date(key);
+
+                     if ( date_now > start && date_now < end ) {
+                        returnDates = {
+                           start: start,
+                           end: end
+                        };
                      }
                   }
-                  if ( (date_now > dates['start'] && date_now < dates['end']) ) {
-                     returnDates = {
-                        start: dates['start'],
-                        end: dates['end']
-                     };
-                  }
                }
-            }
-            return returnDates.hasOwnProperty('start');
-         };
+               console.log(returnDates);
+               return returnDates.hasOwnProperty('start');
+            };
 
-         if ( this.scope.args.hasOwnProperty('offline_interval') ) {
-            interval = getInterval(this.scope.args.offline_interval);
-         } else if ( this.scope.args.hasOwnProperty('online_interval') ) {
-            interval = !getInterval(this.scope.args.online_interval);
+         if ( this.scope.args.intervalUrl !== false ) {
+            CoreLibrary.getData(this.scope.args.intervalUrl ? this.scope.args.intervalUrl : 'intervals.json')
+               .then(( response ) => {
+                  if ( response ) {
+                     if ( response.hasOwnProperty('offline_interval') ) {
+                        interval = getInterval(response.offline_interval);
+                     } else if ( response.hasOwnProperty('online_interval') ) {
+                        interval = !getInterval(response.online_interval);
+                     }
+                     console.log('offline', interval);
+                     this.scope.offline_interval = interval;
+                  }
+               });
          }
-         console.log('offline', interval);
-         this.scope.offline_interval = interval;
       },
 
       /**
