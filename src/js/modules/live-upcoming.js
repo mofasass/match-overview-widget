@@ -8,8 +8,11 @@ var LiveUpcoming = (() => {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
+         var liveEvents = liveEventsData.events.filter(function ( event ) {
+            return event.event.state !== 'NOT_STARTED';
+         });
 
-         var upcoming_events = liveEventsData.events.concat(eventsData.events);
+         var upcoming_events = liveEvents.concat(eventsData.events);
          this.parentScope = parentScope;
          this.scope.teamData = cmsData;
          this.scope.events = this.parseUpcomingEvents(upcoming_events);

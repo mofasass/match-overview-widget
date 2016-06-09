@@ -75,7 +75,7 @@
             if ( CoreLibrary.development === true ) {
                CoreLibrary.getData('fakeLivedata.json')
                   .then(( response ) => {
-                     if ( response && response.events && response.events.length ) {
+                     if ( response && response.events && response.events.length > 0) {
                         resolve(response);
                      } else {
                         this.handleError('eventsPromise');
