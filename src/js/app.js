@@ -18,10 +18,6 @@
       },
 
       init () {
-
-         this.scope.args.cmsUrl = '//kambi-cdn.globalmouth.com/tournamentdata/';
-         this.scope.args.tournamentId = 93;
-
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
          this.handleOnlineIntervals();
