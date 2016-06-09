@@ -29,7 +29,7 @@
          <div class="kw-teams l-pt-6 l-pl-16 l-pr-16 l-pb-12" rv-on-click="navigateToEvent">
             <div class="l-flexbox l-expander l-flex-1">
                <!--Home team-->
-               <div class="l-flexbox l-align-center l-flex-1 l-pack-start">
+               <div class="kw-team l-flexbox l-align-center l-flex-1 l-pack-start">
                   <img class="l-mr-12" rv-if="event.event.homeFlag" rv-src="event.event.homeFlag.url" height=24" width="24" alt="">
                   <span class="kw-team-name text-truncate l-mr-6">
                      {event.event.homeName}
@@ -42,7 +42,7 @@
                <!--Divider-->
                <div rv-show="event.liveData" class="l-pl-6 l-pr-6">-</div>
                <!--Away team-->
-               <div class="l-flexbox l-align-center l-flex-1 l-pack-end">
+               <div class="kw-team l-flexbox l-align-center l-flex-1 l-pack-end">
                   <span class="kw-score" rv-show="event.liveData.score">
                      {event.liveData.score.away}
                   </span>

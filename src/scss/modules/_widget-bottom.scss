@@ -140,6 +140,8 @@ $bottom-height: 120px;
    }
 
    .kw-match-logo {
+      max-width: 90px;
+      min-width: 90px;
       width: 90px;
       @include flex(1 0 90px);
 
@@ -175,6 +177,7 @@ $bottom-height: 120px;
       @include device($mobile) {
          span {
             font-size: 11px;
+            line-height: 36px;
          }
       }
    }
@@ -214,12 +217,27 @@ $bottom-height: 120px;
    .kw-team-name {
       font-size: 14px;
       line-height: 24px;
+
+      //@include device($mobile) {
+      //   @include flexbox();
+      //   @include box-align(center);
+      //}
+   }
+
+   .kw-team {
+      @include device($mobile) {
+         height: 24px;
+      }
    }
 
    * {
       @include device($mobile) {
          font-size: 12px;
       }
+   }
+
+   .iscollapsed & {
+      padding-top: 12px;
    }
 
    @include device($mobile) {
@@ -233,6 +251,12 @@ $bottom-height: 120px;
          // adding the class later because Safari
          &.kw-elastic-scroll {
             -webkit-overflow-scrolling: touch;
+         }
+      }
+
+      .iscollapsed & {
+         .kw-match .kw-section-header {
+            //margin-top: 0;
          }
       }
    }

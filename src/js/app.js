@@ -75,21 +75,13 @@
             if ( CoreLibrary.development === true ) {
                CoreLibrary.getData('fakeLivedata.json')
                   .then(( response ) => {
-                     if ( response && response.events && response.events.length > 0) {
-                        resolve(response);
-                     } else {
-                        this.handleError('eventsPromise');
-                     }
+                     resolve(response);
                   })
                   .catch(this.handleError);
             } else {
                CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/')
                   .then(( response ) => {
-                     if ( response && response.events && response.events.length ) {
-                        resolve(response);
-                     } else {
-                        this.handleError('eventsPromise');
-                     }
+                     resolve(response);
                   })
                   .catch(this.handleError);
             }
