@@ -140,11 +140,11 @@ $bottom-height: 120px;
    }
 
    .kw-match-logo {
+      display: none;
       max-width: 90px;
       min-width: 90px;
-      width: 90px;
       @include flex(1 0 90px);
-      display: none;
+      width: 90px;
 
       .iscollapsed & {
          @include flexbox();
@@ -222,16 +222,16 @@ $bottom-height: 120px;
    .kw-team-name {
       font-size: 14px;
       line-height: 24px;
-
-      //@include device($mobile) {
-      //   @include flexbox();
-      //   @include box-align(center);
-      //}
    }
 
    .kw-team {
+      @include flex(1 1 auto);
+      @include flexbox();
+      @include box-pack(flex-start);
+
       @include device($mobile) {
          height: 24px;
+         width: 100%;
       }
    }
 
