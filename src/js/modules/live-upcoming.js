@@ -16,7 +16,10 @@ var LiveUpcoming = (() => {
             }
          });
 
-         var upcoming_events = liveEvents.concat(eventsData.events);
+         var preliveEvents = eventsData.events.filter(function ( event ) {
+            return event.event.type === 'ET_MATCH';
+         });
+         var upcoming_events = liveEvents.concat(preliveEvents);
          this.parentScope = parentScope;
          this.scope.teamData = cmsData;
          this.scope.events = this.parseUpcomingEvents(upcoming_events);
