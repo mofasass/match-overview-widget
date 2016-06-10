@@ -22,7 +22,7 @@
 
          this.scope.offline_interval = true;
 
-         // var intervalPromise = this.handleOnlineIntervals();
+         var intervalPromise = this.handleOnlineIntervals();
          this.handleCustomCss();
 
          this.mainElement = document.getElementById('main');
@@ -86,7 +86,7 @@
          });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromise])
+         Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromise, intervalPromise])
             .then(( promiseData ) => {
                this.liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3], this.scope);
                var resizeTimeout = false;
@@ -174,11 +174,10 @@
        * Adjusts widget height and enable/disable swipe component if mobile
        */
       adjustHeight ( resizeEvent ) {
-         // var contentHeight = this.scope.offline_interval === false ? 395 : 148; // required value
-         var contentHeight = 148; // required value
+         var contentHeight = this.scope.offline_interval === false ? 395 : 148; // required value
 
          if ( this.scope.is_mobile ) {
-            // contentHeight = this.scope.offline_interval === false ? 380 : 148;
+            contentHeight = this.scope.offline_interval === false ? 380 : 148;
             if ( !this.scope.swiper ) {
                this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
             } else {
@@ -229,7 +228,7 @@
             };
 
          if ( this.scope.args.intervalUrl !== false ) {
-            new Promise(( resolve, reject ) => {
+            return new Promise(( resolve, reject ) => {
                CoreLibrary.getData(this.scope.args.intervalUrl ? this.scope.args.intervalUrl : 'intervals.json')
                   .then(( response ) => {
                      if ( response ) {
