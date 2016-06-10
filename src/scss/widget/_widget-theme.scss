@@ -59,7 +59,7 @@ button {
 }
 
 .kw-custom-background.kw-custom-background-large {
-   @include device(sm, max) {
+   @include device($mobile) {
       background-image: none;
    }
 

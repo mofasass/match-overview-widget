@@ -20,7 +20,7 @@
       init () {
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
-         this.handleOnlineIntervals();
+         var intervalPromise = this.handleOnlineIntervals();
          this.handleCustomCss();
 
          this.mainElement = document.getElementById('main');
@@ -84,7 +84,7 @@
          });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromise])
+         Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromise, intervalPromise])
             .then(( promiseData ) => {
                this.liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3], this.scope);
                var resizeTimeout = false;
@@ -197,6 +197,8 @@
        */
 
       handleOnlineIntervals () {
+         this.scope.offline_interval = true;
+
          var interval = false,
             getInterval = ( intervalType ) => {
                var returnDates = {},
@@ -224,18 +226,25 @@
             };
 
          if ( this.scope.args.intervalUrl !== false ) {
-            CoreLibrary.getData(this.scope.args.intervalUrl ? this.scope.args.intervalUrl : 'intervals.json')
-               .then(( response ) => {
-                  if ( response ) {
-                     if ( response.hasOwnProperty('offline_interval') ) {
-                        interval = getInterval(response.offline_interval);
-                     } else if ( response.hasOwnProperty('online_interval') ) {
-                        interval = !getInterval(response.online_interval);
+            new Promise(( resolve, reject ) => {
+               CoreLibrary.getData(this.scope.args.intervalUrl ? this.scope.args.intervalUrl : 'intervals.json')
+                  .then(( response ) => {
+                     if ( response ) {
+                        if ( response.hasOwnProperty('offline_interval') ) {
+                           interval = getInterval(response.offline_interval);
+                        } else if ( response.hasOwnProperty('online_interval') ) {
+                           interval = !getInterval(response.online_interval);
+                        }
+                        console.log('offline', interval);
+                        this.scope.offline_interval = interval;
+                        resolve();
                      }
-                     console.log('offline', interval);
-                     this.scope.offline_interval = interval;
-                  }
-               });
+                  });
+            });
+         } else {
+            return new Promise(( resolve, reject ) => {
+               resolve();
+            });
          }
       },
 
@@ -276,7 +285,7 @@
        * @returns {boolean}
        */
       is_mobile () {
-         return this.mainElement.offsetWidth < 768;
+         return this.mainElement.offsetWidth <= 768;
       }
 
    });
