@@ -14,6 +14,16 @@ html {
    overflow: hidden;
 }
 
+.kw-svg {
+   display: none;
+}
+
+@supports (-moz-appearance:none) and (display:contents) {
+   .kw-svg {
+      display: block;
+   }
+}
+
 @mixin ie() {
    .kw-widget-bottom {
       position: relative;
