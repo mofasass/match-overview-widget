@@ -9,7 +9,11 @@ var LiveUpcoming = (() => {
             rootElement: htmlElement
          }]);
          var liveEvents = liveEventsData.events.filter(function ( event ) {
-            return event.event.state !== 'NOT_STARTED';
+            if ( event.event.type === 'ET_MATCH' ) {
+               return event.event.state !== 'NOT_STARTED';
+            } else {
+               return false;
+            }
          });
 
          var upcoming_events = liveEvents.concat(eventsData.events);
