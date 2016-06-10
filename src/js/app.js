@@ -22,7 +22,7 @@
 
          this.scope.offline_interval = true;
 
-         var intervalPromise = this.handleOnlineIntervals();
+         // var intervalPromise = this.handleOnlineIntervals();
          this.handleCustomCss();
 
          this.mainElement = document.getElementById('main');
@@ -69,36 +69,36 @@
          });
 
          // get live data or local mock live data
-         var liveEventsPromise = new Promise(( resolve, reject ) => {
-            if ( CoreLibrary.development === true ) {
-               CoreLibrary.getData('fakeLivedata.json')
-                  .then(( response ) => {
-                     resolve(response);
-                  })
-                  .catch(this.handleError);
-            } else {
-               CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/')
-                  .then(( response ) => {
-                     resolve(response);
-                  })
-                  .catch(this.handleError);
-            }
-         });
+         // var liveEventsPromise = new Promise(( resolve, reject ) => {
+         //    if ( CoreLibrary.development === true ) {
+         //       CoreLibrary.getData('fakeLivedata.json')
+         //          .then(( response ) => {
+         //             resolve(response);
+         //          })
+         //          .catch(this.handleError);
+         //    } else {
+         //       CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/')
+         //          .then(( response ) => {
+         //             resolve(response);
+         //          })
+         //          .catch(this.handleError);
+         //    }
+         // });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([eventsPromise, liveEventsPromise, betofferPromise, cmsDataPromise, intervalPromise])
+         Promise.all([eventsPromise, betofferPromise, cmsDataPromise])
             .then(( promiseData ) => {
-               this.liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[1], promiseData[3], this.scope);
+               this.liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[2], this.scope);
                var resizeTimeout = false;
 
-               var filteredEvents = this.filterOutBetOffers(promiseData[2].events);
+               var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
 
                if ( filteredEvents.goldenBoot[0] != null ) {
-                  var goldenBoot = new GoldenBoot('div#golden-boot', filteredEvents.goldenBoot[0], promiseData[3]);
+                  var goldenBoot = new GoldenBoot('div#golden-boot', filteredEvents.goldenBoot[0], promiseData[2]);
                }
 
                if ( filteredEvents.tournamentWinner[0] != null ) {
-                  var tournamentWinner = new TournamentWinner('div#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[3].teams);
+                  var tournamentWinner = new TournamentWinner('div#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[2].teams);
                }
 
                window.addEventListener('resize', () => {

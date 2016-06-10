@@ -4,22 +4,22 @@ var LiveUpcoming = (() => {
 
       htmlTemplateFile: './views/live-upcoming.html',
 
-      constructor ( htmlElement, eventsData, liveEventsData, cmsData, parentScope ) {
+      constructor ( htmlElement, eventsData, cmsData, parentScope ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
-         var liveEvents = liveEventsData.events.filter(function ( event ) {
-            if ( event.event.type === 'ET_MATCH' ) {
-               return event.event.state !== 'NOT_STARTED';
-            } else {
-               return false;
-            }
-         });
+         // var liveEvents = liveEventsData.events.filter(function ( event ) {
+         //    if ( event.event.type === 'ET_MATCH' ) {
+         //       return event.event.state !== 'NOT_STARTED';
+         //    } else {
+         //       return false;
+         //    }
+         // });
 
-         var preliveEvents = eventsData.events.filter(function ( event ) {
+         var upcoming_events = eventsData.events.filter(function ( event ) {
             return event.event.type === 'ET_MATCH';
          });
-         var upcoming_events = liveEvents.concat(preliveEvents);
+         // var upcoming_events = liveEvents.concat(preliveEvents);
          this.parentScope = parentScope;
          this.scope.teamData = cmsData;
          this.scope.events = this.parseUpcomingEvents(upcoming_events);
@@ -66,9 +66,10 @@ var LiveUpcoming = (() => {
                   time = pad(eventDate.getHours()) + ':' + pad(eventDate.getMinutes());
 
                if ( events[i].liveData && events[i].liveData.matchClock ) {
-                  var minute = pad(events[i].liveData.matchClock.minute);
-                  var second = pad(events[i].liveData.matchClock.second);
-                  time = minute + ':' + second;
+                  // var minute = pad(events[i].liveData.matchClock.minute);
+                  // var second = pad(events[i].liveData.matchClock.second);
+                  // time = minute + ':' + second;
+                  time = events[i].liveData.matchClock.period;
                }
 
                events[i].customStartTime = time;
