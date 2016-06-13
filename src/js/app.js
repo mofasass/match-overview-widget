@@ -20,9 +20,9 @@
       init () {
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
-         this.scope.offline_interval = true;
+         var setMinimizedMode = true,
+            intervalPromise = this.handleOnlineIntervals(setMinimizedMode);
 
-         // var intervalPromise = this.handleOnlineIntervals();
          this.handleCustomCss();
 
          this.mainElement = document.getElementById('main');
@@ -86,7 +86,7 @@
          // });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([eventsPromise, betofferPromise, cmsDataPromise])
+         Promise.all([eventsPromise, betofferPromise, cmsDataPromise, intervalPromise])
             .then(( promiseData ) => {
                this.liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[2], this.scope);
                var resizeTimeout = false;
@@ -110,8 +110,7 @@
                   }, 300);
 
                });
-
-               this.adjustHeight();
+               console.log('interval', this.scope.offline_interval);
 
                if ( /Edge/i.test(navigator.userAgent) ) {
                   var body = document.getElementsByTagName('body')[0];
@@ -120,6 +119,7 @@
 
                // Delayed value to be passed on rv-cloak binder
                setTimeout(() => {
+                  this.adjustHeight();
                   this.scope.loaded = true;
                }, 200);
             });
@@ -198,10 +198,10 @@
        * Compares start and end dates passed to determine widget visibility
        */
 
-      handleOnlineIntervals () {
+      handleOnlineIntervals ( stateOverride ) {
          this.scope.offline_interval = true;
 
-         var interval = false,
+         var interval = true,
             getInterval = ( intervalType ) => {
                var returnDates = {},
                   date_now = new Date();
@@ -227,7 +227,7 @@
                return returnDates.hasOwnProperty('start');
             };
 
-         if ( this.scope.args.intervalUrl !== false ) {
+         if ( this.scope.args.intervalUrl !== false && stateOverride !== true ) {
             return new Promise(( resolve, reject ) => {
                CoreLibrary.getData(this.scope.args.intervalUrl ? this.scope.args.intervalUrl : 'intervals.json')
                   .then(( response ) => {
@@ -237,14 +237,18 @@
                         } else if ( response.hasOwnProperty('online_interval') ) {
                            interval = !getInterval(response.online_interval);
                         }
-                        console.log('offline', interval);
+                        console.log('offline check', interval);
                         this.scope.offline_interval = interval;
-                        resolve();
                      }
+                     resolve();
+                  })
+                  .catch(() => {
+                     resolve();
                   });
             });
          } else {
             return new Promise(( resolve, reject ) => {
+               this.scope.offline_interval = stateOverride || false;
                resolve();
             });
          }
