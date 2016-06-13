@@ -70,6 +70,9 @@ var LiveUpcoming = (() => {
                   // var second = pad(events[i].liveData.matchClock.second);
                   // time = minute + ':' + second;
                   time = events[i].liveData.matchClock.period;
+                  // if ( events[i].liveData.minute === 45 && events[i].liveData.second === 0 && events[i].liveData.running === false && events[i].liveData.period === "2nd half" ) {
+                  //    time = 'Half Time';
+                  // }
                }
 
                events[i].customStartTime = time;

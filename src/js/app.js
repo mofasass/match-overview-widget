@@ -21,7 +21,7 @@
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
          var setMinimizedMode = true,
-            intervalPromise = this.handleOnlineIntervals(setMinimizedMode);
+            intervalPromise = this.handleOnlineIntervals(setMinimizedMode); // send true if needed to force minimized mode
 
          this.handleCustomCss();
 
@@ -95,10 +95,16 @@
 
                if ( filteredEvents.goldenBoot[0] != null ) {
                   var goldenBoot = new GoldenBoot('div#golden-boot', filteredEvents.goldenBoot[0], promiseData[2]);
+               } else {
+                  console.log('no goldenboot');
+                  this.scope.offline_interval = true;
                }
 
                if ( filteredEvents.tournamentWinner[0] != null ) {
                   var tournamentWinner = new TournamentWinner('div#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[2].teams);
+               } else {
+                  console.log('no tournamentWinner');
+                  this.scope.offline_interval = true;
                }
 
                window.addEventListener('resize', () => {
@@ -110,7 +116,7 @@
                   }, 300);
 
                });
-               console.log('interval', this.scope.offline_interval);
+               console.log('offline interval', this.scope.offline_interval);
 
                if ( /Edge/i.test(navigator.userAgent) ) {
                   var body = document.getElementsByTagName('body')[0];
@@ -197,7 +203,6 @@
       /**
        * Compares start and end dates passed to determine widget visibility
        */
-
       handleOnlineIntervals ( stateOverride ) {
          this.scope.offline_interval = true;
 
