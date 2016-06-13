@@ -38,8 +38,10 @@ $bottom-height: 120px;
          opacity: 1;
       }
 
-      .kw-slider-container.kw-gradient {
-         -webkit-mask-image: $webkit-full-gradient;
+      @include device(sm, min) {
+         .kw-slider-container.kw-gradient {
+            -webkit-mask-image: $webkit-full-gradient;
+         }
       }
    }
 
