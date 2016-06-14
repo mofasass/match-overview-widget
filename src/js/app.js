@@ -155,9 +155,16 @@
             if ( events[i].betOffers != null && events[i].betOffers.length === 1 ) {
                // Check if the criterion id is one we've mapped
                if ( mappings.hasOwnProperty(events[i].betOffers[0].criterion.id) ) {
-                  // If it is, add it to the return object
+                  // Sort betoffer outcomes
                   this.sortOutcomes(events[i].betOffers[0].outcomes);
-                  ret[mappings[events[i].betOffers[0].criterion.id]].push(events[i]);
+                  // If the return array is empty, add it
+                  if ( ret[mappings[events[i].betOffers[0].criterion.id]].length === 0 ) {
+                     ret[mappings[events[i].betOffers[0].criterion.id]].push(events[i]);
+                  }
+                  // if a live event, replace/add to the return array
+                  if ( events[i].betOffers[0].live === true ) {
+                     ret[mappings[events[i].betOffers[0].criterion.id]] = [events[i]];
+                  }
                }
             }
          }
