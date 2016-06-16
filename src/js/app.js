@@ -9,7 +9,8 @@
             tournamentWinner: 1001221607
          },
          tournamentId: 1,
-         cmsUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/'
+         cmsUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
+         widgetTrackingName: 'gm-euro-2016-overview'
       },
 
       constructor () {
@@ -18,6 +19,8 @@
       },
 
       init () {
+         CoreLibrary.setWidgetTrackingName(this.scope.args.widgetTrackingName);
+
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
          var setMinimizedMode = true,
