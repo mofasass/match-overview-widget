@@ -23,9 +23,11 @@ $bottom-height: 120px;
       }
 
       @include device($mobile) {
-         margin-bottom: 26px;
-         -webkit-mask-image: none;
-         mask: none;
+         .ismobile & {
+            //margin-bottom: 26px;
+            -webkit-mask-image: none;
+            mask: none;
+         }
       }
    }
 
@@ -60,7 +62,9 @@ $bottom-height: 120px;
       }
 
       @include device(sm, max) {
-         display: none;
+         .ismobile & {
+            display: none;
+         }
       }
    }
 
@@ -82,8 +86,10 @@ $bottom-height: 120px;
          -webkit-mask-image: $webkit-right-gradient;
 
          @include device($mobile) {
-            -webkit-mask-image: none;
-            mask-image: none;
+            .ismobile & {
+               -webkit-mask-image: none;
+               mask-image: none;
+            }
          }
       }
    }
@@ -98,8 +104,10 @@ $bottom-height: 120px;
          -webkit-mask-image: $webkit-left-gradient;
 
          @include device($mobile) {
-            -webkit-mask-image: none;
-            mask-image: none;
+            .ismobile & {
+               -webkit-mask-image: none;
+               mask-image: none;
+            }
          }
       }
    }
@@ -232,8 +240,10 @@ $bottom-height: 120px;
       @include box-pack(flex-start);
 
       @include device($mobile) {
-         height: 24px;
-         width: 100%;
+         .ismobile & {
+            height: 24px;
+            width: 100%;
+         }
       }
    }
 
@@ -250,14 +260,16 @@ $bottom-height: 120px;
    @include device($mobile) {
       padding: 0;
 
-      .kw-slider-scroller {
-         @include transform(translate3d(0, 0, 0) !important);
-         overflow-x: scroll;
-         overflow-y: hidden;
+      .ismobile & {
+         .kw-slider-scroller {
+            @include transform(translate3d(0, 0, 0) !important);
+            overflow-x: scroll;
+            overflow-y: hidden;
 
-         // adding the class later because Safari
-         &.kw-elastic-scroll {
-            -webkit-overflow-scrolling: touch;
+            // adding the class later because Safari
+            &.kw-elastic-scroll {
+               -webkit-overflow-scrolling: touch;
+            }
          }
       }
 

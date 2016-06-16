@@ -20,38 +20,40 @@ $top-height: 236px;
       }
 
       @include device ($mobile) {
-         height: $top-height - 18;
-         @include flexbox();
-         @include box-align(center);
-         @include box-orient(row);
-         @include flex-wrap(wrap);
-         @include flex-flow(column wrap);
-
-         > .mobile-page {
+         .ismobile & {
+            height: $top-height - 18;
             @include flexbox();
             @include box-align(center);
-            @include flex(0 0 100%);
-            width: 100%;
+            @include box-orient(row);
+            @include flex-wrap(wrap);
+            @include flex-flow(column wrap);
 
-            > div {
-               max-width: 100%;
-            }
-
-            .kw-section-header {
-               width: auto;
-
-               > h4 {
-                  @include box-pack(center);
-               }
-            }
-
-            .kw-players {
+            > .mobile-page {
+               @include flexbox();
+               @include box-align(center);
+               @include flex(0 0 100%);
                width: 100%;
-            }
 
-            &:nth-child(1) { @include order(1); }
-            &:nth-child(2) { width: 100%; @include order(0); }
-            &:nth-child(3) { @include order(2); }
+               > div {
+                  max-width: 100%;
+               }
+
+               .kw-section-header {
+                  width: auto;
+
+                  > h4 {
+                     @include box-pack(center);
+                  }
+               }
+
+               .kw-players {
+                  width: 100%;
+               }
+
+               &:nth-child(1) { @include order(1); }
+               &:nth-child(2) { width: 100%; @include order(0); }
+               &:nth-child(3) { @include order(2); }
+            }
          }
       }
    }
@@ -69,20 +71,24 @@ $top-height: 236px;
       text-decoration: underline;
 
       @include device($mobile) {
-         margin-bottom: 0;
-         margin-top: 8px;
+         .ismobile & {
+            margin-bottom: 0;
+            margin-top: 8px;
+         }
       }
    }
 
    @include device($mobile) {
-      overflow: hidden;
+      .ismobile & {
+         overflow: hidden;
 
-      .kw-section-header {
-         margin-top: 17px;
-      }
+         .kw-section-header {
+            margin-top: 17px;
+         }
 
-      * {
-         font-size: 12px;
+         * {
+            font-size: 12px;
+         }
       }
    }
 }
@@ -91,8 +97,10 @@ $top-height: 236px;
    display: none;
 
    @include device($mobile) {
-      @include flexbox();
-      margin-bottom: 2px;
+      .ismobile & {
+         @include flexbox();
+         margin-bottom: 2px;
+      }
    }
 
    div {

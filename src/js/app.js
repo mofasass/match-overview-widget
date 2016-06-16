@@ -31,6 +31,7 @@
          // Get the upcoming events
          var eventsPromise = new Promise(( resolve, reject ) => {
             CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/matches/')
+            // CoreLibrary.getData('all_matches.json')
                .then(( response ) => {
                   if ( response && response.events && response.events.length ) {
                      resolve(response);
@@ -44,6 +45,7 @@
          // Get the betoffers
          var betofferPromise = new Promise(( resolve, reject ) => {
             CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/competitions/')
+            // CoreLibrary.getData('all_competitions.json')
                .then(( response ) => {
                   if ( response && response.events && response.events.length ) {
                      resolve(response);
@@ -260,7 +262,13 @@
             });
          } else {
             return new Promise(( resolve, reject ) => {
-               this.scope.offline_interval = stateOverride || false;
+               if ( stateOverride ) {
+                  interval = stateOverride;
+               }
+               if ( this.scope.args.intervalUrl === false ) {
+                  interval = false;
+               }
+               this.scope.offline_interval = interval;
                resolve();
             });
          }
@@ -303,7 +311,8 @@
        * @returns {boolean}
        */
       is_mobile () {
-         return this.mainElement.offsetWidth <= 768;
+         var testBrowser = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+         return this.mainElement.offsetWidth <= 768 && ('ontouchstart' in window) && testBrowser;
       }
 
    });
