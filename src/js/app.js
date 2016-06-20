@@ -161,7 +161,6 @@
             .then(( response ) => {
                if ( response && response.eventId ) {
                   this['liveUpcoming'].setLiveData(response);
-
                   if ( !response.open ) {
                      this.stopLivePolling(eventId);
                      this.liveUpcoming.scope.onResize();
@@ -201,7 +200,7 @@
        * @param eventId
        */
       startLivePolling ( eventId ) {
-         this.pollingInterval = this.scope.args.pollingInterval || 30000; //30s
+         this.pollingInterval = this.scope.args.pollingInterval || 30000; // 30s
          this.livePolling[eventId] = setInterval(() => {
             this.getLiveEventData(eventId);
          }, this.pollingInterval);
