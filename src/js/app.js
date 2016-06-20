@@ -48,22 +48,6 @@
             });
          };
 
-         // Get the betoffers
-         this.betofferPromise = () => {
-            return new Promise(( resolve, reject ) => {
-               CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/competitions/')
-               // CoreLibrary.getData('all_competitions.json')
-                  .then(( response ) => {
-                     if ( response && response.events && response.events.length ) {
-                        resolve(response);
-                     } else {
-                        this.handleError('betofferPromise');
-                     }
-                  })
-                  .catch(this.handleError);
-            });
-         };
-
          // get cms data
          this.cmsDataPromise = new Promise(( resolve, reject ) => {
             CoreLibrary.getData(this.scope.args.cmsUrl + this.scope.args.tournamentId + '/overview/overview.json?' +
@@ -79,7 +63,7 @@
          });
 
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([this.eventsPromise(), this.betofferPromise(), this.cmsDataPromise])
+         Promise.all([this.eventsPromise(), this.cmsDataPromise])
             .then(( promiseData ) => {
                var resizeTimeout = false;
                this.livePollingCount = 0;
@@ -121,7 +105,7 @@
          });
 
          if ( !this.liveUpcoming ) {
-            this.liveUpcoming = new LiveUpcoming('section#live-upcoming', upcoming_events, promiseData[2], this.scope);
+            this.liveUpcoming = new LiveUpcoming('section#live-upcoming', upcoming_events, promiseData[1], this.scope);
          } else {
             this.liveUpcoming.setData(upcoming_events);
          }
