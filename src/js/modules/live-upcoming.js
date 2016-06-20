@@ -8,23 +8,13 @@ var LiveUpcoming = (() => {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
-         // var liveEvents = liveEventsData.events.filter(function ( event ) {
-         //    if ( event.event.type === 'ET_MATCH' ) {
-         //       return event.event.state !== 'NOT_STARTED';
-         //    } else {
-         //       return false;
-         //    }
-         // });
 
-         var upcoming_events = eventsData.events.filter(function ( event ) {
-            return event.event.type === 'ET_MATCH';
-         });
-         // var upcoming_events = liveEvents.concat(preliveEvents);
          this.parentScope = parentScope;
          this.scope.teamData = cmsData;
-         this.scope.events = this.parseUpcomingEvents(upcoming_events);
          this.scope.offline_interval = parentScope.offline_interval;
          this.scope.navigateToEvent = this.navigateToEvent.bind(this);
+
+         this.setData(eventsData);
 
          setTimeout(() => {
             this.scope.loaded = true;
@@ -66,13 +56,7 @@ var LiveUpcoming = (() => {
                   time = pad(eventDate.getHours()) + ':' + pad(eventDate.getMinutes());
 
                if ( events[i].liveData && events[i].liveData.matchClock ) {
-                  // var minute = pad(events[i].liveData.matchClock.minute);
-                  // var second = pad(events[i].liveData.matchClock.second);
-                  // time = minute + ':' + second;
                   time = events[i].liveData.matchClock.period;
-                  // if ( events[i].liveData.minute === 45 && events[i].liveData.second === 0 && events[i].liveData.running === false && events[i].liveData.period === "2nd half" ) {
-                  //    time = 'Half Time';
-                  // }
                }
 
                events[i].customStartTime = time;
@@ -93,6 +77,31 @@ var LiveUpcoming = (() => {
          }
 
          return matchesObj;
+      },
+
+      setData ( events ) {
+         this.scope.events = null;
+         this.scope.events = this.parseUpcomingEvents(events);
+      },
+
+      setLiveData ( liveData ) {
+         this.scope.events.forEach(( event, index ) => {
+            if ( liveData && event.event && event.event.id === liveData.eventId ) {
+               if ( liveData.open === true ) {
+                  var time;
+                  event.liveData = null;
+                  event.liveData = liveData;
+                  if ( event.liveData && event.liveData.matchClock ) {
+                     time = event.liveData.matchClock.period;
+                  }
+                  event.customStartTime = time;
+               } else {
+                  event.betOffers = null;
+                  event = null;
+                  this.scope.events.splice(index, 1);
+               }
+            }
+         });
       },
 
       navigateToEvent ( e, data ) {

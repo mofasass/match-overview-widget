@@ -8,16 +8,29 @@ var GoldenBoot = (() => {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
-         this.scope.event = event.event;
-         this.scope.participantString = CoreLibrary.translationModule
-            .getTranslation('Show all {0} participants')
-            .replace(/\{0}/, event.betOffers[0].outcomes.length);
-         this.scope.outcomes = event.betOffers[0].outcomes.slice(0, 3);
          this.scope.playerData = cmsData.players;
          this.scope.teamData = cmsData.teams;
          this.scope.navigateToDetail = this.navigateToDetail.bind(this);
 
-         // Assign an index number for each outcome
+         this.setData(event);
+      },
+
+      init () {
+      },
+
+      resetScope () {
+         this.scope.outcomes = null;
+         this.scope.event = null;
+      },
+
+      setData ( event ) {
+         this.resetScope();
+         this.scope.event = event.event;
+         this.scope.outcomes = event.betOffers[0].outcomes.slice(0, 3);
+         this.scope.participantString = CoreLibrary.translationModule
+            .getTranslation('Show all {0} participants')
+            .replace(/\{0}/, event.betOffers[0].outcomes.length);
+
          var i = 0, arrLength = this.scope.outcomes.length;
          for ( ; i < arrLength; ++i ) {
             var item = this.scope.outcomes[i];
@@ -28,13 +41,10 @@ var GoldenBoot = (() => {
                   item.cmsData.playerData = this.scope.playerData[item.participantId];
                   item.cmsData.teamData = this.scope.teamData[item.cmsData.playerData.teamId];
                }
-               item.index = this.scope.outcomes.indexOf(item);
             }
          }
       },
 
-      init () {
-      },
       navigateToDetail () {
          CoreLibrary.widgetModule.navigateToEvent(this.scope.event.id);
       }

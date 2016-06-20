@@ -8,6 +8,8 @@
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
          },
+         pollingInterval: 10000,
+         pollingCount: 4,
          tournamentId: 1,
          cmsUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
          widgetTrackingName: 'gm-euro-2016-overview'
@@ -23,8 +25,7 @@
 
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
-         var setMinimizedMode = true,
-            intervalPromise = this.handleOnlineIntervals(setMinimizedMode); // send true if needed to force minimized mode
+         this.scope.offline_interval = true;
 
          this.handleCustomCss();
 
@@ -32,85 +33,58 @@
          this.scope.is_mobile = this.is_mobile();
 
          // Get the upcoming events
-         var eventsPromise = new Promise(( resolve, reject ) => {
-            CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/matches/')
-            // CoreLibrary.getData('all_matches.json')
-               .then(( response ) => {
-                  if ( response && response.events && response.events.length ) {
-                     resolve(response);
-                  } else {
-                     this.handleError('eventsPromise');
-                  }
-               })
-               .catch(this.handleError);
-         });
+         this.eventsPromise = () => {
+            return new Promise(( resolve, reject ) => {
+               CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/matches/')
+               // CoreLibrary.getData('all_matches.json')
+                  .then(( response ) => {
+                     if ( response && response.events && response.events.length ) {
+                        resolve(response);
+                     } else {
+                        this.handleError('eventsPromise');
+                     }
+                  })
+                  .catch(this.handleError);
+            });
+         };
 
          // Get the betoffers
-         var betofferPromise = new Promise(( resolve, reject ) => {
-            CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/competitions/')
-            // CoreLibrary.getData('all_competitions.json')
-               .then(( response ) => {
-                  if ( response && response.events && response.events.length ) {
-                     resolve(response);
-                  } else {
-                     this.handleError('betofferPromise');
-                  }
-               })
-               .catch(this.handleError);
-         });
+         this.betofferPromise = () => {
+            return new Promise(( resolve, reject ) => {
+               CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/competitions/')
+               // CoreLibrary.getData('all_competitions.json')
+                  .then(( response ) => {
+                     if ( response && response.events && response.events.length ) {
+                        resolve(response);
+                     } else {
+                        this.handleError('betofferPromise');
+                     }
+                  })
+                  .catch(this.handleError);
+            });
+         };
 
          // get cms data
-         var cmsDataPromise = new Promise(( resolve, reject ) => {
+         this.cmsDataPromise = new Promise(( resolve, reject ) => {
             CoreLibrary.getData(this.scope.args.cmsUrl + this.scope.args.tournamentId + '/overview/overview.json?' +
                'version=' + (window.CMS_VERSIONS ? window.CMS_VERSIONS.overview : ''))
                .then(( response ) => {
                   if ( response && response.matches && response.players && response.teams ) {
                      resolve(response);
                   } else {
-                     this.handleError('betofferPromise');
+                     this.handleError('cmsDataPromise');
                   }
                })
                .catch(this.handleError);
          });
 
-         // get live data or local mock live data
-         // var liveEventsPromise = new Promise(( resolve, reject ) => {
-         //    if ( CoreLibrary.development === true ) {
-         //       CoreLibrary.getData('fakeLivedata.json')
-         //          .then(( response ) => {
-         //             resolve(response);
-         //          })
-         //          .catch(this.handleError);
-         //    } else {
-         //       CoreLibrary.offeringModule.getLiveEventsByFilter('football/euro_2016/')
-         //          .then(( response ) => {
-         //             resolve(response);
-         //          })
-         //          .catch(this.handleError);
-         //    }
-         // });
-
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([eventsPromise, betofferPromise, cmsDataPromise, intervalPromise])
+         Promise.all([this.eventsPromise(), this.betofferPromise(), this.cmsDataPromise])
             .then(( promiseData ) => {
-               this.liveUpcoming = new LiveUpcoming('section#live-upcoming', promiseData[0], promiseData[2], this.scope);
                var resizeTimeout = false;
+               this.livePollingCount = 0;
 
-               var filteredEvents = this.filterOutBetOffers(promiseData[1].events);
-
-               if ( filteredEvents.goldenBoot[0] != null ) {
-                  var goldenBoot = new GoldenBoot('div#golden-boot', filteredEvents.goldenBoot[0], promiseData[2]);
-               } else {
-                  console.log('no goldenboot');
-                  this.scope.offline_interval = true;
-               }
-
-               if ( filteredEvents.tournamentWinner[0] != null ) {
-                  var tournamentWinner = new TournamentWinner('div#tournament-winner', filteredEvents.tournamentWinner[0], promiseData[2].teams);
-               } else {
-                  console.log('no tournamentWinner');
-                  this.scope.offline_interval = true;
-               }
+               this.handleEvents(promiseData);
 
                window.addEventListener('resize', () => {
                   clearTimeout(resizeTimeout);
@@ -121,7 +95,6 @@
                   }, 300);
 
                });
-               console.log('offline interval', this.scope.offline_interval);
 
                if ( /Edge/i.test(navigator.userAgent) ) {
                   var body = document.getElementsByTagName('body')[0];
@@ -134,6 +107,113 @@
                   this.scope.loaded = true;
                }, 200);
             });
+      },
+
+      /**
+       * Sets data to submodule and starts polling if there are live betoffers
+       * @param promiseData
+       */
+      handleEvents ( promiseData ) {
+         this.livePollingCount++;
+
+         var upcoming_events = promiseData[0].events.filter(( event ) => {
+            return event.event.type === 'ET_MATCH';
+         });
+
+         if ( !this.liveUpcoming ) {
+            this.liveUpcoming = new LiveUpcoming('section#live-upcoming', upcoming_events, promiseData[2], this.scope);
+         } else {
+            this.liveUpcoming.setData(upcoming_events);
+         }
+
+         if ( this.livePolling != null ) {
+            for ( var i in this.livePolling ) {
+               if ( this.livePolling.hasOwnProperty(i) ) {
+                  this.stopLivePolling(i);
+               }
+            }
+         } else {
+            this.livePolling = {};
+         }
+
+         upcoming_events.forEach(( event ) => {
+            if ( this.livePollingCount < this.scope.args.pollingCount &&
+               event.betOffers && event.betOffers.length && event.betOffers[0].live ) {
+               this.startLivePolling(event.event.id);
+            }
+         });
+      },
+
+      /**
+       * Makes a request to fetch liveData
+       * It will stop the interval if there is no live event
+       * Triggers a filter refresh on request fail
+       * @param eventId
+       */
+      getLiveEventData ( eventId ) {
+         var getFn;
+         if ( CoreLibrary.development === true ) {
+            getFn = CoreLibrary.getData('live_' + eventId + '.json');
+         } else {
+            getFn = CoreLibrary.offeringModule.getLiveEventData(eventId);
+         }
+         getFn
+            .then(( response ) => {
+               if ( response && response.eventId ) {
+                  this['liveUpcoming'].setLiveData(response);
+
+                  if ( !response.open ) {
+                     this.stopLivePolling(eventId);
+                     this.liveUpcoming.scope.onResize();
+                  }
+               } else {
+                  this.stopLivePolling(eventId);
+                  this.liveUpcoming.scope.onResize();
+               }
+               this.refreshEvents();
+            })
+            .catch(( error ) => {
+               this.stopLivePolling(eventId);
+               this.refreshEvents();
+            });
+      },
+
+      /**
+       * Makes a request to updated filter data
+       * if there are no live events polling
+       */
+      refreshEvents () {
+         if ( Object.keys(this.livePolling).length === 0 ) {
+            Promise.all([this.eventsPromise()])
+               .then(( promiseData ) => {
+                  if ( promiseData[0].events && promiseData[0].events.length ) {
+                     this.handleEvents(promiseData);
+                     this.liveUpcoming.scope.onResize();
+                  } else {
+                     this.handleError('eventsPromise');
+                  }
+               }).catch(this.handleError);
+         }
+      },
+
+      /**
+       * Start an polling interval assigned to object by id
+       * @param eventId
+       */
+      startLivePolling ( eventId ) {
+         this.pollingInterval = this.scope.args.pollingInterval || 30000; //30s
+         this.livePolling[eventId] = setInterval(() => {
+            this.getLiveEventData(eventId);
+         }, this.pollingInterval);
+      },
+
+      /**
+       * Clear interval and delete object containing it
+       * @param eventId
+       */
+      stopLivePolling ( eventId ) {
+         clearInterval(this.livePolling[eventId]);
+         delete this.livePolling[eventId];
       },
 
       /**
@@ -192,19 +272,9 @@
        * Adjusts widget height and enable/disable swipe component if mobile
        */
       adjustHeight ( resizeEvent ) {
-         var contentHeight = this.scope.offline_interval === false ? 395 : 148; // required value
+         var contentHeight = 148; // required value
 
-         if ( this.scope.is_mobile ) {
-            contentHeight = this.scope.offline_interval === false ? 380 : 148;
-            if ( !this.scope.swiper ) {
-               this.scope.swiper = new CoreLibrary.SwipeComponent(document.getElementById('kw-slider-top'), 'Pan', 30);
-            } else {
-               this.scope.swiper.attach();
-            }
-         } else {
-            if ( this.scope.swiper ) {
-               this.scope.swiper.release();
-            }
+         if ( !this.scope.is_mobile ) {
             if ( resizeEvent ) {
                this.liveUpcoming.scope.onResize();
             }
@@ -215,67 +285,67 @@
       /**
        * Compares start and end dates passed to determine widget visibility
        */
-      handleOnlineIntervals ( stateOverride ) {
-         this.scope.offline_interval = true;
-
-         var interval = true,
-            getInterval = ( intervalType ) => {
-               var returnDates = {},
-                  date_now = new Date();
-
-               if ( typeof intervalType === 'object' && Object.keys(intervalType).length ) {
-                  var i = 0, arrLength = Object.keys(intervalType).length;
-                  for ( ; i < arrLength; ++i ) {
-                     var key = Object.keys(intervalType)[i],
-                        value = intervalType[key];
-
-                     var end = new Date(value),
-                        start = new Date(key);
-
-                     if ( date_now > start && date_now < end ) {
-                        returnDates = {
-                           start: start,
-                           end: end
-                        };
-                     }
-                  }
-               }
-               console.log(returnDates);
-               return returnDates.hasOwnProperty('start');
-            };
-
-         if ( this.scope.args.intervalUrl !== false && stateOverride !== true ) {
-            return new Promise(( resolve, reject ) => {
-               CoreLibrary.getData(this.scope.args.intervalUrl ? this.scope.args.intervalUrl : 'intervals.json')
-                  .then(( response ) => {
-                     if ( response ) {
-                        if ( response.hasOwnProperty('offline_interval') ) {
-                           interval = getInterval(response.offline_interval);
-                        } else if ( response.hasOwnProperty('online_interval') ) {
-                           interval = !getInterval(response.online_interval);
-                        }
-                        console.log('offline check', interval);
-                        this.scope.offline_interval = interval;
-                     }
-                     resolve();
-                  })
-                  .catch(() => {
-                     resolve();
-                  });
-            });
-         } else {
-            return new Promise(( resolve, reject ) => {
-               if ( stateOverride ) {
-                  interval = stateOverride;
-               }
-               if ( this.scope.args.intervalUrl === false ) {
-                  interval = false;
-               }
-               this.scope.offline_interval = interval;
-               resolve();
-            });
-         }
-      },
+      // handleOnlineIntervals ( stateOverride ) {
+      //    this.scope.offline_interval = true;
+      //
+      //    var interval = true,
+      //       getInterval = ( intervalType ) => {
+      //          var returnDates = {},
+      //             date_now = new Date();
+      //
+      //          if ( typeof intervalType === 'object' && Object.keys(intervalType).length ) {
+      //             var i = 0, arrLength = Object.keys(intervalType).length;
+      //             for ( ; i < arrLength; ++i ) {
+      //                var key = Object.keys(intervalType)[i],
+      //                   value = intervalType[key];
+      //
+      //                var end = new Date(value),
+      //                   start = new Date(key);
+      //
+      //                if ( date_now > start && date_now < end ) {
+      //                   returnDates = {
+      //                      start: start,
+      //                      end: end
+      //                   };
+      //                }
+      //             }
+      //          }
+      //          console.log(returnDates);
+      //          return returnDates.hasOwnProperty('start');
+      //       };
+      //
+      //    if ( this.scope.args.intervalUrl !== false && stateOverride !== true ) {
+      //       return new Promise(( resolve, reject ) => {
+      //          CoreLibrary.getData(this.scope.args.intervalUrl ? this.scope.args.intervalUrl : 'intervals.json')
+      //             .then(( response ) => {
+      //                if ( response ) {
+      //                   if ( response.hasOwnProperty('offline_interval') ) {
+      //                      interval = getInterval(response.offline_interval);
+      //                   } else if ( response.hasOwnProperty('online_interval') ) {
+      //                      interval = !getInterval(response.online_interval);
+      //                   }
+      //                   console.log('offline check', interval);
+      //                   this.scope.offline_interval = interval;
+      //                }
+      //                resolve();
+      //             })
+      //             .catch(() => {
+      //                resolve();
+      //             });
+      //       });
+      //    } else {
+      //       return new Promise(( resolve, reject ) => {
+      //          if ( stateOverride ) {
+      //             interval = stateOverride;
+      //          }
+      //          if ( this.scope.args.intervalUrl === false ) {
+      //             interval = false;
+      //          }
+      //          this.scope.offline_interval = interval;
+      //          resolve();
+      //       });
+      //    }
+      // },
 
       /**
        * Makes Ajax request to retrieve customer css
