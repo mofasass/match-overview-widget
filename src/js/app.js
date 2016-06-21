@@ -8,7 +8,7 @@
             goldenBoot: 1001868386,
             tournamentWinner: 1001221607
          },
-         pollingInterval: 10000,
+         pollingInterval: 30000,
          pollingCount: 4,
          tournamentId: 1,
          cmsUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
@@ -101,7 +101,13 @@
          this.livePollingCount++;
 
          var upcoming_events = promiseData[0].events.filter(( event ) => {
-            return event.event.type === 'ET_MATCH';
+            var ret = event.event.type === 'ET_MATCH',
+               timeNow = new Date();
+            if ( event.betOffers.length === 0 && event.event.start < timeNow ) {
+               console.log('live odd');
+               ret = false;
+            }
+            return ret;
          });
 
          if ( !this.liveUpcoming ) {
