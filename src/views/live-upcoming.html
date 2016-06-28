@@ -20,8 +20,8 @@
          <div class="kw-section-header l-pt-6">
             <h4 class="l-flexbox l-align-center l-pack-start l-pl-16">
                <span rv-hide="event.liveData" style="text-transform: capitalize" class="text-truncate">{event.customStartDate}&nbsp</span>
-               <i class="clock-black-expand l-mr-6" rv-show="event.liveData"></i>
-               <span class="text-truncate">{event.customStartTime}</span>
+               <!--<i class="clock-black-expand l-mr-6" rv-show="event.liveData"></i>-->
+               <span class="text-truncate">{event.customStartTime}&nbsp</span>
             </h4>
          </div>
 
@@ -63,7 +63,7 @@
          </div>
 
          <!-- Live outcomes -->
-         <div rv-if="event.betOffers" rv-show="event.liveData" class="kw-event-outcomes kw-live-now l-flexbox l-pack-justify l-pl-16 l-pr-16">
+         <div rv-if="event.event.openForLiveBetting" rv-show="event.liveData" class="kw-event-outcomes kw-live-now l-flexbox l-pack-justify l-pl-16 l-pr-16">
             <button class="KambiWidget-outcome kw-link l-flexbox l-pack-center l-align-center l-flex-1" rv-on-click="navigateToEvent">
                <div class="KambiWidget-outcome__flexwrap">
                   <div class="KambiWidget-outcome__label-wrapper">

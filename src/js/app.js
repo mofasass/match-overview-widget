@@ -101,12 +101,12 @@
          this.livePollingCount++;
 
          var upcoming_events = promiseData[0].events.filter(( event ) => {
-            var ret = event.event.type === 'ET_MATCH',
-               timeNow = new Date();
-            if ( event.betOffers.length === 0 && event.event.start < timeNow ) {
-               console.log('live odd');
-               ret = false;
-            }
+            var ret = event.event.type === 'ET_MATCH';
+            // timeNow = new Date();
+            // if ( event.betOffers.length === 0 && event.event.start < timeNow ) {
+            //    console.log('live odd');
+            //    ret = false;
+            // }
             return ret;
          });
 
@@ -127,8 +127,7 @@
          }
 
          upcoming_events.forEach(( event ) => {
-            if ( this.livePollingCount < this.scope.args.pollingCount &&
-               event.betOffers && event.betOffers.length && event.betOffers[0].live ) {
+            if ( this.livePollingCount < this.scope.args.pollingCount && event.event.openForLiveBetting === true ) {
                this.startLivePolling(event.event.id);
             }
          });
@@ -172,6 +171,7 @@
        * if there are no live events polling
        */
       refreshEvents () {
+         console.debug('Refresh events');
          if ( Object.keys(this.livePolling).length === 0 ) {
             Promise.all([this.eventsPromise()])
                .then(( promiseData ) => {
@@ -190,6 +190,7 @@
        * @param eventId
        */
       startLivePolling ( eventId ) {
+         console.debug('start live polling', eventId);
          this.pollingInterval = this.scope.args.pollingInterval || 30000; // 30s
          this.livePolling[eventId] = setInterval(() => {
             this.getLiveEventData(eventId);
@@ -201,6 +202,7 @@
        * @param eventId
        */
       stopLivePolling ( eventId ) {
+         console.debug('stop live polling ', eventId);
          clearInterval(this.livePolling[eventId]);
          delete this.livePolling[eventId];
       },

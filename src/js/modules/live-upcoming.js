@@ -56,7 +56,8 @@ var LiveUpcoming = (() => {
                   time = pad(eventDate.getHours()) + ':' + pad(eventDate.getMinutes());
 
                if ( events[i].liveData && events[i].liveData.matchClock ) {
-                  time = events[i].liveData.matchClock.period;
+                  // time = events[i].liveData.matchClock.period;
+                  time = '';
                }
 
                events[i].customStartTime = time;
@@ -94,7 +95,8 @@ var LiveUpcoming = (() => {
                   event.liveData = null;
                   event.liveData = liveData;
                   if ( event.liveData && event.liveData.matchClock ) {
-                     time = event.liveData.matchClock.period;
+                     // time = event.liveData.matchClock.period;
+                     time = '';
                   }
                   event.customStartTime = time;
                } else {
