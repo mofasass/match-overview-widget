@@ -12,6 +12,21 @@
          this.getScroller();
       },
 
+      scrollPastLogo () {
+         var start = null;
+         var step = function ( timestamp ) {
+            if ( !start ) {
+               start = timestamp;
+            }
+            var progress = timestamp - start;
+            this.scroller.scrollLeft = Math.min(progress / 2 , 180);
+            if ( progress < 180 ) {
+               window.requestAnimationFrame(step);
+            }
+         }.bind(this);
+         window.requestAnimationFrame(step);
+      },
+
       getScroller () {
          this.scrollerContainer = document.getElementById('live-upcoming');
          this.scroller = document.getElementById('kw-slider-bottom');

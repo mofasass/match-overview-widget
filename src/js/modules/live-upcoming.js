@@ -24,6 +24,12 @@ var LiveUpcoming = (() => {
             live: 'Live',
             rightNow: 'Right Now'
          };
+
+         if ( parentScope.is_mobile ) {
+            setTimeout(() => {
+               this.scope.scroller.scrollPastLogo();
+            }, 3000);
+         }
       },
 
       init () {
