@@ -19,7 +19,7 @@
                start = timestamp;
             }
             var progress = timestamp - start;
-            this.scroller.scrollLeft = Math.min(progress / 2 , 180);
+            this.scroller.scrollLeft = Math.min(progress / 2 , 90);
             if ( progress < 180 ) {
                window.requestAnimationFrame(step);
             }
