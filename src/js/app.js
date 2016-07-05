@@ -111,7 +111,7 @@
          });
 
          if ( !this.liveUpcoming ) {
-            this.liveUpcoming = new LiveUpcoming('section#live-upcoming', upcoming_events, promiseData[1], this.scope);
+            this.liveUpcoming = new window.LiveUpcoming('section#live-upcoming', upcoming_events, promiseData[1], this.scope);
          } else {
             this.liveUpcoming.setData(upcoming_events);
          }

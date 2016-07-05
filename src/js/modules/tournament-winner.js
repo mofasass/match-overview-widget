@@ -2,7 +2,7 @@ var TournamentWinner = (() => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
-      htmlTemplateFile: './views/tournament-winner.html',
+      htmlTemplate: 'tournament-winner-view',
 
       constructor ( htmlElement, event, teamData ) {
          CoreLibrary.Component.apply(this, [{

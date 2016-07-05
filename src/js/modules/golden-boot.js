@@ -2,7 +2,7 @@ var GoldenBoot = (() => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
-      htmlTemplateFile: './views/golden-boot.html',
+      htmlTemplate: 'golden-boot-view',
 
       constructor ( htmlElement, event, cmsData ) {
          CoreLibrary.Component.apply(this, [{

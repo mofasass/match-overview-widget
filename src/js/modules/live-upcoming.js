@@ -2,7 +2,7 @@ var LiveUpcoming = (() => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
-      htmlTemplateFile: './views/live-upcoming.html',
+      htmlTemplate: 'live-upcoming-view',
 
       constructor ( htmlElement, eventsData, cmsData, parentScope ) {
          CoreLibrary.Component.apply(this, [{
