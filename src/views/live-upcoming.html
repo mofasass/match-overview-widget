@@ -1,26 +1,25 @@
 <!--Scroll left-->
-<div class="kw-scroll-left l-flexbox l-align-center hidden-xss hidden-xs hidden-ss" rv-on-click="doscroll" data-dir="left">
+<div class="kw-scroll-left l-flexbox l-align-center" rv-on-click="doscroll" data-dir="left">
    <i class="icon-angle-left"></i>
 </div>
 
 <!-- Upcoming events timeline -->
-<div class="kw-slider-container kw-gradient">
+<div class="kw-scroll-container kw-gradient">
 
-   <div id="kw-slider-bottom" class="kw-slider-scroller l-flexbox l-horizontal" rv-class-kw-elastic-scroll="loaded">
+   <div id="kw-scroll-component" class="kw-scroll-inner l-flexbox l-horizontal" rv-class-kw-elastic-scroll="loaded">
 
       <!--Tournament logo on offline mode-->
-      <div class="kw-match-logo l-flexbox l-pack-center l-align-center">
+      <div id="kw-scroller-logo" class="kw-match-logo kw-scroller-logo l-flexbox l-pack-center l-align-center">
          <div class="kw-tournament-logo kw-custom-logo kw-custom-logo-large-type"></div>
       </div>
 
       <!--Match-->
-      <div class="kw-match" rv-each-event="events">
+      <div class="kw-item" rv-each-event="events">
 
          <!--Match header-->
          <div class="kw-section-header l-pt-6">
             <h4 class="l-flexbox l-align-center l-pack-start l-pl-16">
                <span rv-hide="event.liveData" style="text-transform: capitalize" class="text-truncate">{event.customStartDate}&nbsp</span>
-               <!--<i class="clock-black-expand l-mr-6" rv-show="event.liveData"></i>-->
                <span class="text-truncate">{event.customStartTime}&nbsp</span>
             </h4>
          </div>
@@ -79,6 +78,6 @@
 </div>
 
 <!--Scroll right-->
-<div class="kw-scroll-right l-flexbox l-pack-end l-align-center hidden-xss hidden-xs hidden-ss" rv-on-click="doscroll" data-dir="right">
+<div class="kw-scroll-right l-flexbox l-pack-end l-align-center" rv-on-click="doscroll" data-dir="right">
    <i class="icon-angle-right"></i>
 </div>

@@ -6,36 +6,44 @@
       constructor ( parentScope ) {
          this.parentScope = parentScope;
          this.scrollStart = 0;
-         this.offline_interval = this.parentScope.offline_interval;
+         this.scrollerLogoWidth = parentScope.logoWidth || 90;
          this.onResize = this.onResize.bind(this);
          this.onScroll = this.doScroll;
          this.getScroller();
       },
 
       scrollPastLogo () {
-         var start = null;
-         var step = function ( timestamp ) {
-            if ( !start ) {
-               start = timestamp;
-            }
-            var progress = timestamp - start;
-            this.scroller.scrollLeft = Math.min(progress / 2 , 90);
-            if ( progress < 180 ) {
-               window.requestAnimationFrame(step);
-            }
-         }.bind(this);
+         var start = null,
+            step = ( timestamp ) => {
+               if ( !start ) {
+                  start = timestamp;
+               }
+               var progress = timestamp - start;
+               this.scroller.scrollLeft = Math.min(progress / 2, 90);
+               if ( progress < 180 ) {
+                  window.requestAnimationFrame(step);
+               }
+            };
          window.requestAnimationFrame(step);
       },
 
       getScroller () {
          this.scrollerContainer = document.getElementById('live-upcoming');
-         this.scroller = document.getElementById('kw-slider-bottom');
-         this.events = this.scroller.querySelectorAll('.kw-match');
+         this.scroller = document.getElementById('kw-scroll-component');
+         this.items = this.scroller.querySelectorAll('.kw-item');
          this.itemWidth = 350;
-         this.offline_interval = this.offline_interval ? 90 : 0;
-         this.scrollerWidth = this.itemWidth * this.events.length + this.offline_interval;
+         this.scrollerLogo = document.getElementById('kw-scroller-logo') ? this.scrollerLogoWidth : 0;
+         this.scrollerWidth = this.itemWidth * this.items.length + this.scrollerLogo;
          this.scrollerParent = this.scroller.parentElement;
          this.scrollerParentWidth = this.scrollerParent.offsetWidth;
+         this.enabled = this.scrollerWidth >= this.scrollerParentWidth;
+         this.scrollerContainer.classList.remove('kw-no-gradient');
+         if ( !this.enabled ) {
+            this.scrollerContainer.classList.add('kw-no-gradient');
+            this.scrollStart = 0;
+            this.doTranslate();
+            this.handleClass('left', true);
+         }
       },
 
       handleClass ( dir, end ) {
@@ -50,7 +58,10 @@
 
       doScroll ( elem, scope ) {
          this.scope = scope.scroller;
-         var dir = this.getAttribute('data-dir'), translate;
+         if ( !this.scope.enabled ) {
+            return false;
+         }
+         var dir = this.getAttribute('data-dir');
          this.scope.handleClass(dir);
 
          if ( dir === 'left' ) {
@@ -66,11 +77,14 @@
             this.scope.scrollStart = (this.scope.scrollerWidth - this.scope.scrollerParentWidth) * -1;
             this.scope.handleClass(dir, true);
          }
-         translate = 'translate3d(' + this.scope.scrollStart + 'px, 0, 0)';
+         this.scope.doTranslate();
+      },
 
-         this.scope.scroller.style.transform = translate;
-         this.scope.scroller.style.webkitTransform = translate;
-         this.scope.scroller.style.MozTransform = translate;
+      doTranslate () {
+         var translate = 'translate3d(' + this.scrollStart + 'px, 0, 0)';
+         this.scroller.style.transform = translate;
+         this.scroller.style.webkitTransform = translate;
+         this.scroller.style.MozTransform = translate;
       },
 
       onResize () {

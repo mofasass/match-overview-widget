@@ -6,28 +6,6 @@
 //Include own custom plugins
 @import 'plugins/responsive';
 
-@mixin device($screen-size-label, $type:'') {
-   @each $size in $screen-size-label {
-      $size: get-screen-size($size);
-      $min: nth($size, 1);
-      $max: nth($size, 2);
-
-      @if $type == 'min' {
-         @media (min-width: #{$max + 1}) {
-            @content;
-         }
-      } @else if $type == 'max' {
-         @media (max-width: #{$max}) {
-            @content;
-         }
-      } @else {
-         @media (min-width: #{$min}) and (max-width: #{$max}) {
-            @content;
-         }
-      }
-   }
-}
-
 //Included widget related styles
 @import 'widget/variables';
 @import 'widget/overrides';
@@ -37,4 +15,5 @@
 // Import module specific css
 //@import 'modules/widget-top';
 @import 'modules/widget-bottom';
+@import 'modules/scroll-component';
 
