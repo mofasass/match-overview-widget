@@ -28,7 +28,7 @@
       },
 
       getScroller () {
-         this.scrollerContainer = document.getElementById('live-upcoming');
+         this.scrollerContainer = document.getElementById('match-schedule');
          this.scroller = document.getElementById('kw-scroll-component');
          this.items = this.scroller.querySelectorAll('.kw-item');
          this.itemWidth = 350;

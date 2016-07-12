@@ -1,18 +1,15 @@
 (() => {
 
-   var EuroOverview = CoreLibrary.Component.subclass({
+   var MatchSchedule = CoreLibrary.Component.subclass({
 
       defaultArgs: {
-         filter: '',
-         criterionIds: {
-            goldenBoot: 1001868386,
-            tournamentWinner: 1001221607
-         },
+         widgetTrackingName: 'gm-schedule-widget',
+         name: 'wcq',
+         filter: 'football/world_cup_qualifying_-_europe',
+         dataUrl: '//kambi-cdn.globalmouth.com/tournamentdata/',
+         criterionId: '',
          pollingInterval: 30000,
-         pollingCount: 4,
-         tournamentId: 1,
-         cmsUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
-         widgetTrackingName: 'gm-euro-2016-overview'
+         pollingCount: 4
       },
 
       constructor () {
@@ -25,8 +22,6 @@
 
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
-         this.scope.offline_interval = true;
-
          this.handleCustomCss();
 
          this.mainElement = document.getElementById('main');
@@ -35,8 +30,7 @@
          // Get the upcoming events
          this.eventsPromise = () => {
             return new Promise(( resolve, reject ) => {
-               CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/matches/')
-               // CoreLibrary.getData('all_matches.json')
+               CoreLibrary.offeringModule.getEventsByFilter(this.scope.args.filter)
                   .then(( response ) => {
                      if ( response && response.events && response.events.length ) {
                         resolve(response);
@@ -48,22 +42,8 @@
             });
          };
 
-         // get cms data
-         this.cmsDataPromise = new Promise(( resolve, reject ) => {
-            CoreLibrary.getData(this.scope.args.cmsUrl + this.scope.args.tournamentId + '/overview/overview.json?' +
-               'version=' + (window.CMS_VERSIONS ? window.CMS_VERSIONS.overview : ''))
-               .then(( response ) => {
-                  if ( response && response.matches && response.players && response.teams ) {
-                     resolve(response);
-                  } else {
-                     this.handleError('cmsDataPromise');
-                  }
-               })
-               .catch(this.handleError);
-         });
-
          // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([this.eventsPromise(), this.cmsDataPromise])
+         Promise.all([this.eventsPromise()])
             .then(( promiseData ) => {
                var resizeTimeout = false;
                this.livePollingCount = 0;
@@ -100,20 +80,14 @@
       handleEvents ( promiseData ) {
          this.livePollingCount++;
 
-         var upcoming_events = promiseData[0].events.filter(( event ) => {
-            var ret = event.event.type === 'ET_MATCH';
-            // timeNow = new Date();
-            // if ( event.betOffers.length === 0 && event.event.start < timeNow ) {
-            //    console.log('live odd');
-            //    ret = false;
-            // }
-            return ret;
+         var events = promiseData[0].events.filter(( event ) => {
+            return event.event.type === 'ET_MATCH';
          });
 
-         if ( !this.liveUpcoming ) {
-            this.liveUpcoming = new window.LiveUpcoming('section#live-upcoming', upcoming_events, promiseData[1], this.scope);
+         if ( !this.module ) {
+            this.module = new window.MatchesSchedule('#match-schedule', events, promiseData[0], this.scope);
          } else {
-            this.liveUpcoming.setData(upcoming_events);
+            this.module.setData(events);
          }
 
          if ( this.livePolling != null ) {
@@ -126,7 +100,7 @@
             this.livePolling = {};
          }
 
-         upcoming_events.forEach(( event ) => {
+         events.forEach(( event ) => {
             if ( this.livePollingCount < this.scope.args.pollingCount && event.event.openForLiveBetting === true ) {
                this.startLivePolling(event.event.id);
             }
@@ -149,14 +123,14 @@
          getFn
             .then(( response ) => {
                if ( response && response.eventId ) {
-                  this['liveUpcoming'].setLiveData(response);
+                  this.module.setLiveData(response);
                   if ( !response.open ) {
                      this.stopLivePolling(eventId);
-                     this.liveUpcoming.scope.onResize();
+                     this.module.scope.onResize();
                   }
                } else {
                   this.stopLivePolling(eventId);
-                  this.liveUpcoming.scope.onResize();
+                  this.module.scope.onResize();
                }
                this.refreshEvents();
             })
@@ -171,13 +145,12 @@
        * if there are no live events polling
        */
       refreshEvents () {
-         console.debug('Refresh events');
          if ( Object.keys(this.livePolling).length === 0 ) {
             Promise.all([this.eventsPromise()])
                .then(( promiseData ) => {
                   if ( promiseData[0].events && promiseData[0].events.length ) {
                      this.handleEvents(promiseData);
-                     this.liveUpcoming.scope.onResize();
+                     this.module.scope.onResize();
                   } else {
                      this.handleError('eventsPromise');
                   }
@@ -190,7 +163,6 @@
        * @param eventId
        */
       startLivePolling ( eventId ) {
-         console.debug('start live polling', eventId);
          this.pollingInterval = this.scope.args.pollingInterval || 30000; // 30s
          this.livePolling[eventId] = setInterval(() => {
             this.getLiveEventData(eventId);
@@ -202,7 +174,6 @@
        * @param eventId
        */
       stopLivePolling ( eventId ) {
-         console.debug('stop live polling ', eventId);
          clearInterval(this.livePolling[eventId]);
          delete this.livePolling[eventId];
       },
@@ -213,33 +184,25 @@
        * @returns {{groups: Array, goldenBoot: Array, tournamentWinner: Array}}
        */
       filterOutBetOffers ( events ) {
-         // Map the criterion
-         var mappings = {};
-         mappings[this.scope.args.criterionIds.goldenBoot] = 'goldenBoot';
-         mappings[this.scope.args.criterionIds.tournamentWinner] = 'tournamentWinner';
-
          // The return object
-         var ret = {
-            goldenBoot: [],
-            tournamentWinner: []
-         };
+         var ret = [];
 
          // Iterate over the events array
          var i = 0, len = events.length;
          for ( ; i < len; ++i ) {
             // Check if the event has one and only one betOffer
-            if ( events[i].betOffers != null && events[i].betOffers.length === 1 ) {
+            if ( events[i].betOffers != null && events[i].betOffers ) {
                // Check if the criterion id is one we've mapped
-               if ( mappings.hasOwnProperty(events[i].betOffers[0].criterion.id) ) {
+               if ( this.scope.args.criterionIds && this.scope.args.criterionIds === events[i].betOffers[0].criterion.id ) {
                   // Sort betoffer outcomes
                   this.sortOutcomes(events[i].betOffers[0].outcomes);
                   // If the return array is empty, add it
-                  if ( ret[mappings[events[i].betOffers[0].criterion.id]].length === 0 ) {
-                     ret[mappings[events[i].betOffers[0].criterion.id]].push(events[i]);
+                  if ( ret.length === 0 ) {
+                     ret.push(events[i]);
                   }
                   // if a live event, replace/add to the return array
                   if ( events[i].betOffers[0].live === true ) {
-                     ret[mappings[events[i].betOffers[0].criterion.id]] = [events[i]];
+                     ret = [events[i]];
                   }
                }
             }
@@ -267,85 +230,20 @@
 
          if ( !this.scope.is_mobile ) {
             if ( resizeEvent ) {
-               this.liveUpcoming.scope.onResize();
+               this.module.scope.onResize();
             }
          }
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
       },
 
       /**
-       * Compares start and end dates passed to determine widget visibility
-       */
-      // handleOnlineIntervals ( stateOverride ) {
-      //    this.scope.offline_interval = true;
-      //
-      //    var interval = true,
-      //       getInterval = ( intervalType ) => {
-      //          var returnDates = {},
-      //             date_now = new Date();
-      //
-      //          if ( typeof intervalType === 'object' && Object.keys(intervalType).length ) {
-      //             var i = 0, arrLength = Object.keys(intervalType).length;
-      //             for ( ; i < arrLength; ++i ) {
-      //                var key = Object.keys(intervalType)[i],
-      //                   value = intervalType[key];
-      //
-      //                var end = new Date(value),
-      //                   start = new Date(key);
-      //
-      //                if ( date_now > start && date_now < end ) {
-      //                   returnDates = {
-      //                      start: start,
-      //                      end: end
-      //                   };
-      //                }
-      //             }
-      //          }
-      //          console.log(returnDates);
-      //          return returnDates.hasOwnProperty('start');
-      //       };
-      //
-      //    if ( this.scope.args.intervalUrl !== false && stateOverride !== true ) {
-      //       return new Promise(( resolve, reject ) => {
-      //          CoreLibrary.getData(this.scope.args.intervalUrl ? this.scope.args.intervalUrl : 'intervals.json')
-      //             .then(( response ) => {
-      //                if ( response ) {
-      //                   if ( response.hasOwnProperty('offline_interval') ) {
-      //                      interval = getInterval(response.offline_interval);
-      //                   } else if ( response.hasOwnProperty('online_interval') ) {
-      //                      interval = !getInterval(response.online_interval);
-      //                   }
-      //                   console.log('offline check', interval);
-      //                   this.scope.offline_interval = interval;
-      //                }
-      //                resolve();
-      //             })
-      //             .catch(() => {
-      //                resolve();
-      //             });
-      //       });
-      //    } else {
-      //       return new Promise(( resolve, reject ) => {
-      //          if ( stateOverride ) {
-      //             interval = stateOverride;
-      //          }
-      //          if ( this.scope.args.intervalUrl === false ) {
-      //             interval = false;
-      //          }
-      //          this.scope.offline_interval = interval;
-      //          resolve();
-      //       });
-      //    }
-      // },
-
-      /**
        * Makes Ajax request to retrieve customer css
        * If the request fails sets the default widget style
        */
       handleCustomCss () {
-         this.customCssBaseUrl = ( this.scope.args.customCss ? this.scope.args.customCss : '' +
-            this.scope.args.cmsUrl + 'euro16/css/{customer}/' ) + 'style.css';
-         this.scope.customCssUrl = this.customCssBaseUrl.replace(/\{customer}/, CoreLibrary.config.customer);
+         this.dataUrl = ( this.scope.args.dataUrl ? this.scope.args.dataUrl + '{tournament}/css/{customer}/' : '' +
+            '//kambi-cdn.globalmouth.com/tournamentdata/{tournament}/css/{customer}/' ) + 'style.css';
+         this.scope.customCssUrl = this.dataUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{tournament}/, this.scope.args.name);
 
          fetch(this.scope.customCssUrl)
             .then(( response ) => {
@@ -381,7 +279,7 @@
 
    });
 
-   var euroOverview = new EuroOverview({
+   var matchSchedule = new MatchSchedule({
       rootElement: 'html'
    });
 

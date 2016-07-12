@@ -1,17 +1,15 @@
-var LiveUpcoming = (() => {
+var MatchesSchedule = (() => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
 
       htmlTemplate: 'live-upcoming-view',
 
-      constructor ( htmlElement, eventsData, cmsData, parentScope ) {
+      constructor ( htmlElement, eventsData, parentScope ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
 
          this.parentScope = parentScope;
-         this.scope.teamData = cmsData;
-         this.scope.offline_interval = parentScope.offline_interval;
          this.scope.navigateToEvent = this.navigateToEvent.bind(this);
 
          this.setData(eventsData);
@@ -56,31 +54,14 @@ var LiveUpcoming = (() => {
             var i = 0;
 
             for ( ; i < maxEvents; ++i ) {
-               var eventDate = new Date(events[i].event.start);
-
-               var date = eventDate.toLocaleDateString(dateLocale, { month: 'short', day: '2-digit' }),
+               var eventDate = new Date(events[i].event.start),
+                  date = eventDate.toLocaleDateString(dateLocale, { month: 'short', day: '2-digit' }),
                   time = pad(eventDate.getHours()) + ':' + pad(eventDate.getMinutes());
 
-               if ( events[i].liveData && events[i].liveData.matchClock ) {
-                  // time = events[i].liveData.matchClock.period;
-                  time = '';
-               }
+               time = events[i].liveData && events[i].liveData.matchClock ? '' : time;
 
                events[i].customStartTime = time;
                events[i].customStartDate = date.replace(eventDate.getFullYear(), '');
-
-               if ( this.scope.teamData.teams && this.scope.teamData.matches && this.scope.teamData.matches[events[i].event.id] ) {
-                  // Home
-                  events[i].event.homeFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].flag;
-                  events[i].event.homeName = events[i].liveData ?
-                     this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].name_abbreviation : events[i].event.homeName;
-                  events[i].event.homeLabelCustom = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].home].name_abbreviation;
-                  // Away
-                  events[i].event.awayFlag = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].flag;
-                  events[i].event.awayName = events[i].liveData ?
-                     this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation : events[i].event.awayName;
-                  events[i].event.awayLabelCustom = this.scope.teamData.teams[this.scope.teamData.matches[events[i].event.id].away].name_abbreviation;
-               }
                matchesObj.push(events[i]);
             }
          }
@@ -100,10 +81,7 @@ var LiveUpcoming = (() => {
                   var time;
                   event.liveData = null;
                   event.liveData = liveData;
-                  if ( event.liveData && event.liveData.matchClock ) {
-                     // time = event.liveData.matchClock.period;
-                     time = '';
-                  }
+                  time = event.liveData && event.liveData.matchClock ? '' : time;
                   event.customStartTime = time;
                } else {
                   event.betOffers = null;
@@ -115,7 +93,7 @@ var LiveUpcoming = (() => {
       },
 
       navigateToEvent ( e, data ) {
-         if ( data.event.event.openForLiveBetting != null && data.event.event.openForLiveBetting === true ) {
+         if ( data && data.event && data.event.event.openForLiveBetting != null && data.event.event.openForLiveBetting === true ) {
             CoreLibrary.widgetModule.navigateToLiveEvent(data.event.event.id);
          } else {
             CoreLibrary.widgetModule.navigateToEvent(data.event.event.id);

@@ -1,6 +1,5 @@
 // Commong widget styles
 
-
 .kw-main {
    @include device($mobile) {
       display: block;
@@ -21,17 +20,6 @@ h4 {
    font-size: 14px;
 }
 
-.kw-player-media {
-   height: 24px;
-   position: relative;
-   width: 24px;
-
-   > img {
-      height: 24px;
-      width: 24px;
-   }
-}
-
 button {
    min-width: 60px;
 
@@ -40,7 +28,104 @@ button {
    }
 
    span {
+      font-size: 13px;
+   }
+}
+
+
+.kw-match-schedule {
+   position: relative;
+   width: 100%;
+
+   outcome-component {
+      margin-left: 6px;
+
+      button {
+         margin-left: 0;
+         min-width: 50px;
+      }
+
+      @include device($mobile) {
+         margin-left: 3px;
+         .KambiWidget-outcome__flexwrap {
+            padding: 0 3px;
+         }
+      }
+
+      .KambiWidget-outcome__label {
+         text-transform: capitalize;
+      }
+
+      &:first-child {
+         margin-left: 0;
+      }
+
+      @include device($mobile) {
+         span {
+            font-size: 11px;
+            line-height: 36px;
+         }
+      }
+   }
+
+   .kw-live-now {
+      span {
+         text-transform: uppercase;
+
+         &.red {
+            color: red;
+            font-style: italic;
+         }
+      }
+
+      .KambiWidget-outcome__label-wrapper {
+         @include box-pack(center);
+      }
+   }
+
+   .kw-score {
+      font-size: 24px;
+      @include device($mobile) {
+         font-size: 22px;
+      }
+   }
+
+   .kw-section-header h4,
+   .kw-teams,
+   .kw-event-outcomes {
+      cursor: pointer;
+      @include device($mobile) {
+         padding-left: 8px;
+         padding-right: 8px;
+      }
+   }
+
+   .kw-team-name {
       font-size: 14px;
+      line-height: 24px;
+   }
+
+   .kw-team {
+      @include flex(1 1 auto);
+      @include flexbox();
+      @include box-pack(flex-start);
+
+      @include device($mobile) {
+         .ismobile & {
+            height: 24px;
+            width: 100%;
+         }
+      }
+   }
+
+   * {
+      @include device($mobile) {
+         font-size: 12px;
+      }
+   }
+
+   .iscollapsed & {
+      padding-top: 12px;
    }
 }
 
@@ -60,12 +145,12 @@ button {
 
 .kw-custom-background.kw-custom-background-large {
    @include device($mobile) {
-      background-image: none;
+      //background-image: none;
    }
 
    @include device(sm, min) {
       > .kw-custom-background-small {
-         background-image: none;
+         //background-image: none;
       }
    }
 }
