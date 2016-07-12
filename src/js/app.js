@@ -35,8 +35,8 @@
          // Get the upcoming events
          this.eventsPromise = () => {
             return new Promise(( resolve, reject ) => {
-               // CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/matches/')
-               CoreLibrary.getData('all_matches.json')
+               CoreLibrary.offeringModule.getEventsByFilter('football/euro_2016/all/all/matches/')
+               // CoreLibrary.getData('all_matches.json')
                   .then(( response ) => {
                      if ( response && response.events && response.events.length ) {
                         resolve(response);
