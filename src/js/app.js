@@ -3,13 +3,6 @@
    var MatchSchedule = CoreLibrary.Component.subclass({
 
       defaultArgs: {
-         widgetTrackingName: 'gm-schedule-widget',
-         name: 'wcq',
-         filter: 'football/world_cup_qualifying_-_europe',
-         dataUrl: '//kambi-cdn.globalmouth.com/tournamentdata/',
-         criterionId: '',
-         pollingInterval: 30000,
-         pollingCount: 4
       },
 
       constructor () {
@@ -243,7 +236,7 @@
       handleCustomCss () {
          this.dataUrl = ( this.scope.args.dataUrl ? this.scope.args.dataUrl + '{tournament}/css/{customer}/' : '' +
             '//kambi-cdn.globalmouth.com/tournamentdata/{tournament}/css/{customer}/' ) + 'style.css';
-         this.scope.customCssUrl = this.dataUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{tournament}/, this.scope.args.name);
+         this.scope.customCssUrl = this.dataUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{tournament}/, this.scope.args.tournamentName);
 
          fetch(this.scope.customCssUrl)
             .then(( response ) => {

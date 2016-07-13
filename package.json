@@ -1,10 +1,9 @@
 {
-   "name": "euro2016-overview-widget",
-   "version": "1.1.0",
-   "description": "Euro 2016 Overview Widget",
+   "name": "match-schedule-widget",
+   "version": "1.0.0",
+   "description": "Match Schedule Widget",
    "main": "dist/index.html",
    "scripts": {
-      "changelog": "changelog kambi-sportsbook-widgets/euro2016-overview-widget all -m > CHANGELOG.md",
       "test": "echo \"Error: no test specified\" && exit 1"
    },
    "devDependencies": {

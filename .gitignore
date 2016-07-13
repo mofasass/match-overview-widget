@@ -7,7 +7,6 @@ docs
 bower_components
 /.project
 mockSetupData.json
-externalArgsUrl.json
 /src/transpiled/
 /dist/
 /resourcepaths.json

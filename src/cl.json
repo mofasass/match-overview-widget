@@ -1,0 +1,9 @@
+{
+   "widgetTrackingName": "gm-schedule-widget",
+   "tournamentName": "cl",
+   "filter": "football/world_cup_qualifying_-_europe",
+   "dataUrl": "//kambi-cdn.globalmouth.com/tournamentdata/",
+   "criterionId": "",
+   "pollingInterval": 30000,
+   "pollingCount": 4
+}
