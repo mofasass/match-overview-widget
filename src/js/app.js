@@ -2,8 +2,7 @@
 
    var MatchSchedule = CoreLibrary.Component.subclass({
 
-      defaultArgs: {
-      },
+      defaultArgs: {},
 
       constructor () {
          CoreLibrary.Component.apply(this, arguments);
@@ -11,7 +10,9 @@
       },
 
       init () {
+         var resizeTimeout = false;
          CoreLibrary.setWidgetTrackingName(this.scope.args.widgetTrackingName);
+         this.handleIntervals('intervals');
 
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
@@ -20,65 +21,58 @@
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
 
+         window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+
+            resizeTimeout = setTimeout(() => {
+               this.scope.is_mobile = this.is_mobile();
+               this.adjustHeight(true);
+            }, 300);
+
+         });
+
          // Get the upcoming events
-         this.eventsPromise = () => {
-            return new Promise(( resolve, reject ) => {
-               CoreLibrary.offeringModule.getEventsByFilter(this.scope.args.filter)
-                  .then(( response ) => {
-                     if ( response && response.events && response.events.length ) {
-                        resolve(response);
-                     } else {
-                        this.handleError('eventsPromise');
+         this.getData = () => {
+            CoreLibrary.offeringModule.getEventsByFilter(this.scope.args.filter)
+               .then(( response ) => {
+                  if ( response && response.events && response.events.length ) {
+                     this.livePollingCount = 0;
+
+                     this.handleEvents(response);
+
+                     if ( /Edge/i.test(navigator.userAgent) ) {
+                        var body = document.getElementsByTagName('body')[0];
+                        body.classList.add('browser-edge');
                      }
-                  })
-                  .catch(this.handleError);
-            });
+
+                     // Delayed value to be passed on rv-cloak binder
+                     setTimeout(() => {
+                        this.adjustHeight();
+                        this.scope.loaded = true;
+                     }, 200);
+                  } else {
+                     this.handleError('getData');
+                  }
+               })
+               .catch(this.handleError);
          };
 
-         // When both data fetching promises are resolved, we can create the modules and send them the data
-         Promise.all([this.eventsPromise()])
-            .then(( promiseData ) => {
-               var resizeTimeout = false;
-               this.livePollingCount = 0;
-
-               this.handleEvents(promiseData);
-
-               window.addEventListener('resize', () => {
-                  clearTimeout(resizeTimeout);
-
-                  resizeTimeout = setTimeout(() => {
-                     this.scope.is_mobile = this.is_mobile();
-                     this.adjustHeight(true);
-                  }, 300);
-
-               });
-
-               if ( /Edge/i.test(navigator.userAgent) ) {
-                  var body = document.getElementsByTagName('body')[0];
-                  body.classList.add('browser-edge');
-               }
-
-               // Delayed value to be passed on rv-cloak binder
-               setTimeout(() => {
-                  this.adjustHeight();
-                  this.scope.loaded = true;
-               }, 200);
-            });
+         this.getData();
       },
 
       /**
        * Sets data to submodule and starts polling if there are live betoffers
-       * @param promiseData
+       * @param data
        */
-      handleEvents ( promiseData ) {
+      handleEvents ( data ) {
          this.livePollingCount++;
 
-         var events = promiseData[0].events.filter(( event ) => {
+         var events = data.events.filter(( event ) => {
             return event.event.type === 'ET_MATCH';
          });
 
          if ( !this.module ) {
-            this.module = new window.MatchesSchedule('#match-schedule', events, promiseData[0], this.scope);
+            this.module = new window.MatchesSchedule('#match-schedule', events, data, this.scope);
          } else {
             this.module.setData(events);
          }
@@ -139,15 +133,7 @@
        */
       refreshEvents () {
          if ( Object.keys(this.livePolling).length === 0 ) {
-            Promise.all([this.eventsPromise()])
-               .then(( promiseData ) => {
-                  if ( promiseData[0].events && promiseData[0].events.length ) {
-                     this.handleEvents(promiseData);
-                     this.module.scope.onResize();
-                  } else {
-                     this.handleError('eventsPromise');
-                  }
-               }).catch(this.handleError);
+            this.getData();
          }
       },
 
@@ -169,6 +155,41 @@
       stopLivePolling ( eventId ) {
          clearInterval(this.livePolling[eventId]);
          delete this.livePolling[eventId];
+      },
+
+      /**
+       * Checks if there is an object containing dates to decide whether widget is online or not
+       * @param interval
+       */
+      handleIntervals ( interval ) {
+         var onlineDate = {},
+            intervalObj = this.scope.args.hasOwnProperty(interval) ? this.scope.args[interval] : null,
+            date_now = new Date();
+
+         if ( intervalObj && typeof intervalObj === 'object' && Object.keys(intervalObj).length ) {
+            var i = 0, arrLength = Object.keys(intervalObj).length;
+            for ( ; i < arrLength; ++i ) {
+               var key = Object.keys(intervalObj)[i],
+                  value = intervalObj[key];
+
+               var start = new Date(key),
+                  end = new Date(value);
+
+               if ( date_now > start && date_now < end ) {
+                  onlineDate = {
+                     online: start
+                  };
+               }
+            }
+            this.scope.online = onlineDate.hasOwnProperty('online');
+         } else {
+            this.scope.online = true;
+         }
+
+         console.log('online', this.scope.online);
+         if ( !this.scope.online ) {
+            this.handleError('widget, offline');
+         }
       },
 
       /**
