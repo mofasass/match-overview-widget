@@ -1,19 +1,21 @@
 .kw-custom-logo-large {
-   background-image: url('../custom/Euro-16-large-cup-white.svg');
+   background-image: url('generic-logo-type.svg');
 }
 
 .kw-custom-logo-large-type {
-   background-image: url('../custom/Euro-16-logo-type.svg');
+   background-image: url('generic-logo-type.svg');
 }
 
 .kw-custom-logo-small {
-   background-image: url('../custom/Euro-16-32x32-cup-black.svg');
+   background-image: url('generic-logo-type.svg');
 }
 
 .kw-custom-background-large {
-   background-image: url('../custom/Background_large.jpg');
+   background-image: url('Background_1200x148.jpg');
 }
 
 .kw-custom-background-small {
-   background-image: url('../custom/Background_small.jpg');
+   background-image: url('Background_1200x148.jpg');
 }
+
+#schedule { }

@@ -2,7 +2,9 @@
 
    var MatchSchedule = CoreLibrary.Component.subclass({
 
-      defaultArgs: {},
+      defaultArgs: {
+         pollingCount: 3
+      },
 
       constructor () {
          CoreLibrary.Component.apply(this, arguments);
