@@ -3,7 +3,17 @@
    var MatchSchedule = CoreLibrary.Component.subclass({
 
       defaultArgs: {
-         pollingCount: 3
+         widgetTrackingName: 'gm-schedule-widget-pl',
+         tournamentName: 'pl',
+         filter: ['/football/england/premier_league'],
+         dataUrl: '//kambi-cdn.globalmouth.com/tournamentdata/',
+         criterionId: '',
+         pollingInterval: 30000,
+         pollingCount: 4,
+         intervals: {
+            '2016-07-14T15:45:00+02:00': '2017-07-14T20:30:00+02:00',
+            '2016-08-11T12:00:00+02:00': '2016-08-14T18:45:00+02:00'
+         }
       },
 
       constructor () {
@@ -20,6 +30,11 @@
 
          this.handleCustomCss();
 
+         // var path = ['/football/england/premier_league',
+         //    '/football/champions_league/all',
+         //    '/football/world_cup_qualifying_-_europe/all',
+         //    '/football/france/ligue_1'];
+
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
 
@@ -35,7 +50,9 @@
 
          // Get the upcoming events
          this.getData = () => {
-            CoreLibrary.offeringModule.getEventsByFilter(this.scope.args.filter)
+            var url = CoreLibrary.widgetModule.createFilterUrl(this.scope.args.filter);
+            url = url ? url.replace('#filter/', '') : 'football';
+            CoreLibrary.offeringModule.getEventsByFilter(url)
                .then(( response ) => {
                   if ( response && response.events && response.events.length ) {
                      this.livePollingCount = 0;

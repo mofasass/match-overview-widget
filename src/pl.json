@@ -1,7 +1,7 @@
 {
    "widgetTrackingName": "gm-schedule-widget-pl",
    "tournamentName": "pl",
-   "filter": "football/england/premier_league",
+   "filter": ["/football/england/premier_league"],
    "dataUrl": "//kambi-cdn.globalmouth.com/tournamentdata/",
    "criterionId": "",
    "pollingInterval": 30000,
