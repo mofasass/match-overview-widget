@@ -121,11 +121,11 @@
        */
       getLiveEventData ( eventId ) {
          var getFn;
-         if ( CoreLibrary.development === true ) {
-            getFn = CoreLibrary.getData('live_' + eventId + '.json');
-         } else {
+         // if ( CoreLibrary.development === true ) {
+         //    getFn = CoreLibrary.getData('live_' + eventId + '.json');
+         // } else {
             getFn = CoreLibrary.offeringModule.getLiveEventData(eventId);
-         }
+         // }
          getFn
             .then(( response ) => {
                if ( response && response.eventId ) {

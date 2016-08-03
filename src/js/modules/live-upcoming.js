@@ -1,3 +1,7 @@
+String.prototype.capitalize = function () {
+   return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
 var MatchesSchedule = (() => {
    return CoreLibrary.Component.subclass({
       defaultArgs: {},
@@ -54,14 +58,16 @@ var MatchesSchedule = (() => {
             var i = 0;
 
             for ( ; i < maxEvents; ++i ) {
-               var eventDate = new Date(events[i].event.start),
-                  date = eventDate.toLocaleDateString(dateLocale, { month: 'short', day: '2-digit' }),
-                  time = pad(eventDate.getHours()) + ':' + pad(eventDate.getMinutes());
+               var translate = CoreLibrary.translationModule.getTranslation.bind(CoreLibrary.translationModule),
+                  start = new Date(events[i].event.start);
+               events[i].customStartTime =
+                  translate((new Date().getDate() === start.getDate() ? 'today' :
+                     (new Date().getDate() === start.getDate() - 1 ? 'tomorrow' : ''))) + ' ' +
+                  pad(start.getDate()) + ' ' +
+                  translate('month' + start.getMonth()).slice(0, 3).capitalize() + ' ' +
+                  pad(start.getHours()) + ':' +
+                  pad(start.getMinutes());
 
-               time = events[i].liveData && events[i].liveData.matchClock ? '' : time;
-
-               events[i].customStartTime = time;
-               events[i].customStartDate = date.replace(eventDate.getFullYear(), '');
                matchesObj.push(events[i]);
             }
          }
