@@ -317,9 +317,9 @@
        */
       blendBackground () {
          var svgBlend = document.querySelector('feImage[result="slide2"]');
-         var background = 'custom/overview_widget_bg_bw.jpg';
+         var background = 'custom/overview-bw-bg-desktop.jpg';
          if ( this.scope.is_mobile ) {
-            background = 'custom/overview_widget_bg_bw_mobile.jpg';
+            background = 'custom/overview-bw-bg-mobile.jpg';
          }
          svgBlend.removeAttributeNS('http://www.w3.org/199/xlink', 'xlink:href');
          svgBlend.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', background);

@@ -1,17 +1,17 @@
 .kw-custom-logo-large {
-   background-image: url('generic-logo-type.svg');
+   background-image: url('premier-league-widget-logo.svg');
 }
 
 .kw-custom-logo-large-type {
-   background-image: url('generic-logo-type.svg');
+   background-image: url('premier-league-widget-logo.svg');
 }
 
 .kw-custom-logo-small {
-   background-image: url('generic-logo-type.svg');
+   background-image: url('premier-league-widget-logo.svg');
 }
 
 #blendRect {
-   fill: #0eb5ca;
+   fill: #247423;
 }
 
 #schedule { }
