@@ -6,7 +6,7 @@
          widgetTrackingName: 'gm-schedule-widget-pl',
          tournamentName: 'pl',
          filter: ['/football/england/premier_league'],
-         dataUrl: '//kambi-cdn.globalmouth.com/tournamentdata/',
+         dataUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
          criterionId: '',
          pollingInterval: 30000,
          pollingCount: 4,
@@ -124,7 +124,7 @@
          // if ( CoreLibrary.development === true ) {
          //    getFn = CoreLibrary.getData('live_' + eventId + '.json');
          // } else {
-            getFn = CoreLibrary.offeringModule.getLiveEventData(eventId);
+         getFn = CoreLibrary.offeringModule.getLiveEventData(eventId);
          // }
          getFn
             .then(( response ) => {
@@ -285,9 +285,11 @@
                } else {
                   this.scope.customCss = 'custom/style.local.css';
                }
+               this.blendBackground();
             })
             .catch(( error ) => {
                this.scope.customCss = 'custom/style.local.css';
+               this.blendBackground();
                console.debug('Error fetching css');
             });
       },
@@ -308,6 +310,19 @@
       is_mobile () {
          var testBrowser = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
          return this.mainElement.offsetWidth <= 768 && ('ontouchstart' in window) && testBrowser;
+      },
+
+      /**
+       * Check if we are in a mobile or desktop and then set the correct image for the svg blend filter
+       */
+      blendBackground () {
+         var svgBlend = document.querySelector('feImage[result="slide2"]');
+         var background = 'custom/overview_widget_bg_bw.jpg';
+         if ( this.scope.is_mobile ) {
+            background = 'custom/overview_widget_bg_bw_mobile.jpg';
+         }
+         svgBlend.removeAttributeNS('http://www.w3.org/199/xlink', 'xlink:href');
+         svgBlend.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', background);
       }
 
    });

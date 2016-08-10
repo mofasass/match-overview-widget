@@ -10,12 +10,8 @@
    background-image: url('generic-logo-type.svg');
 }
 
-.kw-custom-background-large {
-   background-image: url('Background_1200x148.jpg');
-}
-
-.kw-custom-background-small {
-   background-image: url('Background_1200x148.jpg');
+#blendRect {
+   fill: #0eb5ca;
 }
 
 #schedule { }

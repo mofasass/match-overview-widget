@@ -38,16 +38,27 @@
    <!--Necessary css for Firefox to render properly the transparent gradients-->
    <style>
       .kw-gradient-left .kw-gradient { mask: url(#gradient_right) }
+
       .kw-gradient-right .kw-gradient { mask: url(#gradient_left) }
+
       .kw-gradient { mask: url(#gradient_both) }
    </style>
 </head>
 <body id="schedule" class="kw-body kw-custom-background kw-custom-background-large KambiWidget-font"
       rv-class-ismobile="is_mobile" rv-cloak="loaded">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blended-background">
+   <defs>
+      <filter id="myFilter">
+         <feImage xlink:href="#" result="slide2" x="0" y="0" width="100%" preserveAspectRatio="xMidYMid slice"/>
+         <feBlend in2="SourceGraphic" in="slide2" mode="hard-light"/>
+      </filter>
+   </defs>
+   <rect id="blendRect" x="0" y="0" filter="url(#myFilter)" width="100%" height="100%"/>
+</svg>
 <!--Main-->
 <main id="main" class="kw-main KambiWidget-font">
 
-   <section class="kw-match-schedule kw-scroll-component l-pl-16 l-pr-16 l-mt-12 kw-gradient-left" id="match-schedule"></section>
+   <section class="kw-match-schedule kw-scroll-component l-pl-16 l-pr-16 l-pt-12 kw-gradient-left" id="match-schedule"></section>
 
 </main>
 
