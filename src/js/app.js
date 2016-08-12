@@ -50,7 +50,11 @@
          // Get the upcoming events
          this.getData = () => {
             var url = CoreLibrary.widgetModule.createFilterUrl(this.scope.args.filter);
-            url = url ? url.replace('#filter/', '') : 'football';
+            var replaceString = '#filter/';
+            if ( CoreLibrary.config.routeRoot !== '' ) {
+               replaceString = '#' + CoreLibrary.config.routeRoot + '/filter/';
+            }
+            url = url ? url.replace(replaceString, '') : 'football';
             CoreLibrary.offeringModule.getEventsByFilter(url)
                .then(( response ) => {
                   if ( response && response.events && response.events.length ) {
