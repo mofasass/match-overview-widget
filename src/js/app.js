@@ -9,10 +9,7 @@
          dataUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
          criterionId: '',
          pollingInterval: 30000,
-         pollingCount: 4,
-         intervals: {
-            '2016-08-11T12:00:00+02:00': '2016-08-14T18:45:00+02:00'
-         }
+         pollingCount: 4
       },
 
       constructor () {
@@ -23,7 +20,7 @@
       init () {
          var resizeTimeout = false;
          CoreLibrary.setWidgetTrackingName(this.scope.args.widgetTrackingName);
-         this.handleIntervals('intervals');
+         this.checkHighlight();
 
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
@@ -180,38 +177,31 @@
       },
 
       /**
-       * Checks if there is an object containing dates to decide whether widget is online or not
-       * @param interval
+       * Checks the highlight resource against the supported filters and decides whether the widget is online or not
        */
-      handleIntervals ( interval ) {
-         var onlineDate = {},
-            intervalObj = this.scope.args.hasOwnProperty(interval) ? this.scope.args[interval] : null,
-            date_now = new Date();
-
-         if ( intervalObj && typeof intervalObj === 'object' && Object.keys(intervalObj).length ) {
-            var i = 0, arrLength = Object.keys(intervalObj).length;
-            for ( ; i < arrLength; ++i ) {
-               var key = Object.keys(intervalObj)[i],
-                  value = intervalObj[key];
-
-               var start = new Date(key),
-                  end = new Date(value);
-
-               if ( date_now > start && date_now < end ) {
-                  onlineDate = {
-                     online: start
-                  };
+      checkHighlight () {
+         CoreLibrary.offeringModule.getHighlight()
+            .then(( response ) => {
+               if ( Array.isArray(response.groups) ) {
+                  if ( this.scope.args.filter.indexOf(response.groups[0].pathTermId) !== -1 ) {
+                     console.debug('Found supported filter, widget is online');
+                     this.scope.online = true;
+                  } else {
+                     console.debug('First highlight, ' + response.groups[0].pathTermId + ', item is not supported');
+                     this.scope.online = false;
+                  }
+               } else {
+                  console.debug('Highlight response empty, hiding widget');
+                  this.scope.online = false;
                }
-            }
-            this.scope.online = onlineDate.hasOwnProperty('online');
-         } else {
-            this.scope.online = true;
-         }
-
-         console.log('online', this.scope.online);
-         if ( !this.scope.online ) {
-            this.handleError('widget, offline');
-         }
+               if ( !this.scope.online ) {
+                  this.handleError('widget, offline');
+               }
+            })
+            .catch(() => {
+               console.debug('Error fetching highlight resource');
+               this.scope.online = false;
+            });
       },
 
       /**
