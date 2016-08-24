@@ -8,7 +8,7 @@ var MatchesSchedule = (() => {
 
       htmlTemplate: 'live-upcoming-view',
 
-      constructor ( htmlElement, eventsData, parentScope ) {
+      constructor ( htmlElement, eventsData, data, parentScope ) {
          CoreLibrary.Component.apply(this, [{
             rootElement: htmlElement
          }]);
@@ -38,6 +38,10 @@ var MatchesSchedule = (() => {
          this.scope.scroller = new CoreLibrary.ScrollComponent(this.parentScope);
          this.scope.doscroll = this.scope.scroller.onScroll;
          this.scope.onResize = this.scope.scroller.onResize;
+
+         this.scope.logoName = this.parentScope.appliedFilter.substring(1).replace(/\//g, '-');
+         document.getElementById('kw-scroller-logo').classList.add(this.scope.logoName);
+
       },
 
       parseUpcomingEvents ( events ) {

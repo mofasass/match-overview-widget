@@ -5,7 +5,11 @@
       defaultArgs: {
          widgetTrackingName: 'gm-schedule-widget-pl',
          tournamentName: 'pl',
-         filter: ['/football/england/premier_league'],
+         filter: [
+            '/football/france/ligue_1',
+            '/football/england/premier_league',
+            '/football/germany/bundesliga'
+         ],
          dataUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
          criterionId: '',
          pollingInterval: 30000,
@@ -20,7 +24,6 @@
       init () {
          var resizeTimeout = false;
          CoreLibrary.setWidgetTrackingName(this.scope.args.widgetTrackingName);
-         this.checkHighlight();
 
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
@@ -34,6 +37,8 @@
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
 
+         this.scope.appliedFilter = null;
+
          window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
 
@@ -46,7 +51,7 @@
 
          // Get the upcoming events
          this.getData = () => {
-            var url = CoreLibrary.widgetModule.createFilterUrl(this.scope.args.filter);
+            var url = CoreLibrary.widgetModule.createFilterUrl([this.scope.appliedFilter]);
             var replaceString = '#filter/';
             if ( CoreLibrary.config.routeRoot !== '' ) {
                replaceString = '#' + CoreLibrary.config.routeRoot + '/filter/';
@@ -76,7 +81,11 @@
                .catch(this.handleError);
          };
 
-         this.getData();
+         this.checkHighlight()
+            .then(this.getData)
+            .catch(( errorMsg )=> {
+               console.debug(errorMsg);
+            });
       },
 
       /**
@@ -180,28 +189,37 @@
        * Checks the highlight resource against the supported filters and decides whether the widget is online or not
        */
       checkHighlight () {
-         CoreLibrary.offeringModule.getHighlight()
-            .then(( response ) => {
-               if ( Array.isArray(response.groups) ) {
-                  if ( this.scope.args.filter.indexOf(response.groups[0].pathTermId) !== -1 ) {
-                     console.debug('Found supported filter, widget is online');
-                     this.scope.online = true;
+         return new Promise(( resolve, reject ) => {
+            CoreLibrary.offeringModule.getHighlight()
+               .then(( response ) => {
+                  if ( Array.isArray(response.groups) ) {
+                     var filteredPaths = response.groups.filter(( value, index, arr ) => {
+                        return this.scope.args.filter.indexOf(value.pathTermId) !== -1;
+                     });
+                     if ( filteredPaths.length > 0 ) {
+                        console.debug('Found supported filter, widget is online');
+                        this.scope.appliedFilter = filteredPaths[0].pathTermId;
+                        this.scope.online = true;
+                        resolve();
+                     } else {
+                        this.scope.online = false;
+                        reject('No matching filters in highlight, widget is offline');
+                     }
                   } else {
-                     console.debug('First highlight, ' + response.groups[0].pathTermId + ', item is not supported');
                      this.scope.online = false;
+                     reject('Highlight response empty, hiding widget');
                   }
-               } else {
-                  console.debug('Highlight response empty, hiding widget');
+                  if ( !this.scope.online ) {
+                     this.handleError('widget, offline');
+                     reject();
+                  }
+               })
+               .catch(() => {
                   this.scope.online = false;
-               }
-               if ( !this.scope.online ) {
-                  this.handleError('widget, offline');
-               }
-            })
-            .catch(() => {
-               console.debug('Error fetching highlight resource');
-               this.scope.online = false;
-            });
+                  reject('Error fetching highlight resource');
+               });
+         });
+
       },
 
       /**
