@@ -38,8 +38,11 @@ var MatchesSchedule = (() => {
          this.scope.scroller = new CoreLibrary.ScrollComponent(this.parentScope);
          this.scope.doscroll = this.scope.scroller.onScroll;
          this.scope.onResize = this.scope.scroller.onResize;
-
-         this.scope.logoName = this.parentScope.appliedFilter.substring(1).replace(/\//g, '-');
+         if ( this.parentScope.args.combineFilters === true && this.parentScope.appliedFilters.length > 1) {
+            this.scope.logoName = 'combined-filters';
+         } else {
+            this.scope.logoName = this.parentScope.appliedFilters[0].substring(1).replace(/\//g, '-');
+         }
          document.getElementById('kw-scroller-logo').classList.add(this.scope.logoName);
 
       },

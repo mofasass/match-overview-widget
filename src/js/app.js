@@ -6,10 +6,9 @@
          widgetTrackingName: 'gm-schedule-widget-pl',
          tournamentName: 'pl',
          filter: [
-            '/football/france/ligue_1',
-            '/football/england/premier_league',
-            '/football/germany/bundesliga'
+            '/football/england/premier_league'
          ],
+         combineFilters: true,
          dataUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
          criterionId: '',
          pollingInterval: 30000,
@@ -29,15 +28,10 @@
 
          this.handleCustomCss();
 
-         // var path = ['/football/england/premier_league',
-         //    '/football/champions_league/all',
-         //    '/football/world_cup_qualifying_-_europe/all',
-         //    '/football/france/ligue_1'];
-
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
 
-         this.scope.appliedFilter = null;
+         this.scope.appliedFilters = [];
 
          window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
@@ -51,7 +45,7 @@
 
          // Get the upcoming events
          this.getData = () => {
-            var url = CoreLibrary.widgetModule.createFilterUrl([this.scope.appliedFilter]);
+            var url = CoreLibrary.widgetModule.createFilterUrl(this.scope.appliedFilters);
             var replaceString = '#filter/';
             if ( CoreLibrary.config.routeRoot !== '' ) {
                replaceString = '#' + CoreLibrary.config.routeRoot + '/filter/';
@@ -83,9 +77,7 @@
 
          this.checkHighlight()
             .then(this.getData)
-            .catch(( errorMsg )=> {
-               console.debug(errorMsg);
-            });
+            .catch(this.handleError);
       },
 
       /**
@@ -197,8 +189,15 @@
                         return this.scope.args.filter.indexOf(value.pathTermId) !== -1;
                      });
                      if ( filteredPaths.length > 0 ) {
-                        console.debug('Found supported filter, widget is online');
-                        this.scope.appliedFilter = filteredPaths[0].pathTermId;
+                        console.debug('Found ' + filteredPaths.length + ' supported filter(s), widget is online');
+                        // If we are combining filters, check that there are more than one, otherwise we should show the single filter
+                        if ( this.scope.args.combineFilters === true && filteredPaths.length > 1 ) {
+                           filteredPaths.forEach(( path ) => {
+                              this.scope.appliedFilters.push(path.pathTermId);
+                           });
+                        } else {
+                           this.scope.appliedFilters.push(filteredPaths[0].pathTermId);
+                        }
                         this.scope.online = true;
                         resolve();
                      } else {
@@ -214,9 +213,9 @@
                      reject();
                   }
                })
-               .catch(() => {
+               .catch(( err ) => {
                   this.scope.online = false;
-                  reject('Error fetching highlight resource');
+                  reject(err);
                });
          });
 
