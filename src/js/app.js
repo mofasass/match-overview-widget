@@ -3,13 +3,12 @@
    var MatchSchedule = CoreLibrary.Component.subclass({
 
       defaultArgs: {
-         widgetTrackingName: 'gm-schedule-widget-pl',
-         tournamentName: 'pl',
+         widgetTrackingName: 'gm-match-overview-widget',
          filter: [
             '/football/england/premier_league'
          ],
          combineFilters: false,
-         dataUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
+         customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget',
          criterionId: '',
          pollingInterval: 30000,
          pollingCount: 4
@@ -297,9 +296,9 @@
        * If the request fails sets the default widget style
        */
       handleCustomCss () {
-         this.dataUrl = ( this.scope.args.dataUrl ? this.scope.args.dataUrl + '{tournament}/css/{customer}/' : '' +
-            '//kambi-cdn.globalmouth.com/tournamentdata/{tournament}/css/{customer}/' ) + 'style.css';
-         this.scope.customCssUrl = this.dataUrl.replace(/\{customer}/, CoreLibrary.config.customer).replace(/\{tournament}/, this.scope.args.tournamentName);
+         this.customCssUrl = ( this.scope.args.customCssUrl ? this.scope.args.customCssUrl + '/{customer}/' : '' +
+            '//kambi-cdn.globalmouth.com/customcss/match-overview-widget/{customer}/' ) + 'style.css';
+         this.scope.customCssUrl = this.customCssUrl.replace(/\{customer}/, CoreLibrary.config.customer);
 
          fetch(this.scope.customCssUrl)
             .then(( response ) => {
