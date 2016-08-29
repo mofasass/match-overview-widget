@@ -8,7 +8,7 @@
          filter: [
             '/football/england/premier_league'
          ],
-         combineFilters: true,
+         combineFilters: false,
          dataUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/',
          criterionId: '',
          pollingInterval: 30000,
