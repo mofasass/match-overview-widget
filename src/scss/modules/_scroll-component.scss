@@ -40,7 +40,6 @@ $scroll-component-height: 120px;
       }
    }
 
-
    // Scroll arrows for desktop
    .kw-scroll-left, .kw-scroll-right {
       @include transition(all .3s);
@@ -181,6 +180,11 @@ $scroll-component-height: 120px;
 
       .ismobile & {
          .kw-scroll-inner {
+
+            .kw-scroller-logo {
+               margin-right: -10px;
+            }
+
             @include transform(translate3d(0, 0, 0) !important);
             overflow-x: scroll;
             overflow-y: hidden;

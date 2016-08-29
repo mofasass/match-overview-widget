@@ -30,6 +30,7 @@
 
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
+         this.adjustLogoWidth();
 
          this.scope.appliedFilters = [];
 
@@ -39,6 +40,7 @@
             resizeTimeout = setTimeout(() => {
                this.scope.is_mobile = this.is_mobile();
                this.adjustHeight(true);
+               this.adjustLogoWidth();
             }, 300);
 
          });
@@ -277,6 +279,17 @@
             }
          }
          CoreLibrary.widgetModule.setWidgetHeight(contentHeight);
+      },
+
+      /**
+       * Adjust the width of the logo depending on if device is mobile or not
+       */
+      adjustLogoWidth(){
+         if ( this.scope.is_mobile ) {
+            this.scope.logoWidth = 80;
+         } else {
+            this.scope.logoWidth = 90;
+         }
       },
 
       /**
