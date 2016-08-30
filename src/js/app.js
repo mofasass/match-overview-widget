@@ -5,7 +5,20 @@
       defaultArgs: {
          widgetTrackingName: 'gm-match-overview-widget',
          filter: [
-            '/football/england/premier_league'
+            '/football/champions_league',
+            '/football/england/premier_league',
+            '/football/europa_league',
+            '/football/france/ligue_1',
+            '/football/germany/bundesliga',
+            '/football/international_friendly_matches',
+            '/football/italy/serie_a',
+            '/football/norway/tippeligaen',
+            '/football/spain/laliga',
+            '/football/sweden/allsvenskan',
+            '/football/world_cup_qualifying_-_asia',
+            '/football/world_cup_qualifying_-_europe',
+            '/football/world_cup_qualifying_-_north__central___caribbean',
+            '/football/world_cup_qualifying_-_south_america'
          ],
          combineFilters: false,
          customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget',
