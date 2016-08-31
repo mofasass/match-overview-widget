@@ -18,7 +18,9 @@
             '/football/world_cup_qualifying_-_asia',
             '/football/world_cup_qualifying_-_europe',
             '/football/world_cup_qualifying_-_north__central___caribbean',
-            '/football/world_cup_qualifying_-_south_america'
+            '/football/world_cup_qualifying_-_south_america',
+            '/football/belgium/jupiler_pro_league',
+            '/football/netherlands/eredivisie'
          ],
          combineFilters: false,
          customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget',
