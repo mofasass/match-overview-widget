@@ -40,7 +40,7 @@
 
          CoreLibrary.widgetModule.enableWidgetTransition(true);
 
-         this.handleCustomCss();
+         this.blendBackground();
 
          this.mainElement = document.getElementById('main');
          this.scope.is_mobile = this.is_mobile();
@@ -307,37 +307,12 @@
       /**
        * Adjust the width of the logo depending on if device is mobile or not
        */
-      adjustLogoWidth(){
+      adjustLogoWidth () {
          if ( this.scope.is_mobile ) {
             this.scope.logoWidth = 80;
          } else {
             this.scope.logoWidth = 90;
          }
-      },
-
-      /**
-       * Makes Ajax request to retrieve customer css
-       * If the request fails sets the default widget style
-       */
-      handleCustomCss () {
-         this.customCssUrl = ( this.scope.args.customCssUrl ? this.scope.args.customCssUrl + '/{customer}/' : '' +
-            '//kambi-cdn.globalmouth.com/customcss/match-overview-widget/{customer}/' ) + 'style.css';
-         this.scope.customCssUrl = this.customCssUrl.replace(/\{customer}/, CoreLibrary.config.customer);
-
-         fetch(this.scope.customCssUrl)
-            .then(( response ) => {
-               if ( response.status >= 200 && response.status < 300 ) {
-                  this.scope.customCss = this.scope.customCssUrl;
-               } else {
-                  this.scope.customCss = 'custom/style.local.css';
-               }
-               this.blendBackground();
-            })
-            .catch(( error ) => {
-               this.scope.customCss = 'custom/style.local.css';
-               this.blendBackground();
-               console.debug('Error fetching css');
-            });
       },
 
       /**
