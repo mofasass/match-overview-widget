@@ -202,16 +202,7 @@
             CoreLibrary.offeringModule.getHighlight()
                .then(( response ) => {
                   if ( Array.isArray(response.groups) ) {
-                     var sortedGroups = response.groups.sort(( a, b ) => {
-                        if ( parseInt(a.sortOrder, 10) > parseInt(b.sortOrder, 10) ) {
-                           return 1;
-                        }
-                        if ( parseInt(a.sortOrder, 10) < parseInt(b.sortOrder, 10) ) {
-                           return -1;
-                        }
-                        return 0;
-                     });
-                     var filteredPaths = sortedGroups.filter(( value, index, arr ) => {
+                     var filteredPaths = response.groups.filter(( value, index, arr ) => {
                         return this.scope.args.filter.indexOf(value.pathTermId) !== -1;
                      });
                      if ( filteredPaths.length > 0 ) {
