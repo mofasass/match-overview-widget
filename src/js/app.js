@@ -23,7 +23,7 @@
             '/football/netherlands/eredivisie'
          ],
          combineFilters: false,
-         customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget',
+         customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/{customer}/style.css',
          criterionId: '',
          pollingInterval: 30000,
          pollingCount: 4
