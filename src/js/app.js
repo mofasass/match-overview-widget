@@ -62,6 +62,8 @@
 
          // Get the upcoming events
          this.getData = () => {
+            // for testing:
+            // this.scope.appliedFilters = ['/football/world_cup_qualifying_-_europe'];
             var url = CoreLibrary.widgetModule.createFilterUrl(this.scope.appliedFilters);
             var replaceString = '#filter/';
             if ( CoreLibrary.config.routeRoot !== '' ) {
@@ -70,7 +72,13 @@
             url = url ? url.replace(replaceString, '') : 'football';
             CoreLibrary.offeringModule.getEventsByFilter(url)
                .then(( response ) => {
-                  if ( response && response.events && response.events.length ) {
+                  var eventCount = 0;
+                  response.events.forEach((ev) => {
+                     if (ev.event.type === 'ET_MATCH') {
+                        eventCount++;
+                     }
+                  });
+                  if ( response && response.events && eventCount > 0) {
                      this.livePollingCount = 0;
 
                      this.handleEvents(response);
@@ -86,7 +94,7 @@
                         this.scope.loaded = true;
                      }, 200);
                   } else {
-                     this.handleError('getData');
+                     this.handleError('not enough events');
                   }
                })
                .catch(this.handleError);
@@ -201,6 +209,7 @@
          return new Promise(( resolve, reject ) => {
             CoreLibrary.offeringModule.getHighlight()
                .then(( response ) => {
+                  var online = false;
                   if ( Array.isArray(response.groups) ) {
                      var filteredPaths = response.groups.filter(( value, index, arr ) => {
                         return this.scope.args.filter.indexOf(value.pathTermId) !== -1;
@@ -215,23 +224,20 @@
                         } else {
                            this.scope.appliedFilters.push(filteredPaths[0].pathTermId);
                         }
-                        this.scope.online = true;
+                        online = true;
                         resolve();
                      } else {
-                        this.scope.online = false;
                         reject('No matching filters in highlight, widget is offline');
                      }
                   } else {
-                     this.scope.online = false;
                      reject('Highlight response empty, hiding widget');
                   }
-                  if ( !this.scope.online ) {
+                  if ( online === false ) {
                      this.handleError('widget, offline');
                      reject();
                   }
                })
                .catch(( err ) => {
-                  this.scope.online = false;
                   reject(err);
                });
          });
