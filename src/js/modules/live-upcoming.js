@@ -1,6 +1,3 @@
-String.prototype.capitalize = function () {
-   return this.charAt(0).toUpperCase() + this.slice(1);
-};
 
 var MatchesSchedule = (() => {
    return CoreLibrary.Component.subclass({
@@ -52,9 +49,13 @@ var MatchesSchedule = (() => {
             maxEvents = events.length,
             dateLocale = CoreLibrary.config.locale.replace(/_/, '-');
 
-         function pad ( n ) {
+         var pad = function ( n ) {
             return n < 10 ? '0' + n : n;
-         }
+         };
+
+         var capitalizeString = function (str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+         };
 
          // en-GB uses a 24 hour format, so we use en-US instead
          if ( dateLocale === 'en-GB' ) {
@@ -68,10 +69,17 @@ var MatchesSchedule = (() => {
                var translate = CoreLibrary.translationModule.getTranslation.bind(CoreLibrary.translationModule),
                   start = new Date(events[i].event.start);
                events[i].customStartTime =
-                  translate((new Date().getDate() === start.getDate() ? 'today' :
-                     (new Date().getDate() === start.getDate() - 1 ? 'tomorrow' : ''))) + ' ' +
+                  translate(
+                     (new Date().getDate() === start.getDate() ?
+                        'today'
+                     :
+                        (new Date().getDate() === start.getDate() - 1 ? 'tomorrow' : ''))
+                  ) + ' ' +
                   pad(start.getDate()) + ' ' +
-                  translate('month' + start.getMonth()).slice(0, 3).capitalize() + ' ' +
+                  capitalizeString(
+                     translate('month' + start.getMonth())
+                        .slice(0, 3)
+                  ) + ' ' +
                   pad(start.getHours()) + ':' +
                   pad(start.getMinutes());
 
