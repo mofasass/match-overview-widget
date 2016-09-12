@@ -1,5 +1,28 @@
 (() => {
 
+   /**
+    * Checks getEventsByFilter response against matching events. Returns null if none found.
+    * @param {Object} response getEventsByFilter response object
+    * @returns {Object|null}
+    */
+   var verifyEventsResponse = function (response) {
+      if (response && Array.isArray(response.events)) {
+         var eventCount = response.events
+            .reduce((c, ev) => ev.event.type === 'ET_MATCH' ? c + 1 : c, 0);
+
+         // found matching events
+         if (eventCount > 0) {
+            return response;
+         }
+
+         // matching events not found
+         return null;
+      }
+
+      // invalid response
+      return null;
+   };
+
    var MatchSchedule = CoreLibrary.Component.subclass({
 
       defaultArgs: {
@@ -62,23 +85,11 @@
 
          // Get the upcoming events
          this.getData = () => {
-            // for testing:
-            // this.scope.appliedFilters = ['/football/world_cup_qualifying_-_europe'];
-            var url = CoreLibrary.widgetModule.createFilterUrl(this.scope.appliedFilters);
-            var replaceString = '#filter/';
-            if ( CoreLibrary.config.routeRoot !== '' ) {
-               replaceString = '#' + CoreLibrary.config.routeRoot + '/filter/';
-            }
-            url = url ? url.replace(replaceString, '') : 'football';
-            CoreLibrary.offeringModule.getEventsByFilter(url)
+            var getEventsFunc = this.scope.args.combineFilters ? this.getEventsCombined : this.getEventsProgressively;
+
+            getEventsFunc(this.scope.appliedFilters)
                .then(( response ) => {
-                  var eventCount = 0;
-                  response.events.forEach((ev) => {
-                     if (ev.event.type === 'ET_MATCH') {
-                        eventCount++;
-                     }
-                  });
-                  if ( response && response.events && eventCount > 0) {
+                  if ( response ) {
                      this.livePollingCount = 0;
 
                      this.handleEvents(response);
@@ -137,6 +148,54 @@
                this.startLivePolling(event.event.id);
             }
          });
+      },
+
+      /**
+       * Fetches events by combining given filters together.
+       * @param {String[]} filters
+       * @returns {Promise.<Object|null>}
+       */
+      getEventsCombined (filters) {
+         var url = CoreLibrary.widgetModule.createFilterUrl(filters);
+         var replaceString = '#filter/';
+
+         if ( CoreLibrary.config.routeRoot !== '' ) {
+            replaceString = '#' + CoreLibrary.config.routeRoot + '/filter/';
+         }
+
+         url = url ? url.replace(replaceString, '') : 'football';
+
+         return CoreLibrary.offeringModule.getEventsByFilter(url)
+            .then(verifyEventsResponse);
+      },
+
+      /**
+       * Fetches events by checking filters one after another until finding matching events.
+       * @param {String[]} filters
+       * @returns {Promise.<Object|null>}
+       */
+      getEventsProgressively (filters) {
+         // start searching for events
+         return Promise.resolve(0)
+            .then(function loop (i) {
+               if (i >= filters.length) {
+                  // no more filters to check
+                  return null;
+               }
+
+               // checking ith filter
+               return CoreLibrary.offeringModule.getEventsByFilter(filters[i].replace(/^\//, ''))
+                  .then(verifyEventsResponse)
+                  .then((response) => {
+                     if (response !== null) {
+                        return response;
+                     }
+
+                     // matching events not found, proceed to next filter
+                     return Promise.resolve(i + 1)
+                        .then(loop);
+                  });
+            });
       },
 
       /**
@@ -216,14 +275,9 @@
                      });
                      if ( filteredPaths.length > 0 ) {
                         console.debug('Found ' + filteredPaths.length + ' supported filter(s), widget is online');
-                        // If we are combining filters, check that there are more than one, otherwise we should show the single filter
-                        if ( this.scope.args.combineFilters === true && filteredPaths.length > 1 ) {
-                           filteredPaths.forEach(( path ) => {
-                              this.scope.appliedFilters.push(path.pathTermId);
-                           });
-                        } else {
-                           this.scope.appliedFilters.push(filteredPaths[0].pathTermId);
-                        }
+                        filteredPaths.forEach(( path ) => {
+                           this.scope.appliedFilters.push(path.pathTermId);
+                        });
                         online = true;
                         resolve();
                      } else {
@@ -327,6 +381,7 @@
        * @returns {boolean}
        */
       is_mobile () {
+
          var testBrowser = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
          return this.mainElement.offsetWidth <= 768 && ('ontouchstart' in window) && testBrowser;
       },
