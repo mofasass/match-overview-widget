@@ -48,7 +48,6 @@
          combineFilters: false,
          customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/{customer}/style.css',
          customCssUrlFallback: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/kambi/style.css',
-         criterionId: '',
          pollingInterval: 30000,
          pollingCount: 4
       },
@@ -295,51 +294,6 @@
                   reject(err);
                });
          });
-
-      },
-
-      /**
-       * Goes through an array of events filters out the events with betoffers that can be mapped based on their criterion id
-       * @param {Array} events An array of event objects containing events and betOffers
-       * @returns {{groups: Array, goldenBoot: Array, tournamentWinner: Array}}
-       */
-      filterOutBetOffers ( events ) {
-         // The return object
-         var ret = [];
-
-         // Iterate over the events array
-         var i = 0, len = events.length;
-         for ( ; i < len; ++i ) {
-            // Check if the event has one and only one betOffer
-            if ( events[i].betOffers != null && events[i].betOffers ) {
-               // Check if the criterion id is one we've mapped
-               if ( this.scope.args.criterionIds && this.scope.args.criterionIds === events[i].betOffers[0].criterion.id ) {
-                  // Sort betoffer outcomes
-                  this.sortOutcomes(events[i].betOffers[0].outcomes);
-                  // If the return array is empty, add it
-                  if ( ret.length === 0 ) {
-                     ret.push(events[i]);
-                  }
-                  // if a live event, replace/add to the return array
-                  if ( events[i].betOffers[0].live === true ) {
-                     ret = [events[i]];
-                  }
-               }
-            }
-         }
-
-         return ret;
-      },
-
-      /**
-       * Sorts outcomes
-       * @param outcomes
-       * @returns {Array.<T>}
-       */
-      sortOutcomes ( outcomes ) {
-         return outcomes.sort(( outcomeA, outcomeB ) => {
-            return outcomeA.odds - outcomeB.odds;
-         });
       },
 
       /**
@@ -381,7 +335,6 @@
        * @returns {boolean}
        */
       is_mobile () {
-
          var testBrowser = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
          return this.mainElement.offsetWidth <= 768 && ('ontouchstart' in window) && testBrowser;
       },
