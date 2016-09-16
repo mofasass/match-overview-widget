@@ -343,7 +343,7 @@
        * Check if we are in a mobile or desktop and then set the correct image for the svg blend filter
        */
       blendBackground () {
-         var svgBlend = document.querySelector('feImage[result="slide2"]');
+         var svgBlend = document.querySelector('#background-image');
          var background = 'custom/overview-bw-bg-desktop.jpg';
          if ( this.scope.is_mobile ) {
             background = 'custom/overview-bw-bg-mobile.jpg';
