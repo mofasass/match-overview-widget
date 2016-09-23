@@ -84,7 +84,7 @@
 
          // Get the upcoming events
          this.getData = () => {
-            var getEventsFunc = this.scope.args.combineFilters ? this.getEventsCombined : this.getEventsProgressively;
+            var getEventsFunc = this.scope.args.combineFilters ? this.getEventsCombined.bind(this) : this.getEventsProgressively.bind(this);
 
             getEventsFunc(this.scope.appliedFilters)
                .then(( response ) => {
@@ -157,6 +157,7 @@
       getEventsCombined (filters) {
          var url = CoreLibrary.widgetModule.createFilterUrl(filters);
          var replaceString = '#filter/';
+         this.scope.logoName = 'combined-filters';
 
          if ( CoreLibrary.config.routeRoot !== '' ) {
             replaceString = '#' + CoreLibrary.config.routeRoot + '/filter/';
@@ -175,26 +176,35 @@
        */
       getEventsProgressively (filters) {
          // start searching for events
+         var loop = (i) => {
+            if (i >= filters.length) {
+               // no more filters to check
+               return null;
+            }
+            // checking ith filter
+            return CoreLibrary.offeringModule.getEventsByFilter(filters[i].replace(/^\//, ''))
+               // uncomment this to test falling back to the second filter
+               // .then((res) => {
+               //    if (i < 1) {
+               //       res.events = [];
+               //    }
+               //    return res;
+               // })
+               .then(verifyEventsResponse)
+               .then((response) => {
+                  if (response !== null) {
+                     this.scope.logoName = filters[i].substring(1).replace(/\//g, '-');
+                     return response;
+                  }
+
+                  // matching events not found, proceed to next filter
+                  return Promise.resolve(i + 1)
+                     .then(loop);
+               });
+         };
+
          return Promise.resolve(0)
-            .then(function loop (i) {
-               if (i >= filters.length) {
-                  // no more filters to check
-                  return null;
-               }
-
-               // checking ith filter
-               return CoreLibrary.offeringModule.getEventsByFilter(filters[i].replace(/^\//, ''))
-                  .then(verifyEventsResponse)
-                  .then((response) => {
-                     if (response !== null) {
-                        return response;
-                     }
-
-                     // matching events not found, proceed to next filter
-                     return Promise.resolve(i + 1)
-                        .then(loop);
-                  });
-            });
+            .then(loop);
       },
 
       /**
