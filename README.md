@@ -1,6 +1,6 @@
 # match-overview-widget
 
-![](https://github.com/kambi-sportsbook-widgets/match-overview-widget/blob/master/screenshot.png?raw=true)
+![](./screenshot.png?raw=true)
 
 A widget showing the match schedule of upcoming matches in a scrollable list. The matches shown are based in the highlights (the popular list in the sportsbook). The matches are ordered by their start date.
 
