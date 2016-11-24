@@ -1,6 +1,6 @@
 # match-overview-widget
 
-![](./screenshot.png?raw=true)
+![](./screenshot.png)
 
 A widget showing the match schedule of upcoming matches in a scrollable list. The matches shown are based in the highlights (the popular list in the sportsbook). The matches are ordered by their start date.
 
