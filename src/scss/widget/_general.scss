@@ -6,7 +6,7 @@ $left: radial-gradient(ellipse 150px 120px at 0px 130px, rgba(0, 0, 0, 0.9), rgb
 body {
    color: white;
    @extend .l-expander;
-   @include transition(opacity ease-out .3s);
+   @include transition(none !important); // hack to overwrite the core animation on opacity attribute
 }
 
 html {
