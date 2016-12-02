@@ -21,7 +21,7 @@ h4 {
 }
 
 button {
-   
+
    &.kw-link {
       text-decoration: none;
    }
@@ -34,32 +34,31 @@ button {
 .kw-match-schedule {
    position: relative;
    width: 100%;
-   
+
    outcome-component {
-      margin-left: 6px;
-      
+      margin-left: 3px;
+
       button {
          font-size: 13px;
          line-height: 36px;
          margin-left: 0;
          min-width: 50px;
       }
-      
+
       @include device($mobile) {
-         margin-left: 3px;
          .KambiWidget-outcome__flexwrap {
             padding: 0 3px;
          }
       }
-      
+
       .KambiWidget-outcome__label {
          text-transform: capitalize;
       }
-      
+
       &:first-child {
          margin-left: 0;
       }
-      
+
       @include device($mobile) {
          span {
             font-size: 11px;
@@ -67,29 +66,29 @@ button {
          }
       }
    }
-   
+
    .kw-live-now {
       span {
          text-transform: uppercase;
-         
+
          &.red {
             color: red;
             font-style: italic;
          }
       }
-      
+
       .KambiWidget-outcome__label-wrapper {
          @include box-pack(center);
       }
    }
-   
+
    .kw-score {
       font-size: 24px;
       @include device($mobile) {
          font-size: 22px;
       }
    }
-   
+
    .kw-section-header h4,
    .kw-event-path,
    .kw-teams,
@@ -100,17 +99,17 @@ button {
       //   padding-right: 8px;
       //}
    }
-   
+
    .kw-team-name {
       font-size: 14px;
       line-height: 24px;
    }
-   
+
    .kw-team {
       @include flex(1 1 auto);
       @include flexbox();
       @include box-pack(flex-start);
-      
+
       @include device($mobile) {
          .ismobile & {
             height: 24px;
@@ -118,13 +117,13 @@ button {
          }
       }
    }
-   
+
    * {
       @include device($mobile) {
          font-size: 12px;
       }
    }
-   
+
    .iscollapsed & {
       padding-top: 12px;
    }
@@ -148,7 +147,7 @@ button {
    @include device($mobile) {
       //background-image: none;
    }
-   
+
    @include device(sm, min) {
       > .kw-custom-background-small {
          //background-image: none;
@@ -166,5 +165,3 @@ button {
    min-width: 100%;
    min-height: 100%;
 }
-
-
