@@ -1,5 +1,5 @@
 <!doctype html>
-<html id='app'>
+<html>
 <head>
    <title>Match Schedule Widget</title>
    <meta charset="UTF-8">
@@ -15,109 +15,8 @@
    <meta name="apple-mobile-web-app-capable" content="yes">
    <meta name="apple-mobile-web-app-status-bar-style" content="black">
    <meta name="apple-mobile-web-app-title" content="">
-
-   <!-- build:css -->
-   <!-- This section will be replaced in the gulp build process -->
-   <link rel="stylesheet" type="text/css" href="transpiled/css/app.css"/>
-   <!-- endbuild -->
-
-   <link rel="stylesheet" type="text/css" rv-href="widgetCss"/>
-
-   <!--Customer css-->
-   <link rel="stylesheet" type="text/css" rv-href="customCss"/>
-
-   <!-- build:third-party-libs -->
-   <script src="https://s3-eu-west-1.amazonaws.com/kambi-widgets/widget-third-party/v1.2.0/thirdparty.js"></script>
-   <!-- endbuild -->
-
-   <!-- build:kambi-widget-api -->
-   <!-- This section will be replaced in the gulp build process -->
-   <script src="https://c3-static.kambi.com/sb-mobileclient/widget-api/1.0.0.16/kambi-widget-api.js"></script>
-   <!-- endbuild -->
-
-   <!--Necessary css for Firefox to render properly the transparent gradients-->
-   <style>
-      .kw-gradient-left .kw-gradient { mask: url(#gradient_right) }
-
-      .kw-gradient-right .kw-gradient { mask: url(#gradient_left) }
-
-      .kw-gradient { mask: url(#gradient_both) }
-   </style>
 </head>
-<body id="schedule" class="kw-body kw-custom-background kw-custom-background-large KambiWidget-font"
-      rv-class-ismobile="is_mobile" rv-cloak="loaded">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blended-background">
-   <defs>
-      <filter id="myFilter">
-         <feImage id='background-image' xlink:href="#" result="slide2" x="0" y="0" width="100%" preserveAspectRatio="xMidYMid slice"/>
-         <feBlend in2="SourceGraphic" in="slide2" mode="multiply" />
-      </filter>
-   </defs>
-   <rect id="blendRect" x="0" y="0" filter="url(#myFilter)" width="100%" height="100%"/>
-</svg>
-<!--Main-->
-<main id="main" class="kw-main KambiWidget-font">
-
-   <section class="kw-match-schedule kw-scroll-component l-pl-16 l-pr-16 l-pt-12 kw-gradient-left" id="match-schedule"></section>
-
-</main>
-
-<!--Svg's used for transparent gradients on Firefox-->
-<div class="kw-svg">
-   <svg height="0">
-      <mask id="gradient_right" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-         <linearGradient id="svg_right_gradient" gradientUnits="objectBoundingBox" x2="1" y2="0">
-            <stop stop-color="white" stop-opacity="1" offset="0.9"></stop>
-            <stop stop-color="white" stop-opacity="0" offset="1"></stop>
-         </linearGradient>
-         <rect x="0" y="0" width="1" height="1" fill="url(#svg_right_gradient)"></rect>
-      </mask>
-   </svg>
-
-   <svg height="0">
-      <mask id="gradient_both" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-         <linearGradient id="svg_both_gradient" gradientUnits="objectBoundingBox" x2="1" y2="0">
-            <stop stop-color="white" stop-opacity="0" offset="0"></stop>
-            <stop stop-color="white" stop-opacity="0.9" offset="0.1"></stop>
-            <stop stop-color="white" stop-opacity="1" offset="0.5"></stop>
-            <stop stop-color="white" stop-opacity="0.9" offset="0.9"></stop>
-            <stop stop-color="white" stop-opacity="0" offset="1"></stop>
-         </linearGradient>
-         <rect x="0" y="0" width="1" height="1" fill="url(#svg_both_gradient)"></rect>
-      </mask>
-   </svg>
-
-   <svg height="0">
-      <mask id="gradient_left" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-         <linearGradient id="svg_left_gradient" gradientUnits="objectBoundingBox" x2="100%" y2="0">
-            <stop stop-color="white" stop-opacity="0" offset="0"></stop>
-            <stop stop-color="white" stop-opacity="1" offset="0.1"></stop>
-         </linearGradient>
-         <rect x="0" y="0" width="1" height="1" fill="url(#svg_left_gradient)"></rect>
-      </mask>
-   </svg>
-</div>
-
-<!-- build:js -->
-<!-- This section will be replaced in the gulp build process -->
-<script src="/node_modules/widget-core-library/src/transpiled/js/coreLibrary.js"></script>
-<script>
-   CoreLibrary.development = true;
-</script>
-<script src="/node_modules/widget-core-library/src/transpiled/js/Module/utilModule.js"></script>
-<script src="/node_modules/widget-core-library/src/transpiled/js/Module/widgetModule.js"></script>
-<script src="/node_modules/widget-core-library/src/transpiled/js/Module/offeringModule.js"></script>
-<script src="/node_modules/widget-core-library/src/transpiled/js/Module/statisticsModule.js"></script>
-<script src="/node_modules/widget-core-library/src/transpiled/js/Module/translationModule.js"></script>
-<script src="/node_modules/widget-core-library/src/transpiled/js/Component/Component.js"></script>
-<script src="/node_modules/widget-core-library/src/transpiled/js/Component/PaginationComponent/PaginationComponent.js"></script>
-<script src="/node_modules/widget-core-library/src/transpiled/js/Component/OutcomeComponent/OutcomeComponent.js"></script>
-
-<script src="transpiled/js/app.js"></script>
-<script src="transpiled/js/views/live-upcoming.js"></script>
-<script src="transpiled/js/modules/live-upcoming.js"></script>
-<script src="transpiled/js/components/ScrollComponent.js"></script>
-<!-- endbuild -->
-
+<body>
+   <div id="root"></div>
 </body>
 </html>

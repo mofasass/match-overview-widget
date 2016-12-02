@@ -1,0 +1,13 @@
+:local(.general) {
+   display: flex;
+   align-items: center;
+   height: 100%;
+
+   i {
+      display: block;
+      background: no-repeat 50%;
+      background-size: contain;
+      height: 90px;
+      width: 90px;
+   }
+}

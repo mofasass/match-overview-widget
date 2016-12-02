@@ -1,0 +1,89 @@
+*:last-child > :local(.general) {
+   border-right: 0;
+}
+
+:local(.general) {
+   border-right: 1px dotted rgba(255, 255, 255, 0.4);
+   margin-top: 6px;
+   max-width: 350px;
+   width: 350px;
+   height: 120px;
+}
+
+:local(.header) {
+   display: flex;
+   padding-top: 6px;
+   opacity: .9;
+   font-size: 12px;
+   line-height: 24px;
+
+   :local(.group) {
+      flex: 1;
+      padding-left: 16px;
+      justify-content: flex-start;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+   }
+
+   :local(.start) {
+      padding-right: 16px;
+      justify-content: flex-end;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+   }
+}
+
+:local(.teams) {
+   padding: 6px 16px 12px 16px;
+   flex: 1;
+   display: flex;
+}
+
+:local(.team) {
+   flex: 1 1 auto;
+   display: flex;
+   align-items: center;
+
+   .flag {
+      margin-right: 12px;
+      width: 24px;
+      height: 24px;
+   }
+
+   .name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      line-height: 24px;
+   }
+
+   &.home {
+      justify-content: flex-start;
+      margin-right: 6px;
+   }
+
+   &.away {
+      justify-content: flex-end;
+      margin-left: 6px;
+   }
+}
+
+:local(.outcomes) {
+   display: flex;
+   margin-left: 16px;
+   margin-right: 16px;
+
+   > * {
+      margin-left: 6px;
+      flex: 1;
+
+      &:first-child {
+         margin-left: 0;
+      }
+   }
+}
