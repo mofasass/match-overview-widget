@@ -3,6 +3,7 @@ import { TabBarScrolled } from 'kambi-widget-components';
 import store from '../Store/store';
 import live from '../Store/live';
 import styles from './MatchOverviewWidget.scss';
+import BlendedBackground from './BlendedBackground';
 import Event from './Event';
 import ArrowButton from './ArrowButton';
 import TabContainer from './TabContainer';
@@ -88,23 +89,7 @@ class MatchOverviewWidget extends Component {
    render() {
       return (
          <div className={styles.widget}>
-            <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' className={styles.background}>
-               <defs>
-                  <filter id='myFilter'>
-                     <feImage
-                        id='background-image'
-                        xlinkHref='src/custom/overview-bw-bg-desktop.jpg'
-                        result='slide2'
-                        x='0'
-                        y='0'
-                        width='100%'
-                        preserveAspectRatio='xMidYMid slice'
-                     />
-                     <feBlend in2='SourceGraphic' in='slide2' mode='multiply' />
-                  </filter>
-               </defs>
-               <rect id='blendRect' x='0' y='0' filter='url(#myFilter)' width='100%' height='100%' />
-            </svg>
+            <BlendedBackground />
             <TabBarScrolled
                renderPrevButton={props => <ArrowButton type='left' {...props} />}
                renderNextButton={props => <ArrowButton type='right' {...props} />}
