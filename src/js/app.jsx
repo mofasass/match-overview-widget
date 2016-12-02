@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { coreLibrary, widgetModule } from 'kambi-widget-core-library';
+import { coreLibrary, eventsModule, widgetModule } from 'kambi-widget-core-library';
 import store from './Store/store';
 import live from './Store/live';
 import MatchOverviewWidget from './Components/MatchOverviewWidget';
@@ -27,14 +27,16 @@ coreLibrary.init({
       '/football/belgium/jupiler_pro_league',
       '/football/netherlands/eredivisie'
    ],
-   combineFilters: false,
+   combineFilters: true,
    customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/{customer}/style.css',
    customCssUrlFallback: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/kambi/style.css',
    pollingInterval: 30000,
-   pollingCount: 4
+   pollingCount: 4,
+   eventsRefreshInterval: 120000
 })
 .then(() => {
    coreLibrary.setWidgetTrackingName(coreLibrary.args.widgetTrackingName);
+   eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval;
    return store.getHighlightedFilters(coreLibrary.args.filter);
 })
 .then((filters) => {
@@ -49,8 +51,8 @@ coreLibrary.init({
       <MatchOverviewWidget
          filters={filters}
          combineFilters={coreLibrary.args.combineFilters}
-         pollingInterval={coreLibrary.args.pollingInterval}
-         pollingLimit={coreLibrary.args.pollingCount}
+         liveEventsLimit={coreLibrary.args.pollingCount}
+         eventsRefreshInterval={coreLibrary.args.eventsRefreshInterval}
       />,
       document.getElementById('root')
    );

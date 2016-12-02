@@ -38,6 +38,7 @@ Arguments and default values:
     "customCssUrlFallback": "https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/kambi/style.css",
     "pollingInterval": 30000,
     "pollingCount": 4,
+    "eventsRefreshInterval": 120000,
     "widgetTrackingName": "gm-match-overview-widget",
 }
 ```
@@ -48,7 +49,8 @@ Arguments and default values:
 4. `customCssUrlFallback` - string - path to load CSS from in case customCssUrl does not exist
 5. `pollingInterval` - number - interval in milliseconds to get new live data from live matches
 6. `pollingCount` - number - maximum number of matches to poll for live data at the same time
-7. `widgetTrackingName` - string - tracking name for analytics purposes
+7. `eventsRefreshInterval` - number - interval in milliseconds to look for live events
+8. `widgetTrackingName` - string - tracking name for analytics purposes
 
 ### Build Instructions
 

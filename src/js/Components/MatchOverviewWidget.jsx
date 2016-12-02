@@ -43,7 +43,7 @@ class MatchOverviewWidget extends Component {
 
    get liveEvents() {
       return this.state.events.reduce((events, event) => {
-         if (events.length >= this.state.pollingLimit) {
+         if (events.length >= this.props.liveEventsLimit) {
             return events;
          }
 
@@ -66,9 +66,15 @@ class MatchOverviewWidget extends Component {
             });
          })
          .then(() => {
+            const liveEvents = this.liveEvents;
+
+            if (liveEvents.length == 0) {
+               setTimeout(this.refreshEvents.bind(this), this.props.eventsRefreshInterval);
+            }
+
             // subscribe to notifications on live events
             live.subscribeToEvents(
-               this.liveEvents.map(event => event.event.id),
+               liveEvents.map(event => event.event.id),
                this.onLiveEventData.bind(this),
                this.refreshEvents.bind(this)
             );
@@ -85,7 +91,15 @@ class MatchOverviewWidget extends Component {
             <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' className={styles.background}>
                <defs>
                   <filter id='myFilter'>
-                     <feImage id='background-image' xlinkHref='src/custom/overview-bw-bg-desktop.jpg' result='slide2' x='0' y='0' width='100%' preserveAspectRatio='xMidYMid slice' />
+                     <feImage
+                        id='background-image'
+                        xlinkHref='src/custom/overview-bw-bg-desktop.jpg'
+                        result='slide2'
+                        x='0'
+                        y='0'
+                        width='100%'
+                        preserveAspectRatio='xMidYMid slice'
+                     />
                      <feBlend in2='SourceGraphic' in='slide2' mode='multiply' />
                   </filter>
                </defs>
@@ -107,14 +121,14 @@ class MatchOverviewWidget extends Component {
 MatchOverviewWidget.propTypes = {
    filters: PropTypes.arrayOf(PropTypes.string),
    combineFilters: PropTypes.bool,
-   pollingInterval: PropTypes.number,
-   pollingLimit: PropTypes.number
+   liveEventsLimit: PropTypes.number,
+   eventsRefreshInterval: PropTypes.number
 };
 
 MatchOverviewWidget.defaultProps = {
    combineFilters: false,
-   pollingInterval: 30000,
-   pollingLimit: 4
+   liveEventsLimit: 4,
+   eventsRefreshInterval: 120000
 };
 
 export default MatchOverviewWidget;

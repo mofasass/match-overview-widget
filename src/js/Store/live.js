@@ -4,11 +4,19 @@ const handlers = {};
 
 const unsubscribeFromEvents = function(eventIds) {
    eventIds.map((eventId) => {
-      eventsModule.unsubscribe(`LIVE:EVENT:${eventId}`, handlers[eventId].data);
-      eventsModule.unsubscribe(`LIVE:EVENT:${eventId}:REMOVED`, handlers[eventId].removed);
+      eventsModule.unsubscribe(`LIVE:EVENTDATA:${eventId}`, handlers[eventId].onData);
+      eventsModule.unsubscribe(`LIVE:EVENTDATA:${eventId}:REMOVED`, handlers[eventId].onRemoved);
       delete handlers[eventId];
       console.debug('unsubscribed', eventId);
    });
+};
+
+const createEventDataHandler = function() {
+   return (liveEventData) => {
+      if (!liveEventData.open) {
+         handlers[liveEventData.eventId].onRemoved(liveEventData.eventId);
+      }
+   }
 };
 
 const createEventRemovedHandler = function(activeEventIds, onDrained) {
@@ -31,14 +39,16 @@ const createEventRemovedHandler = function(activeEventIds, onDrained) {
 };
 
 const subscribeToEvents = function(eventIds, onData, onDrained) {
+   const activeEventIds = eventIds.slice();
+
    eventIds.map((eventId) => {
       handlers[eventId] = {
-         data: onData,
-         removed: createEventRemovedHandler(eventIds.slice(), onDrained)
+         onData: createEventDataHandler.call(handlers[eventId]),
+         onRemoved: createEventRemovedHandler(activeEventIds, onDrained)
       };
 
-      eventsModule.subscribe(`LIVE:EVENT:${eventId}`, handlers[eventId].data);
-      eventsModule.subscribe(`LIVE:EVENT:${eventId}:REMOVED`, handlers[eventId].removed);
+      eventsModule.subscribe(`LIVE:EVENTDATA:${eventId}`, handlers[eventId].onData);
+      eventsModule.subscribe(`LIVE:EVENTDATA:${eventId}:REMOVED`, handlers[eventId].onRemoved);
 
       console.debug('subscribed', eventId);
    });
