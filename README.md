@@ -43,7 +43,7 @@ Arguments and default values:
 }
 ```
 
-1.  `filter` - Array<string> - list of filters to match agains the highlights. Only matches from these filters will show up in the widget. In order to show the proper logo the logo images must be referenced in the CSS file pointed by `customCssUrl`.
+1.  `filter` - Array<string> - list of filters to match against the highlights. Only matches from these filters will show up in the widget. In order to show the proper logo the logo images must be referenced in the CSS file pointed by `customCssUrl`.
 2. `combineFilters` - boolean - if true will use all the filters that are also with the highlights mixing different tournaments together
 3. `customCssUrl` - string - path to load operator-specific CSS from. The default value customizes the logo shown as well the background color.
 4. `customCssUrlFallback` - string - path to load CSS from in case customCssUrl does not exist

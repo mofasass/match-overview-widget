@@ -96,7 +96,12 @@ class MatchOverviewWidget extends Component {
                renderTabContainer={props => <TabContainer {...props} />}
             >
                <TournamentLogo filter={this.props.combineFilters ? null : this.state.appliedFilter} />
-               {this.state.events.map(event => <Event key={event.event.id} event={event} />)}
+               {this.state.events.map(event =>
+                  <Event
+                     key={event.event.id}
+                     event={event.event}
+                     outcomes={event.betOffers.length > 0 ? event.betOffers[0].outcomes : []}
+                  />)}
             </TabBarScrolled>
          </div>
       );
@@ -104,9 +109,25 @@ class MatchOverviewWidget extends Component {
 }
 
 MatchOverviewWidget.propTypes = {
-   filters: PropTypes.arrayOf(PropTypes.string),
+
+   /**
+    * List of event filters
+    */
+   filters: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+   /**
+    * If true will use all the filters mixing different tournaments together
+    */
    combineFilters: PropTypes.bool,
+
+   /**
+    * Maximum count of events which are live updated
+    */
    liveEventsLimit: PropTypes.number,
+
+   /**
+    * Time (in milliseconds) which must past between subsequent getEventsByFilter api calls
+    */
    eventsRefreshInterval: PropTypes.number
 };
 
