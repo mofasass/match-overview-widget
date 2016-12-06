@@ -100,6 +100,7 @@ class MatchOverviewWidget extends Component {
                   <Event
                      key={event.event.id}
                      event={event.event}
+                     liveData={event.liveData}
                      outcomes={event.betOffers.length > 0 ? event.betOffers[0].outcomes : []}
                   />)}
             </TabBarScrolled>

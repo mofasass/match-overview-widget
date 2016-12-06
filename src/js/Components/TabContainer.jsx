@@ -11,9 +11,10 @@ const getWidth = function(el) {
 };
 
 const TabContainer = ({ children, selected, onClick, onWidth }) => (
+   // onClick is not wired in order to disable scroll on click
+
    <div
       className={styles.tab}
-      onClick={onClick}
       ref={onWidth ? el => onWidth(getWidth(el)) : undefined}
    >
       {children}
