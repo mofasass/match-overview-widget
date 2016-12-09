@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import mobile from '../Service/mobile';
+import mobile from '../Services/mobile';
 import styles from './BlendedBackground.scss';
 
 /**
