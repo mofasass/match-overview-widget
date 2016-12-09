@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import mobile from '../Store/mobile';
+import mobile from '../Service/mobile';
 import styles from './BlendedBackground.scss';
 
 /**
@@ -72,7 +72,7 @@ class BlendedBackground extends Component {
                   <feBlend in2='SourceGraphic' in='slide2' mode='multiply' />
                </filter>
             </defs>
-            <rect id='blendRect' x='0' y='0' filter='url(#filter)' width='100%' height='100%'/>
+            <rect id='blendRect' x='0' y='0' filter='url(#filter)' width='100%' height='100%' />
          </svg>
       );
    }

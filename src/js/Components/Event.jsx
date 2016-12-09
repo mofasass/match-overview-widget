@@ -55,9 +55,17 @@ class Event extends Component {
       const now = new Date(),
          date = new Date(this.props.event.start);
 
-      return (now.getDate() === date.getDate() ? t('today')
-            : (now.getDate() === date.getDate() - 1 ? t('tomorrow') : ''))
-            + ' ' +
+      const soonStr = (function() {
+         if (now.getDate() === date.getDate()) {
+            return t('today');
+         } else if (now.getDate() === date.getDate() - 1) {
+            return t('tomorrow');
+         } else {
+            return '';
+         }
+      })();
+
+      return soonStr + ' ' +
          pad(date.getDate()) + ' ' +
          // @todo: add translations for months
          cap(t('month' + date.getMonth()).slice(0, 3)) + ' ' +

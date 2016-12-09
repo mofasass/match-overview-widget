@@ -1,11 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { coreLibrary, eventsModule, widgetModule } from 'kambi-widget-core-library';
-import store from './Store/store';
-import live from './Store/live';
-import MatchOverviewWidget from './Components/MatchOverviewWidget';
+import kambi from './Services/kambi';
+import Widget from './Widget';
 
-const liveEventIds = [];
+/**
+ * Removes widget on fatal errors.
+ * @param {Error} error Error instance
+ */
+const onFatal = function(error) {
+   widgetModule.removeWidget();
+   throw error;
+};
 
 coreLibrary.init({
    widgetTrackingName: 'gm-match-overview-widget',
@@ -27,7 +31,7 @@ coreLibrary.init({
       '/football/belgium/jupiler_pro_league',
       '/football/netherlands/eredivisie'
    ],
-   combineFilters: true,
+   combineFilters: false,
    customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/{customer}/style.css',
    customCssUrlFallback: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/kambi/style.css',
    pollingInterval: 30000,
@@ -37,27 +41,22 @@ coreLibrary.init({
 .then(() => {
    coreLibrary.setWidgetTrackingName(coreLibrary.args.widgetTrackingName);
    eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval;
-   return store.getHighlightedFilters(coreLibrary.args.filter);
+   return kambi.getHighlightedFilters(coreLibrary.args.filter);
 })
 .then((filters) => {
    if (filters.length === 0) {
-      console.warn('No matching filters in highlight');
-
-      // @todo: exceptions are not for flow control
-      throw new Error('No matching filters in highlight');
+      onFatal(new Error('No matching filters in highlight'));
+      return;
    }
 
-   ReactDOM.render(
-      <MatchOverviewWidget
-         filters={filters}
-         combineFilters={coreLibrary.args.combineFilters}
-         liveEventsLimit={coreLibrary.args.pollingCount}
-         eventsRefreshInterval={coreLibrary.args.eventsRefreshInterval}
-      />,
-      document.getElementById('root')
+   const widget = new Widget(
+      filters,
+      {
+         combineFilters: coreLibrary.args.combineFilters,
+         eventsRefreshInterval: coreLibrary.args.eventsRefreshInterval,
+         pollingCount: coreLibrary.args.pollingCount,
+         onFatal
+      }
    );
 })
-.catch((error) => {
-   widgetModule.removeWidget();
-   throw error;
-});
+.catch(onFatal);
