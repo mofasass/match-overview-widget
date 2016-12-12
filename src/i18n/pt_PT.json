@@ -1,1 +1,18 @@
-{}
+{
+   "Live": "Ao vivo",
+   "Right Now": "Agora mesmo",
+   "month0": "Janeiro",
+   "month1": "Fevereiro",
+   "month2": "Março",
+   "month3": "Abril",
+   "month4": "Maio",
+   "month5": "Junho",
+   "month6": "Julho",
+   "month7": "Agosto",
+   "month8": "Setembro",
+   "month9": "Outubro",
+   "month10": "Novembro",
+   "month11": "Dezembro",
+   "today": "Hoje",
+   "tomorrow": "Amanhã"
+}

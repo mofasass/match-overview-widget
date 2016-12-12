@@ -1,1 +1,18 @@
-{}
+{
+   "Live": "Live",
+   "Right Now": "Nu meteen",
+   "month0": "januari",
+   "month1": "februari",
+   "month2": "maart",
+   "month3": "april",
+   "month4": "mei",
+   "month5": "juni",
+   "month6": "juli",
+   "month7": "augustus",
+   "month8": "september",
+   "month9": "oktober",
+   "month10": "november",
+   "month11": "december",
+   "today": "Vandaag",
+   "tomorrow": "Morgen"
+}
