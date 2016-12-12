@@ -25,7 +25,7 @@ const unsubscribeFromEvents = function(eventIds) {
  * @param {function} onUpdate Called on event's live data update
  * @returns {function(object)}
  */
-const createEventDataHandler = function(onUpdate) {
+const createEventUpdateHandler = function(onUpdate) {
    return (liveEventData) => {
       onUpdate(liveEventData);
 
@@ -71,7 +71,7 @@ const subscribeToEvents = function(eventIds, onUpdate, onDrained) {
 
    eventIds.map((eventId) => {
       handlers[eventId] = {
-         onUpdate: createEventDataHandler.call(handlers[eventId], onUpdate),
+         onUpdate: createEventUpdateHandler.call(handlers[eventId], onUpdate),
          onRemoved: createEventRemovedHandler(activeEventIds, onDrained)
       };
 
