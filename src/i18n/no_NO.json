@@ -1,1 +1,18 @@
-{}
+{
+   "Live": "Live",
+   "Right Now": "Akkurat nå",
+   "month0": "Januar",
+   "month1": "Februar",
+   "month2": "Mars",
+   "month3": "April",
+   "month4": "Mai",
+   "month5": "Juni",
+   "month6": "Juli",
+   "month7": "August",
+   "month8": "September",
+   "month9": "Oktober",
+   "month10": "November",
+   "month11": "Desember",
+   "today": "I dag",
+   "tomorrow": "I morgen"
+}

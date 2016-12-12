@@ -1,1 +1,18 @@
-{}
+{
+   "Live": "Live",
+   "Right Now": "Praegu",
+   "month0": "Jaanuar",
+   "month1": "Veebruar",
+   "month2": "Märts",
+   "month3": "Aprill",
+   "month4": "Mai",
+   "month5": "Juuni",
+   "month6": "Juuli",
+   "month7": "August",
+   "month8": "September",
+   "month9": "Oktoober",
+   "month10": "November",
+   "month11": "Detsember",
+   "today": "Täna",
+   "tomorrow": "Homme"
+}

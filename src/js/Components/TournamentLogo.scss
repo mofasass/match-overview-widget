@@ -1,0 +1,19 @@
+@import '~kambi-widget-core-library/src/scss/core.scss';
+
+:local(.general) {
+   display: flex;
+   align-items: center;
+   height: 120px;
+
+   i {
+      background: no-repeat 50%;
+      background-size: contain;
+      height: 90px;
+      width: 90px;
+
+      @media (max-width: $screen-sm) {
+         height: 80px;
+         width: 80px;
+      }
+   }
+}

@@ -1,1 +1,18 @@
-{}
+{
+   "Live": "Livenä",
+   "Right Now": "Juuri nyt",
+   "month0": "Tammikuu",
+   "month1": "Helmikuu",
+   "month2": "Maaliskuu",
+   "month3": "Huhtikuu",
+   "month4": "Toukokuu",
+   "month5": "Kesäkuu",
+   "month6": "Heinäkuu",
+   "month7": "Elokuu",
+   "month8": "Syyskuu",
+   "month9": "Lokakuu",
+   "month10": "Marraskuu",
+   "month11": "Joulukuu",
+   "today": "Tänään",
+   "tomorrow": "Huomenna"
+}

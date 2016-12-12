@@ -1,1 +1,18 @@
-{}
+{
+   "Live": "Live",
+   "Right Now": "Právě teď",
+   "month0": "leden",
+   "month1": "únor",
+   "month2": "březen",
+   "month3": "duben",
+   "month4": "květen",
+   "month5": "červen",
+   "month6": "červenec",
+   "month7": "srpen",
+   "month8": "září",
+   "month9": "říjen",
+   "month10": "listopad",
+   "month11": "prosinec",
+   "today": "Dnes",
+   "tomorrow": "Zítra"
+}

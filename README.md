@@ -38,17 +38,19 @@ Arguments and default values:
     "customCssUrlFallback": "https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/kambi/style.css",
     "pollingInterval": 30000,
     "pollingCount": 4,
+    "eventsRefreshInterval": 120000,
     "widgetTrackingName": "gm-match-overview-widget",
 }
 ```
 
-1.  `filter` - Array<string> - list of filters to match agains the highlights. Only matches from these filters will show up in the widget. In order to show the proper logo the logo images must be referenced in the CSS file pointed by `customCssUrl`.
+1.  `filter` - Array<string> - list of filters to match against the highlights. Only matches from these filters will show up in the widget. In order to show the proper logo the logo images must be referenced in the CSS file pointed by `customCssUrl`.
 2. `combineFilters` - boolean - if true will use all the filters that are also with the highlights mixing different tournaments together
 3. `customCssUrl` - string - path to load operator-specific CSS from. The default value customizes the logo shown as well the background color.
 4. `customCssUrlFallback` - string - path to load CSS from in case customCssUrl does not exist
 5. `pollingInterval` - number - interval in milliseconds to get new live data from live matches
 6. `pollingCount` - number - maximum number of matches to poll for live data at the same time
-7. `widgetTrackingName` - string - tracking name for analytics purposes
+7. `eventsRefreshInterval` - number - interval in milliseconds to look for live events
+8. `widgetTrackingName` - string - tracking name for analytics purposes
 
 ### Build Instructions
 
