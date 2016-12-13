@@ -99,10 +99,15 @@
                      }
 
                      // Delayed value to be passed on rv-cloak binder
+                     this.scope.loaded = true;
+                     this.adjustHeight();
                      setTimeout(() => {
                         this.adjustHeight();
-                        this.scope.loaded = true;
-                     }, 200);
+                     });
+                     //setTimeout(() => {
+                        // this.adjustHeight();
+                        // this.scope.loaded = true;
+                     //}, 200);
                   } else {
                      this.handleError('not enough events');
                   }
