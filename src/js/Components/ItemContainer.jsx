@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import styles from './TabContainer.scss';
+import styles from './ItemContainer.scss';
 
 /**
  * Returns DOM element's width (in pixels)
@@ -10,18 +10,18 @@ const getWidth = function(el) {
    return el ? el.offsetWidth : null;
 };
 
-const TabContainer = ({ children, selected, onClick, onWidth }) => (
+const ItemContainer = ({ children, selected, onClick, onWidth }) => (
    // onClick is not wired in order to disable scroll on click
 
    <div
-      className={styles.tab}
+      className={styles.item}
       ref={onWidth ? el => onWidth(getWidth(el)) : undefined}
    >
       {children}
    </div>
 );
 
-TabContainer.propTypes = {
+ItemContainer.propTypes = {
    /**
     * On click handler
     */
@@ -43,4 +43,4 @@ TabContainer.propTypes = {
    onWidth: PropTypes.func
 };
 
-export default TabContainer;
+export default ItemContainer;

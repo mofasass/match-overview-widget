@@ -1,19 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-import { TabBarScrolled } from 'kambi-widget-components';
+import { ScrolledList } from 'kambi-widget-components';
 import styles from './MatchOverviewWidget.scss';
 import BlendedBackground from './BlendedBackground';
 import Event from './Event';
 import ArrowButton from './ArrowButton';
-import TabContainer from './TabContainer';
+import ItemContainer from './ItemContainer';
 import TournamentLogo from './TournamentLogo';
 
 const MatchOverviewWidget = ({ events, tournamentLogo }) => (
    <div className={styles.widget}>
       <BlendedBackground />
-      <TabBarScrolled
+      <ScrolledList
          renderPrevButton={props => <ArrowButton type='left' {...props} />}
          renderNextButton={props => <ArrowButton type='right' {...props} />}
-         renderTabContainer={props => <TabContainer {...props} />}
+         renderItemContainer={props => <ItemContainer {...props} />}
       >
          <TournamentLogo logoClassName={tournamentLogo} />
          {events.map(event =>
@@ -23,7 +23,7 @@ const MatchOverviewWidget = ({ events, tournamentLogo }) => (
                liveData={event.liveData}
                outcomes={event.betOffers.length > 0 ? event.betOffers[0].outcomes : []}
             />)}
-      </TabBarScrolled>
+      </ScrolledList>
    </div>
 );
 
@@ -38,6 +38,7 @@ MatchOverviewWidget.propTypes = {
     * Tournament logo class name.
     */
    tournamentLogo: PropTypes.string
+
 };
 
 MatchOverviewWidget.defaultProps = {
