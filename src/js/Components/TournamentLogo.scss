@@ -10,10 +10,5 @@
       background-size: contain;
       height: 90px;
       width: 90px;
-
-      @media (max-width: $screen-sm) {
-         height: 80px;
-         width: 80px;
-      }
    }
 }
