@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import mobile from '../Services/mobile';
 import styles from './BlendedBackground.scss';
+import bgDesktop from '../../custom/overview-bw-bg-desktop.jpg';
+import bgMobile from '../../custom/overview-bw-bg-mobile.jpg';
 
 /**
  * Desktop background file path
@@ -67,7 +69,7 @@ class BlendedBackground extends Component {
                      y='0'
                      width='100%'
                      preserveAspectRatio='xMidYMid slice'
-                     xlinkHref={this.state.mobile ? BG_IMAGE_MOBILE : BG_IMAGE_DESKTOP}
+                     xlinkHref={this.state.mobile ? bgMobile : bgDesktop}
                   />
                   <feBlend in2='SourceGraphic' in='slide2' mode='multiply' />
                </filter>
