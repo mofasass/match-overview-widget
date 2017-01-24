@@ -34,7 +34,7 @@ coreLibrary.init({
    combineFilters: false,
    customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/{customer}/style.css',
    customCssUrlFallback: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/kambi/style.css',
-   pollingInterval: 31000,
+   pollingInterval: 30000,
    pollingCount: 4,
    eventsRefreshInterval: 120000
 })
