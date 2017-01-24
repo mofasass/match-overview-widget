@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/kambi-sportsbook-widgets/match-overview-widget#readme",
   "devDependencies": {
-    "kambi-widget-build-tools": "^2.5.1"
+    "kambi-widget-build-tools": "^2.5.2"
   },
   "dependencies": {
-    "kambi-widget-components": "1.9.0",
-    "kambi-widget-core-library": "^3.5.6",
+    "kambi-widget-components": "1.11.1",
+    "kambi-widget-core-library": "^3.6.5",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   }
