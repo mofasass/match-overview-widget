@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { widgetModule } from 'kambi-widget-core-library';
 import MatchOverviewWidget from '../Components/MatchOverviewWidget';
 import kambi from '../Services/kambi';
 import live from '../Services/live';
@@ -105,6 +106,7 @@ class Widget {
       this.appliedFilter = null;
 
       refreshEvents.call(this);
+      widgetModule.setWidgetHeight(150);
    }
 
    /**
