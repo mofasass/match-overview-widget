@@ -29,7 +29,7 @@ class Event extends Component {
 
    /**
     * Constructs.
-    * @param props
+    * @param {object} props Component properties
     */
    constructor(props) {
       super(props);

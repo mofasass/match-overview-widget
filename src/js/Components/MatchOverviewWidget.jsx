@@ -6,26 +6,66 @@ import Event from './Event';
 import ArrowButton from './ArrowButton';
 import ItemContainer from './ItemContainer';
 import TournamentLogo from './TournamentLogo';
+import mobile from '../Services/mobile';
 
-const MatchOverviewWidget = ({ events, tournamentLogo }) => (
-   <div className={styles.widget}>
-      <BlendedBackground />
-      <ScrolledList
-         renderPrevButton={props => <ArrowButton type='left' {...props} />}
-         renderNextButton={props => <ArrowButton type='right' {...props} />}
-         renderItemContainer={props => <ItemContainer {...props} />}
-      >
-         <TournamentLogo logoClassName={tournamentLogo} />
-         {events.map(event =>
-            <Event
-               key={event.event.id}
-               event={event.event}
-               liveData={event.liveData}
-               outcomes={event.betOffers.length > 0 ? event.betOffers[0].outcomes : []}
-            />)}
-      </ScrolledList>
-   </div>
-);
+/**
+ * How long (in milliseconds) to wait before scrolling league logo out
+ * @type {number}
+ */
+const MOBILE_INITIAL_SCROLL_DELAY = 200;
+
+class MatchOverviewWidget extends Component {
+
+   /**
+    * Constructs.
+    * @param {object} props Component properties
+    */
+   constructor(props) {
+      super(props);
+
+      this.state = {
+         selected: 0
+      };
+   }
+
+   /**
+    * Called after component rendering to DOM.
+    */
+   componentDidMount() {
+      if (mobile()) {
+         setTimeout(() => this.setState({ selected: 1 }), MOBILE_INITIAL_SCROLL_DELAY);
+      }
+   }
+
+   /**
+    * Renders component.
+    * @returns {XML}
+    */
+   render() {
+      return (
+         <div className={styles.widget}>
+            <BlendedBackground />
+            <ScrolledList
+               renderPrevButton={props => <ArrowButton type='left' {...props} />}
+               renderNextButton={props => <ArrowButton type='right' {...props} />}
+               renderItemContainer={props => <ItemContainer {...props} />}
+               selected={this.state.selected}
+               scrollToItemMode={ScrolledList.SCROLL_TO_ITEM_MODE.TO_LEFT}
+            >
+               <TournamentLogo logoClassName={this.props.tournamentLogo} />
+               {this.props.events.map(event =>
+                  <Event
+                     key={event.event.id}
+                     event={event.event}
+                     liveData={event.liveData}
+                     outcomes={event.betOffers.length > 0 ? event.betOffers[0].outcomes : []}
+                  />)}
+            </ScrolledList>
+         </div>
+      );
+   }
+
+}
 
 MatchOverviewWidget.propTypes = {
 
