@@ -12,7 +12,7 @@ import mobile from '../Services/mobile';
  * How long (in milliseconds) to wait before scrolling league logo out
  * @type {number}
  */
-const MOBILE_INITIAL_SCROLL_DELAY = 200;
+const MOBILE_INITIAL_SCROLL_DELAY = 2000;
 
 class MatchOverviewWidget extends Component {
 
