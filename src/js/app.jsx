@@ -7,8 +7,8 @@ import Widget from './Widget';
  * @param {Error} error Error instance
  */
 const onFatal = function(error) {
+   console.error(error);
    widgetModule.removeWidget();
-   throw error;
 };
 
 coreLibrary.init({
