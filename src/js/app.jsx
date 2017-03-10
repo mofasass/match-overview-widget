@@ -39,7 +39,7 @@ coreLibrary.init({
    eventsRefreshInterval: 120000
 })
 .then(() => {
-   coreLibrary.setWidgetTrackingName(coreLibrary.args.widgetTrackingName);
+   coreLibrary.widgetTrackingName = coreLibrary.args.widgetTrackingName;
    eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval;
    return kambi.getHighlightedFilters(coreLibrary.args.filter);
 })

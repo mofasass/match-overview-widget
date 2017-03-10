@@ -51,6 +51,7 @@ class MatchOverviewWidget extends Component {
                renderItemContainer={props => <ItemContainer {...props} />}
                selected={this.state.selected}
                scrollToItemMode={ScrolledList.SCROLL_TO_ITEM_MODE.TO_LEFT}
+               showControls={!mobile()}
             >
                <TournamentLogo logoClassName={this.props.tournamentLogo} />
                {this.props.events.map(event =>
