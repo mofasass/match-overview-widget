@@ -29,7 +29,12 @@ coreLibrary.init({
       '/football/world_cup_qualifying_-_north__central___caribbean',
       '/football/world_cup_qualifying_-_south_america',
       '/football/belgium/jupiler_pro_league',
-      '/football/netherlands/eredivisie'
+      '/football/netherlands/eredivisie',
+      '/football/england/fa_cup',
+      '/football/iceland/league_cup',
+      '/football/italy/serie_b',
+      '/football/spain/copa_del_rey',
+      '/football/italy/tim_cup'
    ],
    combineFilters: false,
    customCssUrl: 'https://d1fqgomuxh4f5p.cloudfront.net/customcss/match-overview-widget/{customer}/style.css',
