@@ -17,11 +17,13 @@ jest.mock('kambi-widget-core-library', () => ({
 
 let renderer;
 
-const DAY = 24 * 60 * 60 * 1000;
+const BEGIN_TIME = new Date('2017-01-09 09:00:00').getTime();
+const BEGIN_TIME_2 = new Date('2017-01-10 09:00:00').getTime();
+const BEGIN_TIME_3 = new Date('2017-01-11 09:00:00').getTime();
 
 const mockEvent = {
    id: 100,
-   start: 10 * DAY,
+   start: BEGIN_TIME,
    group: 'Test group',
    homeName: 'Sweden',
    homeFlag: {
@@ -53,7 +55,7 @@ describe('Event DOM rendering', () => {
    beforeEach(() => {
       renderer = ReactTestUtils.createRenderer();
 
-      window.Date = function(input = 10 * DAY) {
+      window.Date = function(input = BEGIN_TIME) {
 
          this.date = new originalDate(input);
 
@@ -64,7 +66,7 @@ describe('Event DOM rendering', () => {
       };
 
       window.Date.now = () => {
-         return 10 * DAY;
+         return BEGIN_TIME;
       };
 
    });
@@ -82,7 +84,7 @@ describe('Event DOM rendering', () => {
    it('renders correctly with event starting today', () => {
       expect(renderer.render(
          <Event
-            event={Object.assign(mockEvent, {start: 10 * DAY})}
+            event={Object.assign(mockEvent, {start: BEGIN_TIME})}
          />
       )).toMatchSnapshot();
    });
@@ -90,7 +92,7 @@ describe('Event DOM rendering', () => {
    it('renders correctly with event starting tomorrow', () => {
       expect(renderer.render(
          <Event
-            event={Object.assign(mockEvent, {start: 11 * DAY})}
+            event={Object.assign(mockEvent, {start: BEGIN_TIME_2})}
          />
       )).toMatchSnapshot();
    });
@@ -98,7 +100,7 @@ describe('Event DOM rendering', () => {
    it('renders correctly with event starting later than tomorrow', () => {
       expect(renderer.render(
          <Event
-            event={Object.assign(mockEvent, {start: 12 * DAY})}
+            event={Object.assign(mockEvent, {start: BEGIN_TIME_3})}
          />
       )).toMatchSnapshot();
    });

@@ -16,7 +16,7 @@ exports[`Event DOM rendering renders correctly with default props 1`] = `
     <div
       className="start"
     >
-      Translated today 11 Tra 01:00
+      Translated today 09 Tra 09:00
        
     </div>
   </div>
@@ -77,7 +77,7 @@ exports[`Event DOM rendering renders correctly with event starting later than to
     <div
       className="start"
     >
-       13 Tra 01:00
+       11 Tra 09:00
        
     </div>
   </div>
@@ -138,7 +138,7 @@ exports[`Event DOM rendering renders correctly with event starting today 1`] = `
     <div
       className="start"
     >
-      Translated today 11 Tra 01:00
+      Translated today 09 Tra 09:00
        
     </div>
   </div>
@@ -199,7 +199,7 @@ exports[`Event DOM rendering renders correctly with event starting tomorrow 1`] 
     <div
       className="start"
     >
-      Translated tomorrow 12 Tra 01:00
+      Translated tomorrow 10 Tra 09:00
        
     </div>
   </div>
@@ -260,7 +260,7 @@ exports[`Event DOM rendering renders correctly with live data 1`] = `
     <div
       className="start"
     >
-       13 Tra 01:00
+       11 Tra 09:00
        
     </div>
   </div>
@@ -345,7 +345,7 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
     <div
       className="start"
     >
-       13 Tra 01:00
+       11 Tra 09:00
        
     </div>
   </div>
@@ -399,7 +399,7 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
           "homeName": "Sweden",
           "id": 100,
           "openForLiveBetting": false,
-          "start": 1036800000,
+          "start": 1484121600000,
         }
       }
       label={true}
@@ -423,7 +423,7 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
           "homeName": "Sweden",
           "id": 100,
           "openForLiveBetting": false,
-          "start": 1036800000,
+          "start": 1484121600000,
         }
       }
       label={true}
