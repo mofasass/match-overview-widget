@@ -104,9 +104,11 @@ class Widget {
 
       this.events = [];
       this.appliedFilter = null;
+   }
 
-      refreshEvents.call(this);
+   init() {
       widgetModule.setWidgetHeight(150);
+      return refreshEvents.call(this);
    }
 
    /**

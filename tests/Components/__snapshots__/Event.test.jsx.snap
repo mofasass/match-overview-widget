@@ -1,0 +1,438 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event DOM rendering renders correctly with default props 1`] = `
+<div
+  className="general"
+>
+  <div
+    className="header"
+    onClick={[Function]}
+  >
+    <div
+      className="group"
+    >
+      Test group
+    </div>
+    <div
+      className="start"
+    >
+      Translated today 11 Tra 01:00
+       
+    </div>
+  </div>
+  <div
+    className="teams"
+    onClick={[Function]}
+  >
+    <div
+      className="team home"
+    >
+      <img
+        alt=""
+        className="flag"
+        src="homeFlagUrl"
+      />
+      <span
+        className="name"
+      >
+        Sweden
+      </span>
+    </div>
+    <div
+      className="team away"
+    >
+      <span
+        className="name"
+      >
+        Poland
+      </span>
+      <img
+        alt=""
+        className="flag"
+        src="awayFlagUrl"
+      />
+    </div>
+  </div>
+  <div
+    className="outcomes"
+  >
+    
+  </div>
+</div>
+`;
+
+exports[`Event DOM rendering renders correctly with event starting later than tomorrow 1`] = `
+<div
+  className="general"
+>
+  <div
+    className="header"
+    onClick={[Function]}
+  >
+    <div
+      className="group"
+    >
+      Test group
+    </div>
+    <div
+      className="start"
+    >
+       13 Tra 01:00
+       
+    </div>
+  </div>
+  <div
+    className="teams"
+    onClick={[Function]}
+  >
+    <div
+      className="team home"
+    >
+      <img
+        alt=""
+        className="flag"
+        src="homeFlagUrl"
+      />
+      <span
+        className="name"
+      >
+        Sweden
+      </span>
+    </div>
+    <div
+      className="team away"
+    >
+      <span
+        className="name"
+      >
+        Poland
+      </span>
+      <img
+        alt=""
+        className="flag"
+        src="awayFlagUrl"
+      />
+    </div>
+  </div>
+  <div
+    className="outcomes"
+  >
+    
+  </div>
+</div>
+`;
+
+exports[`Event DOM rendering renders correctly with event starting today 1`] = `
+<div
+  className="general"
+>
+  <div
+    className="header"
+    onClick={[Function]}
+  >
+    <div
+      className="group"
+    >
+      Test group
+    </div>
+    <div
+      className="start"
+    >
+      Translated today 11 Tra 01:00
+       
+    </div>
+  </div>
+  <div
+    className="teams"
+    onClick={[Function]}
+  >
+    <div
+      className="team home"
+    >
+      <img
+        alt=""
+        className="flag"
+        src="homeFlagUrl"
+      />
+      <span
+        className="name"
+      >
+        Sweden
+      </span>
+    </div>
+    <div
+      className="team away"
+    >
+      <span
+        className="name"
+      >
+        Poland
+      </span>
+      <img
+        alt=""
+        className="flag"
+        src="awayFlagUrl"
+      />
+    </div>
+  </div>
+  <div
+    className="outcomes"
+  >
+    
+  </div>
+</div>
+`;
+
+exports[`Event DOM rendering renders correctly with event starting tomorrow 1`] = `
+<div
+  className="general"
+>
+  <div
+    className="header"
+    onClick={[Function]}
+  >
+    <div
+      className="group"
+    >
+      Test group
+    </div>
+    <div
+      className="start"
+    >
+      Translated tomorrow 12 Tra 01:00
+       
+    </div>
+  </div>
+  <div
+    className="teams"
+    onClick={[Function]}
+  >
+    <div
+      className="team home"
+    >
+      <img
+        alt=""
+        className="flag"
+        src="homeFlagUrl"
+      />
+      <span
+        className="name"
+      >
+        Sweden
+      </span>
+    </div>
+    <div
+      className="team away"
+    >
+      <span
+        className="name"
+      >
+        Poland
+      </span>
+      <img
+        alt=""
+        className="flag"
+        src="awayFlagUrl"
+      />
+    </div>
+  </div>
+  <div
+    className="outcomes"
+  >
+    
+  </div>
+</div>
+`;
+
+exports[`Event DOM rendering renders correctly with live data 1`] = `
+<div
+  className="general"
+>
+  <div
+    className="header"
+    onClick={[Function]}
+  >
+    <div
+      className="group"
+    >
+      Test group
+    </div>
+    <div
+      className="start"
+    >
+       13 Tra 01:00
+       
+    </div>
+  </div>
+  <div
+    className="teams"
+    onClick={[Function]}
+  >
+    <div
+      className="team home"
+    >
+      <img
+        alt=""
+        className="flag"
+        src="homeFlagUrl"
+      />
+      <span
+        className="name"
+      >
+        Sweden
+      </span>
+    </div>
+    <div
+      className="score"
+    >
+      1
+      <small>
+        -
+      </small>
+      5
+    </div>
+    <div
+      className="team away"
+    >
+      <span
+        className="name"
+      >
+        Poland
+      </span>
+      <img
+        alt=""
+        className="flag"
+        src="awayFlagUrl"
+      />
+    </div>
+  </div>
+  <div
+    className="outcomes"
+  >
+    <OutcomeButtonUI
+      label={
+        <span
+          className="liveLabel"
+        >
+          <em>
+            Translated Live
+          </em>
+          Translated Right Now
+        </span>
+      }
+      odds={null}
+      onClick={[Function]}
+      selected={false}
+      suspended={false}
+    />
+  </div>
+</div>
+`;
+
+exports[`Event DOM rendering renders correctly with outcomes 1`] = `
+<div
+  className="general"
+>
+  <div
+    className="header"
+    onClick={[Function]}
+  >
+    <div
+      className="group"
+    >
+      Test group
+    </div>
+    <div
+      className="start"
+    >
+       13 Tra 01:00
+       
+    </div>
+  </div>
+  <div
+    className="teams"
+    onClick={[Function]}
+  >
+    <div
+      className="team home"
+    >
+      <img
+        alt=""
+        className="flag"
+        src="homeFlagUrl"
+      />
+      <span
+        className="name"
+      >
+        Sweden
+      </span>
+    </div>
+    <div
+      className="team away"
+    >
+      <span
+        className="name"
+      >
+        Poland
+      </span>
+      <img
+        alt=""
+        className="flag"
+        src="awayFlagUrl"
+      />
+    </div>
+  </div>
+  <div
+    className="outcomes"
+  >
+    <OutcomeButton
+      event={
+        Object {
+          "awayFlag": Object {
+            "url": "awayFlagUrl",
+          },
+          "awayName": "Poland",
+          "group": "Test group",
+          "homeFlag": Object {
+            "url": "homeFlagUrl",
+          },
+          "homeName": "Sweden",
+          "id": 100,
+          "openForLiveBetting": false,
+          "start": 1036800000,
+        }
+      }
+      label={true}
+      outcome={
+        Object {
+          "id": 200,
+        }
+      }
+    />
+    <OutcomeButton
+      event={
+        Object {
+          "awayFlag": Object {
+            "url": "awayFlagUrl",
+          },
+          "awayName": "Poland",
+          "group": "Test group",
+          "homeFlag": Object {
+            "url": "homeFlagUrl",
+          },
+          "homeName": "Sweden",
+          "id": 100,
+          "openForLiveBetting": false,
+          "start": 1036800000,
+        }
+      }
+      label={true}
+      outcome={
+        Object {
+          "id": 300,
+        }
+      }
+    />
+  </div>
+</div>
+`;

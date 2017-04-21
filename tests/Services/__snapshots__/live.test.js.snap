@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kambi service highlights behaves correctly when receives notification on unregistered event removal 1`] = `"Event not found in active events set: 100"`;

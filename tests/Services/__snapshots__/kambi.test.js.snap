@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kambi service combined events returns empty events list on getEventsByFilter malfunction 1`] = `
+Object {
+  "events": Array [],
+  "filter": "#filter/test/combined/filter",
+}
+`;
+
+exports[`Kambi service combined events returns events correctly 1`] = `
+Object {
+  "events": Array [
+    Object {
+      "event": Object {
+        "type": "ET_MATCH",
+      },
+    },
+  ],
+  "filter": "#filter/test/combined/filter",
+}
+`;
+
+exports[`Kambi service combined events returns football events on createFilterUrl malfunction 1`] = `
+Object {
+  "events": Array [
+    Object {
+      "event": Object {
+        "type": "ET_MATCH",
+      },
+    },
+  ],
+  "filter": null,
+}
+`;
+
+exports[`Kambi service combined events uses correct filter when routeRoot is set 1`] = `
+Object {
+  "events": Array [
+    Object {
+      "event": Object {
+        "type": "ET_MATCH",
+      },
+    },
+  ],
+  "filter": "#test/route/root/filter/test/combined/filter",
+}
+`;
+
+exports[`Kambi service highlights returns highlighted filters correctly 1`] = `
+Array [
+  "test2",
+]
+`;
+
+exports[`Kambi service highlights throws error on malformed highlights result 1`] = `[Error: Highlight response empty, hiding widget]`;
+
+exports[`Kambi service progressive events returns events correctly 1`] = `
+Object {
+  "events": Array [
+    Object {
+      "event": Object {
+        "type": "ET_MATCH",
+      },
+    },
+  ],
+  "filter": "test/filter/2",
+}
+`;

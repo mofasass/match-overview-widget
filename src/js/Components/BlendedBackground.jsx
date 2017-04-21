@@ -1,20 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import mobile from '../Services/mobile';
 import styles from './BlendedBackground.scss';
-import bgDesktop from '../../custom/overview-bw-bg-desktop.jpg';
-import bgMobile from '../../custom/overview-bw-bg-mobile.jpg';
 
 /**
  * Desktop background file path
  * @type {string}
  */
-const BG_IMAGE_DESKTOP = 'src/custom/overview-bw-bg-desktop.jpg';
+const BG_IMAGE_DESKTOP = 'assets/overview-bw-bg-desktop.jpg';
 
 /**
  * Mobile background file path
  * @type {string}
  */
-const BG_IMAGE_MOBILE = 'src/custom/overview-bw-bg-mobile.jpg';
+const BG_IMAGE_MOBILE = 'assets/overview-bw-bg-mobile.jpg';
 
 /**
  * Displays a background image which is blended with actual operator's color theme.
@@ -69,7 +67,7 @@ class BlendedBackground extends Component {
                      y='0'
                      width='100%'
                      preserveAspectRatio='xMidYMid slice'
-                     xlinkHref={this.state.mobile ? bgMobile : bgDesktop}
+                     xlinkHref={this.state.mobile ? BG_IMAGE_MOBILE : BG_IMAGE_DESKTOP}
                   />
                   <feBlend in2='SourceGraphic' in='slide2' mode='multiply' />
                </filter>

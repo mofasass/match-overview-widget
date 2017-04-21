@@ -63,5 +63,7 @@ coreLibrary.init({
          onFatal
       }
    );
+
+   widget.init();
 })
 .catch(onFatal);

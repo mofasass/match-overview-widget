@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemContainer view renders correctly selected state 1`] = `
+<div
+  className="item"
+/>
+`;
+
+exports[`ItemContainer view renders correctly with default props 1`] = `
+<div
+  className="item"
+/>
+`;
+
+exports[`ItemContainer view renders correctly with many child elements 1`] = `
+<div
+  className="item"
+>
+  One Two
+  <ul>
+    <li>
+      Three
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`ItemContainer view renders correctly with one child element 1`] = `
+<div
+  className="item"
+>
+  One
+</div>
+`;

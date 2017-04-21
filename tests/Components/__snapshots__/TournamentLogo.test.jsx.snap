@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event DOM rendering renders correctly with custom logo CSS class name 1`] = `
+<div
+  className="general test_logo_class_name"
+>
+  <i
+    className="kw-custom-logo-large-type"
+  />
+</div>
+`;
+
+exports[`Event DOM rendering renders correctly with default props 1`] = `
+<div
+  className="general combined-filters"
+>
+  <i
+    className="kw-custom-logo-large-type"
+  />
+</div>
+`;

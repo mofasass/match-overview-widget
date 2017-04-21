@@ -15,7 +15,6 @@ const unsubscribeFromEvents = function(eventIds) {
       eventsModule.unsubscribe(`LIVE:EVENTDATA:${eventId}`, handlers[eventId].onUpdate);
       eventsModule.unsubscribe(`LIVE:EVENTDATA:${eventId}:REMOVED`, handlers[eventId].onRemoved);
       delete handlers[eventId];
-      console.debug('unsubscribed', eventId);
    });
 };
 
@@ -43,18 +42,18 @@ const createEventUpdateHandler = function(onUpdate) {
  */
 const createEventRemovedHandler = function(activeEventIds, onDrained) {
    return (eventId) => {
-      unsubscribeFromEvents([eventId]);
-
       const idx = activeEventIds.indexOf(eventId);
 
-      if (idx == -1) {
+      if (idx === -1) {
          console.warn(`Event not found in active events set: ${eventId}`);
          return;
       }
 
+      unsubscribeFromEvents([eventId]);
+
       activeEventIds.splice(idx, 1);
 
-      if (activeEventIds.length == 0) {
+      if (activeEventIds.length === 0) {
          onDrained();
       }
    };
@@ -77,8 +76,6 @@ const subscribeToEvents = function(eventIds, onUpdate, onDrained) {
 
       eventsModule.subscribe(`LIVE:EVENTDATA:${eventId}`, handlers[eventId].onUpdate);
       eventsModule.subscribe(`LIVE:EVENTDATA:${eventId}:REMOVED`, handlers[eventId].onRemoved);
-
-      console.debug('subscribed', eventId);
    });
 };
 

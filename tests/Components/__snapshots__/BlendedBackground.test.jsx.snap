@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlendedBackground DOM rendering renders correctly on mobile device 1`] = `
+<svg
+  className={undefined}
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <filter
+      id="filter"
+    >
+      <feImage
+        preserveAspectRatio="xMidYMid slice"
+        result="slide2"
+        width="100%"
+        x="0"
+        xlinkHref="assets/overview-bw-bg-mobile.jpg"
+        y="0"
+      />
+      <feBlend
+        in="slide2"
+        in2="SourceGraphic"
+        mode="multiply"
+      />
+    </filter>
+  </defs>
+  <rect
+    filter="url(#filter)"
+    height="100%"
+    id="blendRect"
+    width="100%"
+    x="0"
+    y="0"
+  />
+</svg>
+`;
+
+exports[`BlendedBackground DOM rendering renders correctly with default props 1`] = `
+<svg
+  className={undefined}
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <filter
+      id="filter"
+    >
+      <feImage
+        preserveAspectRatio="xMidYMid slice"
+        result="slide2"
+        width="100%"
+        x="0"
+        xlinkHref="assets/overview-bw-bg-desktop.jpg"
+        y="0"
+      />
+      <feBlend
+        in="slide2"
+        in2="SourceGraphic"
+        mode="multiply"
+      />
+    </filter>
+  </defs>
+  <rect
+    filter="url(#filter)"
+    height="100%"
+    id="blendRect"
+    width="100%"
+    x="0"
+    y="0"
+  />
+</svg>
+`;
+
+exports[`BlendedBackground DOM rendering resizes correctly to desktop mode 1`] = `
+<svg
+  className={undefined}
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <filter
+      id="filter"
+    >
+      <feImage
+        preserveAspectRatio="xMidYMid slice"
+        result="slide2"
+        width="100%"
+        x="0"
+        xlinkHref="assets/overview-bw-bg-mobile.jpg"
+        y="0"
+      />
+      <feBlend
+        in="slide2"
+        in2="SourceGraphic"
+        mode="multiply"
+      />
+    </filter>
+  </defs>
+  <rect
+    filter="url(#filter)"
+    height="100%"
+    id="blendRect"
+    width="100%"
+    x="0"
+    y="0"
+  />
+</svg>
+`;
+
+exports[`BlendedBackground DOM rendering resizes correctly to desktop mode 2`] = `
+<svg
+  className={undefined}
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <filter
+      id="filter"
+    >
+      <feImage
+        preserveAspectRatio="xMidYMid slice"
+        result="slide2"
+        width="100%"
+        x="0"
+        xlinkHref="assets/overview-bw-bg-desktop.jpg"
+        y="0"
+      />
+      <feBlend
+        in="slide2"
+        in2="SourceGraphic"
+        mode="multiply"
+      />
+    </filter>
+  </defs>
+  <rect
+    filter="url(#filter)"
+    height="100%"
+    id="blendRect"
+    width="100%"
+    x="0"
+    y="0"
+  />
+</svg>
+`;
+
+exports[`BlendedBackground DOM rendering resizes correctly to mobile mode 1`] = `
+<svg
+  className={undefined}
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <filter
+      id="filter"
+    >
+      <feImage
+        preserveAspectRatio="xMidYMid slice"
+        result="slide2"
+        width="100%"
+        x="0"
+        xlinkHref="assets/overview-bw-bg-desktop.jpg"
+        y="0"
+      />
+      <feBlend
+        in="slide2"
+        in2="SourceGraphic"
+        mode="multiply"
+      />
+    </filter>
+  </defs>
+  <rect
+    filter="url(#filter)"
+    height="100%"
+    id="blendRect"
+    width="100%"
+    x="0"
+    y="0"
+  />
+</svg>
+`;
+
+exports[`BlendedBackground DOM rendering resizes correctly to mobile mode 2`] = `
+<svg
+  className={undefined}
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <filter
+      id="filter"
+    >
+      <feImage
+        preserveAspectRatio="xMidYMid slice"
+        result="slide2"
+        width="100%"
+        x="0"
+        xlinkHref="assets/overview-bw-bg-mobile.jpg"
+        y="0"
+      />
+      <feBlend
+        in="slide2"
+        in2="SourceGraphic"
+        mode="multiply"
+      />
+    </filter>
+  </defs>
+  <rect
+    filter="url(#filter)"
+    height="100%"
+    id="blendRect"
+    width="100%"
+    x="0"
+    y="0"
+  />
+</svg>
+`;
+
+exports[`BlendedBackground DOM rendering stays in proper mode on non-significant screen size change 1`] = `
+<svg
+  className={undefined}
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <filter
+      id="filter"
+    >
+      <feImage
+        preserveAspectRatio="xMidYMid slice"
+        result="slide2"
+        width="100%"
+        x="0"
+        xlinkHref="assets/overview-bw-bg-desktop.jpg"
+        y="0"
+      />
+      <feBlend
+        in="slide2"
+        in2="SourceGraphic"
+        mode="multiply"
+      />
+    </filter>
+  </defs>
+  <rect
+    filter="url(#filter)"
+    height="100%"
+    id="blendRect"
+    width="100%"
+    x="0"
+    y="0"
+  />
+</svg>
+`;
+
+exports[`BlendedBackground DOM rendering stays in proper mode on non-significant screen size change 2`] = `
+<svg
+  className={undefined}
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <filter
+      id="filter"
+    >
+      <feImage
+        preserveAspectRatio="xMidYMid slice"
+        result="slide2"
+        width="100%"
+        x="0"
+        xlinkHref="assets/overview-bw-bg-desktop.jpg"
+        y="0"
+      />
+      <feBlend
+        in="slide2"
+        in2="SourceGraphic"
+        mode="multiply"
+      />
+    </filter>
+  </defs>
+  <rect
+    filter="url(#filter)"
+    height="100%"
+    id="blendRect"
+    width="100%"
+    x="0"
+    y="0"
+  />
+</svg>
+`;

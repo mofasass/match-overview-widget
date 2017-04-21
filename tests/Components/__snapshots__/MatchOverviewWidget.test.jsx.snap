@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchOverviewWidget DOM rendering renders correctly with default props 1`] = `
+<div
+  className="widget"
+>
+  <BlendedBackground />
+  <ScrolledList
+    alignItems="center"
+    renderItemContainer={[Function]}
+    renderNextButton={[Function]}
+    renderPrevButton={[Function]}
+    scrollToItemMode="to-left"
+    selected={0}
+    showControls={true}
+    step={2}
+  >
+    <TournamentLogo
+      logoClassName={null}
+    />
+  </ScrolledList>
+</div>
+`;
+
+exports[`MatchOverviewWidget DOM rendering renders correctly with events 1`] = `
+<div
+  className="widget"
+>
+  <BlendedBackground />
+  <ScrolledList
+    alignItems="center"
+    renderItemContainer={[Function]}
+    renderNextButton={[Function]}
+    renderPrevButton={[Function]}
+    scrollToItemMode="to-left"
+    selected={0}
+    showControls={true}
+    step={2}
+  >
+    <TournamentLogo
+      logoClassName={null}
+    />
+    <Event
+      event={
+        Object {
+          "id": 100,
+        }
+      }
+      liveData={Object {}}
+      outcomes={Array []}
+    />
+    <Event
+      event={
+        Object {
+          "id": 200,
+        }
+      }
+      liveData={Object {}}
+      outcomes={Array []}
+    />
+  </ScrolledList>
+</div>
+`;
+
+exports[`MatchOverviewWidget DOM rendering renders correctly with events and betoffers 1`] = `
+<div
+  className="widget"
+>
+  <BlendedBackground />
+  <ScrolledList
+    alignItems="center"
+    renderItemContainer={[Function]}
+    renderNextButton={[Function]}
+    renderPrevButton={[Function]}
+    scrollToItemMode="to-left"
+    selected={0}
+    showControls={true}
+    step={2}
+  >
+    <TournamentLogo
+      logoClassName={null}
+    />
+    <Event
+      event={
+        Object {
+          "id": 100,
+        }
+      }
+      liveData={Object {}}
+      outcomes={Array []}
+    />
+    <Event
+      event={
+        Object {
+          "id": 200,
+        }
+      }
+      liveData={Object {}}
+      outcomes={Array []}
+    />
+  </ScrolledList>
+</div>
+`;
+
+exports[`MatchOverviewWidget DOM rendering renders correctly with tournament logo 1`] = `
+<div
+  className="widget"
+>
+  <BlendedBackground />
+  <ScrolledList
+    alignItems="center"
+    renderItemContainer={[Function]}
+    renderNextButton={[Function]}
+    renderPrevButton={[Function]}
+    scrollToItemMode="to-left"
+    selected={0}
+    showControls={true}
+    step={2}
+  >
+    <TournamentLogo
+      logoClassName="test_tournament_logo"
+    />
+  </ScrolledList>
+</div>
+`;
+
+exports[`MatchOverviewWidget behaviour mounts correctly in desktop mode 1`] = `
+"<MatchOverviewWidget events={{...}} tournamentLogo={{...}}>
+  <div className=\\"widget\\">
+    <BlendedBackground>
+      <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
+        <defs>
+          <filter id=\\"filter\\">
+            <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-desktop.jpg\\" />
+            <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
+          </filter>
+        </defs>
+        <rect id=\\"blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
+      </svg>
+    </BlendedBackground>
+    <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={0} scrollToItemMode=\\"to-left\\" showControls={true} step={2} alignItems=\\"center\\">
+      <div className=\\"container\\">
+        <div className=\\"eyeshot\\">
+          <div className=\\"bar\\">
+            <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
+              <div className=\\"item\\">
+                <TournamentLogo logoClassName={{...}}>
+                  <div className=\\"general \\">
+                    <i className=\\"kw-custom-logo-large-type\\" />
+                  </div>
+                </TournamentLogo>
+              </div>
+            </ItemContainer>
+          </div>
+        </div>
+        <ArrowButton type=\\"left\\" onClick={[Function]} disabled={true}>
+          <button className=\\"left\\" onClick={[Function]} disabled={true}>
+            <svg className=\\"icon\\" width=\\"22px\\" height=\\"36px\\" viewBox=\\"0 860 420 500\\" version=\\"1.1\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+              <path id=\\"arrowLeft\\" transform=\\"scale(1, -1) translate(0, -1500)\\" d=\\"M358.286 640q0-7.429-5.714-13.143l-224.571-224.571 224.571-224.571q5.714-5.714 5.714-13.143t-5.714-13.143l-28.571-28.571q-5.714-5.714-13.143-5.714t-13.143 5.714l-266.286 266.286q-5.714 5.714-5.714 13.143t5.714 13.143l266.286 266.286q5.714 5.714 13.143 5.714t13.143-5.714l28.571-28.571q5.714-5.714 5.714-13.143z\\" />
+            </svg>
+          </button>
+        </ArrowButton>
+        <ArrowButton type=\\"right\\" onClick={[Function]} disabled={true}>
+          <button className=\\"right\\" onClick={[Function]} disabled={true}>
+            <svg className=\\"icon\\" width=\\"22px\\" height=\\"36px\\" viewBox=\\"0 860 420 500\\" version=\\"1.1\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+              <path id=\\"arrowLeft\\" transform=\\"scale(1, -1) translate(0, -1500)\\" d=\\"M358.286 640q0-7.429-5.714-13.143l-224.571-224.571 224.571-224.571q5.714-5.714 5.714-13.143t-5.714-13.143l-28.571-28.571q-5.714-5.714-13.143-5.714t-13.143 5.714l-266.286 266.286q-5.714 5.714-5.714 13.143t5.714 13.143l266.286 266.286q5.714 5.714 13.143 5.714t13.143-5.714l28.571-28.571q5.714-5.714 5.714-13.143z\\" />
+            </svg>
+          </button>
+        </ArrowButton>
+      </div>
+    </ScrolledList>
+  </div>
+</MatchOverviewWidget>"
+`;
+
+exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 1`] = `
+"<MatchOverviewWidget events={{...}} tournamentLogo={{...}}>
+  <div className=\\"widget\\">
+    <BlendedBackground>
+      <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
+        <defs>
+          <filter id=\\"filter\\">
+            <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-mobile.jpg\\" />
+            <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
+          </filter>
+        </defs>
+        <rect id=\\"blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
+      </svg>
+    </BlendedBackground>
+    <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={0} scrollToItemMode=\\"to-left\\" showControls={false} step={2} alignItems=\\"center\\">
+      <div className=\\"container no-controls\\">
+        <div className=\\"eyeshot\\">
+          <div className=\\"bar\\">
+            <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
+              <div className=\\"item\\">
+                <TournamentLogo logoClassName={{...}}>
+                  <div className=\\"general \\">
+                    <i className=\\"kw-custom-logo-large-type\\" />
+                  </div>
+                </TournamentLogo>
+              </div>
+            </ItemContainer>
+          </div>
+        </div>
+      </div>
+    </ScrolledList>
+  </div>
+</MatchOverviewWidget>"
+`;
+
+exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 2`] = `
+"<MatchOverviewWidget events={{...}} tournamentLogo={{...}}>
+  <div className=\\"widget\\">
+    <BlendedBackground>
+      <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
+        <defs>
+          <filter id=\\"filter\\">
+            <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-mobile.jpg\\" />
+            <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
+          </filter>
+        </defs>
+        <rect id=\\"blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
+      </svg>
+    </BlendedBackground>
+    <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={1} scrollToItemMode=\\"to-left\\" showControls={false} step={2} alignItems=\\"center\\">
+      <div className=\\"container no-controls\\">
+        <div className=\\"eyeshot\\">
+          <div className=\\"bar\\">
+            <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
+              <div className=\\"item\\">
+                <TournamentLogo logoClassName={{...}}>
+                  <div className=\\"general \\">
+                    <i className=\\"kw-custom-logo-large-type\\" />
+                  </div>
+                </TournamentLogo>
+              </div>
+            </ItemContainer>
+          </div>
+        </div>
+      </div>
+    </ScrolledList>
+  </div>
+</MatchOverviewWidget>"
+`;

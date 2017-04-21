@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Widget DOM rendering emits fatal error on empty response from kambi's getEvents 1`] = `[Error: No events to show]`;
+
+exports[`Widget DOM rendering throws error on empty response from kambi's getEvents 1`] = `[Error: No events to show]`;
+
+exports[`Widget DOM rendering works correctly with exceeded live events count 1`] = `
+Array [
+  100,
+]
+`;
+
+exports[`Widget DOM rendering works correctly with invalid live update 1`] = `"Live event not found: 666"`;
+
+exports[`Widget DOM rendering works correctly with live events 1`] = `
+Array [
+  100,
+]
+`;
