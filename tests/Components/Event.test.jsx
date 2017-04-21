@@ -33,7 +33,10 @@ const mockEvent = {
    awayFlag: {
       url: 'awayFlagUrl'
    },
-   openForLiveBetting: false
+   openForLiveBetting: false,
+   toJSON: function() {
+      return {id: 100};
+   }
 };
 
 const mockLiveData = {

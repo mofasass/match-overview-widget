@@ -388,18 +388,7 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
     <OutcomeButton
       event={
         Object {
-          "awayFlag": Object {
-            "url": "awayFlagUrl",
-          },
-          "awayName": "Poland",
-          "group": "Test group",
-          "homeFlag": Object {
-            "url": "homeFlagUrl",
-          },
-          "homeName": "Sweden",
           "id": 100,
-          "openForLiveBetting": false,
-          "start": 1484121600000,
         }
       }
       label={true}
@@ -412,18 +401,7 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
     <OutcomeButton
       event={
         Object {
-          "awayFlag": Object {
-            "url": "awayFlagUrl",
-          },
-          "awayName": "Poland",
-          "group": "Test group",
-          "homeFlag": Object {
-            "url": "homeFlagUrl",
-          },
-          "homeName": "Sweden",
           "id": 100,
-          "openForLiveBetting": false,
-          "start": 1484121600000,
         }
       }
       label={true}
