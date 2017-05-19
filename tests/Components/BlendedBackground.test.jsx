@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import React, { Children } from 'react';
+import React from 'react';
 import ReactShallowRenderer from 'react-test-renderer/shallow';
 import ReactTestRenderer from 'react-test-renderer';
 import { mount } from 'enzyme';

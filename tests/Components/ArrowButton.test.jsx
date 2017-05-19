@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import React, { Children } from 'react';
+import React from 'react';
 import ReactShallowRenderer from 'react-test-renderer/shallow';
 import { shallow } from 'enzyme';
 import ArrowButton from '../../src/js/Components/ArrowButton';
