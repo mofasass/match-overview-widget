@@ -1,15 +1,15 @@
 /* eslint-env jest */
 import React from 'react';
-import ItemContainer from '../../src/js/Components/ItemContainer';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactShallowRenderer from 'react-test-renderer/shallow';
 import { shallow, mount } from 'enzyme';
+import ItemContainer from '../../src/js/Components/ItemContainer';
 
 let renderer;
 
 describe('ItemContainer view', () => {
 
    beforeEach(() => {
-      renderer = ReactTestUtils.createRenderer();
+      renderer = new ReactShallowRenderer();
    });
 
    it('renders correctly with default props', () => {
@@ -45,6 +45,10 @@ describe('ItemContainer view', () => {
 });
 
 describe('ItemContainer interface', () => {
+
+   beforeEach(() => {
+      renderer = new ReactShallowRenderer();
+   });
 
    it('doesn\'t react to click events', () => {
       const onClickMock = jest.fn();

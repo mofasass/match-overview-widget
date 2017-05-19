@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ScrolledList } from 'kambi-widget-components';
 import styles from './MatchOverviewWidget.scss';
 import BlendedBackground from './BlendedBackground';

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import mobile from '../Services/mobile';
 import styles from './BlendedBackground.scss';
 

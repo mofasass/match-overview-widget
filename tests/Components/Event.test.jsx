@@ -1,6 +1,6 @@
 /* eslint-env jest */
-import React, { Children } from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import React from 'react';
+import ReactShallowRenderer from 'react-test-renderer/shallow';
 import { shallow } from 'enzyme';
 import Event from '../../src/js/Components/Event';
 import { widgetModule } from 'kambi-widget-core-library';
@@ -56,7 +56,7 @@ const originalDate = window.Date;
 describe('Event DOM rendering', () => {
 
    beforeEach(() => {
-      renderer = ReactTestUtils.createRenderer();
+      renderer = new ReactShallowRenderer();
 
       window.Date = function(input = BEGIN_TIME) {
 
@@ -129,6 +129,10 @@ describe('Event DOM rendering', () => {
 });
 
 describe('Event behaviour', () => {
+
+   beforeEach(() => {
+      renderer = new ReactShallowRenderer();
+   });
 
    it('handles clicks correctly when not in live mode', () => {
       const wrapper = shallow(

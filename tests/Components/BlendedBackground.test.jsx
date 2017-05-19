@@ -1,8 +1,8 @@
 /* eslint-env jest */
 import React, { Children } from 'react';
-import { mount } from 'enzyme';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactShallowRenderer from 'react-test-renderer/shallow';
 import ReactTestRenderer from 'react-test-renderer';
+import { mount } from 'enzyme';
 import BlendedBackground from '../../src/js/Components/BlendedBackground';
 
 let renderer;
@@ -15,7 +15,7 @@ jest.mock('../../src/custom/overview-bw-bg-mobile.jpg', () => 'overview-bw-bg-mo
 describe('BlendedBackground DOM rendering', () => {
 
    beforeEach(() => {
-      renderer = ReactTestUtils.createRenderer();
+      renderer = new ReactShallowRenderer();
       mockMobile = false;
    });
 
@@ -80,6 +80,10 @@ describe('BlendedBackground DOM rendering', () => {
 });
 
 describe('BlendedBackground interface', () => {
+
+   beforeEach(() => {
+      renderer = new ReactShallowRenderer();
+   });
 
    it('unmounts correctly', () => {
       const wrapper = mount(

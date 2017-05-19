@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import React, { Children } from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactShallowRenderer from 'react-test-renderer/shallow';
 import { shallow } from 'enzyme';
 import ArrowButton from '../../src/js/Components/ArrowButton';
 
@@ -8,7 +8,7 @@ let renderer;
 
 describe('ArrowButton DOM rendering', () => {
    beforeEach(() => {
-      renderer = ReactTestUtils.createRenderer();
+      renderer = new ReactShallowRenderer();
    });
 
    it('renders correctly left variant', () => {
@@ -32,6 +32,10 @@ describe('ArrowButton DOM rendering', () => {
 });
 
 describe('ArrowButton behaviour', () => {
+
+   beforeEach(() => {
+      renderer = new ReactShallowRenderer();
+   });
 
    it('handles clicks correctly', () => {
       const onClickMock = jest.fn();

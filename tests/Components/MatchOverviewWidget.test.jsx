@@ -1,6 +1,6 @@
 /* eslint-env jest */
-import React, { Children } from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import React from 'react';
+import ReactShallowRenderer from 'react-test-renderer/shallow';
 import { mount } from 'enzyme';
 import MatchOverviewWidget from '../../src/js/Components/MatchOverviewWidget';
 
@@ -23,7 +23,7 @@ jest.useFakeTimers();
 describe('MatchOverviewWidget DOM rendering', () => {
 
    beforeEach(() => {
-      renderer = ReactTestUtils.createRenderer();
+      renderer = new ReactShallowRenderer();
       mockMobile = false;
    });
 
@@ -62,6 +62,10 @@ describe('MatchOverviewWidget DOM rendering', () => {
 });
 
 describe('MatchOverviewWidget behaviour', () => {
+
+   beforeEach(() => {
+      renderer = new ReactShallowRenderer();
+   });
 
    it('mounts correctly in desktop mode', () => {
       mockMobile = false;
