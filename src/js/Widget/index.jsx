@@ -9,7 +9,7 @@ import live from '../Services/live';
  * Rendered when combined filter is used or there is no current filter.
  * @type {string}
  */
-const DEFAULT_TOURNAMENT_LOGO = 'combined-filters';
+const DEFAULT_TOURNAMENT_LOGO = 'football';
 
 /**
  * Handles incoming event's live data update.

@@ -54,7 +54,7 @@ class MatchOverviewWidget extends Component {
                scrollToItemMode={ScrolledList.SCROLL_TO_ITEM_MODE.TO_LEFT}
                showControls={!mobile()}
             >
-               <TournamentLogo logoClassName={this.props.tournamentLogo} />
+               <TournamentLogo logoName={this.props.tournamentLogo} />
                {this.props.events.map(event =>
                   <Event
                      key={event.event.id}

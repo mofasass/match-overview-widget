@@ -58,22 +58,24 @@ class BlendedBackground extends Component {
     */
    render() {
       return (
-         <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' className={styles.background}>
-            <defs>
-               <filter id='filter'>
-                  <feImage
-                     result='slide2'
-                     x='0'
-                     y='0'
-                     width='100%'
-                     preserveAspectRatio='xMidYMid slice'
-                     xlinkHref={this.state.mobile ? BG_IMAGE_MOBILE : BG_IMAGE_DESKTOP}
-                  />
-                  <feBlend in2='SourceGraphic' in='slide2' mode='multiply' />
-               </filter>
-            </defs>
-            <rect id='blendRect' x='0' y='0' filter='url(#filter)' width='100%' height='100%' />
-         </svg>
+         <div className={styles.backgroundContainer}>
+            <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' className={styles.background}>
+               <defs>
+                  <filter id='filter'>
+                     <feImage
+                        result='slide2'
+                        x='0'
+                        y='0'
+                        width='100%'
+                        preserveAspectRatio='xMidYMid slice'
+                        xlinkHref={this.state.mobile ? BG_IMAGE_MOBILE : BG_IMAGE_DESKTOP}
+                     />
+                     <feBlend in2='SourceGraphic' in='slide2' mode='multiply' />
+                  </filter>
+               </defs>
+               <rect className={`KambiWidget-primary-color ${styles.blendRect}`} x='0' y='0' filter='url(#filter)' width='100%' height='100%' />
+            </svg>
+         </div>
       );
    }
 }

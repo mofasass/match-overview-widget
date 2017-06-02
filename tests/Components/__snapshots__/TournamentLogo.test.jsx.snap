@@ -2,20 +2,30 @@
 
 exports[`Event DOM rendering renders correctly with custom logo CSS class name 1`] = `
 <div
-  className="general test_logo_class_name"
+  className="general"
 >
   <i
     className="kw-custom-logo-large-type"
+    style={
+      Object {
+        "backgroundImage": "url(assets/icons/football.svg)",
+      }
+    }
   />
 </div>
 `;
 
 exports[`Event DOM rendering renders correctly with default props 1`] = `
 <div
-  className="general combined-filters"
+  className="general"
 >
   <i
     className="kw-custom-logo-large-type"
+    style={
+      Object {
+        "backgroundImage": "url(assets/icons/football.svg)",
+      }
+    }
   />
 </div>
 `;

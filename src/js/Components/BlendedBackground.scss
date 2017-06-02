@@ -1,3 +1,7 @@
+:local(.backgroundContainer) {
+   filter: brightness(90%);
+}
+
 :local(.background) {
    position: absolute;
    top: 0;
@@ -9,4 +13,8 @@
    min-width: 100%;
    min-height: 100%;
    overflow: hidden;
+}
+
+:local(.blendRect) {
+   fill: currentColor;
 }

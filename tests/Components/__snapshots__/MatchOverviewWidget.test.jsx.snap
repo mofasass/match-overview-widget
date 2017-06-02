@@ -16,7 +16,7 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with default props 
     step={2}
   >
     <TournamentLogo
-      logoClassName={null}
+      logoName={null}
     />
   </ScrolledList>
 </div>
@@ -38,7 +38,7 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with events 1`] = `
     step={2}
   >
     <TournamentLogo
-      logoClassName={null}
+      logoName={null}
     />
     <Event
       event={
@@ -78,7 +78,7 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with events and bet
     step={2}
   >
     <TournamentLogo
-      logoClassName={null}
+      logoName={null}
     />
     <Event
       event={
@@ -118,7 +118,7 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with tournament log
     step={2}
   >
     <TournamentLogo
-      logoClassName="test_tournament_logo"
+      logoName="test_tournament_logo"
     />
   </ScrolledList>
 </div>
@@ -128,15 +128,17 @@ exports[`MatchOverviewWidget behaviour mounts correctly in desktop mode 1`] = `
 "<MatchOverviewWidget events={{...}} tournamentLogo={{...}}>
   <div className=\\"widget\\">
     <BlendedBackground>
-      <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
-        <defs>
-          <filter id=\\"filter\\">
-            <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-desktop.jpg\\" />
-            <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
-          </filter>
-        </defs>
-        <rect id=\\"blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
-      </svg>
+      <div className=\\"backgroundContainer\\">
+        <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
+          <defs>
+            <filter id=\\"filter\\">
+              <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-desktop.jpg\\" />
+              <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
+            </filter>
+          </defs>
+          <rect className=\\"KambiWidget-primary-color blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
+        </svg>
+      </div>
     </BlendedBackground>
     <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={0} scrollToItemMode=\\"to-left\\" showControls={true} step={2} alignItems=\\"center\\">
       <div className=\\"container\\">
@@ -144,9 +146,9 @@ exports[`MatchOverviewWidget behaviour mounts correctly in desktop mode 1`] = `
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
               <div className=\\"item\\">
-                <TournamentLogo logoClassName={{...}}>
-                  <div className=\\"general \\">
-                    <i className=\\"kw-custom-logo-large-type\\" />
+                <TournamentLogo logoName={{...}}>
+                  <div className=\\"general\\">
+                    <i className=\\"kw-custom-logo-large-type\\" style={{...}} />
                   </div>
                 </TournamentLogo>
               </div>
@@ -177,15 +179,17 @@ exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 1`] = `
 "<MatchOverviewWidget events={{...}} tournamentLogo={{...}}>
   <div className=\\"widget\\">
     <BlendedBackground>
-      <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
-        <defs>
-          <filter id=\\"filter\\">
-            <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-mobile.jpg\\" />
-            <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
-          </filter>
-        </defs>
-        <rect id=\\"blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
-      </svg>
+      <div className=\\"backgroundContainer\\">
+        <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
+          <defs>
+            <filter id=\\"filter\\">
+              <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-mobile.jpg\\" />
+              <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
+            </filter>
+          </defs>
+          <rect className=\\"KambiWidget-primary-color blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
+        </svg>
+      </div>
     </BlendedBackground>
     <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={0} scrollToItemMode=\\"to-left\\" showControls={false} step={2} alignItems=\\"center\\">
       <div className=\\"container no-controls\\">
@@ -193,9 +197,9 @@ exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 1`] = `
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
               <div className=\\"item\\">
-                <TournamentLogo logoClassName={{...}}>
-                  <div className=\\"general \\">
-                    <i className=\\"kw-custom-logo-large-type\\" />
+                <TournamentLogo logoName={{...}}>
+                  <div className=\\"general\\">
+                    <i className=\\"kw-custom-logo-large-type\\" style={{...}} />
                   </div>
                 </TournamentLogo>
               </div>
@@ -212,15 +216,17 @@ exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 2`] = `
 "<MatchOverviewWidget events={{...}} tournamentLogo={{...}}>
   <div className=\\"widget\\">
     <BlendedBackground>
-      <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
-        <defs>
-          <filter id=\\"filter\\">
-            <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-mobile.jpg\\" />
-            <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
-          </filter>
-        </defs>
-        <rect id=\\"blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
-      </svg>
+      <div className=\\"backgroundContainer\\">
+        <svg xmlns=\\"http://www.w3.org/2000/svg\\" xmlnsXlink=\\"http://www.w3.org/1999/xlink\\" className=\\"background\\">
+          <defs>
+            <filter id=\\"filter\\">
+              <feImage result=\\"slide2\\" x=\\"0\\" y=\\"0\\" width=\\"100%\\" preserveAspectRatio=\\"xMidYMid slice\\" xlinkHref=\\"assets/overview-bw-bg-mobile.jpg\\" />
+              <feBlend in2=\\"SourceGraphic\\" in=\\"slide2\\" mode=\\"multiply\\" />
+            </filter>
+          </defs>
+          <rect className=\\"KambiWidget-primary-color blendRect\\" x=\\"0\\" y=\\"0\\" filter=\\"url(#filter)\\" width=\\"100%\\" height=\\"100%\\" />
+        </svg>
+      </div>
     </BlendedBackground>
     <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={1} scrollToItemMode=\\"to-left\\" showControls={false} step={2} alignItems=\\"center\\">
       <div className=\\"container no-controls\\">
@@ -228,9 +234,9 @@ exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 2`] = `
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
               <div className=\\"item\\">
-                <TournamentLogo logoClassName={{...}}>
-                  <div className=\\"general \\">
-                    <i className=\\"kw-custom-logo-large-type\\" />
+                <TournamentLogo logoName={{...}}>
+                  <div className=\\"general\\">
+                    <i className=\\"kw-custom-logo-large-type\\" style={{...}} />
                   </div>
                 </TournamentLogo>
               </div>
