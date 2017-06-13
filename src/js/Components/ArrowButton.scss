@@ -1,5 +1,5 @@
-:local(.left),
-:local(.right) {
+.left,
+.right {
    position: absolute;
    top: -12px;
    bottom: -12px;
@@ -19,30 +19,30 @@
       cursor: default;
    }
 
-   :local(.icon) {
+   .icon {
       fill: #fff;
       opacity: .15;
       transition: opacity .3s;
       margin: 0 12px;
    }
 
-   &:hover :local(.icon) {
+   &:hover .icon {
       opacity: 1;
    }
 }
 
-:local(.left) {
+.left {
    background: linear-gradient(90deg, rgba(0, 0, 0, .9) 16px, transparent);
    left: 0;
    text-align: left;
 }
 
-:local(.right) {
+.right {
    background: linear-gradient(270deg, rgba(0, 0, 0, .9) 16px, transparent);
    right: 0;
    text-align: right;
 
-   :local(.icon) {
+   .icon {
       transform: scale(-1, 1);
    }
 }

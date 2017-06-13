@@ -1,4 +1,4 @@
-:local(.backgroundContainer) {
+.backgroundContainer {
    filter: brightness(90%);
    position: absolute;
    top: 0;
@@ -12,7 +12,7 @@
    overflow: hidden;
 }
 
-:local(.background) {
+.background {
    position: absolute;
    top: 0;
    right: 0;
@@ -25,6 +25,6 @@
    overflow: hidden;
 }
 
-:local(.blendRect) {
+.blendRect {
    fill: currentColor;
 }

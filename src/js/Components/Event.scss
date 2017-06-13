@@ -1,10 +1,10 @@
 @import '~kambi-widget-core-library/src/scss/core.scss';
 
-*:last-child > :local(.general) {
+*:last-child > .general {
    border-right: 0;
 }
 
-:local(.general) {
+.general {
    border-right: 1px dotted rgba(255, 255, 255, 0.4);
    margin-top: 6px;
    max-width: 350px;
@@ -30,14 +30,14 @@
    }
 }
 
-:local(.header) {
+.header {
    display: flex;
    padding-top: 6px;
    opacity: .9;
    font-size: 12px;
    line-height: 24px;
 
-   :local(.group) {
+   .group {
       flex: 1;
       padding-left: 16px;
       justify-content: flex-start;
@@ -47,7 +47,7 @@
       text-overflow: ellipsis;
    }
 
-   :local(.start) {
+   .start {
       padding-right: 16px;
       justify-content: flex-end;
       align-items: center;
@@ -57,12 +57,12 @@
    }
 }
 
-:local(.teams) {
+.teams {
    padding: 6px 16px 12px 16px;
    flex: 1;
    display: flex;
 
-   :local(.team) {
+   .team {
       flex: 1 1 auto;
       display: flex;
       align-items: center;
@@ -101,7 +101,7 @@
       }
    }
 
-   :local(.score) {
+   .score {
       flex: 0 0 auto;
       line-height: 24px;
       font-size: 24px;
@@ -114,7 +114,7 @@
    }
 }
 
-:local(.outcomes) {
+.outcomes {
    display: flex;
    margin-left: 16px;
    margin-right: 16px;
@@ -128,7 +128,7 @@
       }
    }
 
-   :local(.liveLabel) {
+   .liveLabel {
       text-transform: uppercase;
 
       em {

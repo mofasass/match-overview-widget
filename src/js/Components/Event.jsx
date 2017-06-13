@@ -86,10 +86,10 @@ class Event extends Component {
                <div className={styles.start}>{this.startDate}&nbsp;</div>
             </div>
             <div className={styles.teams} onClick={this.onClick}>
-               <div className={[styles.team, 'home'].join(' ')}>
+               <div className={[styles.team, styles.home].join(' ')}>
                   {(this.props.event.homeFlag) &&
-                     <img className='flag' src={this.props.event.homeFlag.url} alt='' />}
-                  <span className='name'>{this.props.event.homeName}</span>
+                     <img className={styles.flag} src={this.props.event.homeFlag.url} alt='' />}
+                  <span className={styles.name}>{this.props.event.homeName}</span>
                </div>
 
                {this.props.liveData &&
@@ -99,10 +99,10 @@ class Event extends Component {
                      {this.props.liveData.score.away}
                   </div>}
 
-               <div className={[styles.team, 'away'].join(' ')}>
-                  <span className='name'>{this.props.event.awayName}</span>
+               <div className={[styles.team, styles.away].join(' ')}>
+                  <span className={styles.name}>{this.props.event.awayName}</span>
                   {(this.props.event.awayFlag) &&
-                     <img className='flag' src={this.props.event.awayFlag.url} alt='' />}
+                     <img className={styles.flag} src={this.props.event.awayFlag.url} alt='' />}
                </div>
             </div>
             <div className={`${styles.outcomes}`}>
