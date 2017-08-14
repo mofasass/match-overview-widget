@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import mobile from '../Services/mobile';
 import styles from './BlendedBackground.scss';
+import { coreLibrary } from 'kambi-widget-core-library';
 
 /**
  * Desktop background file path
@@ -52,11 +53,25 @@ class BlendedBackground extends Component {
       }
    }
 
-   /**
-    * Renders component.
-    * @returns {XML}
-    */
-   render() {
+
+   cssRender() {
+      let url = this.state.mobile ? BG_IMAGE_MOBILE : BG_IMAGE_DESKTOP;
+      return (
+         <div className={`${styles.backgroundContainer} KambiWidget-primary-color`} style={{
+               backgroundColor: 'currentColor',
+            }}>
+            <div className={styles.background} style={{
+                  backgroundImage: `url(${url})`,
+                  backgroundRepeat: 'no-repeat',
+                  mixBlendMode: 'multiply',
+                  backgroundSize: 'cover',
+               }}>
+            </div>
+         </div>
+      );
+   }
+
+   svgRender() {
       return (
          <div className={styles.backgroundContainer}>
             <svg xmlns='http://www.w3.org/2000/svg' xmlnsXlink='http://www.w3.org/1999/xlink' className={styles.background}>
@@ -77,6 +92,20 @@ class BlendedBackground extends Component {
             </svg>
          </div>
       );
+   }
+
+   render() {
+      /*
+      as of firefox 55.0, firefox has a bug with the way we render the svg
+      as a workaround we render the same thing using the new CSS mixBlendMode
+      property. This property is not supported in IE so the main way to render
+      this should still be using the SVG render
+      */
+      if (coreLibrary.browser === 'firefox') {
+         return this.cssRender();
+      } else {
+         return this.svgRender();
+      }
    }
 }
 
