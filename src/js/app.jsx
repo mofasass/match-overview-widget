@@ -35,8 +35,7 @@ coreLibrary.init({
       '/football/italy/serie_b',
       '/football/spain/copa_del_rey',
       '/football/italy/tim_cup',
-      '/football/england/efl_cup',
-      '/football/scotland/league_cup'
+      '/football/england/efl_cup'
    ],
    combineFilters: false,
    pollingInterval: 30000,
