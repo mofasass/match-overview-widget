@@ -160,10 +160,11 @@ describe('Kambi service progressive events', () => {
 
       return kambi.getEvents(filters, false)
          .then((events) => {
-            expect(events).toBeNull();
-            expect(offeringModule.getEventsByFilter).toHaveBeenCalledTimes(1);
-            expect(offeringModule.getEventsByFilter).toHaveBeenLastCalledWith('test/filter/1');
-         });
+            throw new Error('Not supposed to reach here');
+         })
+         .catch((err) => {
+            expect(err.message === 'No matches available in any of the supported filters');
+         })
    });
 
 });

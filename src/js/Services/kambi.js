@@ -11,7 +11,8 @@ const getHighlightedFilters = function(supportedFilters) {
          if (!Array.isArray(response.groups)) {
             throw new Error('Highlight response empty, hiding widget');
          }
-
+         // response.groups[0].pathTermId = "/football/england/efl_cup"
+         // response.groups = response.groups.slice(0, 1);
          return response.groups
             .map(group => group.pathTermId)
             .filter(filter => supportedFilters.indexOf(filter) !== -1);
@@ -89,7 +90,14 @@ const getEventsProgressively = function(filters) {
    };
 
    return Promise.resolve(0)
-      .then(loop);
+      .then(loop)
+      .then((ev) => {
+         if (ev == null) {
+            throw new Error('No matches available in any of the supported filters');
+         } else {
+            return ev;
+         }
+      });
 };
 
 /**
