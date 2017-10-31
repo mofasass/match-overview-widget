@@ -2,11 +2,19 @@
    display: flex;
    align-items: center;
    height: 120px;
+   overflow: visible;
 
    i {
       background: no-repeat 50%;
       background-size: contain;
       height: 90px;
       width: 90px;
+      min-width: 90px;
+   }
+
+   &.scrolledListHasHorizontalSpaceLeft {
+      width: 0;
+      max-width: 0;
+      direction: rtl;
    }
 }
