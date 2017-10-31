@@ -141,7 +141,7 @@ exports[`MatchOverviewWidget behaviour mounts correctly in desktop mode 1`] = `
       </div>
     </BlendedBackground>
     <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={0} scrollToItemMode=\\"to-left\\" showControls={true} step={2} alignItems=\\"center\\">
-      <div className=\\"container\\">
+      <div className=\\"container\\" style={{...}}>
         <div className=\\"eyeshot\\">
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
@@ -192,7 +192,7 @@ exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 1`] = `
       </div>
     </BlendedBackground>
     <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={0} scrollToItemMode=\\"to-left\\" showControls={false} step={2} alignItems=\\"center\\">
-      <div className=\\"container no-controls\\">
+      <div className=\\"container no-controls\\" style={{...}}>
         <div className=\\"eyeshot\\">
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
@@ -229,7 +229,7 @@ exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 2`] = `
       </div>
     </BlendedBackground>
     <ScrolledList renderPrevButton={[Function]} renderNextButton={[Function]} renderItemContainer={[Function]} selected={1} scrollToItemMode=\\"to-left\\" showControls={false} step={2} alignItems=\\"center\\">
-      <div className=\\"container no-controls\\">
+      <div className=\\"container no-controls\\" style={{...}}>
         <div className=\\"eyeshot\\">
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function]} onWidth={[Function]}>
