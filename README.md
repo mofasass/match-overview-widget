@@ -38,6 +38,7 @@ Arguments and default values:
     "pollingCount": 4,
     "eventsRefreshInterval": 120000,
     "widgetTrackingName": "gm-match-overview-widget",
+    "compareAgainstHighlights": true,
 }
 ```
 
@@ -47,6 +48,7 @@ Arguments and default values:
 6. `pollingCount` - number - maximum number of matches to poll for live data at the same time
 7. `eventsRefreshInterval` - number - interval in milliseconds to look for live events
 8. `widgetTrackingName` - string - tracking name for analytics purposes
+9. `compareAgainstHighlights` - boolean - determines whether you want to compare whether the filters are within the highlighted events (popular events) or not. Will use the first item in the filter that returns events.
 
 ### Build Instructions
 

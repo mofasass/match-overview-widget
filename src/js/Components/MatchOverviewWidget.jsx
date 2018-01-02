@@ -55,13 +55,18 @@ class MatchOverviewWidget extends Component {
                showControls={!mobile()}
             >
                <TournamentLogo logoName={this.props.tournamentLogo} />
-               {this.props.events.map(event =>
-                  <Event
-                     key={event.event.id}
-                     event={event.event}
-                     liveData={event.liveData}
-                     outcomes={event.betOffers.length > 0 ? event.betOffers[0].outcomes : []}
-                  />)}
+               {this.props.events
+                  .filter(event => event.betOffers.length > 0)
+                  .map((event) => {
+                     return (
+                        <Event
+                           key={event.event.id}
+                           event={event.event}
+                           liveData={event.liveData}
+                           outcomes={event.betOffers[0].outcomes}
+                        />
+                     )
+                  })}
             </ScrolledList>
          </div>
       );

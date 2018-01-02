@@ -5,7 +5,7 @@ import { coreLibrary, offeringModule, widgetModule } from 'kambi-widget-core-lib
  * @param {string[]} supportedFilters Supported filters
  * @returns Promise.<string[]>
  */
-const getHighlightedFilters = function(supportedFilters) {
+const getHighlightedFilters = function (supportedFilters) {
    return offeringModule.getHighlight()
       .then((response) => {
          if (!Array.isArray(response.groups)) {
@@ -24,7 +24,7 @@ const getHighlightedFilters = function(supportedFilters) {
  * @param {object} response getEventsByFilter response
  * @returns {object[]}
  */
-const filterEvents = function(response) {
+const filterEvents = function (response) {
    if (!response || !Array.isArray(response.events)) {
       return [];
    }
@@ -38,7 +38,7 @@ const filterEvents = function(response) {
  * @param {String[]} filters
  * @returns {Promise.<object[]>}
  */
-const getEventsCombined = function(filters) {
+const getEventsCombined = function (filters) {
    const filter = widgetModule.createFilterUrl(filters);
    let replaceString = '#filter/';
 
@@ -60,7 +60,7 @@ const getEventsCombined = function(filters) {
  * @param {String[]} filters Filters to check
  * @returns {Promise.<{filter: string, events: object[]}>}
  */
-const getEventsProgressively = function(filters) {
+const getEventsProgressively = function (filters) {
    // start searching for events
    const loop = (i) => {
       if (i >= filters.length) {
@@ -69,13 +69,13 @@ const getEventsProgressively = function(filters) {
       }
       // checking ith filter
       return offeringModule.getEventsByFilter(filters[i].replace(/^\//, ''))
-      // uncomment this to test falling back to the second filter
-      // .then((res) => {
-      //    if (i < 1) {
-      //       res.events = [];
-      //    }
-      //    return res;
-      // })
+         // uncomment this to test falling back to the second filter
+         // .then((res) => {
+         //    if (i < 1) {
+         //       res.events = [];
+         //    }
+         //    return res;
+         // })
          .then(filterEvents)
          .then((events) => {
             if (events.length > 0) {
@@ -107,7 +107,7 @@ const getEventsProgressively = function(filters) {
  * @param {boolean} combined Whether events should be fetched using single combined query or one filter at the time
  * @returns {Promise.<{events: object[], filter: string}>}
  */
-const getEvents = function(filters, combined = true) {
+const getEvents = function (filters, combined = true) {
    const getEventsFunc = combined ? getEventsCombined
       : getEventsProgressively;
 
