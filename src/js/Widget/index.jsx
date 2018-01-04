@@ -15,7 +15,7 @@ const DEFAULT_TOURNAMENT_LOGO = 'football';
  * Handles incoming event's live data update.
  * @param {object} liveEventData Event's live data
  */
-const updateLiveEventData = function(liveEventData) {
+const updateLiveEventData = function (liveEventData) {
    const event = this.events.find(event => event.event.id == liveEventData.eventId);
 
    if (!event) {
@@ -29,7 +29,7 @@ const updateLiveEventData = function(liveEventData) {
 /**
  * Renders widget within previously defined container (rootEl).
  */
-const render = function() {
+const render = function () {
    ReactDOM.render(
       <MatchOverviewWidget events={this.events} tournamentLogo={this.tournamentLogo} />,
       this.rootEl
@@ -40,7 +40,7 @@ const render = function() {
  * Fetches events based on current filters and sets polling on the live ones.
  * @returns {Promise}
  */
-const refreshEvents = function() {
+const refreshEvents = function () {
    return kambi.getEvents(this.filters, this.combineFilters)
       .then(({ events, filter }) => {
          this.events = events;

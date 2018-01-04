@@ -1,6 +1,8 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { coreLibrary, eventsModule, widgetModule } from 'kambi-widget-core-library';
 import kambi from './Services/kambi';
-import Widget from './Widget';
+import MatchOverviewWidget from './Components/MatchOverviewWidget';
 
 /**
  * Removes widget on fatal errors.
@@ -9,6 +11,16 @@ import Widget from './Widget';
 const onFatal = function (error) {
    console.error(error);
    widgetModule.removeWidget();
+};
+
+/**
+ * Renders widget within previously defined container (rootEl).
+ */
+const render = (props) => {
+   ReactDOM.render(
+      <MatchOverviewWidget {...props} />,
+      document.getElementById('root')
+   );
 };
 
 coreLibrary.init({
@@ -42,30 +54,17 @@ coreLibrary.init({
    pollingInterval: 30000,
    pollingCount: 4,
    eventsRefreshInterval: 120000
-})
-   .then(() => {
-      coreLibrary.widgetTrackingName = coreLibrary.args.widgetTrackingName;
-      eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval;
-      return coreLibrary.args.compareAgainstHighlights // set this arg to false to test specific filters
-         ? kambi.getHighlightedFilters(coreLibrary.args.filter)
-         : coreLibrary.args.filter;
-   })
-   .then((filters) => {
-      if (filters.length === 0) {
-         onFatal(new Error('No matching filters in highlight'));
-         return;
-      }
+}).then(() => {
+   coreLibrary.widgetTrackingName = coreLibrary.args.widgetTrackingName;
+   eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval;
 
-      const widget = new Widget(
-         filters,
-         {
-            combineFilters: coreLibrary.args.combineFilters,
-            eventsRefreshInterval: coreLibrary.args.eventsRefreshInterval,
-            pollingCount: coreLibrary.args.pollingCount,
-            onFatal
-         }
-      );
-
-      return widget.init();
+   render({
+      filter: coreLibrary.args.filter,
+      compareAgainstHighlights: coreLibrary.args.compareAgainstHighlights,
+      combineFilters: coreLibrary.args.combineFilters,
+      eventsRefreshInterval: coreLibrary.args.eventsRefreshInterval,
+      pollingCount: coreLibrary.args.pollingCount,
+      pollingInterval: coreLibrary.args.pollingInterval,
+      onFatal
    })
-   .catch(onFatal);
+}).catch(onFatal);

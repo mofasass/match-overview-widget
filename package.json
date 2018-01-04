@@ -23,7 +23,7 @@
    },
    "homepage": "https://github.com/kambi-sportsbook-widgets/match-overview-widget#readme",
    "devDependencies": {
-      "kambi-widget-build-tools": "^4.0.2"
+      "kambi-widget-build-tools": "^4.0.4"
    },
    "useHttps": true,
    "dependencies": {

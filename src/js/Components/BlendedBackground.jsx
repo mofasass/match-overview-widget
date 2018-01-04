@@ -7,7 +7,7 @@ import { coreLibrary } from 'kambi-widget-core-library';
  * Desktop background file path
  * @type {string}
  */
-const BG_IMAGE_DESKTOP = 'assets/overview-bw-bg-desktop.jpg';
+const BG_IMAGE_DESKTOP = 'assets/overview-bw-bg-desktop_progressive.jpg';
 
 /**
  * Mobile background file path
@@ -58,14 +58,14 @@ class BlendedBackground extends Component {
       let url = this.state.mobile ? BG_IMAGE_MOBILE : BG_IMAGE_DESKTOP;
       return (
          <div className={`${styles.backgroundContainer} KambiWidget-primary-color`} style={{
-               backgroundColor: 'currentColor',
-            }}>
+            backgroundColor: 'currentColor',
+         }}>
             <div className={styles.background} style={{
-                  backgroundImage: `url(${url})`,
-                  backgroundRepeat: 'no-repeat',
-                  mixBlendMode: 'multiply',
-                  backgroundSize: 'cover',
-               }}>
+               backgroundImage: `url(${url})`,
+               backgroundRepeat: 'no-repeat',
+               mixBlendMode: 'multiply',
+               backgroundSize: 'cover',
+            }}>
             </div>
          </div>
       );
