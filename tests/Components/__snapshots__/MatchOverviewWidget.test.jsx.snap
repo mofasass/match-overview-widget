@@ -40,24 +40,6 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with events 1`] = `
     <TournamentLogo
       logoName={null}
     />
-    <Event
-      event={
-        Object {
-          "id": 100,
-        }
-      }
-      liveData={Object {}}
-      outcomes={Array []}
-    />
-    <Event
-      event={
-        Object {
-          "id": 200,
-        }
-      }
-      liveData={Object {}}
-      outcomes={Array []}
-    />
   </ScrolledList>
 </div>
 `;
