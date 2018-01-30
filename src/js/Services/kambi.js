@@ -1,104 +1,109 @@
-import { coreLibrary, offeringModule, widgetModule } from 'kambi-widget-core-library';
+import {
+  coreLibrary,
+  offeringModule,
+  widgetModule,
+} from 'kambi-widget-core-library'
 
 /**
  * Checks the highlight resource against the supported filters and decides whether the widget is online or not
  * @param {string[]} supportedFilters Supported filters
  * @returns Promise.<string[]>
  */
-const getHighlightedFilters = function (supportedFilters) {
-   return offeringModule.getHighlight()
-      .then((response) => {
-         if (!Array.isArray(response.groups)) {
-            throw new Error('Highlight response empty, hiding widget');
-         }
-         // response.groups[0].pathTermId = "/football/england/efl_cup"
-         // response.groups = response.groups.slice(0, 1);
-         return response.groups
-            .map(group => group.pathTermId)
-            .filter(filter => supportedFilters.indexOf(filter) !== -1);
-      });
-};
+const getHighlightedFilters = function(supportedFilters) {
+  return offeringModule.getHighlight().then(response => {
+    if (!Array.isArray(response.groups)) {
+      throw new Error('Highlight response empty, hiding widget')
+    }
+    // response.groups[0].pathTermId = "/football/england/efl_cup"
+    // response.groups = response.groups.slice(0, 1);
+    return response.groups
+      .map(group => group.pathTermId)
+      .filter(filter => supportedFilters.indexOf(filter) !== -1)
+  })
+}
 
 /**
  * Filters events that are matches from getEventsByFilter response.
  * @param {object} response getEventsByFilter response
  * @returns {object[]}
  */
-const filterEvents = function (response) {
-   if (!response || !Array.isArray(response.events)) {
-      return [];
-   }
+const filterEvents = function(response) {
+  if (!response || !Array.isArray(response.events)) {
+    return []
+  }
 
-   return response.events
-      .filter(event => event.event.type === 'ET_MATCH');
-};
+  return response.events.filter(event => event.event.type === 'ET_MATCH')
+}
 
 /**
  * Fetches events by combining given filters together.
  * @param {String[]} filters
  * @returns {Promise.<object[]>}
  */
-const getEventsCombined = function (filters) {
-   const filter = widgetModule.createFilterUrl(filters);
-   let replaceString = '#filter/';
+const getEventsCombined = function(filters) {
+  const filter = widgetModule.createFilterUrl(filters)
+  let replaceString = '#filter/'
 
-   if (coreLibrary.config.routeRoot !== '') {
-      replaceString = '#' + coreLibrary.config.routeRoot + '/filter/';
-   }
+  if (coreLibrary.config.routeRoot !== '') {
+    replaceString = '#' + coreLibrary.config.routeRoot + '/filter/'
+  }
 
-   const url = filter ? filter.replace(replaceString, '') : 'football';
+  const url = filter ? filter.replace(replaceString, '') : 'football'
 
-   return offeringModule.getEventsByFilter(url)
-      .then(filterEvents)
-      .then((events) => {
-         return { events, filter };
-      });
-};
+  return offeringModule
+    .getEventsByFilter(url)
+    .then(filterEvents)
+    .then(events => {
+      return { events, filter }
+    })
+}
 
 /**
  * Fetches events by checking filters one after another until finding matching events.
  * @param {String[]} filters Filters to check
  * @returns {Promise.<{filter: string, events: object[]}>}
  */
-const getEventsProgressively = function (filters) {
-   // start searching for events
-   const loop = (i) => {
-      if (i >= filters.length) {
-         // no more filters to check
-         return null;
+const getEventsProgressively = function(filters) {
+  // start searching for events
+  const loop = i => {
+    if (i >= filters.length) {
+      // no more filters to check
+      return null
+    }
+    // checking ith filter
+    return (
+      offeringModule
+        .getEventsByFilter(filters[i].replace(/^\//, ''))
+        // uncomment this to test falling back to the second filter
+        // .then((res) => {
+        //    if (i < 1) {
+        //       res.events = [];
+        //    }
+        //    return res;
+        // })
+        .then(filterEvents)
+        .then(events => {
+          if (events.length > 0) {
+            // found matching events
+            return { filter: filters[i], events }
+          }
+
+          // matching events not found, proceed to next filter
+          return Promise.resolve(i + 1).then(loop)
+        })
+    )
+  }
+
+  return Promise.resolve(0)
+    .then(loop)
+    .then(ev => {
+      if (ev == null) {
+        throw new Error('No matches available in any of the supported filters')
+      } else {
+        return ev
       }
-      // checking ith filter
-      return offeringModule.getEventsByFilter(filters[i].replace(/^\//, ''))
-         // uncomment this to test falling back to the second filter
-         // .then((res) => {
-         //    if (i < 1) {
-         //       res.events = [];
-         //    }
-         //    return res;
-         // })
-         .then(filterEvents)
-         .then((events) => {
-            if (events.length > 0) {
-               // found matching events
-               return { filter: filters[i], events };
-            }
-
-            // matching events not found, proceed to next filter
-            return Promise.resolve(i + 1)
-               .then(loop);
-         });
-   };
-
-   return Promise.resolve(0)
-      .then(loop)
-      .then((ev) => {
-         if (ev == null) {
-            throw new Error('No matches available in any of the supported filters');
-         } else {
-            return ev;
-         }
-      });
-};
+    })
+}
 
 /**
  * Fetches events for given filter list.
@@ -107,11 +112,10 @@ const getEventsProgressively = function (filters) {
  * @param {boolean} combined Whether events should be fetched using single combined query or one filter at the time
  * @returns {Promise.<{events: object[], filter: string}>}
  */
-const getEvents = function (filters, combined = true) {
-   const getEventsFunc = combined ? getEventsCombined
-      : getEventsProgressively;
+const getEvents = function(filters, combined = true) {
+  const getEventsFunc = combined ? getEventsCombined : getEventsProgressively
 
-   return getEventsFunc(filters);
-};
+  return getEventsFunc(filters)
+}
 
-export default { getHighlightedFilters, getEvents };
+export default { getHighlightedFilters, getEvents }

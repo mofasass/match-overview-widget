@@ -1,22 +1,28 @@
-import { eventsModule } from 'kambi-widget-core-library';
+import { eventsModule } from 'kambi-widget-core-library'
 
 /**
  * Maps event identifiers to update methods.
  * @type {object<number,{onUpdate: function, onRemoved: function}>}
  */
-const handlers = {};
+const handlers = {}
 
 /**
  * Unsubscribes from given events.
  * @param {number[]} eventIds Event identifiers array
  */
 const unsubscribeFromEvents = function(eventIds) {
-   eventIds.map((eventId) => {
-      eventsModule.unsubscribe(`LIVE:EVENTDATA:${eventId}`, handlers[eventId].onUpdate);
-      eventsModule.unsubscribe(`LIVE:EVENTDATA:${eventId}:REMOVED`, handlers[eventId].onRemoved);
-      delete handlers[eventId];
-   });
-};
+  eventIds.map(eventId => {
+    eventsModule.unsubscribe(
+      `LIVE:EVENTDATA:${eventId}`,
+      handlers[eventId].onUpdate
+    )
+    eventsModule.unsubscribe(
+      `LIVE:EVENTDATA:${eventId}:REMOVED`,
+      handlers[eventId].onRemoved
+    )
+    delete handlers[eventId]
+  })
+}
 
 /**
  * Creates handler for incoming event's live data.
@@ -25,14 +31,14 @@ const unsubscribeFromEvents = function(eventIds) {
  * @returns {function(object)}
  */
 const createEventUpdateHandler = function(onUpdate) {
-   return (liveEventData) => {
-      onUpdate(liveEventData);
+  return liveEventData => {
+    onUpdate(liveEventData)
 
-      if (!liveEventData.open) {
-         handlers[liveEventData.eventId].onRemoved(liveEventData.eventId);
-      }
-   }
-};
+    if (!liveEventData.open) {
+      handlers[liveEventData.eventId].onRemoved(liveEventData.eventId)
+    }
+  }
+}
 
 /**
  * Creates handler for event removed.
@@ -41,23 +47,23 @@ const createEventUpdateHandler = function(onUpdate) {
  * @returns {function(number)}
  */
 const createEventRemovedHandler = function(activeEventIds, onDrained) {
-   return (eventId) => {
-      const idx = activeEventIds.indexOf(eventId);
+  return eventId => {
+    const idx = activeEventIds.indexOf(eventId)
 
-      if (idx === -1) {
-         console.warn(`Event not found in active events set: ${eventId}`);
-         return;
-      }
+    if (idx === -1) {
+      console.warn(`Event not found in active events set: ${eventId}`)
+      return
+    }
 
-      unsubscribeFromEvents([eventId]);
+    unsubscribeFromEvents([eventId])
 
-      activeEventIds.splice(idx, 1);
+    activeEventIds.splice(idx, 1)
 
-      if (activeEventIds.length === 0) {
-         onDrained();
-      }
-   };
-};
+    if (activeEventIds.length === 0) {
+      onDrained()
+    }
+  }
+}
 
 /**
  * Subscribes for receiving updates on given events.
@@ -66,17 +72,23 @@ const createEventRemovedHandler = function(activeEventIds, onDrained) {
  * @param {function} onDrained Called when none of given events is live anymore
  */
 const subscribeToEvents = function(eventIds, onUpdate, onDrained) {
-   const activeEventIds = eventIds.slice();
+  const activeEventIds = eventIds.slice()
 
-   eventIds.map((eventId) => {
-      handlers[eventId] = {
-         onUpdate: createEventUpdateHandler.call(handlers[eventId], onUpdate),
-         onRemoved: createEventRemovedHandler(activeEventIds, onDrained)
-      };
+  eventIds.map(eventId => {
+    handlers[eventId] = {
+      onUpdate: createEventUpdateHandler.call(handlers[eventId], onUpdate),
+      onRemoved: createEventRemovedHandler(activeEventIds, onDrained),
+    }
 
-      eventsModule.subscribe(`LIVE:EVENTDATA:${eventId}`, handlers[eventId].onUpdate);
-      eventsModule.subscribe(`LIVE:EVENTDATA:${eventId}:REMOVED`, handlers[eventId].onRemoved);
-   });
-};
+    eventsModule.subscribe(
+      `LIVE:EVENTDATA:${eventId}`,
+      handlers[eventId].onUpdate
+    )
+    eventsModule.subscribe(
+      `LIVE:EVENTDATA:${eventId}:REMOVED`,
+      handlers[eventId].onRemoved
+    )
+  })
+}
 
-export default { subscribeToEvents, unsubscribeFromEvents };
+export default { subscribeToEvents, unsubscribeFromEvents }
