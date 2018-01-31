@@ -23,7 +23,7 @@ const getHighlightedFilters = function(supportedFilters) {
 }
 
 /**
- * Filters events that are matches from getEventsByFilter response.
+ * Filters events that are matches from getEventsByFilter response. Also filters out events whose englishName are "Home Teams - Away Teams"
  * @param {object} response getEventsByFilter response
  * @returns {object[]}
  */
@@ -32,7 +32,12 @@ const filterEvents = function(response) {
     return []
   }
 
-  return response.events.filter(event => event.event.type === 'ET_MATCH')
+  return response.events.filter(event => {
+    return (
+      event.event.englishName !== 'Home Teams - Away Teams' &&
+      event.event.type === 'ET_MATCH'
+    )
+  })
 }
 
 /**
