@@ -55,9 +55,7 @@ exports[`Event DOM rendering renders correctly with default props 1`] = `
   </div>
   <div
     className="outcomes"
-  >
-    
-  </div>
+  />
 </div>
 `;
 
@@ -116,9 +114,7 @@ exports[`Event DOM rendering renders correctly with event starting later than to
   </div>
   <div
     className="outcomes"
-  >
-    
-  </div>
+  />
 </div>
 `;
 
@@ -177,9 +173,7 @@ exports[`Event DOM rendering renders correctly with event starting today 1`] = `
   </div>
   <div
     className="outcomes"
-  >
-    
-  </div>
+  />
 </div>
 `;
 
@@ -238,9 +232,7 @@ exports[`Event DOM rendering renders correctly with event starting tomorrow 1`] 
   </div>
   <div
     className="outcomes"
-  >
-    
-  </div>
+  />
 </div>
 `;
 
