@@ -39,7 +39,7 @@
   "homepage":
     "https://github.com/kambi-sportsbook-widgets/match-overview-widget#readme",
   "devDependencies": {
-    "kambi-widget-build-tools": "^5.0.1",
+    "kambi-widget-build-tools": "^5.0.2",
     "lint-staged": "^6.1.0",
     "prettier": "^1.10.2"
   },
