@@ -389,6 +389,8 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
           "id": 200,
         }
       }
+      outlineStyle={false}
+      updateOdds={false}
     />
     <OutcomeButton
       event={
@@ -402,6 +404,8 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
           "id": 300,
         }
       }
+      outlineStyle={false}
+      updateOdds={false}
     />
   </div>
 </div>
