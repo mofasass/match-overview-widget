@@ -128,6 +128,7 @@ class Event extends Component {
                 key={outcome.id}
                 outcome={outcome}
                 event={this.props.event}
+                updateOdds={false}
               />
             ))}
 
