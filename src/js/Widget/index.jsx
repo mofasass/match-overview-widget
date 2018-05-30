@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { widgetModule } from 'kambi-widget-core-library'
+import { widgetModule, coreLibrary } from 'kambi-widget-core-library'
 import MatchOverviewWidget from '../Components/MatchOverviewWidget'
 import kambi from '../Services/kambi'
 import live from '../Services/live'
@@ -93,7 +93,7 @@ class Widget {
   constructor(
     filters,
     {
-      rootEl = document.getElementById('root'),
+      rootEl = coreLibrary.rootElement,
       combineFilters = false,
       eventsRefreshInterval = 120000,
       pollingCount = 4,
