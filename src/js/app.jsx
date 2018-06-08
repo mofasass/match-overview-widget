@@ -19,7 +19,7 @@ const onFatal = function(error) {
 coreLibrary
   .init({
     widgetTrackingName: 'gm-match-overview-widget',
-    compareAgainstHighlights: false,
+    compareAgainstHighlights: true,
     filter: supportedFilters,
     combineFilters: false,
     pollingInterval: 30000,
