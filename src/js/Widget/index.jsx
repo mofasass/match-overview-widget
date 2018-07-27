@@ -35,9 +35,14 @@ const render = function() {
   ReactDOM.render(
     <MatchOverviewWidget
       events={this.events}
-      tournamentLogo={this.tournamentLogo}
+      highlightBasedOnBetslip={coreLibrary.args.highlightBasedOnBetslip}
+      backgroundUrl={coreLibrary.args.backgroundUrl}
+      iconUrl={this.iconUrl}
     />,
-    this.rootEl
+    this.rootEl,
+    () => {
+      coreLibrary.args.onWidgetLoaded()
+    }
   )
 }
 
@@ -62,7 +67,10 @@ const refreshEvents = function() {
 
       // no live events, schedule refresh
       if (liveEvents.length == 0) {
-        setTimeout(refreshEvents.bind(this), this.eventsRefreshInterval)
+        this.refreshTimeout = setTimeout(
+          refreshEvents.bind(this),
+          this.eventsRefreshInterval
+        )
       }
 
       // subscribe to notifications on live events
@@ -108,9 +116,14 @@ class Widget {
     this.eventsRefreshInterval = eventsRefreshInterval
     this.pollingCount = pollingCount
     this.onFatal = onFatal
+    this.refreshTimeout = null
 
     this.events = []
     this.appliedFilter = null
+    coreLibrary.cleanupWidget = () => {
+      clearTimeout(this.refreshTimeout)
+      ReactDOM.unmountComponentAtNode(coreLibrary.rootElement)
+    }
   }
 
   init() {
@@ -140,14 +153,21 @@ class Widget {
    * Returns tournament logo class name based on currently applied filter.
    * @returns {string}
    */
-  get tournamentLogo() {
-    if (this.combineFilters) {
-      return DEFAULT_TOURNAMENT_LOGO
+  get iconUrl() {
+    if (coreLibrary.args.iconUrl) {
+      return coreLibrary.args.iconUrl
     }
 
-    return this.appliedFilter
-      ? this.appliedFilter.substring(1).replace(/\//g, '-')
-      : DEFAULT_TOURNAMENT_LOGO
+    let logoName
+    if (this.combineFilters) {
+      logoName = DEFAULT_TOURNAMENT_LOGO
+    } else {
+      logoName = this.appliedFilter
+        ? this.appliedFilter.substring(1).replace(/\//g, '-')
+        : DEFAULT_TOURNAMENT_LOGO
+    }
+
+    return `assets/icons/${logoName}.svg`
   }
 }
 

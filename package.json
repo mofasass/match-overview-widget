@@ -1,6 +1,6 @@
 {
   "name": "match-overview-widget",
-  "version": "2.3.5",
+  "version": "2.3.5-mrgreen1",
   "widgetCssVersion": "1.0.0.68",
   "description": "Match Schedule Widget",
   "main": "dist/index.html",
@@ -16,7 +16,9 @@
     "postversion": "kambi-widgets-cli postversion",
     "test": "kambi-widgets-cli test",
     "prettier-all": "find ./src -name \"*.jsx\" -o -name \"*.js\" | xargs prettier --write",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "start:embedded": "kambi-widgets-cli start-embedded",
+    "build:embedded": "kambi-widgets-cli build-embedded"
   },
   "prettier": {
     "tabWidth": 2,
@@ -32,11 +34,11 @@
     ]
   },
   "devServer": {
-    "https": true
+    "https": false
   },
   "dependencies": {
-    "kambi-widget-core-library": "^4.8.0",
-    "kambi-widget-components": "^1.21.8"
+    "kambi-widget-core-library": "4.10.2-mrgreen6",
+    "kambi-widget-components": "1.21.10-mrgreen1"
   },
   "peerDependencies": {
     "prop-types": "x",

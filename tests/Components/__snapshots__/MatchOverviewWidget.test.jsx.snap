@@ -16,7 +16,7 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with default props 
     step={2}
   >
     <TournamentLogo
-      logoName={null}
+      iconUrl={null}
     />
   </ScrolledList>
 </div>
@@ -38,7 +38,7 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with events 1`] = `
     step={2}
   >
     <TournamentLogo
-      logoName={null}
+      iconUrl={null}
     />
   </ScrolledList>
 </div>
@@ -60,7 +60,7 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with events and bet
     step={2}
   >
     <TournamentLogo
-      logoName={null}
+      iconUrl={null}
     />
     <Event
       event={
@@ -100,7 +100,7 @@ exports[`MatchOverviewWidget DOM rendering renders correctly with tournament log
     step={2}
   >
     <TournamentLogo
-      logoName="test_tournament_logo"
+      iconUrl="test_tournament_logo"
     />
   </ScrolledList>
 </div>
@@ -128,7 +128,7 @@ exports[`MatchOverviewWidget behaviour mounts correctly in desktop mode 1`] = `
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function: bound onItemClick]} onWidth={[Function: bound setItemWidth]}>
               <div className=\\"item\\">
-                <TournamentLogo logoName={{...}}>
+                <TournamentLogo iconUrl={{...}}>
                   <div className=\\"general\\">
                     <i className=\\"kw-custom-logo-large-type\\" style={{...}} />
                   </div>
@@ -179,7 +179,7 @@ exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 1`] = `
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function: bound onItemClick]} onWidth={[Function: bound setItemWidth]}>
               <div className=\\"item\\">
-                <TournamentLogo logoName={{...}}>
+                <TournamentLogo iconUrl={{...}}>
                   <div className=\\"general\\">
                     <i className=\\"kw-custom-logo-large-type\\" style={{...}} />
                   </div>
@@ -216,7 +216,7 @@ exports[`MatchOverviewWidget behaviour mounts correctly in mobile mode 2`] = `
           <div className=\\"bar\\">
             <ItemContainer selected={true} onClick={[Function: bound onItemClick]} onWidth={[Function: bound setItemWidth]}>
               <div className=\\"item\\">
-                <TournamentLogo logoName={{...}}>
+                <TournamentLogo iconUrl={{...}}>
                   <div className=\\"general\\">
                     <i className=\\"kw-custom-logo-large-type\\" style={{...}} />
                   </div>

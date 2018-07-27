@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './TournamentLogo.scss'
 
-const TournamentLogo = ({ logoName, scrolledListHasHorizontalSpaceLeft }) => {
+const TournamentLogo = ({ iconUrl, scrolledListHasHorizontalSpaceLeft }) => {
   let className = styles.general
   if (scrolledListHasHorizontalSpaceLeft) {
     className += ' ' + styles.scrolledListHasHorizontalSpaceLeft
@@ -12,7 +12,7 @@ const TournamentLogo = ({ logoName, scrolledListHasHorizontalSpaceLeft }) => {
       <i
         className="kw-custom-logo-large-type"
         style={{
-          backgroundImage: `url(assets/icons/${logoName}.svg)`,
+          backgroundImage: `url(${iconUrl})`,
         }}
       />
     </div>
@@ -24,11 +24,11 @@ TournamentLogo.propTypes = {
    * Logo CSS class name.
    * These classes are defined in operator-specific CSS file.
    */
-  logoName: PropTypes.string,
+  iconUrl: PropTypes.string,
 }
 
 TournamentLogo.defaultProps = {
-  logoName: 'football',
+  iconUrl: 'assets/icons/football.svg',
 }
 
 export default TournamentLogo

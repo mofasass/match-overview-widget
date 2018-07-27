@@ -129,6 +129,7 @@ class Event extends Component {
                 outcome={outcome}
                 event={this.props.event}
                 updateOdds={false}
+                highlightBasedOnBetslip={this.props.highlightBasedOnBetslip}
               />
             ))}
 

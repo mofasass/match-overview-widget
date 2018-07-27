@@ -13,7 +13,7 @@ import { supportedFilters } from './constants'
  */
 const onFatal = function(error) {
   console.error(error)
-  widgetModule.removeWidget()
+  widgetModule.removeWidget(error)
 }
 
 coreLibrary
@@ -25,6 +25,9 @@ coreLibrary
     pollingInterval: 30000,
     pollingCount: 4,
     eventsRefreshInterval: 120000,
+    highlightBasedOnBetslip: true,
+    backgroundUrl: null,
+    iconUrl: null,
   })
   .then(() => {
     coreLibrary.widgetTrackingName = coreLibrary.args.widgetTrackingName

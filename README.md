@@ -1,4 +1,4 @@
-# match-overview-widget
+# match-overview-widget v2.3.5-mrgreen1
 
 ![](./screenshot.png)
 
@@ -13,6 +13,7 @@ In desktop mode the widget has clickable arrows to scroll the widget, In mobile 
 ## Configuration
 
 Arguments and default values:
+
 ```json
 "args": {
     "filter": [
@@ -39,16 +40,22 @@ Arguments and default values:
     "eventsRefreshInterval": 120000,
     "widgetTrackingName": "gm-match-overview-widget",
     "compareAgainstHighlights": true,
+    "highlightBasedOnBetslip": true,
+    "backgroundUrl": null,
+    "iconUrl": null,
 }
 ```
 
 1.  `filter` - Array<string> - list of filters to match against the highlights. Only matches from these filters will show up in the widget.
-2. `combineFilters` - boolean - if true will use all the filters that are also with the highlights mixing different tournaments together
-5. `pollingInterval` - number - interval in milliseconds to get new live data from live matches
-6. `pollingCount` - number - maximum number of matches to poll for live data at the same time
-7. `eventsRefreshInterval` - number - interval in milliseconds to look for live events
-8. `widgetTrackingName` - string - tracking name for analytics purposes
-9. `compareAgainstHighlights` - boolean - determines whether you want to compare whether the filters are within the highlighted events (popular events) or not. Will use the first item in the filter that returns events.
+2.  `combineFilters` - boolean - if true will use all the filters that are also with the highlights mixing different tournaments together
+3.  `pollingInterval` - number - interval in milliseconds to get new live data from live matches
+4.  `pollingCount` - number - maximum number of matches to poll for live data at the same time
+5.  `eventsRefreshInterval` - number - interval in milliseconds to look for live events
+6.  `widgetTrackingName` - string - tracking name for analytics purposes
+7.  `compareAgainstHighlights` - boolean - determines whether you want to compare whether the filters are within the highlighted events (popular events) or not. Will use the first item in the filter that returns events.
+8.  `highlightBasedOnBetslip` - boolean - if false OutcomeButtons will not become selected when they are present in the betslip
+9.  `backgroundUrl` - string - custom background URL
+10. `iconUrl` - string - custom tournament icon URL
 
 ### Build Instructions
 
