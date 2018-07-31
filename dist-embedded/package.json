@@ -1,9 +1,9 @@
 {
   "name": "match-overview-widget",
-  "version": "2.3.5-mrgreen1",
+  "version": "2.3.5",
   "widgetCssVersion": "1.0.0.68",
   "description": "Match Schedule Widget",
-  "main": "dist-embedded/main.js",
+  "main": "dist/index.html",
   "scripts": {
     "clean": "kambi-widgets-cli clean",
     "prestart": "npm run clean",

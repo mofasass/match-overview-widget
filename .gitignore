@@ -8,7 +8,6 @@ bower_components
 /.project
 mockSetupData.json
 /dist/
-/dist-embedded/
 /coverage/
 npm-debug.log
 .DS_Store
