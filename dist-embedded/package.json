@@ -1,9 +1,9 @@
 {
   "name": "match-overview-widget",
-  "version": "2.3.5",
+  "version": "2.3.5-mrgreen1",
   "widgetCssVersion": "1.0.0.68",
   "description": "Match Schedule Widget",
-  "main": "dist/index.html",
+  "main": "dist-embedded/main.js",
   "scripts": {
     "clean": "kambi-widgets-cli clean",
     "prestart": "npm run clean",
@@ -34,11 +34,12 @@
     ]
   },
   "devServer": {
-    "https": false
+    "https": false,
+    "port": 3000
   },
   "dependencies": {
-    "kambi-widget-core-library": "4.10.2-mrgreen6",
-    "kambi-widget-components": "1.21.10-mrgreen1"
+    "kambi-widget-core-library": "4.10.2-mrgreen7",
+    "kambi-widget-components": "1.21.10-mrgreen2"
   },
   "peerDependencies": {
     "prop-types": "x",

@@ -16,6 +16,35 @@ const onFatal = function(error) {
   widgetModule.removeWidget(error)
 }
 
+coreLibrary.onInit = () => {
+  new Promise((resolve, reject) => {
+    resolve()
+  })
+    .then(() => {
+      coreLibrary.widgetTrackingName = coreLibrary.args.widgetTrackingName
+      eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval
+      return coreLibrary.args.compareAgainstHighlights // set this arg to false to test specific filters
+        ? kambi.getHighlightedFilters(coreLibrary.args.filter)
+        : coreLibrary.args.filter
+    })
+    .then(filters => {
+      if (filters.length === 0) {
+        onFatal(new Error('No matching filters in highlight'))
+        return
+      }
+
+      const widget = new Widget(filters, {
+        combineFilters: coreLibrary.args.combineFilters,
+        eventsRefreshInterval: coreLibrary.args.eventsRefreshInterval,
+        pollingCount: coreLibrary.args.pollingCount,
+        onFatal,
+      })
+
+      return widget.init()
+    })
+    .catch(onFatal)
+}
+
 coreLibrary
   .init({
     widgetTrackingName: 'gm-match-overview-widget',
@@ -28,27 +57,5 @@ coreLibrary
     highlightBasedOnBetslip: true,
     backgroundUrl: null,
     iconUrl: null,
-  })
-  .then(() => {
-    coreLibrary.widgetTrackingName = coreLibrary.args.widgetTrackingName
-    eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval
-    return coreLibrary.args.compareAgainstHighlights // set this arg to false to test specific filters
-      ? kambi.getHighlightedFilters(coreLibrary.args.filter)
-      : coreLibrary.args.filter
-  })
-  .then(filters => {
-    if (filters.length === 0) {
-      onFatal(new Error('No matching filters in highlight'))
-      return
-    }
-
-    const widget = new Widget(filters, {
-      combineFilters: coreLibrary.args.combineFilters,
-      eventsRefreshInterval: coreLibrary.args.eventsRefreshInterval,
-      pollingCount: coreLibrary.args.pollingCount,
-      onFatal,
-    })
-
-    return widget.init()
   })
   .catch(onFatal)

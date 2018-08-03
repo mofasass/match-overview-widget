@@ -122,6 +122,8 @@ class Widget {
     this.appliedFilter = null
     coreLibrary.cleanupWidget = () => {
       clearTimeout(this.refreshTimeout)
+      const eventIds = this.liveEvents.map(event => event.event.id)
+      live.unsubscribeFromEvents(eventIds)
       ReactDOM.unmountComponentAtNode(coreLibrary.rootElement)
     }
   }
