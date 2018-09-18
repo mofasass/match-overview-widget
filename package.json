@@ -35,8 +35,8 @@
     "https": true
   },
   "dependencies": {
-    "kambi-widget-core-library": "^4.8.0",
-    "kambi-widget-components": "^1.21.8"
+    "kambi-widget-components": "^1.21.8",
+    "kambi-widget-core-library": "^4.11.0"
   },
   "peerDependencies": {
     "prop-types": "x",

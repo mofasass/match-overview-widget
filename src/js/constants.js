@@ -7,7 +7,7 @@ export const supportedFilters = [
   '/football/international_friendly_matches',
   '/football/italy/serie_a',
   '/football/norway/tippeligaen',
-  '/football/spain/laliga',
+  '/football/spain/la_liga',
   '/football/sweden/allsvenskan',
   '/football/world_cup_qualifying_-_asia',
   '/football/world_cup_qualifying_-_europe',
