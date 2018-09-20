@@ -34,6 +34,10 @@
   "devServer": {
     "https": true
   },
+  "useRealReact": {
+    "development": true,
+    "production": true
+  },
   "dependencies": {
     "kambi-widget-components": "^1.21.8",
     "kambi-widget-core-library": "^4.11.0"

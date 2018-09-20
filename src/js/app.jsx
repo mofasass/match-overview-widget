@@ -6,12 +6,14 @@ import {
 import kambi from './Services/kambi'
 import Widget from './Widget'
 
-import { supportedFilters } from './constants'
+import {
+  supportedFilters
+} from './constants'
 /**
  * Removes widget on fatal errors.
  * @param {Error} error Error instance
  */
-const onFatal = function(error) {
+const onFatal = function (error) {
   console.error(error)
   widgetModule.removeWidget()
 }
@@ -30,8 +32,9 @@ coreLibrary
     coreLibrary.widgetTrackingName = coreLibrary.args.widgetTrackingName
     eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval
     return coreLibrary.args.compareAgainstHighlights // set this arg to false to test specific filters
-      ? kambi.getHighlightedFilters(coreLibrary.args.filter)
-      : coreLibrary.args.filter
+      ?
+      kambi.getHighlightedFilters(coreLibrary.args.filter) :
+      coreLibrary.args.filter
   })
   .then(filters => {
     if (filters.length === 0) {
