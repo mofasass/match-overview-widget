@@ -1,21 +1,39 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { widgetModule, coreLibrary } from 'kambi-widget-core-library'
+import {
+  widgetModule,
+  coreLibrary
+} from 'kambi-widget-core-library'
 import MatchOverviewWidget from '../Components/MatchOverviewWidget'
 import kambi from '../Services/kambi'
 import live from '../Services/live'
+import {
+  supportedSports
+} from '../constants'
 
 /**
  * Rendered when combined filter is used or there is no current filter.
  * @type {string}
  */
-const DEFAULT_TOURNAMENT_LOGO = 'football'
+const DEFAULT_TOURNAMENT_LOGO = 'default';
+
+/**
+ * Default sport logos used when no icon -> competition match
+ * @type {object}
+ */
+const DEFAULT_LOGOS = {
+  football: 'football',
+  basketball: 'basketball',
+  ice_hockey: 'ice-hockey',
+  baseball: 'baseball',
+  american_football: 'american-football'
+}
 
 /**
  * Handles incoming event's live data update.
  * @param {object} liveEventData Event's live data
  */
-const updateLiveEventData = function(liveEventData) {
+const updateLiveEventData = function (liveEventData) {
   const event = this.events.find(
     event => event.event.id == liveEventData.eventId
   )
@@ -31,11 +49,14 @@ const updateLiveEventData = function(liveEventData) {
 /**
  * Renders widget within previously defined container (rootEl).
  */
-const render = function() {
-  ReactDOM.render(
-    <MatchOverviewWidget
-      events={this.events}
-      tournamentLogo={this.tournamentLogo}
+const render = function () {
+  ReactDOM.render( <
+    MatchOverviewWidget events = {
+      this.events
+    }
+    tournamentLogo = {
+      this.tournamentLogo
+    }
     />,
     this.rootEl
   )
@@ -45,10 +66,13 @@ const render = function() {
  * Fetches events based on current filters and sets polling on the live ones.
  * @returns {Promise}
  */
-const refreshEvents = function() {
+const refreshEvents = function () {
   return kambi
     .getEvents(this.filters, this.combineFilters)
-    .then(({ events, filter }) => {
+    .then(({
+      events,
+      filter
+    }) => {
       this.events = events
       this.appliedFilter = filter
 
@@ -91,8 +115,7 @@ class Widget {
    * @param {function} [onFatal] Fatal error handler
    */
   constructor(
-    filters,
-    {
+    filters, {
       rootEl = coreLibrary.rootElement,
       combineFilters = false,
       eventsRefreshInterval = 120000,
@@ -145,9 +168,19 @@ class Widget {
       return DEFAULT_TOURNAMENT_LOGO
     }
 
-    return this.appliedFilter
-      ? this.appliedFilter.substring(1).replace(/\//g, '-')
-      : DEFAULT_TOURNAMENT_LOGO
+    const sportsWithoutCompetitionLogo = supportedSports.filter(sport => sport !== 'football')
+
+    const sport = this.appliedFilter.split(/\//g).filter(str => str.length > 0)[0]
+    const index = sportsWithoutCompetitionLogo.indexOf(sport)
+
+    if (this.appliedFilter) {
+      if (index === -1) {
+        return this.appliedFilter === '/football/usa/mls' ? DEFAULT_LOGOS[sport] : this.appliedFilter.substring(1).replace(/\//g, '-')
+      }
+      return DEFAULT_LOGOS[sport]
+    }
+
+    return DEFAULT_TOURNAMENT_LOGO
   }
 }
 

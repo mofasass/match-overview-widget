@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/sport/ice_hockey</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M45,18.9209894 L45,29.0790106 C45,34.9040657 35.5098879,39 24,39 C12.4901121,39 3,34.9040657 3,29.0790106 L3,18.9209894 C3,13.0959343 12.4901121,9 24,9 C35.5098879,9 45,13.0959343 45,18.9209894 Z M41.9543922,24.2072809 C38.255105,27.0731941 31.5636616,28.8419788 24,28.8419788 C16.4363384,28.8419788 9.74489499,27.0731941 6.04560776,24.2072809 L6.04560776,29.0790106 C6.04560776,32.5402119 13.9952928,35.9712976 24,35.9712976 C34.0047072,35.9712976 41.9543922,32.5402119 41.9543922,29.0790106 L41.9543922,24.2072809 Z M24,12.0287024 C13.9952928,12.0287024 6.04560776,15.4597881 6.04560776,18.9209894 C6.04560776,22.3821908 13.9952928,25.8132764 24,25.8132764 C34.0047072,25.8132764 41.9543922,22.3821908 41.9543922,18.9209894 C41.9543922,15.4597881 34.0047072,12.0287024 24,12.0287024 Z" id="path-1"></path>
+    </defs>
+    <g id="icon/sport/ice_hockey" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#fff" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="icon/color/black" mask="url(#mask-2)">
+            <rect id="Colour---keep-transparent-for-export" x="0" y="0" width="48" height="48"></rect>
+        </g>
+    </g>
+</svg>

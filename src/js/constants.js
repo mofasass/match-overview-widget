@@ -46,3 +46,5 @@ export const iceHockeyFilters = [
   '/ice_hockey/nhl_preseason',
   '/ice_hockey/nhl'
 ]
+
+export const supportedSports = ['football', 'baseball', 'basketball', 'american_football', 'ice_hockey']
