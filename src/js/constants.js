@@ -1,4 +1,4 @@
-export const supportedFilters = [
+export const footballFilters = [
   '/football/champions_league',
   '/football/england/premier_league',
   '/football/europa_league',
@@ -24,4 +24,25 @@ export const supportedFilters = [
   '/football/mexico/liga_mx',
   '/football/mexico/copa_mx',
   '/football/colombia/liga_aguila',
+  '/football/usa/mls',
+]
+
+export const americanFootballFilters = [
+  '/american_football/nfl',
+  '/american_football/cfl',
+  '/american_football/ncaaf',
+
+]
+
+export const baseballFilters = [
+  '/baseball/mlb',
+]
+
+export const basketballFilter = [
+  '/basketball/nba_preseason',
+]
+
+export const iceHockeyFilters = [
+  '/ice_hockey/nhl_preseason',
+  '/ice_hockey/nhl'
 ]

@@ -6,9 +6,7 @@ import {
 import kambi from './Services/kambi'
 import Widget from './Widget'
 
-import {
-  supportedFilters
-} from './constants'
+import * as filters from './constants'
 /**
  * Removes widget on fatal errors.
  * @param {Error} error Error instance
@@ -22,7 +20,7 @@ coreLibrary
   .init({
     widgetTrackingName: 'gm-match-overview-widget',
     compareAgainstHighlights: true,
-    filter: supportedFilters,
+    filter: Object.keys(filters).reduce((arr, key) => [...arr, ...filters[key]], []),
     combineFilters: false,
     pollingInterval: 30000,
     pollingCount: 4,
