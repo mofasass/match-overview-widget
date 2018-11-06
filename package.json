@@ -1,7 +1,7 @@
 {
   "name": "match-overview-widget",
   "version": "2.3.9",
-  "widgetCssVersion": "1.0.0.72",
+  "widgetCssVersion": "1.0.0.84",
   "description": "Match Schedule Widget",
   "main": "dist/index.html",
   "scripts": {
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "kambi-widget-components": "^1.21.8",
-    "kambi-widget-core-library": "^4.11.0"
+    "kambi-widget-core-library": "^4.11.3"
   },
   "peerDependencies": {
     "prop-types": "x",
