@@ -60,12 +60,19 @@ class MatchOverviewWidget extends Component {
           {this.props.events
             .filter(event => event.betOffers.length > 0)
             .map(event => {
+              const outcomes = event.betOffers
+                .filter(bo => bo.main)
+                .reduce((arr, bo) => {
+                  arr = bo.outcomes
+                  return arr
+                }, [])
+
               return (
                 <Event
                   key={event.event.id}
                   event={event.event}
                   liveData={event.liveData}
-                  outcomes={event.betOffers[0].outcomes}
+                  outcomes={outcomes}
                 />
               )
             })}
