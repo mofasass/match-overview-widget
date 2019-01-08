@@ -1,7 +1,7 @@
 {
   "name": "match-overview-widget",
   "version": "2.3.15",
-  "widgetCssVersion": "1.0.0.91",
+  "widgetCssVersion": "1.0.0.93",
   "description": "Match Schedule Widget",
   "main": "dist/index.html",
   "scripts": {
@@ -12,6 +12,7 @@
     "build": "kambi-widgets-cli build",
     "start-embedded": "kambi-widgets-cli start-embedded",
     "build-embedded": "kambi-widgets-cli build-embedded",
+    "deploy:kambi": "npm run build && wdt deploy kambi -if",
     "preversion": "kambi-widgets-cli preversion",
     "postversion": "kambi-widgets-cli postversion",
     "test": "kambi-widgets-cli test",
