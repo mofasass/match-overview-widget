@@ -1,8 +1,6 @@
-import {
-  coreLibrary,
-  offeringModule,
-  widgetModule,
-} from 'kambi-widget-core-library'
+import { coreLibrary, widgetModule } from 'kambi-widget-core-library'
+
+import { getHighlights, getEventsByFilter } from 'kambi-offering-api-module'
 
 /**
  * Checks the highlight resource against the supported filters and decides whether the widget is online or not
@@ -10,13 +8,13 @@ import {
  * @returns Promise.<string[]>
  */
 const getHighlightedFilters = function(supportedFilters) {
-  return offeringModule.getHighlight().then(response => {
-    if (!Array.isArray(response.groups)) {
+  return getHighlights().then(groups => {
+    if (!Array.isArray(groups)) {
       throw new Error('Highlight response empty, hiding widget')
     }
     // response.groups[0].pathTermId = "/football/england/efl_cup"
     // response.groups = response.groups.slice(0, 1);
-    return response.groups
+    return groups
       .map(group => group.pathTermId)
       .filter(filter => supportedFilters.indexOf(filter) !== -1)
   })
@@ -34,8 +32,8 @@ const filterEvents = function(response) {
 
   return response.events.filter(event => {
     return (
-      event.event.englishName !== 'Home Teams - Away Teams' &&
-      event.event.type === 'ET_MATCH'
+      event.englishName !== 'Home Teams - Away Teams' &&
+      event.tags.indexOf('MATCH') !== -1
     )
   })
 }
@@ -55,8 +53,7 @@ const getEventsCombined = function(filters) {
 
   const url = filter ? filter.replace(replaceString, '') : 'football'
 
-  return offeringModule
-    .getEventsByFilter(url)
+  return getEventsByFilter(url)
     .then(filterEvents)
     .then(events => {
       return { events, filter }
@@ -77,8 +74,7 @@ const getEventsProgressively = function(filters) {
     }
     // checking ith filter
     return (
-      offeringModule
-        .getEventsByFilter(filters[i].replace(/^\//, ''))
+      getEventsByFilter(filters[i].replace(/^\//, ''))
         // uncomment this to test falling back to the second filter
         // .then((res) => {
         //    if (i < 1) {

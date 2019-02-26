@@ -40,7 +40,7 @@ class Event extends Component {
    * Handles click on event box.
    */
   onClick() {
-    if (this.props.event.openForLiveBetting === true) {
+    if (this.props.event.tags.indexOf('OPEN_FOR_LIVE') !== -1) {
       widgetModule.navigateToLiveEvent(this.props.event.id)
     } else {
       widgetModule.navigateToEvent(this.props.event.id)
@@ -84,6 +84,56 @@ class Event extends Component {
    * @returns {XML}
    */
   render() {
+    // AMERICAN_DISPLAY_FORMAT means the match should show awayName first
+    // it is usually only used for american football
+    const americanDisplayFormat =
+      this.props.event.tags.indexOf('AMERICAN_DISPLAY_FORMAT') !== -1
+    const homeName = (
+      <div
+        className={[
+          styles.team,
+          americanDisplayFormat ? styles.right : styles.left,
+        ].join(' ')}
+      >
+        {this.props.event.homeFlag && (
+          <img
+            className={styles.flag}
+            src={this.props.event.homeFlag.url}
+            alt=""
+          />
+        )}
+        <span className={styles.name}>{this.props.event.homeName}</span>
+      </div>
+    )
+
+    const awayName = (
+      <div
+        className={[
+          styles.team,
+          americanDisplayFormat ? styles.left : styles.right,
+        ].join(' ')}
+      >
+        <span className={styles.name}>{this.props.event.awayName}</span>
+        {this.props.event.awayFlag && (
+          <img
+            className={styles.flag}
+            src={this.props.event.awayFlag.url}
+            alt=""
+          />
+        )}
+      </div>
+    )
+
+    let outcomes = this.props.outcomes
+    if (americanDisplayFormat) {
+      if (outcomes.length === 3) {
+        outcomes = [outcomes[2], outcomes[1], outcomes[0]]
+      } else if (outcomes.length === 2) {
+        outcomes = [outcomes[1], outcomes[0]]
+      }
+    }
+
+    const score = this.props.liveData ? this.props.liveData.score : null
     return (
       <div className={styles.general}>
         <div className={styles.header} onClick={this.onClick}>
@@ -91,39 +141,21 @@ class Event extends Component {
           <div className={styles.start}>{this.startDate}&nbsp;</div>
         </div>
         <div className={styles.teams} onClick={this.onClick}>
-          <div className={[styles.team, styles.home].join(' ')}>
-            {this.props.event.homeFlag && (
-              <img
-                className={styles.flag}
-                src={this.props.event.homeFlag.url}
-                alt=""
-              />
-            )}
-            <span className={styles.name}>{this.props.event.homeName}</span>
-          </div>
+          {americanDisplayFormat ? awayName : homeName}
 
           {this.props.liveData && (
             <div className={styles.score}>
-              {this.props.liveData.score.home}
+              {americanDisplayFormat ? score.away : score.home}
               <small>-</small>
-              {this.props.liveData.score.away}
+              {americanDisplayFormat ? score.home : score.away}
             </div>
           )}
 
-          <div className={[styles.team, styles.away].join(' ')}>
-            <span className={styles.name}>{this.props.event.awayName}</span>
-            {this.props.event.awayFlag && (
-              <img
-                className={styles.flag}
-                src={this.props.event.awayFlag.url}
-                alt=""
-              />
-            )}
-          </div>
+          {americanDisplayFormat ? homeName : awayName}
         </div>
         <div className={`${styles.outcomes}`}>
           {!this.props.liveData &&
-            this.props.outcomes.map(outcome => (
+            outcomes.map(outcome => (
               <OutcomeButton
                 key={outcome.id}
                 outcome={outcome}

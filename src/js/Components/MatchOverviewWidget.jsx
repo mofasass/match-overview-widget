@@ -61,7 +61,7 @@ class MatchOverviewWidget extends Component {
             .filter(event => event.betOffers.length > 0)
             .map(event => {
               const outcomes = event.betOffers
-                .filter(bo => bo.main)
+                .filter(bo => bo.tags.indexOf('MAIN') !== -1)
                 .reduce((arr, bo) => {
                   arr = bo.outcomes
                   return arr
@@ -69,8 +69,8 @@ class MatchOverviewWidget extends Component {
 
               return (
                 <Event
-                  key={event.event.id}
-                  event={event.event}
+                  key={event.id}
+                  event={event}
                   liveData={event.liveData}
                   outcomes={outcomes}
                 />
