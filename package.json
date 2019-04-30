@@ -1,7 +1,7 @@
 {
   "name": "match-overview-widget",
   "version": "2.3.23",
-  "widgetCssVersion": "1.0.0.99",
+  "widgetCssVersion": "1.0.0.100",
   "description": "Match Schedule Widget",
   "main": "dist/index.html",
   "scripts": {
