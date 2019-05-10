@@ -79,20 +79,35 @@ class Event extends Component {
     )
   }
 
+  sortOutcomes(outcomes) {
+    let sorting = ['OT_ONE', 'OT_CROSS', 'OT_TWO']
+    const byType = (a, b) => sorting.indexOf(a.type) - sorting.indexOf(b.type)
+    if (this.americanDisplayFormat) sorting = sorting.reverse()
+
+    return [...outcomes].sort(byType)
+  }
+
+  // AMERICAN_DISPLAY_FORMAT means the match should show awayName first
+  // it is usually only used for american football
+  get americanDisplayFormat() {
+    return this.props.event.tags.indexOf('AMERICAN_DISPLAY_FORMAT') !== -1
+  }
+
+  get outcomes() {
+    const { outcomes } = this.props
+    return this.sortOutcomes(outcomes)
+  }
+
   /**
    * Renders component.
    * @returns {XML}
    */
   render() {
-    // AMERICAN_DISPLAY_FORMAT means the match should show awayName first
-    // it is usually only used for american football
-    const americanDisplayFormat =
-      this.props.event.tags.indexOf('AMERICAN_DISPLAY_FORMAT') !== -1
     const homeName = (
       <div
         className={[
           styles.team,
-          americanDisplayFormat ? styles.right : styles.left,
+          this.americanDisplayFormat ? styles.right : styles.left,
         ].join(' ')}
       >
         {this.props.event.homeFlag && (
@@ -110,7 +125,7 @@ class Event extends Component {
       <div
         className={[
           styles.team,
-          americanDisplayFormat ? styles.left : styles.right,
+          this.americanDisplayFormat ? styles.left : styles.right,
         ].join(' ')}
       >
         <span className={styles.name}>{this.props.event.awayName}</span>
@@ -124,15 +139,6 @@ class Event extends Component {
       </div>
     )
 
-    let outcomes = this.props.outcomes
-    if (americanDisplayFormat) {
-      if (outcomes.length === 3) {
-        outcomes = [outcomes[2], outcomes[1], outcomes[0]]
-      } else if (outcomes.length === 2) {
-        outcomes = [outcomes[1], outcomes[0]]
-      }
-    }
-
     const score = this.props.liveData ? this.props.liveData.score : null
     return (
       <div className={styles.general}>
@@ -141,21 +147,21 @@ class Event extends Component {
           <div className={styles.start}>{this.startDate}&nbsp;</div>
         </div>
         <div className={styles.teams} onClick={this.onClick}>
-          {americanDisplayFormat ? awayName : homeName}
+          {this.americanDisplayFormat ? awayName : homeName}
 
           {this.props.liveData && (
             <div className={styles.score}>
-              {americanDisplayFormat ? score.away : score.home}
+              {this.americanDisplayFormat ? score.away : score.home}
               <small>-</small>
-              {americanDisplayFormat ? score.home : score.away}
+              {this.americanDisplayFormat ? score.home : score.away}
             </div>
           )}
 
-          {americanDisplayFormat ? homeName : awayName}
+          {this.americanDisplayFormat ? homeName : awayName}
         </div>
         <div className={`${styles.outcomes}`}>
           {!this.props.liveData &&
-            outcomes.map(outcome => (
+            this.outcomes.map(outcome => (
               <OutcomeButton
                 key={outcome.id}
                 outcome={outcome}
