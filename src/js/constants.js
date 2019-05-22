@@ -25,26 +25,42 @@ export const footballFilters = [
   '/football/mexico/copa_mx',
   '/football/colombia/liga_aguila',
   '/football/usa/mls',
+  '/football/england/the_championship',
+  '/football/england/league_one',
+  '/football/england/league_two',
 ]
 
 export const americanFootballFilters = [
   '/american_football/nfl',
   '/american_football/cfl',
   '/american_football/ncaaf',
-
 ]
 
 export const baseballFilters = [
   '/baseball/mlb',
 ]
 
-export const basketballFilter = [
+export const basketballFilters = [
   '/basketball/nba_preseason',
 ]
 
 export const iceHockeyFilters = [
   '/ice_hockey/nhl_preseason',
-  '/ice_hockey/nhl'
+  '/ice_hockey/nhl',
+]
+
+export const golfFilters = [
+  '/golf/pga_tour',
+  '/golf/european_tour',
+]
+
+export const cricketFilters = [
+  '/cricket/icc_world_cup_2019',
+]
+
+export const tennisFilters = [
+  '/tennis/atp',
+  '/tennis/wta',
 ]
 
 export const supportedSports = ['football', 'baseball', 'basketball', 'american_football', 'ice_hockey']
