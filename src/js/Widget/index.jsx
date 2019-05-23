@@ -156,21 +156,31 @@ class Widget {
       return DEFAULT_TOURNAMENT_LOGO
     }
 
-    const sportsWithoutCompetitionLogo = supportedSports.filter(
-      sport => sport !== 'football'
+    const customLogoSports = supportedSports.filter(
+      sport => sport === 'football'
     )
+
+    const defaultLogoFilters = [
+      '/football/usa/mls',
+      '/football/england/the_championship',
+      '/football/england/league_one',
+      '/football/england/league_two',
+    ]
+
+    const includes = (arr, item) => arr.indexOf(item) !== -1
 
     const sport = this.appliedFilter
       .split(/\//g)
       .filter(str => str.length > 0)[0]
-    const index = sportsWithoutCompetitionLogo.indexOf(sport)
 
     if (this.appliedFilter) {
-      if (index === -1) {
-        return this.appliedFilter === '/football/usa/mls'
-          ? DEFAULT_LOGOS[sport]
-          : this.appliedFilter.substring(1).replace(/\//g, '-')
+      const customLogoSport = includes(customLogoSports, sport)
+      const defaultLogoFilter = includes(defaultLogoFilters, this.appliedFilter)
+
+      if (customLogoSport && !defaultLogoFilter) {
+        return this.appliedFilter.substring(1).replace(/\//g, '-')
       }
+
       return DEFAULT_LOGOS[sport]
     }
 
