@@ -165,14 +165,6 @@ class Widget {
       '/football/england/the_championship',
       '/football/england/league_one',
       '/football/england/league_two',
-      "football/euro_2020_qualification",
-      "football/uefa_championship_u21",
-      "football/copa_america ",
-      "football/world_cup__w_",
-      "football/euro_2020",
-      "football/african_nations_cup",
-      "football/copa_libertadores",
-      "football/world_cup_2022"
     ]
 
     const includes = (arr, item) => arr.indexOf(item) !== -1
