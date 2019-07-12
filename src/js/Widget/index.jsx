@@ -22,6 +22,7 @@ const DEFAULT_LOGOS = {
   ice_hockey: 'ice-hockey',
   baseball: 'baseball',
   american_football: 'american-football',
+  golf: 'default',
 }
 
 /**
@@ -43,6 +44,12 @@ const updateLiveEventData = function(liveEventData) {
  * Renders widget within previously defined container (rootEl).
  */
 const render = function() {
+  const hasBetOffers = this.events.some(
+    ({ betOffers }) => betOffers && betOffers.length
+  )
+
+  if (!hasBetOffers) return
+
   ReactDOM.render(
     <MatchOverviewWidget
       events={this.events}
