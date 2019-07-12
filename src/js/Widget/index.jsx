@@ -48,7 +48,7 @@ const render = function() {
     ({ betOffers }) => betOffers && betOffers.length
   )
 
-  if (!hasBetOffers) return
+  if (!hasBetOffers) return widgetModule.removeWidget()
 
   ReactDOM.render(
     <MatchOverviewWidget
