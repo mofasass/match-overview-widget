@@ -1,4 +1,4 @@
-import { coreLibrary, widgetModule } from 'kambi-widget-core-library'
+import { coreLibrary, widgetModule } from 'kambi-wc-widget-core-library'
 
 import { getHighlights, getEventsByFilter } from 'kambi-offering-api-module'
 

@@ -1,4 +1,4 @@
-import { eventsModule } from 'kambi-widget-core-library'
+import { eventsModule } from 'kambi-wc-widget-core-library'
 
 /**
  * Maps event identifiers to update methods.

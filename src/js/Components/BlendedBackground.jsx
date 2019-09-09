@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import mobile from '../Services/mobile'
 import styles from './BlendedBackground.scss'
-import { coreLibrary } from 'kambi-widget-core-library'
+import { coreLibrary } from 'kambi-wc-widget-core-library'
 
 /**
  * Desktop background file path
  * @type {string}
  */
-const BG_IMAGE_DESKTOP = 'assets/overview-bw-bg-desktop.jpg'
+const BG_IMAGE_DESKTOP = 'http://localhost:9090/assets/overview-bw-bg-desktop.jpg'
 
 /**
  * Mobile background file path
  * @type {string}
  */
-const BG_IMAGE_MOBILE = 'assets/overview-bw-bg-mobile.jpg'
+const BG_IMAGE_MOBILE = 'http://localhost:9090/assets/overview-bw-bg-mobile.jpg/'
 
 /**
  * Displays a background image which is blended with actual operator's color theme.
@@ -62,7 +62,7 @@ class BlendedBackground extends Component {
         }}
       >
         <div
-          className={styles.background}
+          className={`${styles.background}`}
           style={{
             backgroundImage: `url(${url})`,
             backgroundRepeat: 'no-repeat',
@@ -117,11 +117,9 @@ class BlendedBackground extends Component {
       property. This property is not supported in IE so the main way to render
       this should still be using the SVG render
       */
-    if (coreLibrary.browser === 'firefox') {
+    
       return this.cssRender()
-    } else {
-      return this.svgRender()
-    }
+
   }
 }
 

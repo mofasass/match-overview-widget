@@ -3,9 +3,9 @@ import React from 'react';
 import ReactShallowRenderer from 'react-test-renderer/shallow';
 import { shallow } from 'enzyme';
 import Event from '../../src/js/Components/Event';
-import { widgetModule } from 'kambi-widget-core-library';
+import { widgetModule } from 'kambi-wc-widget-core-library';
 
-jest.mock('kambi-widget-core-library', () => ({
+jest.mock('kambi-wc-widget-core-library', () => ({
    widgetModule: {
       navigateToEvent: jest.fn(),
       navigateToLiveEvent: jest.fn()

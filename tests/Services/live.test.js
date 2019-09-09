@@ -1,8 +1,8 @@
 import live from '../../src/js/Services/live';
-import { eventsModule } from 'kambi-widget-core-library';
+import { eventsModule } from 'kambi-wc-widget-core-library';
 
 
-jest.mock('kambi-widget-core-library', () => ({
+jest.mock('kambi-wc-widget-core-library', () => ({
    eventsModule: {
       subscribe: jest.fn(),
       unsubscribe: jest.fn()

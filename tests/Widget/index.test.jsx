@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Widget from '../../src/js/Widget';
 import kambi from '../../src/js/Services/kambi'
 import live from '../../src/js/Services/live'
-import { widgetModule } from 'kambi-widget-core-library';
+import { widgetModule } from 'kambi-wc-widget-core-library';
 
 jest.mock('../../src/js/Services/kambi', () => ({
    getEvents: jest.fn(() => Promise.resolve({events: [], filter: 'test/filter/1'}))
@@ -17,7 +17,7 @@ jest.mock('react-dom', () => ({
    render: jest.fn()
 }));
 
-jest.mock('kambi-widget-core-library', () => ({
+jest.mock('kambi-wc-widget-core-library', () => ({
    widgetModule: {
       setWidgetHeight: jest.fn()
    },

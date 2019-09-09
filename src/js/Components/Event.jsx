@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { translationModule, widgetModule } from 'kambi-widget-core-library'
-import { OutcomeButton, OutcomeButtonUI } from 'kambi-widget-components'
+import { translationModule, widgetModule } from 'kambi-wc-widget-core-library'
+import { OutcomeButton, OutcomeButtonUI } from 'kambi-wc-widget-components'
 import styles from './Event.scss'
 
 /**

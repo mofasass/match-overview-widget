@@ -1,8 +1,8 @@
 import kambi from '../../src/js/Services/kambi';
-import { coreLibrary, offeringModule, widgetModule } from 'kambi-widget-core-library';
+import { coreLibrary, offeringModule, widgetModule } from 'kambi-wc-widget-core-library';
 
 
-jest.mock('kambi-widget-core-library', () => ({
+jest.mock('kambi-wc-widget-core-library', () => ({
    coreLibrary: {
       config: {
          routeRoot: ''

@@ -1,13 +1,12 @@
 {
-  "name": "match-overview-widget",
-  "version": "2.3.35",
+  "name": "wc-match-overview-widget",
+  "version": "3.0.0",
   "widgetCssVersion": "1.0.0.104",
   "description": "Match Schedule Widget",
   "main": "dist/index.html",
   "scripts": {
     "clean": "kambi-widgets-cli clean",
     "prestart": "npm run clean",
-    "start": "kambi-widgets-cli start",
     "prebuild": "npm run clean",
     "build": "kambi-widgets-cli build",
     "start-embedded": "kambi-widgets-cli start-embedded",
@@ -15,7 +14,6 @@
     "deploy:kambi": "npm run build && wdt deploy kambi -if",
     "preversion": "kambi-widgets-cli preversion",
     "postversion": "kambi-widgets-cli postversion",
-    "test": "kambi-widgets-cli test",
     "prettier-all": "find ./src -name \"*.jsx\" -o -name \"*.js\" | xargs prettier --write",
     "precommit": "lint-staged",
     "production-deployment": "aws s3 sync ./dist s3://extwidgets/match-overview-widget/v2.3 --profile kambi"
@@ -34,7 +32,11 @@
     ]
   },
   "devServer": {
-    "https": true
+    "https": true,
+    "headers": {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*"
+    }
   },
   "useRealReact": {
     "development": true,
@@ -42,9 +44,10 @@
   },
   "dependencies": {
     "kambi-offering-api-module": "^3.3.0",
-    "kambi-widget-components": "^1.21.12",
-    "kambi-widget-core-library": "^4.11.7",
-    "npm-check": "^5.9.0"
+    "kambi-wc-widget-components": "0.0.3",
+    "kambi-wc-widget-core-library": "^5.0.0",
+    "npm-check": "^5.9.0",
+    "react-shadow-dom-retarget-events": "^1.0.10"
   },
   "peerDependencies": {
     "prop-types": "x",
@@ -52,8 +55,12 @@
     "react-dom": "x"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "babel-plugin-transform-custom-element-classes": "^0.1.0",
     "lint-staged": "^8.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "prettier": "^1.18.2",
+    "to-string-loader": "^1.1.5",
     "webpack-cli": "^3.3.3"
   },
   "repository": {

@@ -12,7 +12,7 @@ const TournamentLogo = ({ logoName, scrolledListHasHorizontalSpaceLeft }) => {
       <i
         className="kw-custom-logo-large-type"
         style={{
-          backgroundImage: `url(assets/icons/${logoName}.svg)`,
+          backgroundImage: `url(http://localhost:9090/assets/icons/${logoName}.svg)`,
         }}
       />
     </div>

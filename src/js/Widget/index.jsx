@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { widgetModule, coreLibrary } from 'kambi-widget-core-library'
+import { widgetModule, coreLibrary } from 'kambi-wc-widget-core-library'
 import MatchOverviewWidget from '../Components/MatchOverviewWidget'
 import kambi from '../Services/kambi'
 import live from '../Services/live'
@@ -51,6 +51,7 @@ const render = function() {
   if (!hasBetOffers) return widgetModule.removeWidget()
 
   ReactDOM.render(
+    // <button onClick={() => { alert('ads')}}></button>,
     <MatchOverviewWidget
       events={this.events}
       tournamentLogo={this.tournamentLogo}
